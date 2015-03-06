@@ -1,0 +1,36 @@
+<div id="container">
+
+    <div id="container-header">
+        <header id="header">
+            <div id="logo">
+                <div class="contain-logo">
+                    <h1><a href="/">Konglig Datasektionen</a></h1>
+                </div>
+            </div>
+        </header>
+
+        <nav ng-controller="NavigationController">
+            <div class="contain-nav">
+                <div class="nav-inner">
+                    <ul>
+                        <li><a ng-href="/content/home">Hjem</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="clear"></div>
+
+    <div ng-animate-children>
+        <div ng-view class="view-animate"></div>
+    </div>
+
+    <div class="clear"></div>
+
+    <footer>
+        &copy; 2015
+    </footer>
+
+</div>
