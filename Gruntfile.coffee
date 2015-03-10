@@ -4,14 +4,12 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-sass'
   grunt.loadNpmTasks 'grunt-bower-task'
-  grunt.loadNpmTasks 'grunt-contrib-connect'
 
   grunt.initConfig({
     bower: {
       dev: {
         options: {
           targetDir: "assets"
-          cleanBowerDir: true
           layout: "byType"
         }
       }
@@ -33,14 +31,6 @@ module.exports = (grunt) ->
         }
       }
     }
-    connect: {
-      server: {
-        options: {
-          port: 3000
-          keepalive: true
-        }
-      }
-    }
   })
 
-  grunt.registerTask('default', ['bower', 'sass', 'coffee', 'connect'])
+  grunt.registerTask('default', ['bower', 'sass', 'coffee'])

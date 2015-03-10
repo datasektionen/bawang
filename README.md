@@ -16,6 +16,10 @@ Det lättaste är dock att använda den Gruntfile som gör preppar allt och star
 1. Se till att du har [Node.js v0.10+](http://nodejs.org/) med NPM (standard) installerat.
 2. Kör `npm install grunt-cli -g` för att göra kommandot `grunt` globally accessible.
 3. cd:a till projektmappen och kör `npm install` för att dra in alla dependencies.
-4. Kör kommandot `grunt`, servern landar på [http://localhost:3000](http://localhost:3000).
+4. Kör kommandot `grunt` för att kompilera alla filer.
+5. Kör `node server.js`, servern landar på [http://localhost:3000](http://localhost:3000).
+
+Det går med fördel att baka ihop 4. och 5. i en Run Configuration i WebStorm.
+Välj Node.js; kör server.js, välj sedan att köra External Tool innan uppstart, och fyll där i grunt.
 
 Bawang bygger på AngularJS 1.3, CoffeeScript och SASS ([node-sass](https://github.com/sass/node-sass)).
