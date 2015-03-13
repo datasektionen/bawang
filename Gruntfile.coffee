@@ -4,6 +4,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-sass'
   grunt.loadNpmTasks 'grunt-bower-task'
+  grunt.loadNpmTasks 'grunt-autoprefixer'
 
   grunt.initConfig({
     bower: {
@@ -31,6 +32,11 @@ module.exports = (grunt) ->
         }
       }
     }
+    autoprefixer: {
+      prefix: {
+        src: "assets/css/*.css"
+      }
+    }
   })
 
-  grunt.registerTask('default', ['bower', 'sass', 'coffee'])
+  grunt.registerTask('default', ['bower', 'sass', 'coffee', 'autoprefixer'])

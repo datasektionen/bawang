@@ -17,7 +17,7 @@ app.config ['$routeProvider', '$locationProvider', ($routeProvider, $locationPro
     templateUrl: app.base.concat 'page.html'
     controller: 'PageController'
   .otherwise
-      redirectTo: '/content/home'
+    redirectTo: '/content/home'
 
   return
 ]
@@ -33,17 +33,27 @@ app.directive "application", () ->
   return directive
 
 
-# Factories (used to define
-# app.factory 'Menu', ['$resource', ($resource) ->
-#   return $resource app.api.concat "menu.json"
-# ]
-
-
 # Controllers
 app.controller 'ApplicationController', ['$scope', ($scope) ->
 
   $scope.swag = 9001 # over 9000
 
+]
+
+app.controller 'TopnavController', ['$scope', '$http', ($scope, $http) ->
+
+  $scope.loading = true
+
+  $http
+  .get("/bawang/api/topnav.json")
+  .success (data) ->
+    $scope.topnav = data
+    $scope.loading = false
+  .error (data) ->
+    $scope.topnav = data
+    $scope.loading = false
+
+  return
 ]
 
 # Controller for <nav>

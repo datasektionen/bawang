@@ -1,21 +1,39 @@
+<div id="top-nav" ng-controller="TopnavController" ng-animate-children>
+    <div class="contain">
+        <div ng-show="loading">loading</div>
+        <ul ng-hide="loading">
+            <li ng-repeat="item in topnav.topnav">
+                <a ng-class="{strong: item.bold}" ng-href="{{ item.href }}">{{ item.caption }}</a>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+</div>
+
 <div id="container">
 
-    <div id="container-header">
-        <header id="header">
-            <div id="logo">
-                <div class="contain-logo">
+    <div id="container-header" class="contain">
+        <nav id="primary-nav" ng-controller="NavigationController">
+            <div class="contain-nav">
+                <nav id="nav-left">
+                    <ul>
+                        <li><a ng-href="/content/home">Nyheter</a></li>
+                        <li><a ng-href="/content/sektionen">Sektionen</a></li>
+                        <li><a ng-href="/content/studier">Studier</a></li>
+                        <li><a ng-href="/content/jobb">Jobb</a></li>
+                    </ul>
+                </nav>
+                <div id="logo">
                     <h1><a href="/">Konglig Datasektionen</a></h1>
                 </div>
-            </div>
-        </header>
-
-        <nav ng-controller="NavigationController">
-            <div class="contain-nav">
-                <div class="nav-inner">
+                <nav id="nav-right">
                     <ul>
-                        <li><a ng-href="/content/home">Hjem</a></li>
+                        <li><a ng-href="/agenda">Agenda</a></li>
+                        <li><a ng-href="/content/naringsliv">Näringsliv</a></li>
+                        <li><a ng-href="/content/kontakt">Kontakt</a></li>
+                        <li><a href="http://ths.kth.se">THS</a></li>
                     </ul>
-                </div>
+                </nav>
                 <div class="clear"></div>
             </div>
         </nav>
@@ -23,13 +41,13 @@
 
     <div class="clear"></div>
 
-    <div ng-animate-children>
+    <div class="contain" ng-animate-children>
         <div ng-view class="view-animate"></div>
     </div>
 
     <div class="clear"></div>
 
-    <footer>
+    <footer class="contain">
         &copy; 2015
     </footer>
 

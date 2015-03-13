@@ -1,2 +1,61 @@
+// Base colors
+$cerise: #e2007f
+$dblue: #6e838f
+$headline: #555555
+$base: #646d72
+
+$desktop: 1200px
+$tablet: 900px
+$mobile: 500px
+
+// Base classes
+body
+  background: #ffffff
+  margin: 0
+  font-size: 15px
+
 *
   font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif
+  transition: all 0.3s
+
+a
+  text-decoration: none
+
+.strong
+  font-weight: bold
+
+.clear
+  clear: both
+
+.contain
+  max-width: 1200px
+  margin: 0 auto
+
+// Topnav
+#top-nav
+  background: #f1f2f3
+  border-bottom: 1px solid #e2e2e3
+
+  ul
+    padding: 0
+    margin: 0
+    list-style-type: none
+
+    &.ng-enter
+      // transition: all 2s
+      opacity: 0
+
+    &.ng-enter-active
+      opacity: 1
+
+    li
+      float: left
+
+      a
+        display: block
+        color: $dblue
+        font-size: 0.9em
+        padding-top: 8px
+        padding-bottom: 7px
+        padding-left: 10px
+
