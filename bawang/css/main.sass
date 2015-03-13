@@ -1,8 +1,10 @@
 // Base colors
 $cerise: #e2007f
+$cerise_light: #f64e9d
 $dblue: #6e838f
 $headline: #555555
 $base: #646d72
+$topwhite: #fbfcfd
 
 $desktop: 1200px
 $tablet: 900px
@@ -28,7 +30,11 @@ a
   clear: both
 
 .contain
-  max-width: 1200px
+  max-width: $desktop
+  margin: 0 auto
+
+.contain-tight
+  max-width: $desktop - 20
   margin: 0 auto
 
 // Topnav
@@ -41,21 +47,98 @@ a
     margin: 0
     list-style-type: none
 
-    &.ng-enter
-      // transition: all 2s
-      opacity: 0
-
-    &.ng-enter-active
-      opacity: 1
-
     li
       float: left
-
       a
         display: block
         color: $dblue
         font-size: 0.9em
-        padding-top: 8px
-        padding-bottom: 7px
-        padding-left: 10px
+        padding: 8px 10px 7px
 
+#primary-nav
+  margin-top: 65px
+  background: $cerise
+  border-top: 7px solid $cerise_light
+  border-bottom: 7px solid $cerise_light
+
+  #nav-left
+    display: block
+    float: left
+    width: 50%
+    #nav-left-contain
+      margin-left: 10px
+      margin-right: 100px
+
+  #nav-right
+    display: block
+    float: left
+    width: 50%
+    #nav-right-contain
+      float: right
+      margin-left: 100px
+      margin-right: 10px
+
+  #logo h1
+    margin: 0
+    padding: 0
+    a
+      float: left
+      display: inline-block
+      text-indent: -9999px
+      position: absolute
+      left: 50%
+      top: 40px
+      width: 200px
+      height: 195px
+      background: url("/bawang/gfx/d.png")
+      background-size: 200px 195px
+      margin-bottom: -75px
+      margin-left: -100px
+
+
+.primary-nav
+  ul
+    padding: 0
+    margin: 0
+    list-style-type: none
+
+  li
+    float: left
+
+  a
+    display: block
+    color: #ffffff
+    font-size: 1.1em
+    padding: 17px 17px
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .1)
+    text-transform: uppercase
+
+    &:hover
+      background: $cerise_light
+
+// Loading indicator
+.loading
+  display: inline-block
+  width: 16px
+  height: 16px
+  background-size: 16px 16px
+  background-image: url("/bawang/gfx/spinner.gif")
+
+.fade
+  &.ng-hide-add, &.ng-hide-remove
+    transition: 0s linear all
+
+  &.ng-hide-add-active, &.ng-hide-remove-active
+    transition: 1s linear all
+
+  &.ng-hide-add
+    opacity: 1
+
+  &.ng-hide-add.ng-hide-add-active
+    opacity: 0
+
+  &.ng-hide-remove
+    opacity: 1
+
+  &.ng-hide-remove.ng-hide-remove-active
+    opacity: 0

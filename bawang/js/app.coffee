@@ -49,9 +49,6 @@ app.controller 'TopnavController', ['$scope', '$http', ($scope, $http) ->
   .success (data) ->
     $scope.topnav = data
     $scope.loading = false
-  .error (data) ->
-    $scope.topnav = data
-    $scope.loading = false
 
   return
 ]

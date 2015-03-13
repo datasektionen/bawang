@@ -1,54 +1,62 @@
 <div id="top-nav" ng-controller="TopnavController" ng-animate-children>
-    <div class="contain">
-        <div ng-show="loading">loading</div>
-        <ul ng-hide="loading">
-            <li ng-repeat="item in topnav.topnav">
-                <a ng-class="{strong: item.bold}" ng-href="{{ item.href }}">{{ item.caption }}</a>
-            </li>
-        </ul>
-        <div class="clear"></div>
+    <div class="contain-tight">
+        <div ng-show="loading">
+            <div class="loading fade" style="float: left; margin-top: 8px;"></div>
+            <ul>
+                <li><a href="#">...</a></li>
+            </ul>
+        </div>
+
+        <div class="fade">
+            <ul>
+                <li ng-repeat="item in topnav.topnav">
+                    <a ng-class="{strong: item.bold}" ng-href="{{ item.href }}">{{ item.caption }}</a>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
     </div>
 </div>
 
-<div id="container">
-
-    <div id="container-header" class="contain">
-        <nav id="primary-nav" ng-controller="NavigationController">
-            <div class="contain-nav">
-                <nav id="nav-left">
+<nav id="primary-nav" ng-controller="NavigationController">
+    <div class="contain-tight">
+        <div id="primary-nav-container">
+            <nav id="nav-left" class="primary-nav">
+                <div id="nav-left-contain">
                     <ul>
                         <li><a ng-href="/content/home">Nyheter</a></li>
                         <li><a ng-href="/content/sektionen">Sektionen</a></li>
                         <li><a ng-href="/content/studier">Studier</a></li>
                         <li><a ng-href="/content/jobb">Jobb</a></li>
                     </ul>
-                </nav>
-                <div id="logo">
-                    <h1><a href="/">Konglig Datasektionen</a></h1>
                 </div>
-                <nav id="nav-right">
+            </nav>
+            <nav id="nav-right" class="primary-nav">
+                <div id="nav-right-contain">
                     <ul>
                         <li><a ng-href="/agenda">Agenda</a></li>
                         <li><a ng-href="/content/naringsliv">Näringsliv</a></li>
                         <li><a ng-href="/content/kontakt">Kontakt</a></li>
                         <li><a href="http://ths.kth.se">THS</a></li>
                     </ul>
-                </nav>
-                <div class="clear"></div>
-            </div>
-        </nav>
+                </div>
+            </nav>
+            <div class="clear"></div>
+        </div>
+        <div id="logo">
+            <h1><a href="/">Konglig Datasektionen</a></h1>
+        </div>
     </div>
+</nav>
 
-    <div class="clear"></div>
+<div class="clear"></div>
 
-    <div class="contain" ng-animate-children>
-        <div ng-view class="view-animate"></div>
-    </div>
-
-    <div class="clear"></div>
-
-    <footer class="contain">
-        &copy; 2015
-    </footer>
-
+<div class="contain" ng-animate-children>
+    <div ng-view class="view-animate"></div>
 </div>
+
+<div class="clear"></div>
+
+<footer class="contain">
+    &copy; 2015
+</footer>
