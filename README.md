@@ -2,24 +2,27 @@ Bawang
 ======
 
 En ny site till Datasektionen. Som Purjo, fast klyftigare.
-Skiss finns på Slack under #bawang.
+PSD-skiss finns på Slack under #bawang.
 
-Byggs som ett skal till Datasektionens olika microservices, kommunicerar genom HTTP REST API:er.
+Bawang byggs som ett skal till Datasektionens olika microservices och kommunicerar genom HTTP REST API:er.
 Alla microservices måste följa [JSON API-standarden](http://jsonapi.org/).
 
-Build and run
--------------
+Utveckling och körning
+----------------------
 
-Bawang är bara frontend, så det bör gå att transpile:a allt i typ WebStorm och öppna main.html i en browser.
-Det lättaste är dock att använda den Gruntfile som gör preppar allt och startar en lokal webserver:
+Bawang är en frontend-site, och kan därför köras på valfri webserver.
 
-1. Se till att du har [Node.js v0.10+](http://nodejs.org/) med NPM (standard) installerat.
-2. Kör `npm install grunt-cli -g` för att göra kommandot `grunt` globally accessible.
-3. cd:a till projektmappen och kör `npm install` för att dra in alla dependencies.
-4. Kör kommandot `grunt` för att kompilera alla filer.
-5. Kör `node server.js`, servern landar på [http://localhost:3000](http://localhost:3000).
+För utveckling av Bawang, se till att du har [Node.js](http://nodejs.org/) installerat.
+Grunt är det automatiseringsverktyg som Bawang utvecklas med.
+Kör `npm install grunt-cli -g` i en terminal för att göra `grunt` till ett globalt kommando.
 
-Det går med fördel att baka ihop 4. och 5. i en Run Configuration i WebStorm.
-Välj Node.js; kör server.js, välj sedan att köra External Tool innan uppstart, och fyll där i grunt.
+För att sätta upp utvecklingsmiljön, gå till projektmappen och:
+1. Kör `npm install` för att installera Grunt-plugins samt Bower.
+2. Kör `grunt` för att kompilera SASS- och Coffeescript-filer.
+3. Kör `node server.js` för att starta en enkel utvecklingsserver.
+4. Öppna [http://localhost:3000](http://localhost:3000) i en webbläsare.
 
-Bawang bygger på AngularJS 1.3, CoffeeScript och SASS ([node-sass](https://github.com/sass/node-sass)).
+Det går med fördel att lägga ihop 1., 2., 3. och 4. i en Run Configuration i WebStorm.
+Skapa två External Tools för NPM och Grunt som körs Before Launch, och öppna webbläsare After Launch.
+
+Bawang bygger på [AngularJS 1.3](https://angularjs.org/), [CoffeeScript](http://coffeescript.org/) och SASS/[node-sass](https://github.com/sass/node-sass).

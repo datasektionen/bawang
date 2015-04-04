@@ -1,20 +1,23 @@
-<div id="top-nav" ng-controller="TopnavController" ng-animate-children>
+<div id="top-nav" ng-controller="TopnavController" ng-animate-children="">
     <div class="contain-tight">
-        <div ng-show="loading">
-            <div class="loading fade" style="float: left; margin-top: 8px;"></div>
+        <div id="top-nav-links">
+            <div ng-hide="loading">
+                <ul>
+                    <li><a href="http://ths.kth.se"><strong>THS</strong></a></li>
+                    <li ng-repeat="item in topnav.topnav">
+                        <a ng-class="{strong: item.bold}" ng-href="{{ item.href }}">{{ item.caption }}</a>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="top-nav-login">
             <ul>
-                <li><a href="#">...</a></li>
+                <li><a ng-href="/en">In English</a></li>
+                <li class="login-link strong"><a href="#">Logga in &raquo;</a></li>
             </ul>
         </div>
-
-        <div class="fade">
-            <ul>
-                <li ng-repeat="item in topnav.topnav">
-                    <a ng-class="{strong: item.bold}" ng-href="{{ item.href }}">{{ item.caption }}</a>
-                </li>
-            </ul>
-            <div class="clear"></div>
-        </div>
+        <div class="clear"></div>
     </div>
 </div>
 
@@ -51,8 +54,8 @@
 
 <div class="clear"></div>
 
-<div class="contain" ng-animate-children>
-    <div ng-view class="view-animate"></div>
+<div class="contain" ng-animate-children="">
+    <div ng-view="" class="view-animate"></div>
 </div>
 
 <div class="clear"></div>
