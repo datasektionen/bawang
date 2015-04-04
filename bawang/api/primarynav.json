@@ -1,0 +1,32 @@
+{
+  "primarynav": {
+    "sv": {
+      "left": [
+        {"id": 1, "href": "/startsida", "caption": "Nyheter"},
+        {"id": 2, "href": "/sektionen/sektionen", "caption": "Sektionen"},
+        {"id": 3, "href": "/sektionen/studier", "caption": "Studier"},
+        {"id": 4, "href": "/sektionen/jobb", "caption": "Jobb"}
+      ],
+      "right": [
+        {"id": 1, "href": "/agenda", "caption": "Agenda"},
+        {"id": 2, "href": "/sektionen/naringsliv", "caption": "Näringsliv"},
+        {"id": 3, "href": "/sektionen/kontakt", "caption": "Kontakt"},
+        {"id": 4, "href": "http://ths.kth.se", "caption": "THS &raquo;"}
+      ]
+    },
+    "en": {
+      "left": [
+        {"id": 1, "href": "/home", "caption": "News"},
+        {"id": 2, "href": "/chapter/the-chapter", "caption": "The Chapter"},
+        {"id": 3, "href": "/chapter/studies", "caption": "Studies"},
+        {"id": 4, "href": "/chapter/jobs", "caption": "Jobs"}
+      ],
+      "right": [
+        {"id": 1, "href": "/agenda", "caption": "Agenda"},
+        {"id": 2, "href": "/chapter/industry", "caption": "Industry"},
+        {"id": 3, "href": "/chapter/contact", "caption": "Contact"},
+        {"id": 4, "href": "http://ths.kth.se/international/", "caption": "THS &raquo;"}
+      ]
+    }
+  }
+}

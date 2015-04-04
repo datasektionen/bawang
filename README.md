@@ -17,6 +17,7 @@ Grunt är det automatiseringsverktyg som Bawang utvecklas med.
 Kör `npm install grunt-cli -g` i en terminal för att göra `grunt` till ett globalt kommando.
 
 För att sätta upp utvecklingsmiljön, gå till projektmappen och:
+
 1. Kör `npm install` för att installera Grunt-plugins samt Bower.
 2. Kör `grunt` för att kompilera SASS- och Coffeescript-filer.
 3. Kör `node server.js` för att starta en enkel utvecklingsserver.

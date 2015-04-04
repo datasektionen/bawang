@@ -1,12 +1,11 @@
 {
   "topnav": [
-    {"id": 1, "href": "#", "caption": "THS", "bold": true},
-    {"id": 2, "href": "#", "caption": "Datasektionen", "bold": false},
-    {"id": 3, "href": "#", "caption": "Sektioner", "bold": false},
-    {"id": 4, "href": "#", "caption": "Kårföreningar", "bold": false},
-    {"id": 5, "href": "#", "caption": "Armada", "bold": false},
-    {"id": 6, "href": "#", "caption": "Osqledaren", "bold": false},
-    {"id": 7, "href": "#", "caption": "Quarnevalen", "bold": false},
-    {"id": 8, "href": "#", "caption": "THSi", "bold": false}
+    {"id": 1, "href": "#", "caption": "Datasektionen", "bold": false},
+    {"id": 2, "href": "#", "caption": "Sektioner", "bold": false},
+    {"id": 3, "href": "#", "caption": "Kårföreningar", "bold": false},
+    {"id": 4, "href": "#", "caption": "Armada", "bold": false},
+    {"id": 5, "href": "#", "caption": "Osqledaren", "bold": false},
+    {"id": 6, "href": "#", "caption": "Quarnevalen", "bold": false},
+    {"id": 7, "href": "#", "caption": "THSi", "bold": false}
   ]
 }
