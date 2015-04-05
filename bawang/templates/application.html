@@ -13,7 +13,7 @@
         </div>
         <div id="top-nav-login">
             <ul>
-                <li><a ng-href="/en">In English</a></li>
+                <li><a ng-href="{{ langTogglerHref }}">{{ langTogglerLabel }}</a></li>
                 <li class="login-link strong"><a href="#">Logga in &raquo;</a></li>
             </ul>
         </div>
@@ -27,20 +27,18 @@
             <nav id="nav-left" class="primary-nav">
                 <div id="nav-left-contain">
                     <ul>
-                        <li><a ng-href="/content/home">Nyheter</a></li>
-                        <li><a ng-href="/content/sektionen">Sektionen</a></li>
-                        <li><a ng-href="/content/studier">Studier</a></li>
-                        <li><a ng-href="/content/jobb">Jobb</a></li>
+                        <li ng-repeat="item in primarynav.primarynav.left">
+                            <a ng-href="{{ item.href }}">{{ item.caption }}</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
             <nav id="nav-right" class="primary-nav">
                 <div id="nav-right-contain">
                     <ul>
-                        <li><a ng-href="/agenda">Agenda</a></li>
-                        <li><a ng-href="/content/naringsliv">Näringsliv</a></li>
-                        <li><a ng-href="/content/kontakt">Kontakt</a></li>
-                        <li><a href="http://ths.kth.se">THS</a></li>
+                        <li ng-repeat="item in primarynav.primarynav.right">
+                            <a ng-href="{{ item.href }}">{{ item.caption }}</a>
+                        </li>
                     </ul>
                 </div>
             </nav>

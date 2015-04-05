@@ -2,7 +2,8 @@
 app = angular.module 'bawang', ['ngRoute', 'ngResource', 'ngProgress', 'ngAnimate']
 
 # Template base URL
-app.base = "/bawang/templates/"
+app.base = '/bawang/templates/'
+app.api = '/bawang/'
 
 
 # Routes
@@ -13,19 +14,29 @@ app.config ['$routeProvider', '$locationProvider', ($routeProvider, $locationPro
 
   # Bind routes to controllers
   $routeProvider
-  .when '/content/:slug',
+  .when '/',
+    templateUrl: app.base.concat 'home.html'
+    controller: 'HomeController'
+  .when '/:slug',
     templateUrl: app.base.concat 'page.html'
     controller: 'PageController'
   .otherwise
-    redirectTo: '/content/home'
-
-  return
+    redirectTo: '/'
 ]
 
+
+# Factories
+app.factory 'DSekt', ['$resource', ($resource) ->
+
+  # Universal factory to fetch API data from services
+  return $resource app.api.concat 'api/:service/:lang/:object.json'
+
+]
 
 # Directives
 app.directive "application", () ->
 
+  # Application controller initializes the app in <application> tag
   directive = {}
   directive.restrict = "E"
   directive.templateUrl = app.base.concat "application.html"
@@ -34,33 +45,43 @@ app.directive "application", () ->
 
 
 # Controllers
-app.controller 'ApplicationController', ['$scope', ($scope) ->
+app.controller 'ApplicationController', ['$scope', '$window', '$route', '$rootScope', ($scope, $route, $window, $rootScope) ->
 
-  $scope.swag = 9001 # over 9000
+  # Publish route to child controllers
+  $scope.$route = $route
+  $rootScope.lang = $window.lang
 
 ]
 
-app.controller 'TopnavController', ['$scope', '$http', ($scope, $http) ->
+# Controller for start pages
+app.controller 'HomeController', ['$rootScope', '$scope', '$routeParams', () ->
+
+]
+
+# Controller for top navigation, also called shortcut bar
+app.controller 'TopnavController', ['$scope', '$window', 'DSekt', ($scope, $window, DSekt) ->
 
   $scope.loading = true
+  $scope.langTogglerHref = $window.langTogglerHref
+  $scope.langTogglerLabel = $window.langTogglerLabel
 
-  $http
-  .get("/bawang/api/topnav.json")
-  .success (data) ->
+  # Fetch data from factory and populate scope
+  DSekt.get {service: 'shortcut', lang: $window.lang, object: 'topnav'}, (data) ->
     $scope.topnav = data
     $scope.loading = false
 
-  return
 ]
 
 # Controller for <nav>
-app.controller 'NavigationController', ['$scope', '$location', ($scope, $location) ->
+app.controller 'NavigationController', ['$scope', '$window', 'DSekt', ($scope, $window, DSekt) ->
 
-  # Function to determine currently active page
-  $scope.isActive = (route) ->
-    return route is $location.path()
+  $scope.loading = true
 
-  return
+  # Fetch data from factory and populate scope
+  DSekt.get {service: 'navigation', lang: $window.lang, object: 'primary'}, (data) ->
+    $scope.primarynav = data
+    $scope.loading = false
+
 ]
 
 # Controller for ng-view
@@ -70,5 +91,4 @@ app.controller 'PageController', ['$scope', '$routeParams', 'ngProgress', ($scop
   ngProgress.color('#e2007f')
   ngProgress.complete()
 
-  return
 ]
