@@ -42,6 +42,12 @@ a
   background: #f1f2f3
   border-bottom: 1px solid #e2e2e3
 
+  #top-nav-links
+    float: left
+
+  #top-nav-login
+    float: right
+
   ul
     padding: 0
     margin: 0
@@ -66,17 +72,14 @@ a
     float: left
     width: 50%
     #nav-left-contain
-      margin-left: 10px
-      margin-right: 100px
+      margin-right: 90px
 
   #nav-right
     display: block
     float: left
     width: 50%
     #nav-right-contain
-      float: right
-      margin-left: 100px
-      margin-right: 10px
+      margin-left: 90px
 
   #logo h1
     margin: 0
@@ -104,17 +107,30 @@ a
 
   li
     float: left
+    width: 25%
+
+    &:last-child a::after
+      display: none
 
   a
     display: block
     color: #ffffff
     font-size: 1.1em
-    padding: 17px 17px
+    padding: 17px 0
     text-shadow: 0 1px 2px rgba(0, 0, 0, .1)
     text-transform: uppercase
+    text-align: center
 
     &:hover
       background: $cerise_light
+
+    &::after
+      float: right
+      display: block
+      width: 2px
+      height: 20px
+      background: $cerise_light
+      content: ""
 
 // Loading indicator
 .loading
@@ -124,21 +140,35 @@ a
   background-size: 16px 16px
   background-image: url("/bawang/gfx/spinner.gif")
 
-.fade
-  &.ng-hide-add, &.ng-hide-remove
-    transition: 0s linear all
+.fade.ng-hide-add, .fade.ng-hide-remove
+  transition: 0s linear all
 
-  &.ng-hide-add-active, &.ng-hide-remove-active
-    transition: 1s linear all
+.fade.ng-hide-add-active, .fade.ng-hide-remove-active
+  transition: 1s linear all
 
-  &.ng-hide-add
-    opacity: 1
+.fade.ng-hide-add
+  opacity: 1
 
-  &.ng-hide-add.ng-hide-add-active
-    opacity: 0
+.fade.ng-hide-add.ng-hide-add-active
+  opacity: 0
 
-  &.ng-hide-remove
-    opacity: 1
+.fade.ng-hide-remove
+  opacity: 1
 
-  &.ng-hide-remove.ng-hide-remove-active
-    opacity: 0
+.fade.ng-hide-remove.ng-hide-remove-active
+  opacity: 0
+
+.ng-enter
+  transition: all 1s
+  height: 0 !important
+  opacity: 0 !important
+
+.ng-enter-active
+  transition: all 1s
+  height: auto !important
+  opacity: 1 !important
+
+.ng-leave-active
+  transition: none
+  height: 0 !important
+  opacity: 0 !important

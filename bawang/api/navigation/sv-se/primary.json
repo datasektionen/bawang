@@ -10,7 +10,7 @@
       {"id": 1, "href": "/sv-se/agenda", "caption": "Agenda"},
       {"id": 2, "href": "/sv-se/naringsliv", "caption": "Näringsliv"},
       {"id": 3, "href": "/sv-se/kontakt", "caption": "Kontakt"},
-      {"id": 4, "href": "http://ths.kth.se", "caption": "THS &raquo;"}
+      {"id": 4, "href": "http://ths.kth.se", "caption": "THS »"}
     ]
   }
 }

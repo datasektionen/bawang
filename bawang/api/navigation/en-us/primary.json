@@ -10,7 +10,7 @@
       {"id": 1, "href": "/en-us/agenda", "caption": "Agenda"},
       {"id": 2, "href": "/en-us/industry", "caption": "Industry"},
       {"id": 3, "href": "/en-us/contact", "caption": "Contact"},
-      {"id": 4, "href": "http://ths.kth.se/international/", "caption": "THS &raquo;"}
+      {"id": 4, "href": "http://ths.kth.se/international/", "caption": "THS »"}
     ]
   }
 }
