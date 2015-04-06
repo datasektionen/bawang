@@ -15,6 +15,7 @@ body
   background: #ffffff
   margin: 0
   font-size: 15px
+  font-weight: 200
 
 *
   font-family: "Helvetica Neue", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif
@@ -23,8 +24,8 @@ body
 a
   text-decoration: none
 
-.strong
-  font-weight: bold
+.strong, strong
+  font-weight: 500
 
 .clear
   clear: both
@@ -66,6 +67,8 @@ a
   background: $cerise
   border-top: 7px solid $cerise_light
   border-bottom: 7px solid $cerise_light
+  font-weight: 400
+  min-height: 45px
 
   #nav-left
     display: block
@@ -91,12 +94,12 @@ a
       position: absolute
       left: 50%
       top: 40px
-      width: 200px
-      height: 195px
+      width: 184px
+      height: 182px
       background: url("/bawang/gfx/d.png")
-      background-size: 200px 195px
+      background-size: 184px 182px
       margin-bottom: -75px
-      margin-left: -100px
+      margin-left: -92px
 
 
 .primary-nav
@@ -131,6 +134,39 @@ a
       height: 20px
       background: $cerise_light
       content: ""
+
+// Intro section
+#intro
+  background: #e8ecf2
+  border-bottom: 1px solid #ced5e0
+  font-size: 1em
+  color: $dblue
+  padding-top: 19px
+  padding-bottom: 17px
+  line-height: 180%
+  font-weight: 200
+
+  strong
+    font-weight: 500
+
+  #intro-description
+    width: 30%
+    float: left
+
+  #intro-agenda
+    width: 30%
+    float: right
+    text-align: right
+
+    ul
+      list-style-type: none
+      margin: 0
+      padding: 0
+
+      a
+        color: $dblue
+        strong
+          color: $cerise
 
 // Loading indicator
 .loading

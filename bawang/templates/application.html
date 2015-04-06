@@ -1,5 +1,5 @@
 <div id="top-nav" ng-controller="TopnavController" ng-animate-children="">
-    <div class="contain-tight">
+    <div class="contain">
         <div id="top-nav-links">
             <div ng-hide="loading">
                 <ul>
@@ -22,7 +22,7 @@
 </div>
 
 <nav id="primary-nav" ng-controller="NavigationController">
-    <div class="contain-tight">
+    <div class="contain">
         <div id="primary-nav-container">
             <nav id="nav-left" class="primary-nav">
                 <div id="nav-left-contain">
@@ -49,6 +49,32 @@
         </div>
     </div>
 </nav>
+
+<!-- TODO: Make dynamic -->
+<div id="intro">
+    <div class="contain-tight">
+        <div id="intro-description">
+            <strong>Konglig Datasektionen</strong> finns till för<br /> studenter vid datateknikprogrammet på KTH.
+        </div>
+
+        <div id="intro-agenda">
+            <ul>
+                <li>
+                    <a ng-href="/sv-se/agenda/2015-03-05-reservtid-revisions-sm">
+                        <strong>Reservtid Revisions-SM</strong> 5 mar 17:30
+                    </a>
+                </li>
+                <li>
+                    <a ng-href="/sv-se/agenda/2015-05-07-tjejgasque">
+                        <strong>Tjejgasque</strong> 7 mar 18:00
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
 
 <div class="clear"></div>
 
