@@ -1,0 +1,30 @@
+{
+  "name": "bawang",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datasektionen/bawang.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/datasektionen/bawang/issues"
+  },
+  "homepage": "https://github.com/datasektionen/bawang#readme",
+  "dependencies": {
+    "babel-core": "^5.8.25",
+    "browserify": "^11.2.0",
+    "express": "^4.13.3",
+    "normalize.css": "^3.0.3",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1"
+  },
+  "browserify": {
+        "transform": [
+            ["reactify", {"es6": true}]
+        ]
+    }
+}
