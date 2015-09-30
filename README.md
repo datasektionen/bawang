@@ -16,3 +16,4 @@ But don't be afraid, just take a look into components/bawang.jsx and you should 
 * Implement styling
 * Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
 * Implement news widget. read rss from datasektionen.se or dataflödet (whenever thats ready).
+* Implement source maps for browserify/reactify thingyn. Should be easy with gulp-sourcemaps and pipe from bundle() in server.js
