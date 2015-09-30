@@ -1,5 +1,5 @@
 var React = require("react");
-var Databaren = require("./Databaren.jsx");
+var Databaren = require("./databaren.jsx");
 
 
 class Bawang extends React.Component {
@@ -30,7 +30,7 @@ class Bawang extends React.Component {
                             </article>
                         </div>
                         <data-news className="right" />
-                    </section>reandered
+                    </section>
                     <script src="bundle.js"></script>
                 </body>
             </html>

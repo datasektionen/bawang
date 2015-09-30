@@ -35,5 +35,5 @@ app.get("/", function(req, res) {
     res.send(string);
 });
 
-
+console.log("Listening on", PORT);
 app.listen(PORT);
