@@ -9,6 +9,10 @@ But don't be afraid, just take a look into components/bawang.jsx and you should 
     npm install
     node server.js
 
-
 ## TODO
 * Add react-translate to everything. https://www.npmjs.com/package/react-translate
+* Look at cookie and browser default language when determining what language to send to client as default
+* Create lightweight global stylesheet with fonts, default colors and forms.
+* Implement styling
+* Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
+* Implement news widget. read rss from datasektionen.se or dataflödet (whenever thats ready).

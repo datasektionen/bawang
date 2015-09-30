@@ -7,6 +7,9 @@ var bawang = require("./components/bawang.jsx");
 var browserify = require("browserify");
 var reactify = require("reactify");
 
+var app = express();
+
+// Compile the app into a bundle and send to client. Client will laiter hook into the already rendered initial state.
 var b = browserify();
 b.add("./components/bawang.jsx");
 var bundle = null;
@@ -17,9 +20,14 @@ b.bundle(function(err, buf) {
     bundle = buf;
 });
 
-var app = express();
+app.get("/bundle.js", function(req, res) {
+    res.send(bundle);
+});
+
+// Static files
 app.use('/node_modules', express.static('node_modules'));
 
+// Render the result of the entire application at initial state into a string and send to client.
 app.get("/", function(req, res) {
     // TODO Fix default language based on browser language
     // FIXME If needed only render to string every hour to speed up
@@ -27,8 +35,5 @@ app.get("/", function(req, res) {
     res.send(string);
 });
 
-app.get("/bundle.js", function(req, res) {
-    res.send(bundle);
-});
 
 app.listen(PORT);

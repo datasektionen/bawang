@@ -30,7 +30,7 @@ class Bawang extends React.Component {
                             </article>
                         </div>
                         <data-news className="right" />
-                    </section>
+                    </section>reandered
                     <script src="bundle.js"></script>
                 </body>
             </html>
@@ -39,6 +39,7 @@ class Bawang extends React.Component {
 }
 
 if(process.browser) {
+    // If any data needs to be preloaded, hook that up here.
     React.render(<Bawang />, document);
 }
 
