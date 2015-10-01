@@ -1,5 +1,5 @@
 var React = require("react");
-var Databaren = require("./databaren.jsx");
+var Databaren = require("../databaren/databaren.jsx");
 
 
 class Bawang extends React.Component {

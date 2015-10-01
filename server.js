@@ -3,7 +3,7 @@ const PORT = 8080;
 var express = require("express");
 var React = require("react");
 var babel = require("babel-core/register");
-var bawang = require("./components/bawang.jsx");
+var bawang = require("./components/bawang/bawang.jsx");
 var browserify = require("browserify");
 var reactify = require("reactify");
 
@@ -11,7 +11,7 @@ var app = express();
 
 // Compile the app into a bundle and send to client. Client will laiter hook into the already rendered initial state.
 var b = browserify();
-b.add("./components/bawang.jsx");
+b.add("./components/bawang/bawang.jsx");
 var bundle = null;
 b.bundle(function(err, buf) {
     if(err) {
