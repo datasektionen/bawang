@@ -1,5 +1,5 @@
 # Bawang
-node express reactand just code aways
+node express react
 
 Warning, application may include traces of black client-server side rendering magic.
 But don't be afraid, just take a look into components/bawang.jsx and you should feel right at home.
@@ -11,6 +11,7 @@ But don't be afraid, just take a look into components/bawang.jsx and you should 
 
 ## TODO
 * Add react-translate to everything. https://www.npmjs.com/package/react-translate
+* Switch out more syntax for es6 just for fun
 * Look at cookie and browser default language when determining what language to send to client as default
 * Create lightweight global stylesheet with fonts, default colors and forms.
 * Implement styling
