@@ -6,7 +6,7 @@ class Databaren extends React.Component {
         return (
             <header>
                 <a href="/">
-                    <img alt="Home" src="small_delta.svg" />
+                    <img alt="Home" src="/static/databaren/small_delta.svg" />
                 </a>
                 <nav>
                     <a href="http://datasektionen.se/">Nyheter/Event</a>

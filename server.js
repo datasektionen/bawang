@@ -26,6 +26,7 @@ app.get("/bundle.js", function(req, res) {
 
 // Static files
 app.use('/node_modules', express.static('node_modules'));
+app.use('/static/', express.static('components'));
 
 // Render the result of the entire application at initial state into a string and send to client.
 app.get("/", function(req, res) {
