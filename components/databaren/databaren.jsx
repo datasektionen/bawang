@@ -1,27 +1,57 @@
 var React = require("react");
+var dcolors = require("../../data-colors.js");
+var Dataswitch = require("../dataswitch/dataswitch.jsx");
 
 
 class Databaren extends React.Component {
     render() {
+        var styles = {
+            header: {
+                backgroundColor: dcolors.background
+            },
+            button: {
+                backgroundColor: dcolors.second,
+                border: "none"
+            },
+            nav: {
+                display: "inline-block"
+            },
+            navelement: {
+                textTransform: "uppercase",
+                color: "white",
+                textDecoration: "none"
+            }
+        }
         return (
-            <header>
-                <a href="/">
+            <header style={styles.header}>
+                <a href="/" style={styles.button}>
                     <img alt="Home" src="/static/databaren/small_delta.svg" />
                 </a>
-                <nav>
-                    <a href="http://datasektionen.se/">Nyheter/Event</a>
-                    <a href="http://datasektionen.se/sektionen">Sektionen</a>
-                    <a href="http://datasektionen.se/studier">Studier</a>
-                    <a href="http://datasektionen.se/naringsliv">Näringsliv</a>
-                    <a href="http://datasektionen.se/sektionen/namnder">Nämder</a>
-                    <a href="http://www.djobb.se/">Jobb</a>
-                    <a href="http://datasektionen.se/kontakt">Kontakt</a>
+                <nav style={styles.nav}>
+                    <a style={styles.navelement} href="http://datasektionen.se/">
+                        Nyheter/Event
+                    </a>
+                    <a style={styles.navelement} href="http://datasektionen.se/sektionen">
+                        Sektionen
+                    </a>
+                    <a style={styles.navelement} href="http://datasektionen.se/studier">
+                        Studier
+                    </a>
+                    <a style={styles.navelement} href="http://datasektionen.se/naringsliv">
+                        Näringsliv
+                    </a>
+                    <a style={styles.navelement} href="http://datasektionen.se/sektionen/namnder">
+                        Nämder
+                    </a>
+                    <a style={styles.navelement} href="http://www.djobb.se/">
+                        Jobb
+                    </a>
+                    <a style={styles.navelement} href="http://datasektionen.se/kontakt">
+                        Kontakt
+                    </a>
                 </nav>
-                <div className="language_select">
-                    <input type="radio" name="language" id="language" value="English" /> Engelska
-                    <input type="radio" name="language" id="language" value="Swedish" /> Svenska
-                </div>
-                <button href="http://datasektionen.se/login">Login</button>
+                <Dataswitch alternatives={["English", "Swedish"]} />
+                <button style={styles.button} href="http://datasektionen.se/login">Login</button>
             </header>
         );
     }

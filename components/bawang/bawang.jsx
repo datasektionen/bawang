@@ -1,5 +1,6 @@
 var React = require("react");
 var Databaren = require("../databaren/databaren.jsx");
+var Style = require("Radium").Style;
 
 class Bawang extends React.Component {
     render() {
@@ -9,8 +10,13 @@ class Bawang extends React.Component {
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width" />
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
-                    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+                    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css' />
                     <title>Konlig Datasektionen vid KTH</title>
+                    <Style rules={{
+                        '*': {
+                            'fontFamily': 'Lato, Arial'
+                        }
+                    }}/>
                 </head>
                 <body>
                     <Databaren />
