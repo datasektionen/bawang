@@ -1,11 +1,13 @@
 var React = require("react");
 var Databaren = require("../databaren/databaren.jsx");
 var Style = require("Radium").Style;
+var Translate = require("../translate/translate.jsx");
+
 
 class Bawang extends React.Component {
     render() {
         return (
-            <html>
+            <html lang={global? global.language : window.language}>
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width" />
@@ -46,7 +48,8 @@ class Bawang extends React.Component {
 
 if(process.browser) {
     // If any data needs to be preloaded, hook that up here.
+    Translate.client_setup();
     React.render(<Bawang />, document);
 }
 
-module.exports = Bawang;
+export default Bawang;

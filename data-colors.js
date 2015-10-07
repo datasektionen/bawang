@@ -1,6 +1,6 @@
 // Colors
 
-module.exports = {
+export default {
     cerise: "#ED458A",
     second: "#FDDE00",
     background: "#212121",

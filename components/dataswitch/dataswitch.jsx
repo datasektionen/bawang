@@ -4,6 +4,18 @@ var dcolors = require("../../data-colors.js");
 
 
 class Dataswitch extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            value: props.value
+        };
+    }
+    onChange(e) {
+        this.setState({
+            value: e.target.value
+        });
+        this.props.onChange(e.target.value);
+    }
     render() {
         var styles = {
             base: {
@@ -35,17 +47,22 @@ class Dataswitch extends React.Component {
         };
         var that = this;
         return (
-            <div style={styles.base} className="language_select">
-                {this.props.alternatives.map(function(alternative) {
+            <form onChange={this.onChange.bind(this)} style={styles.base}>
+                {this.props.alternatives.map(function(alternative, i) {
                     return (
-                        <label key={alternative} style={[styles.label, that.props.value == alternative && styles.checked]}>
-                            <input style={styles.input} type="radio" name="language" id={alternative} value={alternative} defaultChecked={that.props.value == alternative} />
+                        <label key={alternative} style={[styles.label, that.state.value == that.props.values[i] && styles.checked]}>
+                            <input
+                                style={styles.input}
+                                type="radio"
+                                name="language" 
+                                value={that.props.values[i]}
+                            />
                             {alternative}
                         </label>
                 )})}
-            </div>
+            </form>
         );
     }
 }
 
-module.exports = Radium(Dataswitch);
+export default Radium(Dataswitch);

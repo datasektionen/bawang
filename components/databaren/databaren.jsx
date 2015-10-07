@@ -1,7 +1,8 @@
 var React = require("react");
 var dcolors = require("../../data-colors.js");
-var Dataswitch = require("../dataswitch/dataswitch.jsx");
 var Radium = require('radium');
+var {Translate, Lang, LanguageSwitcher} = require("../translate/translate.jsx");
+
 
 class Databaren extends React.Component {
     render() {
@@ -62,34 +63,92 @@ class Databaren extends React.Component {
                 </a>
                 <nav style={styles.nav}>
                     <a style={styles.navelement} href="http://datasektionen.se/">
-                        Nyheter/Event
+                        <Translate>
+                            <Lang lang="sv">
+                                Nyheter/Event
+                            </Lang>
+                            <Lang lang="en">
+                                News/Events
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/sektionen">
-                        Sektionen
+                        <Translate>
+                            <Lang lang="sv">
+                                Sektionen
+                            </Lang>
+                            <Lang lang="en">
+                                The Chapter
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/studier">
-                        Studier
+                        <Translate>
+                            <Lang lang="sv">
+                                Studier
+                            </Lang>
+                            <Lang lang="en">
+                                Studies
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/naringsliv">
-                        Näringsliv
+                        <Translate>
+                            <Lang lang="sv">
+                                Näringsliv
+                            </Lang>
+                            <Lang lang="en">
+                                Business
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/sektionen/namnder">
-                        Nämder
+                        <Translate>
+                            <Lang lang="sv">
+                                Nämder
+                            </Lang>
+                            <Lang lang="en">
+                                Groups
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://www.djobb.se/">
-                        Jobb
+                        <Translate>
+                            <Lang lang="sv">
+                                Jobb
+                            </Lang>
+                            <Lang lang="en">
+                                jobs
+                            </Lang>
+                        </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/kontakt">
-                        Kontakt
+                        <Translate>
+                            <Lang lang="sv">
+                                Kontakt
+                            </Lang>
+                            <Lang lang="en">
+                                Contact
+                            </Lang>
+                        </Translate>
                     </a>
                 </nav>
                 <div style={styles.leftside}>
-                    <Dataswitch alternatives={["English", "Swedish"]} value="English" />
-                    <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">Login</button>
+                    <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} />
+                    <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">
+                        <Translate>
+                            <Lang lang="sv">
+                                Logga in
+                            </Lang>
+                            <Lang lang="en">
+                                Login
+                            </Lang>
+                        </Translate>
+                    </button>
                 </div>
             </header>
         );
     }
 }
 
-module.exports = Radium(Databaren);
+export default Radium(Databaren);
