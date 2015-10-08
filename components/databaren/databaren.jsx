@@ -64,72 +64,44 @@ class Databaren extends React.Component {
                 <nav style={styles.nav}>
                     <a style={styles.navelement} href="http://datasektionen.se/">
                         <Translate>
-                            <Lang lang="sv">
-                                Nyheter/Event
-                            </Lang>
-                            <Lang lang="en">
-                                News/Events
-                            </Lang>
+                            <Lang lang="sv">Nyheter/Event</Lang>
+                            <Lang lang="en">News/Events</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/sektionen">
                         <Translate>
-                            <Lang lang="sv">
-                                Sektionen
-                            </Lang>
-                            <Lang lang="en">
-                                The Chapter
-                            </Lang>
+                            <Lang lang="sv">Sektionen</Lang>
+                            <Lang lang="en">The Chapter</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/studier">
                         <Translate>
-                            <Lang lang="sv">
-                                Studier
-                            </Lang>
-                            <Lang lang="en">
-                                Studies
-                            </Lang>
+                            <Lang lang="sv">Studier</Lang>
+                            <Lang lang="en">Studies</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/naringsliv">
                         <Translate>
-                            <Lang lang="sv">
-                                Näringsliv
-                            </Lang>
-                            <Lang lang="en">
-                                Business
-                            </Lang>
+                            <Lang lang="sv">Näringsliv</Lang>
+                            <Lang lang="en">Business</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/sektionen/namnder">
                         <Translate>
-                            <Lang lang="sv">
-                                Nämder
-                            </Lang>
-                            <Lang lang="en">
-                                Groups
-                            </Lang>
+                            <Lang lang="sv">Nämnder</Lang>
+                            <Lang lang="en">Groups</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://www.djobb.se/">
                         <Translate>
-                            <Lang lang="sv">
-                                Jobb
-                            </Lang>
-                            <Lang lang="en">
-                                jobs
-                            </Lang>
+                            <Lang lang="sv">Jobb</Lang>
+                            <Lang lang="en">Jobs</Lang>
                         </Translate>
                     </a>
                     <a style={styles.navelement} href="http://datasektionen.se/kontakt">
                         <Translate>
-                            <Lang lang="sv">
-                                Kontakt
-                            </Lang>
-                            <Lang lang="en">
-                                Contact
-                            </Lang>
+                            <Lang lang="sv">Kontakt</Lang>
+                            <Lang lang="en">Contact</Lang>
                         </Translate>
                     </a>
                 </nav>
@@ -137,12 +109,8 @@ class Databaren extends React.Component {
                     <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} />
                     <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">
                         <Translate>
-                            <Lang lang="sv">
-                                Logga in
-                            </Lang>
-                            <Lang lang="en">
-                                Login
-                            </Lang>
+                            <Lang lang="sv">Logga in</Lang>
+                            <Lang lang="en">Login</Lang>
                         </Translate>
                     </button>
                 </div>

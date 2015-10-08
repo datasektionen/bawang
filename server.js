@@ -39,11 +39,13 @@ app.get("/", function(req, res) {
         var lang = req.cookies.language;
     } else {
         // Set language cookie based on browser setting. Prefer Swedish default to English;
-        var lang = req.acceptsLanguages("sv");
+        var lang = req.acceptsLanguages(["sv", "en"]);
         if(!lang) {
             lang = "en";
         }
-        res.cookie("language", lang);
+        res.cookie("language", lang, {
+            maxAge: 9000000000
+        });
     } 
     Translate.server_setup(lang);
     var string = "<!DOCTYPE html>" + React.renderToString(React.createElement(bawang));
