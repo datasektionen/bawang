@@ -14,8 +14,10 @@ class Databaren extends React.Component {
             button: {
                 backgroundColor: dcolors.second,
                 border: "none",
+                fontSize: 13,
                 height: 50,
-                padding: 0
+                padding: 0,
+                paddingTop: 1
             },
             superdelta: {
                 //marginLeft: 50,
@@ -47,8 +49,8 @@ class Databaren extends React.Component {
             login: {
                 //marginRight: 50,
                 width: 100,
-                fontSize: 15,
-                fontFamily: "Lato, Arial"
+                fontFamily: "Lato, Arial",
+                textTransform: "uppercase"
             },
             leftside: {
                 display: "inline-block",
