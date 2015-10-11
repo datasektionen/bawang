@@ -38,7 +38,7 @@ class Dataswitch extends React.Component {
             checked: {
                 backgroundColor: "#e1e1e1",
                 color: "#333",
-                fontWeight: "bold",
+                fontWeight: 900,
                 borderRadius: 2
             },
             input: {
