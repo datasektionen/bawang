@@ -1,11 +1,41 @@
 var React = require("react");
 var Databaren = require("../databaren/databaren.jsx");
-var Style = require("Radium").Style;
+var Radium = require("Radium");
 var Translate = require("../translate/translate.jsx");
 
 
 class Bawang extends React.Component {
     render() {
+        var blur = "blur(2px)";
+        var styles = {
+            overlay: {
+                width: "50%",
+                height: "100vh",
+                backgroundColor: "rgba(1, 1, 1, 0.5)",
+                overflow: "hidden",
+                position: "relative",
+                display: "inline-block"
+            },
+            bgimg: {
+                zIndex: -10,
+                position: "absolute",
+                bottom: 0,
+                WebkitFilter: blur,
+                MozFilter: blur,
+                OFilter: blur,
+                MsFilter: blur,
+                filter: blur,
+                transform: "scale(1.03)",    // Get rid of white frame from blur
+                height: "100vh",
+                minWidth: "100%"
+            },
+            left: {
+                backgroundColor: "rgba(0, 0, 0, 0.6)",
+            },
+            right: {
+                backgroundColor: "rgba(193, 9, 85, 0.7)",
+            }
+        };
         return (
             <html lang={global? global.language : window.language}>
                 <head>
@@ -14,7 +44,7 @@ class Bawang extends React.Component {
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
                     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css' />
                     <title>Konlig Datasektionen vid KTH</title>
-                    <Style rules={{
+                    <Radium.Style rules={{
                         '*': {
                             'fontFamily': 'Lato, Arial'
                         }
@@ -22,9 +52,13 @@ class Bawang extends React.Component {
                 </head>
                 <body>
                     <Databaren />
-                    <div className="background">
-                        <img className="left" src="/static/bawang/left.jpg" />
-                        <img className="right" src="/static/bawang/right.jpg" />
+                    <div>
+                        <div style={[styles.overlay, styles.left]}>
+                            <img style={[styles.bgimg]} src="/static/bawang/left.jpg" />
+                        </div>
+                        <div style={[styles.overlay, styles.right]}>
+                            <img style={[styles.bgimg]} src="/static/bawang/right_croped.jpg" />
+                        </div>
                     </div>
                     <section className="top">
                         <img alt="Datasektionens sköld" src="./static/bawang/sköld.svg" />
@@ -52,4 +86,4 @@ if(process.browser) {
     React.render(<Bawang />, document);
 }
 
-export default Bawang;
+export default Radium(Bawang);
