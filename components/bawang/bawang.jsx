@@ -2,7 +2,7 @@ var React = require("react");
 var Databaren = require("../databaren/databaren.jsx");
 var Radium = require("Radium");
 var Translate = require("../translate/translate.jsx");
-var dcolors = require("../../data-colors.js");
+var dconst = require("../../data-constants.js");
 
 
 class Bawang extends React.Component {
@@ -34,26 +34,27 @@ class Bawang extends React.Component {
                 backgroundColor: "rgba(0, 0, 0, 0.6)",
             },
             right: {
-                backgroundColor: "rgba(193, 9, 85, 0.7)",
+                backgroundColor: "rgba(241, 29, 116, 0.75)",
             },
             content: {
                 textAlign: "center",
                 position: "absolute",
                 top: 145,
-                width: "100%",
+                width: "100%"
             },
             delta: {
                 height: 269,
                 marginRight: 3,
-                marginBottom: 29,
+                marginBottom: 31,
             },
             heading: {
                 fontSize: 60,
+                marginTop: 0,
                 fontWeight: 900,
-                color: dcolors.cerise,
+                color: dconst.colors.cerise,
                 position: "relative",
                 marginLeft: -81,
-                marginBottom: 78,
+                marginBottom: 70,
                 textShadow: "1px 1px 3px rgba(0, 0, 0, 0.34)"
             },
             sektionen: {
@@ -66,6 +67,22 @@ class Bawang extends React.Component {
                 position: "absolute",
                 bottom: 14
             },
+            bottom: {
+                maxWidth: dconst.site_width,
+                margin: "auto",
+                color: "white",
+                position: "relative",
+                fontSize: 17.5,
+                letterSpacing: "0.15px"
+            },
+            articles: {
+                width: "45.4%",
+                textAlign: "justify",
+                lineHeight: "35px",
+            },
+            article: {
+                marginBottom: 24
+            }
         };
         return (
             <html lang={global? global.language : window.language}>
@@ -102,13 +119,15 @@ class Bawang extends React.Component {
                                 </span>
                             </span>
                         </h1>
-                        <div>
-                            <article>
-                                Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
-                            </article>
-                            <article>
-                                På Konglig Datasektionen finns det många sätt att roa sig. Förutom studier i intressanta ämnen och episka fester anordnas det även qulturella tillställningar, hackerkvällar, sektionsmöten och mycket mer.
-                            </article>
+                        <div style={styles.bottom}>
+                            <div style={styles.articles}>
+                                <article style={[styles.article, {fontWeight: 900}]}>
+                                    Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
+                                </article>
+                                <article style={styles.article}>
+                                    På Konglig Datasektionen finns det många sätt att roa sig. Förutom studier i intressanta ämnen och episka fester anordnas det även qulturella tillställningar, hackerkvällar, sektionsmöten och mycket mer.
+                                </article>
+                            </div>
                         </div>
                         <data-news />
                     </section>

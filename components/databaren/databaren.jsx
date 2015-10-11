@@ -1,18 +1,24 @@
 var React = require("react");
-var dcolors = require("../../data-colors.js");
+var dconst = require("../../data-constants.js");
 var Radium = require('radium');
 var {Translate, Lang, LanguageSwitcher} = require("../translate/translate.jsx");
+
 
 
 class Databaren extends React.Component {
     render() {
         var styles = {
             header: {
-                backgroundColor: dcolors.background,
+                backgroundColor: dconst.colors.background,
                 height: 50,
             },
+            widther: {
+                maxWidth: dconst.site_width,
+                margin: "auto",
+                position: "relative"
+            },
             button: {
-                backgroundColor: dcolors.second,
+                backgroundColor: dconst.colors.second,
                 border: "none",
                 fontSize: 14,
                 height: 50,
@@ -23,9 +29,6 @@ class Databaren extends React.Component {
                 width: 50,
                 display: "inline-block",
                 textAlign: "center",
-                "@media (min-width: 1500px)": {
-                    marginLeft: 50,
-                },
             },
             superdelta_img: {
                 marginTop: 10,
@@ -34,17 +37,17 @@ class Databaren extends React.Component {
             },
             nav: {
                 display: "inline-block",
-                marginLeft: 12.5,
+                marginLeft: 9,
                 verticalAlign: "top",
             },
             navelement: {
                 display: "inline-block",
                 fontSize: 15,
                 textTransform: "uppercase",
-                color: dcolors.offwhite,
+                color: dconst.colors.offwhite,
                 textDecoration: "none",
-                paddingRight: 12.5,
-                paddingLeft: 12.5,
+                paddingRight: 11,
+                paddingLeft: 11,
                 paddingTop: 17,
                 paddingBottom: 16
             },
@@ -52,9 +55,6 @@ class Databaren extends React.Component {
                 width: 100,
                 fontFamily: "Lato, Arial",
                 textTransform: "uppercase",
-                "@media (min-width: 1500px)": {
-                    marginRight: 50,
-                },
             },
             leftside: {
                 display: "inline-block",
@@ -64,61 +64,63 @@ class Databaren extends React.Component {
         }
         return (
             <header style={styles.header}>
-                <a href="/" style={[styles.button, styles.superdelta]}>
-                    <img style={styles.superdelta_img} alt="Home" src="/static/databaren/small_delta.svg" />
-                </a>
-                <nav style={styles.nav}>
-                    <a style={styles.navelement} href="http://datasektionen.se/">
-                        <Translate>
-                            <Lang lang="sv">Nyheter/Event</Lang>
-                            <Lang lang="en">News/Events</Lang>
-                        </Translate>
+                <div style={styles.widther}>
+                    <a href="/" style={[styles.button, styles.superdelta]}>
+                        <img style={styles.superdelta_img} alt="Home" src="/static/databaren/small_delta.svg" />
                     </a>
-                    <a style={styles.navelement} href="http://datasektionen.se/sektionen">
-                        <Translate>
-                            <Lang lang="sv">Sektionen</Lang>
-                            <Lang lang="en">The Chapter</Lang>
-                        </Translate>
-                    </a>
-                    <a style={styles.navelement} href="http://datasektionen.se/studier">
-                        <Translate>
-                            <Lang lang="sv">Studier</Lang>
-                            <Lang lang="en">Studies</Lang>
-                        </Translate>
-                    </a>
-                    <a style={styles.navelement} href="http://datasektionen.se/naringsliv">
-                        <Translate>
-                            <Lang lang="sv">Näringsliv</Lang>
-                            <Lang lang="en">Business</Lang>
-                        </Translate>
-                    </a>
-                    <a style={styles.navelement} href="http://datasektionen.se/sektionen/namnder">
-                        <Translate>
-                            <Lang lang="sv">Nämnder</Lang>
-                            <Lang lang="en">Groups</Lang>
-                        </Translate>
-                    </a>
-                    <a style={styles.navelement} href="http://www.djobb.se/">
-                        <Translate>
-                            <Lang lang="sv">Jobb</Lang>
-                            <Lang lang="en">Jobs</Lang>
-                        </Translate>
-                    </a>
-                    <a style={styles.navelement} href="http://datasektionen.se/kontakt">
-                        <Translate>
-                            <Lang lang="sv">Kontakt</Lang>
-                            <Lang lang="en">Contact</Lang>
-                        </Translate>
-                    </a>
-                </nav>
-                <div style={styles.leftside}>
-                    <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} />
-                    <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">
-                        <Translate>
-                            <Lang lang="sv">Logga in</Lang>
-                            <Lang lang="en">Login</Lang>
-                        </Translate>
-                    </button>
+                    <nav style={styles.nav}>
+                        <a style={styles.navelement} href="http://datasektionen.se/">
+                            <Translate>
+                                <Lang lang="sv">Nyheter/Event</Lang>
+                                <Lang lang="en">News/Events</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://datasektionen.se/sektionen">
+                            <Translate>
+                                <Lang lang="sv">Sektionen</Lang>
+                                <Lang lang="en">The Chapter</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://datasektionen.se/studier">
+                            <Translate>
+                                <Lang lang="sv">Studier</Lang>
+                                <Lang lang="en">Studies</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://datasektionen.se/naringsliv">
+                            <Translate>
+                                <Lang lang="sv">Näringsliv</Lang>
+                                <Lang lang="en">Business</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://datasektionen.se/sektionen/namnder">
+                            <Translate>
+                                <Lang lang="sv">Nämnder</Lang>
+                                <Lang lang="en">Groups</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://www.djobb.se/">
+                            <Translate>
+                                <Lang lang="sv">Jobb</Lang>
+                                <Lang lang="en">Jobs</Lang>
+                            </Translate>
+                        </a>
+                        <a style={styles.navelement} href="http://datasektionen.se/kontakt">
+                            <Translate>
+                                <Lang lang="sv">Kontakt</Lang>
+                                <Lang lang="en">Contact</Lang>
+                            </Translate>
+                        </a>
+                    </nav>
+                    <div style={styles.leftside}>
+                        <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} />
+                        <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">
+                            <Translate>
+                                <Lang lang="sv">Logga in</Lang>
+                                <Lang lang="en">Login</Lang>
+                            </Translate>
+                        </button>
+                    </div>
                 </div>
             </header>
         );

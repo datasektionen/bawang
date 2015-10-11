@@ -1,6 +1,6 @@
 var React = require("react");
 var Radium = require("radium");
-var dcolors = require("../../data-colors.js");
+var dconst = require("../../data-constants.js");
 
 
 class Dataswitch extends React.Component {
@@ -20,11 +20,11 @@ class Dataswitch extends React.Component {
         var styles = {
             base: {
                 display: "inline-block",
-                color: dcolors.offwhite,
+                color: dconst.colors.offwhite,
                 margin: 10,
                 backgroundColor: "#333",
                 borderRadius: 2,
-                textTransform: "uppercase"
+                textTransform: "uppercase",
             },
             label: {
                 cursor: "pointer",
