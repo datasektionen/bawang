@@ -45,14 +45,16 @@ class Bawang extends React.Component {
             delta: {
                 height: 269,
                 marginRight: 3,
+                marginBottom: 29,
             },
             heading: {
-                marginTop: 29,
                 fontSize: 60,
                 fontWeight: 900,
                 color: dcolors.cerise,
                 position: "relative",
-                marginLeft: -81
+                marginLeft: -81,
+                marginBottom: 78,
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.34)"
             },
             sektionen: {
                 marginLeft: 3,
@@ -63,7 +65,7 @@ class Bawang extends React.Component {
                 marginLeft: 12,
                 position: "absolute",
                 bottom: 14
-            }
+            },
         };
         return (
             <html lang={global? global.language : window.language}>
