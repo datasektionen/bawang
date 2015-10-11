@@ -29,8 +29,8 @@ class Dataswitch extends React.Component {
             label: {
                 cursor: "pointer",
                 fontSize: 11.3,
-                paddingLeft: 16,
-                paddingRight: 16,
+                paddingLeft: 19,
+                paddingRight: 19,
                 paddingTop: 8.5,
                 paddingBottom: 8.5,
                 display: "inline-block",

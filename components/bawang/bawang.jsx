@@ -2,6 +2,7 @@ var React = require("react");
 var Databaren = require("../databaren/databaren.jsx");
 var Radium = require("Radium");
 var Translate = require("../translate/translate.jsx");
+var dcolors = require("../../data-colors.js");
 
 
 class Bawang extends React.Component {
@@ -34,6 +35,34 @@ class Bawang extends React.Component {
             },
             right: {
                 backgroundColor: "rgba(193, 9, 85, 0.7)",
+            },
+            content: {
+                textAlign: "center",
+                position: "absolute",
+                top: 145,
+                width: "100%",
+            },
+            delta: {
+                height: 269,
+                marginRight: 3,
+            },
+            heading: {
+                marginTop: 29,
+                fontSize: 60,
+                fontWeight: 900,
+                color: dcolors.cerise,
+                position: "relative",
+                marginLeft: -81
+            },
+            sektionen: {
+                marginLeft: 3,
+                color: "white"
+            },
+            vidkth: {
+                fontSize: 25,
+                marginLeft: 12,
+                position: "absolute",
+                bottom: 14
             }
         };
         return (
@@ -54,24 +83,32 @@ class Bawang extends React.Component {
                     <Databaren />
                     <div>
                         <div style={[styles.overlay, styles.left]}>
-                            <img style={[styles.bgimg]} src="/static/bawang/left.jpg" />
+                            <img style={styles.bgimg} src="/static/bawang/left.jpg" />
                         </div>
                         <div style={[styles.overlay, styles.right]}>
-                            <img style={[styles.bgimg]} src="/static/bawang/right_croped.jpg" />
+                            <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                         </div>
                     </div>
-                    <section className="top">
-                        <img alt="Datasektionens sköld" src="./static/bawang/sköld.svg" />
-                        <h1>Konglig Data<span className="invert">sektionen<span className="small">vid KTH</span></span></h1>
-                        <div className="left">
-                            <article className="half bold">
+                    <section style={styles.content}>
+                        <img style={styles.delta} alt="Datasektionens Logotyp sköld deltat" src="./static/bawang/sköld.svg" />
+                        <h1 style={styles.heading}>
+                            Konglig Data
+                            <span style={styles.sektionen}>
+                                sektionen
+                                <span style={styles.vidkth}>
+                                    vid KTH
+                                </span>
+                            </span>
+                        </h1>
+                        <div>
+                            <article>
                                 Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
                             </article>
-                            <article className="half">
+                            <article>
                                 På Konglig Datasektionen finns det många sätt att roa sig. Förutom studier i intressanta ämnen och episka fester anordnas det även qulturella tillställningar, hackerkvällar, sektionsmöten och mycket mer.
                             </article>
                         </div>
-                        <data-news className="right" />
+                        <data-news />
                     </section>
                     <script src="bundle.js"></script>
                 </body>

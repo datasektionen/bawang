@@ -14,16 +14,18 @@ class Databaren extends React.Component {
             button: {
                 backgroundColor: dcolors.second,
                 border: "none",
-                fontSize: 13,
+                fontSize: 14,
                 height: 50,
                 padding: 0,
                 paddingTop: 1
             },
             superdelta: {
-                //marginLeft: 50,
                 width: 50,
                 display: "inline-block",
-                textAlign: "center"
+                textAlign: "center",
+                "@media (min-width: 1500px)": {
+                    marginLeft: 50,
+                },
             },
             superdelta_img: {
                 marginTop: 10,
@@ -47,10 +49,12 @@ class Databaren extends React.Component {
                 paddingBottom: 16
             },
             login: {
-                //marginRight: 50,
                 width: 100,
                 fontFamily: "Lato, Arial",
-                textTransform: "uppercase"
+                textTransform: "uppercase",
+                "@media (min-width: 1500px)": {
+                    marginRight: 50,
+                },
             },
             leftside: {
                 display: "inline-block",
