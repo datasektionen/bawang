@@ -3,7 +3,7 @@ var dconst = require("../../data-constants.js");
 var merge = require("merge");
 
 
-class Dataswitch extends React.Component {
+export default class Dataswitch extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -64,5 +64,3 @@ class Dataswitch extends React.Component {
         );
     }
 }
-
-export default Dataswitch;

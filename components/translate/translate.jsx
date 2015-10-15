@@ -2,11 +2,11 @@
 // Introduces two new elements, <Translate> and <Lang lang="sv">. Lang should be put inside Translate.
 // Uses a cookies, global/window variable and an event window.addListener("language-change").
 
-var React = require("react");
-var Dataswitch = require("../dataswitch/dataswitch.jsx");
+import React from "react";
+import Dataswitch from "../dataswitch/dataswitch.jsx";
 
 
-function client_setup() {
+export function client_setup() {
     var cookies = document.cookie.split(";");
     for(var cookie in cookies) {
         var parts = cookies[cookie].split("=");
@@ -19,7 +19,7 @@ function client_setup() {
 
 // Identifices the what language to send to the client, looking at cookies and accept-header
 // Takes express res and req
-function server_setup(res, req) {
+export function server_setup(res, req) {
     if(req.cookies.language) {
         var lang = req.cookies.language;
     } else {
@@ -37,13 +37,9 @@ function server_setup(res, req) {
 
 // Put inside <Translate>
 // Set property lang="en" to filter it out
-class Lang extends React.Component {
-    render() {
-        return <span>{this.props.children}</span>;
-    }
-}
+export var Lang = (props) => <span>{props.children}</span>; 
 
-class Translate extends React.Component {
+export class Translate extends React.Component {
     render() {
         for(var child in this.props.children) {
             if(this.props.children[child].props.lang == this.props.language) {
@@ -54,7 +50,7 @@ class Translate extends React.Component {
     }
 }
 
-class LanguageSwitcher extends React.Component {
+export class LanguageSwitcher extends React.Component {
     render() {
         return <Dataswitch
             onChange={this.change}
@@ -71,13 +67,4 @@ class LanguageSwitcher extends React.Component {
         };
         window.dispatchEvent(event);
     }
-}
-
-
-export default {
-    Translate: Translate,
-    Lang: Lang,
-    server_setup: server_setup,
-    client_setup: client_setup,
-    LanguageSwitcher: LanguageSwitcher
 }

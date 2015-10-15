@@ -1,11 +1,12 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var Databaren = require("../databaren/databaren.jsx");
-var dconst = require("../../data-constants.js");
-var merge = require("merge");
-var {Translate, Lang, client_setup} = require("../translate/translate.jsx");
+import React from "react";
+import ReactDOM from "react-dom";
+import Databaren from "../databaren/databaren.jsx";
+import dconst from "../../data-constants.js";
+import merge from "merge";
+import {Translate, Lang, client_setup} from "../translate/translate.jsx";
 
-class Bawang extends React.Component {
+
+export default class Bawang extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -175,5 +176,3 @@ if(process.browser) {
     var language = client_setup();
     ReactDOM.render(<Bawang language={language}/>, document);
 }
-
-export default Bawang;

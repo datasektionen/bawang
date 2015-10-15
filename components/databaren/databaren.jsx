@@ -1,11 +1,10 @@
-var React = require("react");
-var dconst = require("../../data-constants.js");
-var {Translate, Lang, LanguageSwitcher} = require("../translate/translate.jsx");
-var merge = require("merge");
+import React from "react";
+import dconst from "../../data-constants.js";
+import {Translate, Lang, LanguageSwitcher} from "../translate/translate.jsx";
+import merge from "merge";
 
 
-
-class Databaren extends React.Component {
+export default class Databaren extends React.Component {
     render() {
         var styles = {
             header: {
@@ -123,5 +122,3 @@ class Databaren extends React.Component {
         );
     }
 }
-
-export default Databaren;
