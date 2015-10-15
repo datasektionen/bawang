@@ -1,7 +1,7 @@
 var React = require("react");
 var dconst = require("../../data-constants.js");
-var Radium = require('radium');
 var {Translate, Lang, LanguageSwitcher} = require("../translate/translate.jsx");
+var merge = require("merge");
 
 
 
@@ -62,7 +62,7 @@ class Databaren extends React.Component {
         return (
             <header style={styles.header}>
                 <div style={styles.widther}>
-                    <a href="/" style={[styles.button, styles.superdelta]}>
+                    <a href="/" style={merge({}, styles.button, styles.superdelta)}>
                         <img style={styles.superdelta_img} alt="Home" src="/static/databaren/small_delta.svg" />
                     </a>
                     <nav style={styles.nav}>
@@ -111,7 +111,7 @@ class Databaren extends React.Component {
                     </nav>
                     <div style={styles.leftside}>
                         <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} value={this.props.language} />
-                        <button style={[styles.button, styles.login]} href="http://datasektionen.se/login">
+                        <button style={merge({}, styles.button, styles.login)} href="http://datasektionen.se/login">
                             <Translate language={this.props.language}>
                                 <Lang lang="sv">Logga in</Lang>
                                 <Lang lang="en">Login</Lang>
@@ -124,4 +124,4 @@ class Databaren extends React.Component {
     }
 }
 
-export default Radium(Databaren);
+export default Databaren;

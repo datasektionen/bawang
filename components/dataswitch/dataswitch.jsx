@@ -1,6 +1,6 @@
 var React = require("react");
-var Radium = require("radium");
 var dconst = require("../../data-constants.js");
+var merge = require("merge");
 
 
 class Dataswitch extends React.Component {
@@ -50,7 +50,7 @@ class Dataswitch extends React.Component {
             <form onChange={this.onChange.bind(this)} style={styles.base}>
                 {this.props.alternatives.map(function(alternative, i) {
                     return (
-                        <label key={alternative} style={[styles.label, that.state.value == that.props.values[i] && styles.checked]}>
+                        <label key={alternative} style={merge({}, styles.label, (that.state.value == that.props.values[i] ? styles.checked : {}))}>
                             <input
                                 style={styles.input}
                                 type="radio"
@@ -65,4 +65,4 @@ class Dataswitch extends React.Component {
     }
 }
 
-export default Radium(Dataswitch);
+export default Dataswitch;
