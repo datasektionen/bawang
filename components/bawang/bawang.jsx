@@ -52,7 +52,7 @@ class Bawang extends React.Component {
                 backgroundColor: "rgba(0, 0, 0, 0.6)",
             },
             right: {
-                backgroundColor: "rgba(241, 29, 116, 0.75)",
+                backgroundColor: "rgba(221, 0, 124, 0.85)",
             },
             content: {
                 textAlign: "center",
