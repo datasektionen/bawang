@@ -1,10 +1,9 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 var Databaren = require("../databaren/databaren.jsx");
-var Translate = require("../translate/translate.jsx");
 var dconst = require("../../data-constants.js");
 var merge = require("merge");
-
+var {Translate, Lang, client_setup} = require("../translate/translate.jsx");
 
 class Bawang extends React.Component {
     constructor(props) {
@@ -128,21 +127,41 @@ class Bawang extends React.Component {
                             <span style={styles.sektionen}>
                                 sektionen
                                 <span style={styles.vidkth}>
-                                    vid KTH
+                                    <Translate language={this.state.language}>
+                                        <Lang lang="sv">
+                                            vid KTH
+                                        </Lang>
+                                        <Lang lang="en">
+                                            at KTH
+                                        </Lang>
+                                    </Translate>
                                 </span>
                             </span>
                         </h1>
                         <div style={styles.bottom}>
                             <div style={styles.articles}>
                                 <article style={merge({}, {fontWeight: 900}, styles.article)}>
-                                    Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
+                                    <Translate  language={this.state.language}>
+                                        <Lang lang="sv">
+                                            Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
+                                        </Lang>
+                                        <Lang lang="en">
+                                            Datasektionen is a non-profit student section under THS and is there for everyone who reads Computer Engineering at KTH to get such a good and productive study time as possible.
+                                        </Lang>
+                                    </Translate>
                                 </article>
                                 <article style={styles.article}>
-                                    På Konglig Datasektionen finns det många sätt att roa sig. Förutom studier i intressanta ämnen och episka fester anordnas det även qulturella tillställningar, hackerkvällar, sektionsmöten och mycket mer.
+                                    <Translate style={styles.vidkth} language={this.state.language}>
+                                        <Lang lang="sv">
+                                            På Datasektionen finns det många sätt att roa sig. Förutom studier i intressanta ämnen och episka fester anordnas det även qulturella tillställningar, hackerkvällar, sektionsmöten och mycket mer.
+                                        </Lang>
+                                        <Lang lang="en">
+                                            There are many ways to entertain yourself at Datasektionen. In addition to studies in interesting topics and epic parties we organize hacker evenings, pubs, section meetings and much more much more.
+                                        </Lang>
+                                    </Translate>
                                 </article>
                             </div>
                         </div>
-                        <data-news />
                     </section>
                     <script src="bundle.js"></script>
                 </body>
@@ -153,7 +172,7 @@ class Bawang extends React.Component {
 
 if(process.browser) {
     // If any data needs to be preloaded, hook that up here.
-    var language = Translate.client_setup();
+    var language = client_setup();
     ReactDOM.render(<Bawang language={language}/>, document);
 }
 
