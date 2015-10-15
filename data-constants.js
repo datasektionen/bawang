@@ -1,6 +1,6 @@
 export default {
     colors: {
-        cerise: "#EE2A7B",
+        cerise: "#E62977",  // Not #E2007F?
         second: "#FDDE00",
         background: "#212121",
         offwhite: "#f1f1f1"

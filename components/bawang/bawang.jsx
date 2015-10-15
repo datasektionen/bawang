@@ -1,14 +1,32 @@
 var React = require("react");
+var ReactDOM = require("react-dom");
 var Databaren = require("../databaren/databaren.jsx");
-var Radium = require("Radium");
 var Translate = require("../translate/translate.jsx");
 var dconst = require("../../data-constants.js");
+var merge = require("merge");
 
 
 class Bawang extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            language: props.language
+        }
+    }
+    componentDidMount() {
+        if(process.browser) {
+            var that = this;
+            window.addEventListener("language-change", function(event) {
+                that.setState({language: event.detail.language});
+            });
+        }
+    }
     render() {
         var blur = "blur(2px)";
         var styles = {
+            body: {
+                fontFamily: 'Lato, Arial'
+            },                
             overlay: {
                 width: "50%",
                 height: "100vh",
@@ -85,26 +103,21 @@ class Bawang extends React.Component {
             }
         };
         return (
-            <html lang={global? global.language : window.language}>
+            <html lang={this.state.language}>
                 <head>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width" />
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
                     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css' />
                     <title>Konlig Datasektionen vid KTH</title>
-                    <Radium.Style rules={{
-                        '*': {
-                            'fontFamily': 'Lato, Arial'
-                        }
-                    }}/>
                 </head>
-                <body>
-                    <Databaren />
+                <body style={styles.body}>
+                    <Databaren language={this.state.language} />
                     <div>
-                        <div style={[styles.overlay, styles.left]}>
+                        <div style={merge({}, styles.overlay, styles.left)}>
                             <img style={styles.bgimg} src="/static/bawang/left.jpg" />
                         </div>
-                        <div style={[styles.overlay, styles.right]}>
+                        <div style={merge({}, styles.overlay, styles.right)}>
                             <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                         </div>
                     </div>
@@ -121,7 +134,7 @@ class Bawang extends React.Component {
                         </h1>
                         <div style={styles.bottom}>
                             <div style={styles.articles}>
-                                <article style={[styles.article, {fontWeight: 900}]}>
+                                <article style={merge({}, {fontWeight: 900}, styles.article)}>
                                     Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
                                 </article>
                                 <article style={styles.article}>
@@ -140,8 +153,8 @@ class Bawang extends React.Component {
 
 if(process.browser) {
     // If any data needs to be preloaded, hook that up here.
-    Translate.client_setup();
-    React.render(<Bawang />, document);
+    var language = Translate.client_setup();
+    ReactDOM.render(<Bawang language={language}/>, document);
 }
 
-export default Radium(Bawang);
+export default Bawang;
