@@ -6,17 +6,6 @@ import React from "react";
 import Dataswitch from "../dataswitch/dataswitch.jsx";
 
 
-export function client_setup() {
-    var cookies = document.cookie.split(";");
-    for(var cookie in cookies) {
-        var parts = cookies[cookie].split("=");
-        if(parts[0] == "language") {
-            var language = parts[1];
-        }
-    }
-    return language;
-}
-
 // Identifices the what language to send to the client, looking at cookies and accept-header
 // Takes express res and req
 export function server_setup(res, req) {

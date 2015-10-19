@@ -9,6 +9,7 @@ var browserify = require("browserify");
 var babelify = require("babelify");
 var Bawang = require("./components/bawang/bawang.jsx");
 var Translate = require("./components/translate/translate.jsx");
+var Datanews = require("./components/datanews/datanews.jsx");
 
 var app = express();
 app.use(cookieParser());
@@ -36,9 +37,17 @@ app.use('/static/', express.static('components'));
 // Render the html of the entire application at initial state into a string and send to client.
 bawangcache = React.createFactory(Bawang);
 app.get("/", function(req, res) {
+    // FIXME Cache one English and one Swedish site and only rerender on changes.
     var language = Translate.server_setup(res, req);
-    var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({language: language}));
-    res.send(string);
+    Datanews.news(function(news) {
+        var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
+            initialState: {
+                language: language,
+                events: news
+            }
+        }));
+        res.send(string);
+    });
 });
 
 console.log("Listening on", PORT);

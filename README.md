@@ -1,8 +1,16 @@
 # Bawang
-node express react
+node express react isomorphic
 
 Warning, application may include traces of black client-server side rendering magic.
-But don't be afraid, just take a look into components/bawang.jsx and you should feel right at home.
+But don't be afraid, just take a look into components/bawang.jsx and you should feel right at home, except for the weird inline CSS, WOOPS.
+
+You may ask, "why so fucking complicated just for a simple site?". To that I say, "BECAUSE WE CAN!". No but seriously, when you get the chance, try out new stuff it's kind of fun.
+
+If you are so hipster, why not Flux? One thing at a time.
+
+
+## State Magic
+This application only has tree states to keep track of, the news, the events and language for the front-page. The language is chosen by the server depending on accept-header, then a cookie is set for that user. The initial state is sent and stored in window.\_state and then rendered locally.
 
 ## Setup
 
@@ -10,12 +18,7 @@ But don't be afraid, just take a look into components/bawang.jsx and you should 
     node server.js
 
 ## TODO
-* Add react-translate to everything. https://www.npmjs.com/package/react-translate
-* Switch out more syntax for es6 just for fun
-* Look at cookie and browser default language when determining what language to send to client as default
-* Create lightweight global stylesheet with fonts, default colors and forms.
-* Implement styling
+* Fix the race condition when loading
+* refactor bawang.jsx styling into seperate file
 * Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
 * Implement news widget. read rss from datasektionen.se or dataflödet (whenever thats ready).
-* Implement source maps for browserify/reactify thingyn. Should be easy with gulp-sourcemaps and pipe from bundle() in server.js
-* Some king of race condition when loading...

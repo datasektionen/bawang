@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import merge from "merge";
 import Databaren from "../databaren/databaren.jsx";
 import dconst from "../../data-constants.js";
-import merge from "merge";
 import {Translate, Lang, client_setup} from "../translate/translate.jsx";
+import {Datanews} from "../datanews/datanews.jsx";
 
 
 export default class Bawang extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            language: props.language
-        }
+        this.state = props.initialState;
+        console.log(this.state.events);
     }
     componentDidMount() {
         if(process.browser) {
@@ -90,7 +90,7 @@ export default class Bawang extends React.Component {
                 MsFilter: blur,
                 filter: blur,
                 transform: "scale(1.03)",    // Get rid of white frame from blur
-                height: "100vh",
+                height: "100%",
                 minWidth: "100%"
             },
             left: {
@@ -107,9 +107,11 @@ export default class Bawang extends React.Component {
                 margin: "0 50px 0 50px",
             },
         };
+        var statefixer = "window._state = " + JSON.stringify(this.props.initialState);
         return (
             <html lang={this.state.language}>
                 <head>
+                    <script dangerouslySetInnerHTML={{__html: statefixer}}></script>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="width=device-width" />
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
@@ -162,7 +164,7 @@ export default class Bawang extends React.Component {
                             </div>
                             <div style={merge({}, styles.overlay, styles.right)}>
                                 <article style={styles.article}>
-                                    placeholder
+                                    <Datanews events={this.state.events} />
                                 </article>
                                 <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                             </div>
@@ -176,7 +178,5 @@ export default class Bawang extends React.Component {
 }
 
 if(process.browser) {
-    // If any data needs to be preloaded, hook that up here.
-    var language = client_setup();
-    ReactDOM.render(<Bawang language={language}/>, document);
+    ReactDOM.render(<Bawang initialState={window._state} />, document);
 }
