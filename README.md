@@ -12,13 +12,17 @@ If you are so hipster, why not Flux? One thing at a time.
 ## State Magic
 This application only has tree states to keep track of, the news, the events and language for the front-page. The language is chosen by the server depending on accept-header, then a cookie is set for that user. The initial state is sent and stored in window.\_state and then rendered locally.
 
-## Setup
 
+## Setup
     npm install
     node server.js
 
+
 ## TODO
 * Fix the race condition when loading
-* refactor bawang.jsx styling into seperate file
+* implement fetching of that one news story
+* login button 2 pixels to high
+* more reactive-ness
+* style news component
 * Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
-* Implement news widget. read rss from datasektionen.se or dataflödet (whenever thats ready).
+* http2 would be cool

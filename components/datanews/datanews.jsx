@@ -31,7 +31,6 @@ export function news(callback) {
 
 export class Datanews extends React.Component {
     render() {
-        console.log(this.props.events.map(function(event, i) { return i}));
         return (
             <ul>
                 {this.props.events ? this.props.events.map(function(event, i) {
