@@ -27,18 +27,63 @@ export default class Bawang extends React.Component {
             body: {
                 fontFamily: 'Lato, Arial'
             },                
+            delta: {
+                height: 269,
+                marginRight: 3,
+                marginBottom: 31,
+                zIndex: 10,
+                position: "relative"
+            },
+            heading: {
+                fontSize: 60,
+                marginTop: 0,
+                fontWeight: 900,
+                color: dconst.colors.cerise,
+                position: "relative",
+                marginLeft: -81,
+                marginBottom: 70,
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.34)",
+                zIndex: 10,
+            },
+            sektionen: {
+                marginLeft: 3,
+                color: "white"
+            },
+            vidkth: {
+                fontSize: 25,
+                marginLeft: 12,
+                position: "absolute",
+                bottom: 14
+            },
+            content: {
+                textAlign: "center",
+                marginTop: 95,
+                width: "100%"
+            },
+            bottom: {
+                color: "white",
+                position: "absolute",
+                top: 50,
+                left: 0,
+                right: 0,
+                fontSize: 17.5,
+                letterSpacing: "0.15px",
+                display: "flex",
+                flexDirection: "row",
+                minHeight: "calc(100% - 50px)",
+            },
             overlay: {
                 width: "50%",
-                height: "100vh",
                 backgroundColor: "rgba(1, 1, 1, 0.5)",
                 overflow: "hidden",
                 position: "relative",
-                display: "inline-block"
+                paddingTop: 540
             },
             bgimg: {
                 zIndex: -10,
                 position: "absolute",
-                bottom: 0,
+                top: 0,
+                left: 0,
                 WebkitFilter: blur,
                 MozFilter: blur,
                 OFilter: blur,
@@ -52,55 +97,15 @@ export default class Bawang extends React.Component {
                 backgroundColor: "rgba(0, 0, 0, 0.6)",
             },
             right: {
-                backgroundColor: "rgba(221, 0, 124, 0.85)",
-            },
-            content: {
-                textAlign: "center",
-                position: "absolute",
-                top: 145,
-                width: "100%"
-            },
-            delta: {
-                height: 269,
-                marginRight: 3,
-                marginBottom: 31,
-            },
-            heading: {
-                fontSize: 60,
-                marginTop: 0,
-                fontWeight: 900,
-                color: dconst.colors.cerise,
-                position: "relative",
-                marginLeft: -81,
-                marginBottom: 70,
-                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.34)"
-            },
-            sektionen: {
-                marginLeft: 3,
-                color: "white"
-            },
-            vidkth: {
-                fontSize: 25,
-                marginLeft: 12,
-                position: "absolute",
-                bottom: 14
-            },
-            bottom: {
-                maxWidth: dconst.site_width,
-                margin: "auto",
-                color: "white",
-                position: "relative",
-                fontSize: 17.5,
-                letterSpacing: "0.15px"
-            },
-            articles: {
-                width: "45.4%",
-                textAlign: "justify",
-                lineHeight: "35px",
+                backgroundColor: "rgba(230, 41, 119, 0.85)",
             },
             article: {
-                marginBottom: 24
-            }
+                textAlign: "justify",
+                lineHeight: "35px",
+                maxWidth: dconst.site_width /2 - 50, // minus whatever with we need for margins
+                display: "inline-block",
+                margin: "0 50px 0 50px",
+            },
         };
         return (
             <html lang={this.state.language}>
@@ -113,14 +118,6 @@ export default class Bawang extends React.Component {
                 </head>
                 <body style={styles.body}>
                     <Databaren language={this.state.language} />
-                    <div>
-                        <div style={merge({}, styles.overlay, styles.left)}>
-                            <img style={styles.bgimg} src="/static/bawang/left.jpg" />
-                        </div>
-                        <div style={merge({}, styles.overlay, styles.right)}>
-                            <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
-                        </div>
-                    </div>
                     <section style={styles.content}>
                         <img style={styles.delta} alt="Datasektionens Logotyp sköld deltat" src="./static/bawang/sköld.svg" />
                         <h1 style={styles.heading}>
@@ -140,8 +137,8 @@ export default class Bawang extends React.Component {
                             </span>
                         </h1>
                         <div style={styles.bottom}>
-                            <div style={styles.articles}>
-                                <article style={merge({}, {fontWeight: 900}, styles.article)}>
+                            <div style={merge({textAlign: "right"}, styles.overlay, styles.left)}>
+                                <article style={merge({fontWeight: 900}, styles.article)}>
                                     <Translate  language={this.state.language}>
                                         <Lang lang="sv">
                                             Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
@@ -161,6 +158,13 @@ export default class Bawang extends React.Component {
                                         </Lang>
                                     </Translate>
                                 </article>
+                                <img style={styles.bgimg} src="/static/bawang/left.jpg" />
+                            </div>
+                            <div style={merge({}, styles.overlay, styles.right)}>
+                                <article style={styles.article}>
+                                    placeholder
+                                </article>
+                                <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                             </div>
                         </div>
                     </section>
