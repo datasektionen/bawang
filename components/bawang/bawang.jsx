@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import merge from "merge";
 import Databaren from "../databaren/databaren.jsx";
 import {Translate, Lang, client_setup} from "../translate/translate.jsx";
-import {Datanews} from "../datanews/datanews.jsx";
+import Datanews from "../datanews/datanews.jsx";
 import styles from "./styles.js"
 
 export default class Bawang extends React.Component {
@@ -12,12 +12,10 @@ export default class Bawang extends React.Component {
         this.state = props.initialState;
     }
     componentDidMount() {
-        if(process.browser) {
-            var that = this;
-            window.addEventListener("language-change", function(event) {
-                that.setState({language: event.detail.language});
-            });
-        }
+        var that = this;
+        window.addEventListener("language-change", function(event) {
+            that.setState({language: event.detail.language});
+        });
     }
     render() {
         var statefixer = "window._state = " + JSON.stringify(this.props.initialState);
@@ -77,7 +75,7 @@ export default class Bawang extends React.Component {
                             </div>
                             <div style={merge({}, styles.overlay, styles.right)}>
                                 <article style={styles.article}>
-                                    <Datanews events={this.state.events} />
+                                    <Datanews events={this.state.events} news={this.state.news} />
                                 </article>
                                 <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                             </div>

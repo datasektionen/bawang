@@ -9,7 +9,7 @@ var browserify = require("browserify");
 var babelify = require("babelify");
 var Bawang = require("./components/bawang/bawang.jsx");
 var Translate = require("./components/translate/translate.jsx");
-var Datanews = require("./components/datanews/datanews.jsx");
+var datanewsServer = require("./components/datanews/server.js");
 
 var app = express();
 app.use(cookieParser());
@@ -39,14 +39,18 @@ bawangcache = React.createFactory(Bawang);
 app.get("/", function(req, res) {
     // FIXME Cache one English and one Swedish site and only rerender on changes.
     var language = Translate.server_setup(res, req);
-    Datanews.news(function(news) {
+    datanewsServer().then(function(data) {
         var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
             initialState: {
                 language: language,
-                events: news
+                events: data[0],
+                news: data[1]
             }
         }));
         res.send(string);
+    }, function(err) {
+        console.error(err);
+        res.status(500).send(err);
     });
 });
 

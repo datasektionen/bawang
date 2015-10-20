@@ -25,7 +25,8 @@
     "normalize.css": "^3.0.3",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "request": "^2.65.0",
-    "superagent": "^1.4.0"
+    "react-linkify": "0.0.5",
+    "rssparser": "0.0.10",
+    "striptags": "^2.0.4",
   }
 }
