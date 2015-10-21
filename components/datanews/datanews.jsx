@@ -15,7 +15,7 @@ export default class Datanews extends React.Component {
         while(words.length > 0 && newstory.length + words[0].length < 300)
             newstory += words.pop() + " ";
         if(words.length > 0)
-            newstory += "...";
+            newstory += "<a href=\"" + this.props.news[0].url + "\">...</a>";
 
         return (
             <section>
@@ -24,7 +24,7 @@ export default class Datanews extends React.Component {
                         return (
                             <li style={styles.li} key={i}>
                                 <h3 style={styles.heading}>{event.title}</h3>
-                                <i className="fa fa-clock-o"></i>
+                                <i style={styles.icon} className="fa fa-clock-o"></i>
                                 <time style={styles.time}>{moment(event.start).format("LLL")}</time>
                             </li>
                         );

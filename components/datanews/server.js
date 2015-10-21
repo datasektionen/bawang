@@ -32,7 +32,7 @@ export default () => Promise.all([
         {},
         function(err, data) {
             if(err) reject(err);
-            var one = data.items[1];
+            var one = data.items[0];
             resolve([{
                 title: one.title,
                 summary: striptags(one.summary, ['a']),

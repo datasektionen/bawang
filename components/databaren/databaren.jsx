@@ -57,12 +57,14 @@ export default class Databaren extends React.Component {
                         </a>
                     </nav>
                     <div style={styles.leftside}>
-                        <LanguageSwitcher languages={["Svenska", "English"]} codes={["sv", "en"]} value={this.props.language} />
+                        <LanguageSwitcher style={styles.switcher} languages={["Svenska", "English"]} codes={["sv", "en"]} value={this.props.language} />
                         <button style={merge({}, styles.button, styles.login)} href="http://datasektionen.se/login">
-                            <Translate language={this.props.language}>
-                                <Lang lang="sv">Logga in</Lang>
-                                <Lang lang="en">Login</Lang>
-                            </Translate>
+                            <span style={styles.login_text}>
+                                <Translate language={this.props.language}>
+                                    <Lang lang="sv">Logga in</Lang>
+                                    <Lang lang="en">Login</Lang>
+                                </Translate>
+                            </span>
                         </button>
                     </div>
                 </div>

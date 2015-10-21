@@ -5,5 +5,5 @@ export default {
         background: "#212121",
         offwhite: "#f1f1f1"
     },
-    site_width: 1244
+    site_width: 1242
 }

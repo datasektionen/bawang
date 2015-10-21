@@ -8,7 +8,7 @@ export default {
         fontFamily: 'Lato, Arial'
     },                
     delta: {
-        height: 269,
+        height: 270,
         marginRight: 3,
         marginBottom: 31,
         zIndex: 10,
@@ -33,11 +33,11 @@ export default {
         fontSize: 25,
         marginLeft: 12,
         position: "absolute",
-        bottom: 14
+        bottom: 13
     },
     content: {
         textAlign: "center",
-        marginTop: 95,
+        marginTop: 92,
         width: "100%"
     },
     bottom: {
@@ -85,6 +85,6 @@ export default {
         lineHeight: "35px",
         maxWidth: dconst.site_width /2 - 50, // minus whatever with we need for margins
         display: "inline-block",
-        margin: "0 50px 0 50px",
+        margin: "0 50px 23px 50px",
     },
 };

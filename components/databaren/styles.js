@@ -13,14 +13,17 @@ export default {
         position: "relative"
     },
     button: {
+        position: "relative",
         backgroundColor: dconst.colors.second,
         border: "none",
         fontSize: 14,
         height: 50,
-        padding: "1px 0 0 0"
+        padding: 0,
+        top: -5,
     },
     superdelta: {
         width: 50,
+        top: 0,
         display: "inline-block",
         textAlign: "center",
     },
@@ -38,6 +41,7 @@ export default {
         display: "inline-block",
         fontSize: 15,
         textTransform: "uppercase",
+        letterSpacing: "0.5px",
         color: dconst.colors.offwhite,
         textDecoration: "none",
         padding: "17px 11px 16px 11px"
@@ -51,5 +55,14 @@ export default {
         display: "inline-block",
         position: "absolute",
         right: 0
+    },
+    switcher: {
+
+    },
+    login_text: {
+        position: "absolute",
+        top: 17,
+        left: 0,
+        width: "100%",
     }
 }
