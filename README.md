@@ -22,5 +22,7 @@ This application only has tree states to keep track of, the news, the events and
 * Fix the race condition when loading
 * Pixel push, tip overlay image on design with opacity
 * more reactive-ness
+* Cache site for speedup (one english and one swedish every 10 minutes or something)
+* Hide year from date in events
 * Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
 * http2 would be cool
