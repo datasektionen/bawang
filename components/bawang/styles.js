@@ -54,6 +54,7 @@ export default {
     },
     overlay: {
         width: "50%",
+        textAlign: "left",
         backgroundColor: "rgba(1, 1, 1, 0.5)",
         overflow: "hidden",
         position: "relative",

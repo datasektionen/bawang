@@ -20,9 +20,7 @@ This application only has tree states to keep track of, the news, the events and
 
 ## TODO
 * Fix the race condition when loading
-* implement fetching of that one news story
-* login button 2 pixels to high
+* Pixel push, tip overlay image on design with opacity
 * more reactive-ness
-* style news component
 * Refactor navigation bar for others to use. Maybe create its own repo? NPM module or something?
 * http2 would be cool

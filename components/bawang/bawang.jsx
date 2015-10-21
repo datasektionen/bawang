@@ -51,7 +51,7 @@ export default class Bawang extends React.Component {
                             </span>
                         </h1>
                         <div style={styles.bottom}>
-                            <div style={merge({textAlign: "right"}, styles.overlay, styles.left)}>
+                            <div style={merge({}, styles.overlay, styles.left, {textAlign: "right"})}>
                                 <article style={merge({fontWeight: 900}, styles.article)}>
                                     <Translate  language={this.state.language}>
                                         <Lang lang="sv">
