@@ -1,18 +1,25 @@
 import React from "react";
-import Linkify from "react-linkify"
+import moment from "moment";
+require("moment/locale/sv");
 
 
 export default class Datanews extends React.Component {
     render() {
+        var styles = {
+            ul: {},
+            li: {},
+            heading: {}
+        };
+        moment.locale(this.props.language);
         return (
             <section>
-                <ul>
+                <ul styles={styles.ul}>
                     {this.props.events.map(function(event, i) {
                         return (
-                            <li key={i}>
-                                <h3>{event.title}</h3>
-                                <span>icon</span>
-                                <time>{event.start.getDate()} {event.start.getMonth()} {event.start.getHours()}:{event.start.getMinutes()}</time>
+                            <li styles={styles.ul} key={i}>
+                                <h3 styles={styles.heading}>{event.title}</h3>
+                                <i className="fa fa-clock-o"></i>
+                                <time>{moment(event.start).format("LLL")}</time>
                             </li>
                         );
                     })}
@@ -21,9 +28,7 @@ export default class Datanews extends React.Component {
                     <a href={this.props.news[0].url}>
                         <h3>{this.props.news[0].title}</h3>
                     </a>
-                    <p>
-                        <Linkify>{this.props.news[0].summary}</Linkify>
-                    </p>
+                    <p dangerouslySetInnerHTML={{__html: this.props.news[0].summary}}></p>
                 </article>
             </section>
         );

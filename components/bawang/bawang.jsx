@@ -27,6 +27,7 @@ export default class Bawang extends React.Component {
                     <meta name="viewport" content="width=device-width" />
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
                     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css' />
+                    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
                     <title>Konlig Datasektionen vid KTH</title>
                 </head>
                 <body style={styles.body}>
@@ -75,7 +76,7 @@ export default class Bawang extends React.Component {
                             </div>
                             <div style={merge({}, styles.overlay, styles.right)}>
                                 <article style={styles.article}>
-                                    <Datanews events={this.state.events} news={this.state.news} />
+                                    <Datanews language={this.state.language} events={this.state.events} news={this.state.news} />
                                 </article>
                                 <img style={styles.bgimg} src="/static/bawang/right_croped.jpg" />
                             </div>

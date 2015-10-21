@@ -40,17 +40,22 @@ app.get("/", function(req, res) {
     // FIXME Cache one English and one Swedish site and only rerender on changes.
     var language = Translate.server_setup(res, req);
     datanewsServer().then(function(data) {
-        var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
-            initialState: {
-                language: language,
-                events: data[0],
-                news: data[1]
-            }
-        }));
+        try {
+            var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
+                initialState: {
+                    language: language,
+                    events: data[0],
+                    news: data[1]
+                }
+            }));
+        } catch(e) {
+            res.status(500).send(e.toString());
+            console.error(e);
+        }
         res.send(string);
     }, function(err) {
         console.error(err);
-        res.status(500).send(err);
+        res.status(500).send(err.toString());
     });
 });
 
