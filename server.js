@@ -1,4 +1,5 @@
 const PORT = 8080; 
+const minutes_update = 10;
 
 var express = require("express");
 var cookieParser = require("cookie-parser");
@@ -38,28 +39,40 @@ app.get("/bundle.js", function(req, res) {
 app.use('/node_modules', express.static('node_modules'));
 app.use('/static/', express.static('components'));
 
-// Render the html of the entire application at initial state into a string and send to client.
+var site = {};
+
 bawangcache = React.createFactory(Bawang);
-app.get("/", function(req, res) {
-    // FIXME Cache one English and one Swedish site and only rerender on changes.
-    var language = Translate.server_setup(res, req);
+function renderSite(lang, events, news) {
+    return "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
+        initialState: {
+            language: lang,
+            events: events,
+            news: news
+        }
+    }));
+}
+
+// Every minutes_update, render site on server.
+function update() {
     datanewsServer().then(function(data) {
         try {
-            var string = "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
-                initialState: {
-                    language: language,
-                    events: data[0],
-                    news: data[1]
-                }
-            }));
+            site["sv"] = renderSite("sv", data[0], data[1]);
+            site["en"] = renderSite("en", data[0], data[1]);
         } catch(e) {
-            res.status(500).send(e.toString());
             console.error(e);
         }
-        res.send(string);
-    }, function(err) {
-        console.error(err);
-        res.status(500).send(err.toString());
     });
+}
+update();
+setInterval(update, 1000 * 60 * minutes_update);
+
+// Just server the rendered site
+app.get("/", function(req, res) {
+    var language = Translate.server_setup(res, req);
+    if(site[language]) {
+        res.send(site[language]);
+    } else {
+        res.status(500).send("Error on server compile or not done yet");
+    }
 });
 

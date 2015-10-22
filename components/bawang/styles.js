@@ -33,7 +33,7 @@ export default {
         fontSize: 25,
         marginLeft: 12,
         position: "absolute",
-        bottom: 13
+        bottom: 14,
     },
     content: {
         textAlign: "center",
