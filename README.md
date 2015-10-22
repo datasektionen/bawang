@@ -19,7 +19,6 @@ This application only has tree states to keep track of, the news, the events and
 
 
 ## TODO
-* Fix the race condition when loading
 * Pixel push, tip overlay image on design with opacity
 * more reactive-ness
 * Cache site for speedup (one english and one swedish every 10 minutes or something)

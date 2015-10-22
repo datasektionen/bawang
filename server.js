@@ -24,6 +24,10 @@ b.transform(babelify).bundle(function(err, buf) {
         console.error(err);
     }
     bundle = buf;
+
+    // Listen when done
+    app.listen(PORT);
+    console.log("Listening on", PORT);
 });
 
 app.get("/bundle.js", function(req, res) {
@@ -59,5 +63,3 @@ app.get("/", function(req, res) {
     });
 });
 
-console.log("Listening on", PORT);
-app.listen(PORT);
