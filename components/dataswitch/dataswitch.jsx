@@ -25,6 +25,7 @@ export default class Dataswitch extends React.Component {
                 backgroundColor: "#333",
                 borderRadius: 2,
                 textTransform: "uppercase",
+                verticalAlign: "top",
             },
             label: {
                 cursor: "pointer",

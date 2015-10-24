@@ -19,7 +19,7 @@ export default {
         fontSize: 14,
         height: 50,
         padding: 0,
-        top: -5,
+        verticalAlign: "top",
     },
     superdelta: {
         width: 50,
@@ -57,7 +57,6 @@ export default {
         right: 0
     },
     switcher: {
-
     },
     login_text: {
         position: "absolute",
