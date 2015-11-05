@@ -4,7 +4,8 @@ import merge from "merge";
 import Databaren from "../databaren/databaren.jsx";
 import {Translate, Lang, client_setup} from "../translate/translate.jsx";
 import Datanews from "../datanews/datanews.jsx";
-import styles from "./styles.js"
+import Datafooter from "../datafooter/datafooter.jsx";
+import styles from "./styles.js";
 
 export default class Bawang extends React.Component {
     constructor(props) {
@@ -54,7 +55,7 @@ export default class Bawang extends React.Component {
                         <div style={styles.bottom}>
                             <div style={merge({}, styles.overlay, styles.left, {textAlign: "right"})}>
                                 <article style={merge({fontWeight: 900}, styles.article)}>
-                                    <Translate  language={this.state.language}>
+                                    <Translate language={this.state.language}>
                                         <Lang lang="sv">
                                             Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.
                                         </Lang>
@@ -83,6 +84,7 @@ export default class Bawang extends React.Component {
                             </div>
                         </div>
                     </section>
+                    <Datafooter language={this.state.language}/>
                     <script src="bundle.js"></script>
                 </body>
             </html>
