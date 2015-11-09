@@ -28,7 +28,7 @@ export default class Bawang extends React.Component {
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
                     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css' />
                     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
-                    <title>Konlig Datasektionen vid KTH</title>
+                    <title>Konglig Datasektionen vid KTH</title>
                     <style dangerouslySetInnerHTML={{__html: "a { color: white; }"}}></style>
                 </head>
                 <body style={styles.body}>
