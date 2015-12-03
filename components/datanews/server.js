@@ -2,7 +2,6 @@
 // Everything packaged as a promise where data results of type [[event], [news]].
 
 import ical from "ical";
-import rssparser from "rssparser";
 import striptags from "striptags";
 
 
@@ -27,16 +26,9 @@ export default () => Promise.all([
             resove(future_events.splice(0, 3));
         }
     )),
-    new Promise((resolve, reject) => rssparser.parseURL(
-        "http://datasektionen.se/rss",
-        {},
-        function(err, data) {
-            if(err) reject(err);
-            var one = data.items[0];
-            resolve([{
-                title: one.title,
-                summary: striptags(one.summary, ['a']),
-                url: one.url
-            }]);
-        })
+    new Promise((resolve, reject) => resolve([{
+        title: "Djulkalendern",
+        summary: "Djulkalendern är släppt!",
+        url: "#"
+    }])
     )]);
