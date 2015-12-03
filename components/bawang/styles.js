@@ -88,6 +88,45 @@ export default {
         maxWidth: dconst.site_width /2 - 50, // minus whatever with we need for margins
         margin: "0 50px 23px 50px",
     },
-    rest: {
-    }
+    blib: {
+        sec: {
+            width: "100%",
+            maxHeight: "100vh",
+            position: "relative",
+            overflow: "hidden"
+        },
+        back: {
+            minWidth: "100%",
+            minHeight: "100vh",
+            zIndex: 5,
+        },
+        overlay: {
+            position: "absolute",
+            zIndex: 10,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            opacity: 0.7,
+            backgroundColor: dconst.colors.cerise,
+        },
+        head: {
+            position: "absolute",
+            top: "35vh",
+            zIndex: 15,
+            fontSize: "400%",
+            width: "100%",
+            textAlign: "center",
+            fontWeight: "normal",
+        },
+        par: {
+            position: "absolute",
+            top: "50vh",
+            left: "50%",
+            right: "50%",
+            width: "30vw",
+            marginLeft: "-15vw",
+            zIndex: 15,
+        }
+    },
 };

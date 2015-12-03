@@ -73,46 +73,49 @@ export default class Bawang extends React.Component {
                                 </div>
                             </div>
                             <div style={styles.rest}>
-                                <div style={styles.rest}>
-                                    <section>
-                                        <img src="http://placekitten.com/1000/501"/>
-                                        <h2>
+                                <div>
+                                    <section style={styles.blib.sec}>
+                                        <img style={styles.blib.back} src="http://placekitten.com/1000/501"/>
+                                        <div style={styles.blib.overlay}></div>
+                                        <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Studier</Lang>
                                                 <Lang lang="en">Studies</Lang>
                                             </Translate>
                                         </h2>
-                                        <p>
+                                        <p style={styles.blib.par}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Datateknikprogrammet på KTH är en av Skandinaviens mest välrenommerade tekniska utbildningar och bland de främsta datateknikutbildningarna i världen. Efter examen har du breda karriärmöjligheter inom alla de branscher där datasystem är viktiga för verksamheten. Det kan alltså handla om allt från kultur, finans, handel eller vård till mer traditionella tekniska områden inom industrin. Arbetet handlar ofta om design och utveckling av produkter, men det är också möjligt att ägna sig åt undervisning eller konsultverksamhet.</Lang>
                                                 <Lang lang="en">The Computer Engineering at KTH is one of Scandinavia's most renowned technical programs and among the top computer science programs in the world. After graduation, you have broad career opportunities in all the sectors in which computer systems are important to the business. Thus it can be everything from culture, finance or commerce to more traditional technical areas of the industry. The work often involves the design and development of products, but it is also possible to engage in teaching or consulting.</Lang>
                                             </Translate>
                                         </p>
                                     </section>
-                                    <section>
-                                        <img src="/static/bawang/social.jpg"/>
-                                        <h2>
+                                    <section style={styles.blib.sec}>
+                                        <img style={styles.blib.back} src="/static/bawang/social.jpg"/>
+                                        <div style={styles.blib.overlay}></div>
+                                        <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Socialt</Lang>
                                                 <Lang lang="en">Social</Lang>
                                             </Translate>
                                         </h2>
-                                        <p>
+                                        <p style={styles.blib.par}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Att studera behöver inte bara vara långa kvällar med tunga böcker. Datasektionen anordnar pubar, fester, spelkvällar och andra roliga aktiviteter som ger dig en chans att koppla av mellan studierna och lära känna andra studerande. Aktiviteterna arrangeras av våra medlemmar och som medlem är du självklart välkommen.</Lang>
                                                 <Lang lang="en">Study need not be just long evenings with heavy books. The computer section organizes pubs, parties, game nights and other fun activities that give you a chance to relax in between your studies and get to know other students. All our activities are organized by our members.</Lang>
                                             </Translate>
                                         </p>
                                     </section>
-                                    <section>
-                                        <img src="http://placekitten.com/1000/501"/>
-                                        <h2>
+                                    <section style={styles.blib.sec}>
+                                        <img style={styles.blib.back} src="http://placekitten.com/1000/501"/>
+                                        <div style={styles.blib.overlay}></div>
+                                        <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Näringsliv</Lang>
                                                 <Lang lang="en">Business</Lang>
                                             </Translate>
                                         </h2>
-                                        <p>
+                                        <p style={styles.blib.par}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                             <Lang lang="sv">Datasektionens näringslivsgrupp arbetar aktivt för ett nära samarbete mellan sektionens medlemmar och aktörer i näringslivet, som i många fall kan bli framtida arbetsgivare. Berätta om ert företag på en lunchföreläsning, eller få personlig kontakt med studenter från Sveriges högst rankade datautbildning <a href="http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/computer-science-information-systems#sorting=rank+region=+country=203+faculty=+stars=false+search=">[1]</a> på vår årliga arbetsmarknadsdag.</Lang>
                                                 <Lang lang="en">The computer section's business group is working actively to create close cooperation between our members and future employers. Tell us about your company on a lunch lecture, or get personal contact with students from Sweden's highest ranked computer university <a href="http://www.topuniversities.com/university-rankings/university-subject-rankings/2015/computer-science-information-systems#sorting=rank+region=+country=203+faculty=+stars=false+search=">[1]</a> at our annual career fair.</Lang>

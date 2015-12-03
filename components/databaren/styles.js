@@ -6,6 +6,11 @@ export default {
         backgroundColor: dconst.colors.background,
         fontFamily: 'Lato, Arial',
         height: 50,
+        position: "fixed",
+        left: 0,
+        right: 0,
+        top: 0,
+        zIndex: 10000
     },
     widther: {
         maxWidth: dconst.site_width,
