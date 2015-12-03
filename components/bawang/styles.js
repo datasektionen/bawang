@@ -46,9 +46,11 @@ export default {
         top: 50,
         left: 0,
         right: 0,
-        fontSize: 17.5,
         letterSpacing: "0.15px",
+    },
+    first: {
         display: "flex",
+        fontSize: 17.5,
         flexDirection: "row",
         minHeight: "calc(100% - 50px)",
     },
@@ -84,7 +86,8 @@ export default {
         textAlign: "justify",
         lineHeight: "35px",
         maxWidth: dconst.site_width /2 - 50, // minus whatever with we need for margins
-        display: "inline-block",
         margin: "0 50px 23px 50px",
     },
+    rest: {
+    }
 };
