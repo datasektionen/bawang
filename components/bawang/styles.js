@@ -91,7 +91,7 @@ export default {
     blib: {
         sec: {
             width: "100%",
-            maxHeight: "100vh",
+            maxHeight: "calc(100vh - 50px)",
             position: "relative",
             overflow: "hidden"
         },
