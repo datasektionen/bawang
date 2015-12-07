@@ -33,6 +33,6 @@ export default {
 		overflowX: "hidden",
 	},
 	map_image: {
-		marginBottom: "-7px"
+		marginBottom: "-5px"
 	}
 }
