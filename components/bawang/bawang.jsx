@@ -107,7 +107,7 @@ export default class Bawang extends React.Component {
                                         </p>
                                     </section>
                                     <section style={styles.blib.sec}>
-                                        <img style={styles.blib.back} src="http://placekitten.com/1000/501"/>
+                                        <img style={styles.blib.back} src="/static/bawang/business.jpg"/>
                                         <div style={styles.blib.overlay}></div>
                                         <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
