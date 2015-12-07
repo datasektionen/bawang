@@ -35,7 +35,7 @@ export default class Bawang extends React.Component {
                 <body style={styles.body}>
                     <Databaren language={this.state.language} />
                     <section style={styles.content}>
-                        <img style={styles.delta} alt="Datasektionens Logotyp sköld deltat" src="./static/bawang/sköld.svg" />
+                        <img style={styles.delta} alt="Datasektionens Logotyp sköld deltat" src="/static/bawang/skold.png" />
                         <h1 style={styles.heading}>
                             Konglig Data
                             <span style={styles.sektionen}>

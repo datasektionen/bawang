@@ -10,7 +10,8 @@ export default {
     delta: {
         height: 270,
         marginRight: 3,
-        marginBottom: 31,
+        marginTop: 25,
+        marginBottom: 25,
         zIndex: 10,
         position: "relative"
     },
@@ -21,7 +22,7 @@ export default {
         color: dconst.colors.cerise,
         position: "relative",
         marginLeft: -81,
-        marginBottom: 70,
+        marginBottom: 60,
         textShadow: "1px 1px 3px rgba(0, 0, 0, 0.34)",
         zIndex: 10,
     },

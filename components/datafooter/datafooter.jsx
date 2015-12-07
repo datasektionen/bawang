@@ -7,7 +7,9 @@ export default class Datafooter extends React.Component {
     render() {
         return (
             <footer style={styles.footer}>
-                <img src="/static/datafooter/vit_delta.svg"/>
+                <div style={styles.column}>
+                    <img style={styles.footer_delta} src="/static/datafooter/vit_delta.svg"/>
+                </div>
                 <div styles={styles.column}>
                     <h3>
                         <Translate language={this.props.language}>
@@ -54,9 +56,11 @@ export default class Datafooter extends React.Component {
                         802412 - 7709
                     </p>
                 </div>
-                <a href="https://www.google.se/maps/place/Konglig+Datasektionen/@59.348956,18.0725666,16z/data=!4m2!3m1!1s0x0000000000000000:0x3dab8e996009cc1f?hl=en">
-                    <img src="/static/datafooter/map.png"/>
-                </a>
+                <div styles={styles.column}>
+                    <a href="https://www.google.se/maps/place/Konglig+Datasektionen/@59.348956,18.0725666,16z/data=!4m2!3m1!1s0x0000000000000000:0x3dab8e996009cc1f?hl=en">
+                        <img src="/static/datafooter/map.png"/>
+                    </a>
+                </div>
             </footer>
         );
     }
