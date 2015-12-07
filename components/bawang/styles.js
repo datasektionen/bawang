@@ -52,12 +52,12 @@ export default {
         display: "flex",
         fontSize: 17.5,
         flexDirection: "row",
-        minHeight: "calc(100% - 50px)",
+        minHeight: "100%",
     },
     overlay: {
         width: "50%",
         textAlign: "left",
-        backgroundColor: "rgba(1, 1, 1, 0.5)",
+        // backgroundColor: "rgba(1, 1, 1, 0.5)",
         overflow: "hidden",
         position: "relative",
         paddingTop: 540
@@ -67,23 +67,24 @@ export default {
         position: "absolute",
         top: 0,
         left: 0,
-        WebkitFilter: blur,
+        /* WebkitFilter: blur,
         MozFilter: blur,
         OFilter: blur,
         MsFilter: blur,
-        filter: blur,
+        filter: blur, */
+        backgroundSize: "cover",
         transform: "scale(1.03)",    // Get rid of white frame from blur
         height: "100%",
         minWidth: "100%"
     },
     left: {
-        backgroundColor: "rgba(0, 0, 0, 0.6)",
+        // backgroundColor: "rgba(0, 0, 0, 0.55)",
     },
     right: {
-        backgroundColor: "rgba(230, 41, 119, 0.85)",
+        // backgroundColor: "rgba(197, 38, 103, 0.9)",
     },
     article: {
-        textAlign: "justify",
+        // textAlign: "justify",
         lineHeight: "35px",
         maxWidth: dconst.site_width /2 - 50, // minus whatever with we need for margins
         margin: "0 50px 23px 50px",
