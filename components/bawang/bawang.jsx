@@ -50,7 +50,7 @@ export default class Bawang extends React.Component {
                         </h1>
                         <div style={styles.bottom}>
                             <div style={styles.first}>
-                                <div style={merge({}, styles.overlay, styles.left, {textAlign: "right"})}>
+                                <div style={merge({}, styles.overlay, styles.left, {textAlign: "left"})}>
                                     <article style={merge({fontWeight: 900}, styles.article)}>
                                         <Translate language={this.state.language}>
                                             <Lang lang="sv">Datasektionen är en ideel studentsektion under Tekniska Högskolans Studentkår som finns till för att alla som läser Datateknik på KTH ska få en så bra och givande studietid som möjligt.</Lang>
@@ -75,7 +75,7 @@ export default class Bawang extends React.Component {
                             <div style={styles.rest}>
                                 <div>
                                     <section style={styles.blib.sec}>
-                                        <img style={styles.blib.back} src="http://placekitten.com/1000/501"/>
+                                        <img style={styles.blib.back} src="/static/bawang/studies.jpg"/>
                                         <div style={styles.blib.overlay}></div>
                                         <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
@@ -86,12 +86,12 @@ export default class Bawang extends React.Component {
                                         <p style={styles.blib.par}>
                                             <Translate style={styles.vidkth} language={this.state.language}>
                                                 <Lang lang="sv">Datateknikprogrammet på KTH är en av Skandinaviens mest välrenommerade tekniska utbildningar och bland de främsta datateknikutbildningarna i världen. Efter examen har du breda karriärmöjligheter inom alla de branscher där datasystem är viktiga för verksamheten. Det kan alltså handla om allt från kultur, finans, handel eller vård till mer traditionella tekniska områden inom industrin. Arbetet handlar ofta om design och utveckling av produkter, men det är också möjligt att ägna sig åt undervisning eller konsultverksamhet.</Lang>
-                                                <Lang lang="en">The Computer Engineering at KTH is one of Scandinavia's most renowned technical programs and among the top computer science programs in the world. After graduation, you have broad career opportunities in all the sectors in which computer systems are important to the business. Thus it can be everything from culture, finance or commerce to more traditional technical areas of the industry. The work often involves the design and development of products, but it is also possible to engage in teaching or consulting.</Lang>
+                                                <Lang lang="en">The Computer Engineering at KTH is one of Scandinavia&#39;s most renowned technical programs and among the top computer science programs in the world. After graduation, you have broad career opportunities in all the sectors in which computer systems are important to the business. Thus it can be everything from culture, finance or commerce to more traditional technical areas of the industry. The work often involves the design and development of products, but it is also possible to engage in teaching or consulting.</Lang>
                                             </Translate>
                                         </p>
                                     </section>
                                     <section style={styles.blib.sec}>
-                                        <img style={styles.blib.back} src="/static/bawang/social.jpg"/>
+                                        <img style={styles.blib.back} src="/static/bawang/socialt.jpg"/>
                                         <div style={styles.blib.overlay}></div>
                                         <h2 style={styles.blib.head}>
                                             <Translate style={styles.vidkth} language={this.state.language}>

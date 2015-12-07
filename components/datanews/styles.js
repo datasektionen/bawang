@@ -14,8 +14,8 @@ export default {
     heading: {
         marginTop: 0,
         lineHeight: "24px",
-        fontWeight: 900,
-        fontSize: 17.5,
+        fontWeight: 700,
+        fontSize: 16,
         marginBottom: 3,
     },
     time: {

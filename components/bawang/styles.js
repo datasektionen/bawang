@@ -38,7 +38,8 @@ export default {
     content: {
         textAlign: "center",
         marginTop: 92,
-        width: "100%"
+        width: "100%",
+        height: "100vh"
     },
     bottom: {
         color: "white",
@@ -92,42 +93,53 @@ export default {
     blib: {
         sec: {
             width: "100%",
-            maxHeight: "calc(100vh - 50px)",
+            height: "600px",
             position: "relative",
-            overflow: "hidden"
+            overflow: "hidden",
         },
         back: {
-            minWidth: "100%",
-            minHeight: "100vh",
+            width: "100vw",
+            // minWidth: "100%",
+            // minHeight: "100%",
+            // backgroundSize: "cover",
+            backgroundPosition: "center bottom",
             zIndex: 5,
         },
         overlay: {
             position: "absolute",
+            boxShadow: "inset 0 1px 10px rgba(0, 0, 0, .2)",
             zIndex: 10,
             top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            opacity: 0.7,
-            backgroundColor: dconst.colors.cerise,
+            // opacity: 0.7,
+            // backgroundColor: dconst.colors.cerise,
         },
         head: {
             position: "absolute",
-            top: "35vh",
+            top: "100px",
+            // marginTop: "100px",
+            display: "block",
             zIndex: 15,
             fontSize: "400%",
             width: "100%",
             textAlign: "center",
-            fontWeight: "normal",
+            fontWeight: 900,
         },
         par: {
             position: "absolute",
-            top: "50vh",
+            top: "250px",
             left: "50%",
             right: "50%",
-            width: "30vw",
-            marginLeft: "-15vw",
+            // margin: "0 auto",
+            maxWidth: "900 px",
+            width: "70%",
+            marginLeft: "-35%",
             zIndex: 15,
+            lineHeight: 2,
+            fontWeight: 300,
+            fontSize: "1.2rem"
         }
     },
 };
