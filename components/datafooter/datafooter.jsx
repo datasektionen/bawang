@@ -10,7 +10,7 @@ export default class Datafooter extends React.Component {
                 <div style={styles.column}>
                     <img style={styles.footer_delta} src="/static/datafooter/vit_delta.svg"/>
                 </div>
-                <div styles={styles.column}>
+                <div style={styles.column}>
                     <h3>
                         <Translate language={this.props.language}>
                             <Lang lang="sv">Allmänt</Lang>
@@ -34,7 +34,7 @@ export default class Datafooter extends React.Component {
                         <tel>070-798 79 13</tel>
                     </p>
                 </div>
-                <div styles={styles.column}>
+                <div style={styles.column}>
                     <h3>
                         <Translate language={this.props.language}>
                             <Lang lang="sv">Adress</Lang>
@@ -56,9 +56,9 @@ export default class Datafooter extends React.Component {
                         802412 - 7709
                     </p>
                 </div>
-                <div styles={styles.column}>
+                <div style={styles.map}>
                     <a href="https://www.google.se/maps/place/Konglig+Datasektionen/@59.348956,18.0725666,16z/data=!4m2!3m1!1s0x0000000000000000:0x3dab8e996009cc1f?hl=en">
-                        <img src="/static/datafooter/map.png"/>
+                        <img style={styles.map_image} src="/static/datafooter/map.png"/>
                     </a>
                 </div>
             </footer>

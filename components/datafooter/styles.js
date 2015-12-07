@@ -9,14 +9,30 @@ export default {
 		textAlign: "left"
 	},
 	footer_delta: {
-		margin: "5rem 1rem 5rem 0",
-		width: "25%",
-		height: "150px"
+		marginTop: "4rem",
+		marginLeft: "auto",
+		marginRight: "auto",
+		width: "100px",
+		height: "100px",
+		display: "block"
 	},
 	column: {
+		paddingTop: "2rem",
 		width: "25%",
 		display: "inline-block",
 		textAlign: "left",
-		verticalAlign: "top"
+		verticalAlign: "top",
+		overflowX: "hidden",
+		lineHeight: "1.6"
+	},
+	map: {
+		width: "25%",
+		display: "inline-block",
+		textAlign: "left",
+		verticalAlign: "top",
+		overflowX: "hidden",
+	},
+	map_image: {
+		marginBottom: "-7px"
 	}
 }
