@@ -9,7 +9,7 @@ export default {
 		textAlign: "left"
 	},
 	footer_delta: {
-		marginTop: "4rem",
+		marginTop: "5.5rem",
 		marginLeft: "auto",
 		marginRight: "auto",
 		width: "100px",
@@ -17,7 +17,7 @@ export default {
 		display: "block"
 	},
 	column: {
-		paddingTop: "2rem",
+		paddingTop: "1rem",
 		width: "25%",
 		display: "inline-block",
 		textAlign: "left",
@@ -30,7 +30,7 @@ export default {
 		display: "inline-block",
 		textAlign: "left",
 		verticalAlign: "top",
-		overflowX: "hidden",
+		overflow: "hidden",
 	},
 	map_image: {
 		marginBottom: "-5px"
