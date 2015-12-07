@@ -1,4 +1,4 @@
-const PORT = 8081; 
+const PORT = 5000; 
 
 const minutes_update = 10;
 
@@ -76,4 +76,3 @@ app.get("/", function(req, res) {
         res.status(500).send("Error on server compile or not done yet");
     }
 });
-
