@@ -1,0 +1,78 @@
+.header {
+	background-color: #212121;
+	font-family: Lato, Arial;
+	height: 50px;
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	z-index: 10000;
+}
+
+.widther {
+	max-width: 1242px;
+	margin: auto;
+	position: relative;
+}
+
+.button {
+	position: relative;
+	background-color: #FDDE00;
+	border: none;
+	font-size: 14px;
+	height: 50px;
+	padding: 0px;
+	vertical-align: top;
+}
+
+.superdelta {
+	width: 50px;
+	top: 0px;
+	display: inline-block;
+	text-align: center;
+}
+
+.superdelta_img {
+	margin-top: 10px;
+	height: 31px;
+	margin-left: 1.5px;
+}
+
+.nav {
+	display: inline-block;
+	margin-left: 9px;
+	vertical-align: top;
+}
+
+.navelement {
+	display: inline-block;
+	font-size: 15px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #f1f1f1;
+	text-decoration: none;
+	padding: 17px 11px 16px 11px;
+}
+
+.login {
+	width: 100px;
+	font-family: Lato, Arial;
+	text-transform: uppercase;
+}
+
+.leftside {
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+}
+
+.switcher {
+}
+
+.login_text {
+	position: absolute;
+	top: 17px;
+	left: 0px;
+	width: 100%;
+}
+

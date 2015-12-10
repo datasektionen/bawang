@@ -1,16 +1,15 @@
 import React from "react";
 import {Translate, Lang, LanguageSwitcher} from "../translate/translate.jsx";
-import styles from "./styles.js";
 
 
 export default class Datafooter extends React.Component {
     render() {
         return (
-            <footer style={styles.footer}>
-                <div style={styles.column}>
-                    <img style={styles.footer_delta} src="/static/datafooter/vit_delta.svg"/>
+            <footer className="footer">
+                <div className="column">
+                    <img className="footer_delta" src="/components/datafooter/vit_delta.svg"/>
                 </div>
-                <div style={styles.column}>
+                <div className="column">
                     <h3>
                         <Translate language={this.props.language}>
                             <Lang lang="sv">Allmänt</Lang>
@@ -34,7 +33,7 @@ export default class Datafooter extends React.Component {
                         <tel>070-798 79 13</tel>
                     </p>
                 </div>
-                <div style={styles.column}>
+                <div className="column">
                     <h3>
                         <Translate language={this.props.language}>
                             <Lang lang="sv">Adress</Lang>
@@ -56,9 +55,9 @@ export default class Datafooter extends React.Component {
                         802412 - 7709
                     </p>
                 </div>
-                <div style={styles.map}>
+                <div className="map">
                     <a href="https://www.google.se/maps/place/Konglig+Datasektionen/@59.348956,18.0725666,16z/data=!4m2!3m1!1s0x0000000000000000:0x3dab8e996009cc1f?hl=en">
-                        <img style={styles.map_image} src="/static/datafooter/map.png"/>
+                        <img className="map_image" src="/components/datafooter/map.png"/>
                     </a>
                 </div>
             </footer>

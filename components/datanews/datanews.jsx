@@ -4,7 +4,6 @@
 import React from "react";
 import moment from "moment";
 require("moment/locale/sv");
-import styles from "./styles.js";
 
 
 export default class Datanews extends React.Component {
@@ -18,23 +17,23 @@ export default class Datanews extends React.Component {
             newstory += "<a href=\"" + this.props.news[0].url + "\">...</a>";
 
         return (
-            <section>
-                <ul style={styles.ul}>
+            <section className="thing">
+                <ul>
                     {this.props.events.map(function(event, i) {
                         return (
-                            <li style={styles.li} key={i}>
-                                <h3 style={styles.heading}>{event.title}</h3>
-                                <i style={styles.icon} className="fa fa-clock-o"></i>
-                                <time style={styles.time}>{moment(event.start).format("LLL")}</time>
+                            <li key={i}>
+                                <h3 className="heading">{event.title}</h3>
+                                <i className="icon" className="fa fa-clock-o"></i>
+                                <time className="time">{moment(event.start).format("LLL")}</time>
                             </li>
                         );
                     })}
                 </ul>
-                <div style={styles.news}>
-                    <a style={styles.newsheading} href={this.props.news[0].url}>
-                        <h3 style={styles.headinginside}>{this.props.news[0].title}</h3>
+                <div className="news">
+                    <a className="newsheading" href={this.props.news[0].url}>
+                        <h3 className="headinginside">{this.props.news[0].title}</h3>
                     </a>
-                    <p style={styles.newsstory} dangerouslySetInnerHTML={{__html: newstory}}></p>
+                    <p className="newsstory" dangerouslySetInnerHTML={{__html: newstory}}></p>
                 </div>
             </section>
         );

@@ -13,6 +13,7 @@ var Bawang = require("./components/bawang/bawang.jsx");
 var Translate = require("./components/translate/translate.jsx");
 var datanewsServer = require("./components/datanews/server.js");
 
+
 var app = express();
 app.use(cookieParser());
 
@@ -38,7 +39,7 @@ app.get("/bundle.js", function(req, res) {
 
 // Static files
 app.use('/node_modules', express.static('node_modules'));
-app.use('/static/', express.static('components'));
+app.use('/components/', express.static('components'));
 
 var site = {};
 
