@@ -57,7 +57,7 @@ export default class Databaren extends React.Component {
                     </nav>
                     <div className="leftside">
                         <LanguageSwitcher className="switcher" languages={["Svenska", "English"]} codes={["sv", "en"]} value={this.props.language} />
-                        <button className="button login" href="http://datasektionen.se/login">
+                        <button className="button login href="http://datasektionen.se/login">
                             <span className="login_text">
                                 <Translate language={this.props.language}>
                                     <Lang lang="sv">Logga in</Lang>

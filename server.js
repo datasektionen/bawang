@@ -44,13 +44,9 @@ app.use('/components/', express.static('components'));
 var site = {};
 
 bawangcache = React.createFactory(Bawang);
-function renderSite(lang, events, news) {
+function renderSite(lang) {
     return "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
-        initialState: {
-            language: lang,
-            events: events,
-            news: news
-        }
+        language: lang
     }));
 }
 
@@ -58,10 +54,10 @@ function renderSite(lang, events, news) {
 function update() {
     datanewsServer().then(function(data) {
         try {
-            site["sv"] = renderSite("sv", data[0], data[1]);
-            site["en"] = renderSite("en", data[0], data[1]);
+            site["sv"] = renderSite("sv");
+            site["en"] = renderSite("en");
         } catch(e) {
-            console.error(e);
+            console.error(e.stack);
         }
     });
 }
