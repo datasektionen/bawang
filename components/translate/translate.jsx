@@ -1,27 +1,14 @@
 // # Translate for isomorphic react applications.
 // Introduces two new elements, <Translate> and <Lang lang="sv">. Lang should be put inside Translate.
-// Uses a cookies, global/window variable and an event window.addListener("language-change").
+// Uses a cookie, event window.addListener("language-change").
 
 import React from "react";
 import Dataswitch from "../dataswitch/dataswitch.jsx";
 
 
-// Identifices the what language to send to the client, looking at cookies and accept-header
-// Takes express res and req
-export function server_setup(res, req) {
-    if(req.cookies.language) {
-        var lang = req.cookies.language;
-    } else {
-        // Set language cookie based on browser setting. Prefer Swedish default to English;
-        var lang = req.acceptsLanguages(["sv", "en"]);
-        if(!lang) {
-            lang = "en";
-        }
-        res.cookie("language", lang, {
-            maxAge: 9000000000
-        });
-    } 
-    return lang;
+
+export function get_lang() {
+    return document.cookie.split("language")[1].slice(1);
 }
 
 // Put inside <Translate>
@@ -63,3 +50,27 @@ export class LanguageSwitcher extends React.Component {
 LanguageSwitcher.contextTypes = {
     language: React.PropTypes.string
 }
+
+export class TranslateContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {language: props.startlang};
+    }
+    componentDidMount() {
+        var that = this;
+        window.addEventListener("language-change", function(event) {
+            that.setState({language: event.detail.language});
+        });
+    }
+    getChildContext() {
+        return {
+            language: this.state.language
+        }
+    }
+    render() {
+        return <div>{this.props.children}</div>;
+    }
+}
+TranslateContainer.childContextTypes = {
+    language: React.PropTypes.string
+};

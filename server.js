@@ -10,7 +10,7 @@ var babel = require("babel-core/register");
 var browserify = require("browserify");
 var babelify = require("babelify");
 var Bawang = require("./components/bawang/bawang.jsx");
-var Translate = require("./components/translate/translate.jsx");
+var TranslateServer = require("./components/translate/server.js");
 var datanewsServer = require("./components/datanews/server.js");
 
 
@@ -66,7 +66,7 @@ setInterval(update, 1000 * 60 * minutes_update);
 
 // Just server the rendered site
 app.get("/", function(req, res) {
-    var language = Translate.server_setup(res, req);
+    var language = TranslateServer.server_setup(res, req);
     if(site[language]) {
         res.send(site[language]);
     } else {
