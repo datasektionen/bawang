@@ -52,10 +52,10 @@ function renderSite(lang) {
 
 // Every minutes_update, render site on server.
 function update() {
+    site["sv"] = renderSite("sv");
+    site["en"] = renderSite("en");
     datanewsServer().then(function(data) {
         try {
-            site["sv"] = renderSite("sv");
-            site["en"] = renderSite("en");
         } catch(e) {
             console.error(e.stack);
         }

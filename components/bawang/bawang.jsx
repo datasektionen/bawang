@@ -52,6 +52,9 @@ export default class Bawang extends React.Component {
         );
     }
 }
+Bawang.childContextTypes = {
+    language: React.PropTypes.string
+};
 
 if(process.browser) {
     var language = document.cookie.split("language")[1].slice(1);

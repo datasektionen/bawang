@@ -8,7 +8,7 @@ require("moment/locale/sv");
 
 export default class Datanews extends React.Component {
     render() {
-        moment.locale(this.props.language);
+        moment.locale(this.context.language);
         var newstory = "";
         var words = this.props.news[0].summary.split(" ").reverse();
         while(words.length > 0 && newstory.length + words[0].length < 300)
@@ -38,4 +38,7 @@ export default class Datanews extends React.Component {
             </section>
         );
     }
+}
+Datanews.contextTypes = {
+    language: React.PropTypes.string
 }

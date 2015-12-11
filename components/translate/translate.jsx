@@ -38,6 +38,9 @@ export class Translate extends React.Component {
         return <span>{text}</span>;
     }
 }
+Translate.contextTypes = {
+    language: React.PropTypes.string
+}
 
 export class LanguageSwitcher extends React.Component {
     render() {
@@ -45,7 +48,7 @@ export class LanguageSwitcher extends React.Component {
             onChange={this.change}
             alternatives={this.props.languages}
             values={this.props.codes}
-            value={this.props.value}
+            value={this.context.language}
             />;
     }
     change(value) {
@@ -56,4 +59,7 @@ export class LanguageSwitcher extends React.Component {
         };
         window.dispatchEvent(event);
     }
+}
+LanguageSwitcher.contextTypes = {
+    language: React.PropTypes.string
 }
