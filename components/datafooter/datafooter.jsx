@@ -11,7 +11,7 @@ export default class Datafooter extends React.Component {
                 </div>
                 <div className="column">
                     <h3>
-                        <Translate language={this.props.language}>
+                        <Translate>
                             <Lang lang="sv">Allmänt</Lang>
                             <Lang lang="en">General</Lang>
                         </Translate>
@@ -22,7 +22,7 @@ export default class Datafooter extends React.Component {
                         <tel>0706 72 75 27</tel>
                     </p>
                     <h3>
-                        <Translate language={this.props.language}>
+                        <Translate>
                             <Lang lang="sv">Företagskontakt</Lang>
                             <Lang lang="en">Company Contact</Lang>
                         </Translate>
@@ -35,7 +35,7 @@ export default class Datafooter extends React.Component {
                 </div>
                 <div className="column">
                     <h3>
-                        <Translate language={this.props.language}>
+                        <Translate>
                             <Lang lang="sv">Adress</Lang>
                             <Lang lang="en">Address</Lang>
                         </Translate>
@@ -46,7 +46,7 @@ export default class Datafooter extends React.Component {
                         100 44 Stockholm
                     </p>
                     <h3>
-                        <Translate language={this.props.language}>
+                        <Translate>
                             <Lang lang="sv">Organisationsnummer</Lang>
                             <Lang lang="en">Organisation Number</Lang>
                         </Translate>

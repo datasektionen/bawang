@@ -13,43 +13,43 @@ export default class Databaren extends React.Component {
                     </a>
                     <nav className="nav">
                         <a className="navelement" href="http://datasektionen.se/">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Nyheter/Event</Lang>
                                 <Lang lang="en">News/Events</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://datasektionen.se/sektionen">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Sektionen</Lang>
                                 <Lang lang="en">The Chapter</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://datasektionen.se/studier">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Studier</Lang>
                                 <Lang lang="en">Studies</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://datasektionen.se/naringsliv">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Näringsliv</Lang>
                                 <Lang lang="en">Business</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://datasektionen.se/sektionen/namnder">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Nämnder</Lang>
                                 <Lang lang="en">Groups</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://www.djobb.se/">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Jobb</Lang>
                                 <Lang lang="en">Jobs</Lang>
                             </Translate>
                         </a>
                         <a className="navelement" href="http://datasektionen.se/kontakt">
-                            <Translate language={this.props.language}>
+                            <Translate>
                                 <Lang lang="sv">Kontakt</Lang>
                                 <Lang lang="en">Contact</Lang>
                             </Translate>
@@ -57,9 +57,9 @@ export default class Databaren extends React.Component {
                     </nav>
                     <div className="leftside">
                         <LanguageSwitcher className="switcher" languages={["Svenska", "English"]} codes={["sv", "en"]} value={this.props.language} />
-                        <button className="button login href="http://datasektionen.se/login">
+                        <button className="button login" href="http://datasektionen.se/login">
                             <span className="login_text">
-                                <Translate language={this.props.language}>
+                                <Translate>
                                     <Lang lang="sv">Logga in</Lang>
                                     <Lang lang="en">Login</Lang>
                                 </Translate>

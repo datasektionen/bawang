@@ -19,7 +19,11 @@ export default class Bawang extends React.Component {
             that.setState({language: event.detail.language});
         });
     }
-
+    getChildContext() {
+        return {
+            language: this.state.language
+        }
+    }
     render() {
         return (
             <html lang={this.state.language}>
@@ -29,19 +33,19 @@ export default class Bawang extends React.Component {
                     <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css" />
                     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900,300" rel="stylesheet" />
                     <link rel="styleshconstructioneet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.css" />
-                    <link rel="stylesheet" type="tpropsext/css" href="/components/bawang/style.css" />
+                    <link rel="stylesheet" type="text/css" href="/components/bawang/style.css" />
                     <link rel="stylesheet" type="text/css" href="/components/databaren/style.css" />
                     <link rel="stylesheet" type="text/css" href="/components/datafooter/style.css" />
                     <link rel="stylesheet" type="text/css" href="/components/datanews/style.css" />
                     <title>Konglig Datasektionen vid KTH</title>
                 </head>
                 <body>
-                    <Databaren language={this.state.language} />
+                    <Databaren />
                     <Router history={createMemoryHistory()}>
-                        <Route path="/" component={FirstPage} language={this.state.language} />
+                        <Route path="/" component={FirstPage} />
                         <Route path="/chapter" component={Tajtan} />
                     </Router>
-                    <Datafooter language={this.state.language}/>
+                    <Datafooter />
                     <script src="bundle.js"></script>
                 </body>
             </html>

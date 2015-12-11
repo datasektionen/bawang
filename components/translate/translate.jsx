@@ -31,7 +31,7 @@ export var Lang = (props) => <span>{props.children}</span>;
 export class Translate extends React.Component {
     render() {
         for(var child in this.props.children) {
-            if(this.props.children[child].props.lang == this.props.language) {
+            if(this.props.children[child].props.lang == this.context.language) {
                 var text = this.props.children[child];
             }
         }
