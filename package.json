@@ -21,13 +21,21 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "font-awesome": "^4.4.0",
+    "history": "^1.16.0",
     "ical": "^0.4.0",
+    "kew": "^0.7.0",
     "merge": "^1.2.0",
     "moment": "^2.10.6",
     "normalize.css": "^3.0.3",
     "react": "^0.14.0",
+    "react-async-render": "0.0.2",
     "react-dom": "^0.14.0",
+    "react-mixin": "^3.0.3",
+    "react-redux": "^4.0.0",
     "react-router": "^1.0.2",
-    "striptags": "^2.0.4"
+    "redux": "^3.0.4",
+    "redux-thunk": "^1.0.0",
+    "striptags": "^2.0.4",
+    "sync-request": "^2.1.0"
   }
 }

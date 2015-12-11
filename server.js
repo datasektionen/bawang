@@ -13,6 +13,7 @@ var babelify = require("babelify");
 var Bawang = require("./components/bawang/bawang.jsx");
 var TranslateServer = require("./components/translate/server.js");
 var datanewsServer = require("./components/datanews/server.js");
+var AsyncRender = require('react-async-render');
 
 
 var app = express();
@@ -30,8 +31,11 @@ b.transform(babelify).bundle(function(err, buf) {
     bundle = buf;
 
     // Listen when done
-    app.listen(PORT);
     console.log("Listening on", PORT);
+    app.listen(PORT);
+    console.log("Triggered render");
+    update();
+    setInterval(update, 1000 * 60 * minutes_update);
 });
 
 app.get("/bundle.js", function(req, res) {
@@ -46,28 +50,38 @@ var paths = {}; // paths: {sv: string, en: string}
 
 bawangcache = React.createFactory(Bawang);
 function renderSite(path, lang) {
-    return "<!DOCTYPE html>" + ReactDOMServer.renderToString(bawangcache({
+     AsyncRender.renderToString(bawangcache, {
         language: lang,
         path: path
-    }));
+     }).then(function(raw) {
+         console.log(raw);
+         console.log(path, lang, "rendered");
+         paths[path][lang] = "<!DOCTYPE html>" + raw;
+     });
 }
+
+app.get("/datanews", function(req, res) {
+    datanewsServer().then(function(data) {
+        res.send(data);
+    });
+});
+
 
 // Every minutes_update, render site on server.
 function update() {
     CACHED_SITES.forEach(function(site) {
-        paths[site] = {
-            sv: renderSite(site, "sv"),
-            en: renderSite(site, "en")
-        };
+        paths[site] = {};
+        renderSite(site, "sv");
+        renderSite(site, "en");
     });
+    console.log("Website server render triggered.");
 }
-update();
-setInterval(update, 1000 * 60 * minutes_update);
 
 app.get("/update_cache", function(req, res) {
     update();
     res.send("done");
 });
+
 
 // Just server the rendered site
 app.get("/*", function(req, res) {

@@ -3,23 +3,52 @@
 
 import React from "react";
 import moment from "moment";
+import request from "request";
+import AsyncRender from "react-async-render";
+import reactMixin from "react-mixin";
 require("moment/locale/sv");
 
 
 export default class Datanews extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        // should probably only be run when not initial render, maybe a context variable on bawang with that resets on history listnes?
+        this.state = {no_data: true};
+        var that = this;
+        this.asyncInit(function(done) {
+            request("http://localhost:5000/datanews", function (error, response, body) {
+                if(error) {
+                    console.error(error);
+                    return;
+                }
+                var parsed = JSON.parse(body);
+                that.state = {
+                    news: parsed[1],
+                    events: parsed[0],
+                    no_data: false
+                };
+                console.log(that.state);
+                that.forceUpdate();
+                done();
+            });
+        });
+    }
     render() {
+        if(this.state.no_data) {
+            return <section>Loading...</section>;
+        }
         moment.locale(this.context.language);
         var newstory = "";
-        var words = this.props.news[0].summary.split(" ").reverse();
+        var words = this.state.news[0].summary.split(" ").reverse();
         while(words.length > 0 && newstory.length + words[0].length < 300)
             newstory += words.pop() + " ";
         if(words.length > 0)
-            newstory += "<a href=\"" + this.props.news[0].url + "\">...</a>";
+            newstory += "<a href=\"" + this.state.news[0].url + "\">...</a>";
 
         return (
             <section className="thing">
                 <ul>
-                    {this.props.events.map(function(event, i) {
+                    {this.state.events.map(function(event, i) {
                         return (
                             <li key={i}>
                                 <h3 className="heading">{event.title}</h3>
@@ -30,8 +59,8 @@ export default class Datanews extends React.Component {
                     })}
                 </ul>
                 <div className="news">
-                    <a className="newsheading" href={this.props.news[0].url}>
-                        <h3 className="headinginside">{this.props.news[0].title}</h3>
+                    <a className="newsheading" href={this.state.news[0].url}>
+                        <h3 className="headinginside">{this.state.news[0].title}</h3>
                     </a>
                     <p className="newsstory" dangerouslySetInnerHTML={{__html: newstory}}></p>
                 </div>
@@ -40,5 +69,7 @@ export default class Datanews extends React.Component {
     }
 }
 Datanews.contextTypes = {
+    ...AsyncRender.contextTypes,
     language: React.PropTypes.string
 }
+reactMixin(Datanews.prototype, AsyncRender.mixin);

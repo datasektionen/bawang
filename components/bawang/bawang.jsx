@@ -7,11 +7,13 @@ import FirstPage from "../firstpage/firstpage.jsx";
 import Tajtan from "../tajtan/tajtan.jsx";
 import {Router, Route, Link} from 'react-router'
 import {createHistory, createMemoryHistory} from 'history'
+import AsyncRender from "react-async-render";
+import reactMixin from "react-mixin";
 
 
 export default class Bawang extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         var history = process.browser ? createHistory() : createMemoryHistory();
         if(props.path) {
             // For serverside
@@ -20,10 +22,19 @@ export default class Bawang extends React.Component {
         this.state = {
             history: history
         }
+        this.asyncInit(function(done) {
+            done();
+        });
+    }
+    componentDidMount() {
+        var that = this;
+        this.state.history.listen(function(location) {
+            that.setState({isInitialRender: false});
+        });
     }
     getChildContext() {
         return {
-            history: this.state.history
+            history: this.state.history,
         }
     }
     render() {
@@ -56,9 +67,13 @@ export default class Bawang extends React.Component {
         );
     }
 }
-Bawang.childContextTypes = {
-    history: React.PropTypes.object
+Bawang.contextTypes = {
+    ...AsyncRender.contextTypes
 };
+Bawang.childContextTypes = {
+    history: React.PropTypes.object,
+};
+reactMixin(Bawang.prototype, AsyncRender.mixin);
 
 if(process.browser) {
     ReactDOM.render(<Bawang language={get_lang()} />, document);
