@@ -1,7 +1,7 @@
 import React from "react";
 import {Translate, Lang, LanguageSwitcher} from "../translate/translate.jsx";
 import merge from "merge";
-
+import {Link} from 'react-router'
 
 export default class Databaren extends React.Component {
     render() {
@@ -12,18 +12,18 @@ export default class Databaren extends React.Component {
                         <img className="superdelta_img" alt="Home" src="/components/databaren/small_delta.svg" />
                     </a>
                     <nav className="nav">
-                        <a className="navelement" href="http://datasektionen.se/">
+                        <Link className="navelement" to="/">
                             <Translate>
                                 <Lang lang="sv">Nyheter/Event</Lang>
                                 <Lang lang="en">News/Events</Lang>
                             </Translate>
-                        </a>
-                        <a className="navelement" href="http://datasektionen.se/sektionen">
+                        </Link>
+                        <Link className="navelement" to="/chapter">
                             <Translate>
                                 <Lang lang="sv">Sektionen</Lang>
                                 <Lang lang="en">The Chapter</Lang>
                             </Translate>
-                        </a>
+                        </Link>
                         <a className="navelement" href="http://datasektionen.se/studier">
                             <Translate>
                                 <Lang lang="sv">Studier</Lang>

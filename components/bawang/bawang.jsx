@@ -6,9 +6,26 @@ import Datafooter from "../datafooter/datafooter.jsx";
 import FirstPage from "../firstpage/firstpage.jsx";
 import Tajtan from "../tajtan/tajtan.jsx";
 import {Router, Route, Link} from 'react-router'
-import {createMemoryHistory} from 'history'
+import {createHistory, createMemoryHistory} from 'history'
+
 
 export default class Bawang extends React.Component {
+    constructor(props) {
+        super(props);
+        var history = process.browser ? createHistory() : createMemoryHistory();
+        if(props.path) {
+            // For serverside
+            history.pushState(null, props.path);
+        }
+        this.state = {
+            history: history
+        }
+    }
+    getChildContext() {
+        return {
+            history: this.state.history
+        }
+    }
     render() {
         return (
             <html>
@@ -27,18 +44,21 @@ export default class Bawang extends React.Component {
                 <body>
                     <TranslateContainer startlang={this.props.language}>
                         <Databaren />
-                        <Router history={createMemoryHistory()}>
+                        <Router history={this.state.history}>
                             <Route path="/" component={FirstPage} />
                             <Route path="/chapter" component={Tajtan} />
                         </Router>
                         <Datafooter />
                     </TranslateContainer>
-                    <script src="bundle.js"></script>
+                    <script src="/bundle.js"></script>
                 </body>
             </html>
         );
     }
 }
+Bawang.childContextTypes = {
+    history: React.PropTypes.object
+};
 
 if(process.browser) {
     ReactDOM.render(<Bawang language={get_lang()} />, document);
