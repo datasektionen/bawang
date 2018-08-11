@@ -38,6 +38,7 @@ class Frontpage extends Component {
           </h2>
           <ul>
             {
+              calypso.content &&
               calypso.content
                 .filter(item => item.itemType === 'POST')
                 .filter((_, i) => i < 5)
@@ -61,6 +62,7 @@ class Frontpage extends Component {
           </h2>
           <ul>
             {
+              calypso.content &&
               calypso.content
                 .filter(item => item.itemType === 'EVENT')
                 .filter((_, i) => i < 5)

@@ -2,7 +2,7 @@ import React from 'react';
 import { hydrate } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import App from './components/App';
-import { Provider } from './components/fetcherContext';
+import { Provider } from './components/cachePromises';
 
 hydrate(
   <BrowserRouter>

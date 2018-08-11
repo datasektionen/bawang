@@ -6,6 +6,8 @@ import Frontpage from './Frontpage'
 import News from './News'
 import Default from './Default'
 
+import './App.css'
+
 //const links = taitanSlugs.map(({link, name} => <Link to={link}>{name}</Link>))
 const links = [
   <Link to="/nyheter">Nyheter</Link>,
