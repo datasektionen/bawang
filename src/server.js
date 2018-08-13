@@ -24,14 +24,16 @@ server
     const promises = []
     const vdom =
       <StaticRouter context={context} location={req.url}>
-        <Provider cachePromises={promises}>
+        <Provider value={promises}>
           <App />
         </Provider>
       </StaticRouter>
 
-    console.log('promises', promises)
+    renderToStaticMarkup(vdom)
+
+    // console.log('promises', promises)
     const data = await Promise.all(promises)
-    console.log('data', data, context, req.url)
+    // console.log('data', data, context, req.url)
 
     const markup = renderToString(vdom)
     if (context.url) {
@@ -45,6 +47,7 @@ server
     <meta charset="utf-8" />
     <title>Konglig Datasektionen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//aurora.datasektionen.se/">
     ${assets.client.css
       ? `<link rel="stylesheet" href="${assets.client.css}">`
       : ''}

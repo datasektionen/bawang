@@ -10,16 +10,17 @@ import './App.css'
 
 //const links = taitanSlugs.map(({link, name} => <Link to={link}>{name}</Link>))
 const links = [
-  <Link to="/nyheter">Nyheter</Link>,
-  <Link to="/sektionen">Sektionen</Link>,
-  <Link to="/studier">Studier</Link>,
-  <Link to="/namnder">Nämnder</Link>,
-  <Link to="/organisation">Organisation</Link>,
-  <Link to="/naringsliv">Näringsliv</Link>,
-  <Link to="/kontakt">Kontakt</Link>,
+  <Link key="nyheter" to="/nyheter">Nyheter</Link>,
+  <Link key="sektionen" to="/sektionen">Sektionen</Link>,
+  <Link key="studier" to="/studier">Studier</Link>,
+  <Link key="namnder" to="/namnder">Nämnder</Link>,
+  <Link key="organisation" to="/organisation">Organisation</Link>,
+  <Link key="naringsliv" to="/naringsliv">Näringsliv</Link>,
+  <Link key="kontakt" to="/kontakt">Kontakt</Link>,
 ]
 
-const App = () => <div id="application" className="cerise">
+const App = () =>
+  <div id="application" className="cerise">
     <Methone config={{sytem_name: 'bawang', color_scheme: 'cerise', links}} />
     <Switch>
       <Route path="/" exact render={ match => <Frontpage {...match} /> } />
