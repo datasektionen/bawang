@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom'
 import express from 'express'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 
-import { Provider } from './components/cachePromises'
+import { Provider } from './components/DataLoader'
 
 const TAITAN_URL = process.env.TAITAN_URL || 'https://taitan.datasektionen.se'
 
@@ -29,12 +29,13 @@ server
         </Provider>
       </StaticRouter>
 
+    // render the tree to trigger all promises
     renderToStaticMarkup(vdom)
 
-    // console.log('promises', promises)
+    // wait for them to finish
     const data = await Promise.all(promises)
-    // console.log('data', data, context, req.url)
 
+    // render the tree again with data
     const markup = renderToString(vdom)
     if (context.url) {
       res.redirect(context.url)
@@ -50,10 +51,15 @@ server
     <link rel="stylesheet" href="//aurora.datasektionen.se/">
     ${assets.client.css
       ? `<link rel="stylesheet" href="${assets.client.css}">`
-      : ''}
+      : ''
+    }
     ${process.env.NODE_ENV === 'production'
       ? `<script src="${assets.client.js}" defer></script>`
-      : `<script src="${assets.client.js}" defer crossorigin></script>`}
+      : `<script src="${assets.client.js}" defer crossorigin></script>`
+    }
+    <script>
+      window.__cache__ = ${JSON.stringify(Object.assign(...data.map(d => ({[d.cacheKey]: d}))))}
+    </script>
   </head>
   <body>
     <div id="root">${markup}</div>

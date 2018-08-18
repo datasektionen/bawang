@@ -23,7 +23,6 @@ export const Default = ({ location }) =>
         }
       </ul>
 
-
     return (
       <Fragment>
         <header key="header">

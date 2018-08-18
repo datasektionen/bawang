@@ -26,76 +26,79 @@ const Frontpage = ({ location }) =>
       </span>
     </div>
   </header>
-  <Taitan pathname={location.pathname}>
-    {taitan =>
-      <Fragment>
-        <div className={cx('content', 'flex')}>
-          <div
-            className={cx('col-md-4', 'intro')}
-            dangerouslySetInnerHTML={{__html: taitan.body}}
-          />
-          <Calypso search={location.search}>
-            {calypso =>
-              <Fragment>
-                <div className={cx('col-md-4', 'news')}>
-                  <h2>
-                    Nyheter
-                  </h2>
-                  <ul>
-                    {
-                      calypso.content &&
-                      calypso.content
-                        .filter(item => item.itemType === 'POST')
-                        .filter((_, i) => i < 5)
-                        .map(item => <li key={item.id}>
-                          <h3>{ item.titleSwedish }</h3>
-                          <span>
-                            { new Date(item.publishDate)
-                              .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
-                          </span>
-                          &bull;
-                          <span>
-                            { item.publishAsDisplay || item.authorDisplay }
-                          </span>
-                        </li>)
-                    }
-                  </ul>
-                </div>
-                <div className={cx('col-md-4', 'news')}>
-                  <h2>
-                    Event
-                  </h2>
-                  <ul>
-                    {
-                      calypso.content &&
-                      calypso.content
-                        .filter(item => item.itemType === 'EVENT')
-                        .filter((_, i) => i < 5)
-                        .map(item => <li key={item.id}>
-                          <h3>{ item.titleSwedish }</h3>
-                          <span>
-                            { new Date(item.eventStartTime)
-                              .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
-                          </span>
-                          &bull;
-                          <span>
-                            { item.publishAsDisplay || item.authorDisplay }
-                          </span>
-                        </li>)
-                    }
-                  </ul>
-                </div>
-              </Fragment>
-            }
-          </Calypso>
-        </div>
+    <div className={cx('content', 'flex')}>
+      <Taitan pathname={location.pathname}>
+        {taitan =>
+              <div
+                className={cx('col-md-4', 'intro')}
+                dangerouslySetInnerHTML={{__html: taitan.body}}
+              />
+        }
+      </Taitan>
+      <Calypso search={location.search}>
+        {calypso =>
+          <Fragment>
+            <div className={cx('col-md-4', 'news')}>
+              <h2>
+                Nyheter
+              </h2>
+              <ul>
+                {
+                  calypso.content &&
+                  calypso.content
+                    .filter(item => item.itemType === 'POST')
+                    .filter((_, i) => i < 5)
+                    .map(item => <li key={item.id}>
+                      <h3>{ item.titleSwedish }</h3>
+                      <span>
+                        { new Date(item.publishDate)
+                          .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
+                      </span>
+                      &bull;
+                      <span>
+                        { item.publishAsDisplay || item.authorDisplay }
+                      </span>
+                    </li>)
+                }
+              </ul>
+            </div>
+            <div className={cx('col-md-4', 'news')}>
+              <h2>
+                Event
+              </h2>
+              <ul>
+                {
+                  calypso.content &&
+                  calypso.content
+                    .filter(item => item.itemType === 'EVENT')
+                    .filter((_, i) => i < 5)
+                    .map(item => <li key={item.id}>
+                      <h3>{ item.titleSwedish }</h3>
+                      <span>
+                        { new Date(item.eventStartTime)
+                          .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
+                      </span>
+                      &bull;
+                      <span>
+                        { item.publishAsDisplay || item.authorDisplay }
+                      </span>
+                    </li>)
+                }
+              </ul>
+            </div>
+          </Fragment>
+        }
+      </Calypso>
+    </div>
+    <Taitan pathname={location.pathname}>
+      { taitan =>
         <div
           className={cx('content')}
           dangerouslySetInnerHTML={{__html: taitan.sidebar}}
         />
-      </Fragment>
-    }
-  </Taitan>
+      }
+    </Taitan>
+
 </div>
 
 export default Frontpage
