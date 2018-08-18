@@ -26,10 +26,6 @@ const taitanFetcher = pathname => () =>
       }
     })
     .then(res => ({ status: 200, redirect: false, ...res }))
-    .then(res => {
-        if(typeof document !== 'undefined') document.title = res.title
-        return res
-    })
     .catch(err => {
       // Most likely we were redirected and the target did not allow cors-requests
       // Should not happen while SSR-ing, so is probably safe
@@ -45,11 +41,13 @@ export const Taitan = ({ pathname, children }) =>
     ttl={60 * 60}
   >
     {({ data, loading }) => {
+      if(!loading) {
+        if(data.redirect)
+          return <Redirect to={data.redirect} />
+        else if (data.status !== 200)
+          return <NotFound status={data.status} />
+      }
 
-      if(loading) return null
-
-      if(data.redirect) return <Redirect to={data.redirect} />
-      else if (data.status !== 200) return <NotFound status={data.status} />
       return children(data)
     }}
   </DataLoader>

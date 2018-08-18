@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { Title } from 'react-head'
 
 import Calypso from '../Calypso'
 
@@ -7,6 +8,9 @@ export const News = ({ location }) =>
   <Calypso search={location.search}>
     {({ content }) =>
       <Fragment>
+        <Title>
+          Nyheter - Kongling Datasektionen
+        </Title>
         <header key="header">
           <div className="header-inner">
             <div className="row">

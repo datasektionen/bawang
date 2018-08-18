@@ -3,6 +3,7 @@ import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import express from 'express'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
+import { HeadProvider } from 'react-head'
 
 import { Provider } from './components/DataLoader'
 
@@ -22,10 +23,13 @@ server
   .get('/*', async (req, res) => {
     const context = {}
     const promises = []
+    const headTags = []
     const vdom =
       <StaticRouter context={context} location={req.url}>
         <Provider value={promises}>
-          <App />
+          <HeadProvider headTags={headTags}>
+            <App />
+          </HeadProvider>
         </Provider>
       </StaticRouter>
 
@@ -46,7 +50,6 @@ server
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8" />
-    <title>Konglig Datasektionen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//aurora.datasektionen.se/">
     ${assets.client.css
@@ -57,6 +60,7 @@ server
       ? `<script src="${assets.client.js}" defer></script>`
       : `<script src="${assets.client.js}" defer crossorigin></script>`
     }
+    ${renderToString(headTags)}
     <script>
       window.__cache__ = ${JSON.stringify(Object.assign(...data.map(d => ({[d.cacheKey]: d}))))}
     </script>
