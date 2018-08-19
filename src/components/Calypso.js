@@ -12,10 +12,11 @@ const calypsoFetcher = search => () =>
       console.error('Calypso error', err)
     })
 
-export const Calypso = ({ search, children }) =>
+export const Calypso = ({ search, children, ttl }) =>
   <DataLoader
     cacheKey={'calypso' + search}
     fetcher={calypsoFetcher(search)}
+    ttl={ ttl || 60 }
   >
     {({ data, loading, time }) => children(data) }
   </DataLoader>

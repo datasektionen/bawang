@@ -1,10 +1,9 @@
 {
   "name": "bawang",
   "scripts": {
-    "start": "node bin/razzle.js start",
+    "start:dev": "node bin/razzle.js start",
     "build": "node bin/razzle.js build",
-    "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node -r esm build/server.js"
+    "start": "NODE_ENV=production node -r esm build/server.js"
   },
   "dependencies": {
     "babel-preset-stage-0": "^6.24.1",

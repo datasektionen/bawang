@@ -41,6 +41,8 @@ server
 
     // render the tree again with data
     const markup = renderToString(vdom)
+    const cacheObject = Object.assign(...data.map(d => ({[d.cacheKey]: d})))
+    const cacheString = JSON.stringify(cacheObject)
     if (context.url) {
       res.redirect(context.url)
     } else {
@@ -62,7 +64,7 @@ server
     }
     ${renderToString(headTags)}
     <script>
-      window.__cache__ = ${JSON.stringify(Object.assign(...data.map(d => ({[d.cacheKey]: d}))))}
+      window.__cache__ = JSON.parse(decodeURIComponent("${encodeURIComponent(cacheString)}"))
     </script>
   </head>
   <body>

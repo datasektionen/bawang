@@ -12,7 +12,7 @@ const TAITAN_URL = process.env.TAITAN_URL || 'https://taitan.datasektionen.se'
 const taitanFetcher = pathname => () =>
   fetch(TAITAN_URL + pathname)
     .then(res => {
-      const redirected = !res.url.endsWith(pathname) // node-fetch doesnt have the res.redirected property
+      const redirected = res.url !== TAITAN_URL + pathname // node-fetch doesnt have the res.redirected property
       if(redirected) {
         if(res.url.startsWith(TAITAN_URL)) {
           return { redirect: res.url.substr(TAITAN_URL.length) }
@@ -34,11 +34,11 @@ const taitanFetcher = pathname => () =>
         window.location.href = TAITAN_URL + pathname
     })
 
-export const Taitan = ({ pathname, children }) =>
+export const Taitan = ({ pathname, children, ttl }) =>
   <DataLoader
     cacheKey={'taitan' + pathname}
     fetcher={taitanFetcher(pathname)}
-    ttl={60 * 60}
+    ttl={ttl || 60 * 60}
   >
     {({ data, loading }) => {
       if(!loading) {

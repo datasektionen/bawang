@@ -10,7 +10,9 @@ import skold from './skold.svg'
 
 const cx = classNames.bind(styles)
 
-const Frontpage = ({ location }) =>
+const Translate = ({ current, children }) => children[current || 'sv']
+
+const Frontpage = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
   {taitan =>
     <div className={styles.frontpage}>
@@ -20,7 +22,12 @@ const Frontpage = ({ location }) =>
       <header>
         <div className={styles.title}>
           <span className={cx('thin', 'left')}>
-            Välkommen till
+            <Translate current={lang}>
+              {{
+                en: 'Welcome to',
+                sv: 'Välkommen till'
+              }}
+            </Translate>
           </span>
           <span className={styles.bold}>
           Konglig
@@ -28,7 +35,12 @@ const Frontpage = ({ location }) =>
           Datasektionen
           </span>
           <span className={cx('thin',  'right')}>
-            Vid THS &bull; Sedan 1983
+            <Translate current={lang}>
+              {{
+                en: 'Chapter of THS &bull; Since 1983',
+                sv: 'Vid THS &bull; Sedan 1983'
+              }}
+            </Translate>
           </span>
         </div>
       </header>
@@ -38,23 +50,44 @@ const Frontpage = ({ location }) =>
           dangerouslySetInnerHTML={{__html: taitan.body}}
         />
         <Calypso search={location.search}>
-          {calypso =>
+          {({ content }) =>
             <Fragment>
               <div className={cx('col-md-4', 'news')}>
                 <h2>
-                  Nyheter
+                  <Translate current={lang}>
+                    {{
+                      en: 'News',
+                      sv: 'Nyheter'
+                    }}
+                  </Translate>
                 </h2>
                 <ul>
                   {
-                    calypso.content &&
-                    calypso.content
+                    content &&
+                    content
                       .filter(item => item.itemType === 'POST')
                       .filter((_, i) => i < 5)
                       .map(item => <li key={item.id}>
-                        <h3>{ item.titleSwedish }</h3>
+                        <h3>
+                          <Translate current={lang}>
+                           {{
+                              en: item.titleEnglish,
+                              sv: item.titleSwedish
+                           }}
+                          </Translate>
+                        </h3>
                         <span>
-                          { new Date(item.publishDate)
-                            .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
+                          {
+                            new Date(item.publishDate)
+                            .toLocaleDateString(
+                              lang === 'en' ? 'en-GB' : 'sv-SE',
+                              {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                              }
+                            )
+                          }
                         </span>
                         &bull;
                         <span>
@@ -66,19 +99,40 @@ const Frontpage = ({ location }) =>
               </div>
               <div className={cx('col-md-4', 'news')}>
                 <h2>
-                  Event
+                  <Translate current={lang}>
+                    {{
+                      en: 'News',
+                      sv: 'Nyheter'
+                    }}
+                  </Translate>
                 </h2>
                 <ul>
                   {
-                    calypso.content &&
-                    calypso.content
+                    content &&
+                    content
                       .filter(item => item.itemType === 'EVENT')
                       .filter((_, i) => i < 5)
                       .map(item => <li key={item.id}>
-                        <h3>{ item.titleSwedish }</h3>
+                        <h3>
+                          <Translate current={lang}>
+                           {{
+                              en: item.titleEnglish,
+                              sv: item.titleSwedish
+                           }}
+                          </Translate>
+                        </h3>
                         <span>
-                          { new Date(item.eventStartTime)
-                            .toLocaleDateString('sv-SE', {day: 'numeric', month: 'short', year: 'numeric'}) }
+                          {
+                            new Date(item.publishDate)
+                            .toLocaleDateString(
+                              lang === 'en' ? 'en-GB' : 'sv-SE',
+                              {
+                                day: 'numeric',
+                                month: 'short',
+                                year: 'numeric'
+                              }
+                            )
+                          }
                         </span>
                         &bull;
                         <span>
