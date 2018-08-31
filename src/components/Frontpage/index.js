@@ -14,10 +14,10 @@ const Translate = ({ current, children }) => children[current || 'sv']
 
 const Frontpage = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
-  {taitan =>
+  {({ title, body, sidebar }) =>
     <div className={styles.frontpage}>
       <Title>
-        { taitan.title }
+        { title }
       </Title>
       <header>
         <div className={styles.title}>
@@ -47,7 +47,7 @@ const Frontpage = ({ location, lang }) =>
       <div className={cx('content', 'flex')}>
         <div
           className={cx('col-md-4', 'intro')}
-          dangerouslySetInnerHTML={{__html: taitan.body}}
+          dangerouslySetInnerHTML={{__html: body}}
         />
         <Calypso search={location.search}>
           {({ content }) =>
@@ -148,7 +148,7 @@ const Frontpage = ({ location, lang }) =>
       </div>
       <div
         className={cx('content')}
-        dangerouslySetInnerHTML={{__html: taitan.sidebar}}
+        dangerouslySetInnerHTML={{__html: sidebar}}
       />
     </div>
   }

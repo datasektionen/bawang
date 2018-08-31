@@ -37,12 +37,10 @@ const App = () =>
     <Switch>
       <Route path="/en/" exact render={ match => <Frontpage lang="en" {...match} /> } />
       <Route path="/en/news" exact render={ match => <News lang="en" {...match} /> } />
-      <Route path="/en/news/:postId" render={ match => <News lang="en" {...match} /> } />
       <Route path="/en/" render={ match => <Default lang="en" {...match} /> } />
 
       <Route path="/" exact render={ match => <Frontpage {...match} /> } />
       <Route path="/nyheter" render={ match => <News {...match} /> } />
-      <Route path="/nyheter/:postId" render={ match => <News {...match} /> } />
       <Route path="/" render={ match => <Default {...match} /> } />
     </Switch>
   </div>

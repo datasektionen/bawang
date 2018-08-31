@@ -59,7 +59,8 @@ export const DataLoader = withConsumer(class extends Component {
       time: Date.now()
     }
 
-    waiting[cacheKey] = []
+    if(!waiting[cacheKey])
+      waiting[cacheKey] = []
 
     this.props.cachePromises.push(
       this.props
@@ -74,9 +75,8 @@ export const DataLoader = withConsumer(class extends Component {
 
           cache[cacheKey] = res
 
-          waiting[cacheKey].forEach(resolve => {
-            resolve(res)
-          })
+          waiting[cacheKey].forEach(resolve => resolve(res))
+          delete waiting[cacheKey]
 
           this.forceUpdate()
 

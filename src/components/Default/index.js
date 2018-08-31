@@ -4,7 +4,6 @@ import { Title } from 'react-head'
 
 import Taitan from '../Taitan'
 
-
 const getNav = (nav, lang) => {
   const enNav = lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
   const child = enNav.find(item => item.nav)
