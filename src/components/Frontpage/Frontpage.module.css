@@ -3,6 +3,7 @@
   padding: 2em;
   text-align: center;
   text-transform: uppercase;
+  box-shadow: none;
 }
 
 .frontpage header .title {
@@ -13,8 +14,9 @@
 .frontpage header .title .bold {
   font-size: 5em;
   font-weight: bolder;
-  text-shadow: -1px -2px #ff0, 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: -2px -2px #fcda02, 4px 4px #e83d84;
   line-height: 1.3em;
+  color: #fff;
 }
 
 .frontpage header .title .bold img {
@@ -24,7 +26,7 @@
 }
 
 .frontpage header .title .thin {
-  color: #eee;
+  color: #ffbbe0;
   font-size: initial;
   font-weight: lighter;
   display: block;
@@ -53,9 +55,28 @@
   padding: 40px 50px;
   min-height: 0;
   top: -220px;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
   z-index: 21;
+}
+
+.frontpage .content.hero {
+  background: #fff6f0;
+  background-image: linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%);
+  /* PLS FIX: background-image: url('kth.jpg'), linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%); */
+  background-size: cover;
+  background-position: center;
+}
+
+.frontpage .content.hero .more-btn {
+  display: inline-block;
+  padding: 6px 15px;
+  background: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: lighter;
+  margin-top: 20px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+  color: #828ca2;
 }
 
 .frontpage .content .intro {
@@ -70,6 +91,10 @@
   font-weight: lighter;
   margin: 0;
   padding: 0;
+  color: #64708d;
+  line-height: 165%;
+  text-align: center;
+  font-size: 1.1em;
 }
 
 .frontpage .content .intro p {
@@ -77,11 +102,12 @@
 }
 
 .frontpage .content .news h2 {
-  color: #ee2a7b;
-  font-size: 3em;
-  font-weight: bolder;
-  text-shadow: 1px 1px #ff0;
+  color: #e83d84;
+  font-size: 2.75em;
+  font-weight: 900;
+  text-shadow: 1px 1px #fff;
   margin: 20px;
+  text-transform: uppercase;
 }
 
 .frontpage .content .news ul {
@@ -91,17 +117,19 @@
 
 .frontpage .content .news ul li {
   margin: 10px;
+  margin-top: 22px;
 }
 
 .frontpage .content .news ul li h3 {
   border: none;
   padding: 0;
   margin: 10px;
-  margin-bottom: 0px;
-  font-size: 18px;
+  margin-bottom: 1px;
+  font-size: 17px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #6a758f;
 }
 
 .frontpage .content .news ul li span {
@@ -109,6 +137,7 @@
   text-transform: uppercase;
   font-weight: lighter;
   font-size: 13px;
+  color: #959eb3;
 }
 
 .frontpage .content:after {

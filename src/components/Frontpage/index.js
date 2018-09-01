@@ -37,22 +37,22 @@ const Frontpage = ({ location, lang }) =>
           <span className={cx('thin',  'right')}>
             <Translate current={lang}>
               {{
-                en: 'Chapter of THS &bull; Since 1983',
-                sv: 'Vid THS &bull; Sedan 1983'
+                en: 'Chapter of THS • Since 1983',
+                sv: 'Vid THS • Sedan 1983'
               }}
             </Translate>
           </span>
         </div>
       </header>
-      <div className={cx('content', 'flex')}>
+      <div className={cx('content', 'flex', 'hero')}>
         <div
-          className={cx('col-md-4', 'intro')}
+          className={cx('col-md-3', 'intro')}
           dangerouslySetInnerHTML={{__html: body}}
         />
         <Calypso search={location.search}>
           {({ content }) =>
             <Fragment>
-              <div className={cx('col-md-4', 'news')}>
+              <div className={cx('col-md-5', 'news')}>
                 <h2>
                   <Translate current={lang}>
                     {{
@@ -80,7 +80,7 @@ const Frontpage = ({ location, lang }) =>
                           {
                             new Date(item.publishDate)
                             .toLocaleDateString(
-                              lang === 'en' ? 'en-GB' : 'sv-SE',
+                              lang === 'en' ? 'en-US' : 'sv-SE',
                               {
                                 day: 'numeric',
                                 month: 'short',
@@ -88,21 +88,29 @@ const Frontpage = ({ location, lang }) =>
                               }
                             )
                           }
-                        </span>
-                        &bull;
-                        <span>
+                          &nbsp;&bull;&nbsp;
                           { item.publishAsDisplay || item.authorDisplay }
                         </span>
                       </li>)
                   }
                 </ul>
+                <div class="text-center">
+                <a href="#" className={cx('more-btn')}>
+                  <Translate current={lang}>
+                  {{
+                    en: 'More News »',
+                    sv: 'Mer Nyheter »'
+                  }}
+                  </Translate>
+                </a>
+                </div>
               </div>
               <div className={cx('col-md-4', 'news')}>
                 <h2>
                   <Translate current={lang}>
                     {{
-                      en: 'News',
-                      sv: 'Nyheter'
+                      en: 'Event',
+                      sv: 'Event'
                     }}
                   </Translate>
                 </h2>
@@ -125,7 +133,7 @@ const Frontpage = ({ location, lang }) =>
                           {
                             new Date(item.publishDate)
                             .toLocaleDateString(
-                              lang === 'en' ? 'en-GB' : 'sv-SE',
+                              lang === 'en' ? 'en-US' : 'sv-SE',
                               {
                                 day: 'numeric',
                                 month: 'short',
