@@ -62,7 +62,7 @@
 .frontpage .content.hero {
   background: #fff6f0;
   background-image: linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%);
-  /* PLS FIX: background-image: url('kth.jpg'), linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%); */
+  background-image: url('./kth.jpg'), linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%);
   background-size: cover;
   background-position: center;
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 import classNames from 'classnames/bind'
 
@@ -94,15 +95,18 @@ const Frontpage = ({ location, lang }) =>
                       </li>)
                   }
                 </ul>
-                <div class="text-center">
-                <a href="#" className={cx('more-btn')}>
+                <div className="text-center">
+                <Link
+                  to={ lang === 'en' ? '/en/news' : '/nyheter' }
+                  className={cx('more-btn')}
+                >
                   <Translate current={lang}>
                   {{
                     en: 'More News »',
                     sv: 'Mer Nyheter »'
                   }}
                   </Translate>
-                </a>
+                </Link>
                 </div>
               </div>
               <div className={cx('col-md-4', 'news')}>
