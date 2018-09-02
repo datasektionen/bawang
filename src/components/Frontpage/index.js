@@ -66,7 +66,7 @@ const Frontpage = ({ location, lang }) =>
                   content &&
                   content
                     .filter(item => item.itemType === 'POST')
-                    .filter((_, i) => i < 5)
+                    .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
                       <h3>
                         <Translate current={lang}>
@@ -88,7 +88,9 @@ const Frontpage = ({ location, lang }) =>
                             }
                           )
                         }
-                        &nbsp;&bull;&nbsp;
+                      </span>
+                      &bull;
+                      <span>
                         { item.publishAsDisplay || item.authorDisplay }
                       </span>
                     </li>)
@@ -138,7 +140,7 @@ const Frontpage = ({ location, lang }) =>
                       </h3>
                       <span>
                         {
-                          new Date(item.publishDate)
+                          new Date(item.eventStartTime)
                           .toLocaleDateString(
                             lang === 'en' ? 'en-US' : 'sv-SE',
                             {
