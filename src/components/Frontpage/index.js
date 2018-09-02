@@ -16,7 +16,7 @@ const Translate = ({ current, children }) => children[current || 'sv']
 const Frontpage = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
   {({ title, body, sidebar }) =>
-    <div className={styles.frontpage}>
+    <div>
       <Title>
         { title }
       </Title>
