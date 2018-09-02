@@ -64,7 +64,7 @@ export const DataLoader = withConsumer(class extends Component {
 
     this.props.cachePromises.push(
       this.props
-        .fetcher()
+        .fetcher(cacheKey)
         .then(data => {
           const res = {
             data,

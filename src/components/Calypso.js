@@ -3,19 +3,19 @@ import fetch from 'cross-fetch'
 
 import { DataLoader } from './DataLoader'
 
-const CALYPSO_URL = process.env.CALYPSO_URL || 'https://calypso.datasektionen.se/api/list'
+const CALYPSO_URL = process.env.CALYPSO_URL || 'https://calypso.datasektionen.se/api/'
 
-const calypsoFetcher = search => () =>
-  fetch(CALYPSO_URL + search)
+const calypsoFetcher = url =>
+  fetch(url)
     .then(res => res.json())
     .catch(err => {
       console.error('Calypso error', err)
     })
 
-export const Calypso = ({ search, children, ttl }) =>
+export const Calypso = ({ type, search, children, ttl }) =>
   <DataLoader
-    cacheKey={'calypso' + search}
-    fetcher={calypsoFetcher(search)}
+    cacheKey={`${CALYPSO_URL}/${type || 'list'}${search || ''}`}
+    fetcher={calypsoFetcher}
     ttl={ ttl || 60 }
   >
     {({ data, loading, time }) => children(data) }

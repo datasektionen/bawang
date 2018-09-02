@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 import classNames from 'classnames/bind'
@@ -50,111 +50,113 @@ const Frontpage = ({ location, lang }) =>
           className={cx('col-md-3', 'intro')}
           dangerouslySetInnerHTML={{__html: body}}
         />
-        <Calypso search={location.search}>
+        <Calypso type='list'>
           {({ content }) =>
-            <Fragment>
-              <div className={cx('col-md-5', 'news')}>
-                <h2>
-                  <Translate current={lang}>
-                    {{
-                      en: 'News',
-                      sv: 'Nyheter'
-                    }}
-                  </Translate>
-                </h2>
-                <ul>
-                  {
-                    content &&
-                    content
-                      .filter(item => item.itemType === 'POST')
-                      .filter((_, i) => i < 5)
-                      .map(item => <li key={item.id}>
-                        <h3>
-                          <Translate current={lang}>
-                           {{
-                              en: item.titleEnglish,
-                              sv: item.titleSwedish
-                           }}
-                          </Translate>
-                        </h3>
-                        <span>
-                          {
-                            new Date(item.publishDate)
-                            .toLocaleDateString(
-                              lang === 'en' ? 'en-US' : 'sv-SE',
-                              {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                              }
-                            )
-                          }
-                          &nbsp;&bull;&nbsp;
-                          { item.publishAsDisplay || item.authorDisplay }
-                        </span>
-                      </li>)
-                  }
-                </ul>
-                <div className="text-center">
-                <Link
-                  to={ lang === 'en' ? '/en/news' : '/nyheter' }
-                  className={cx('more-btn')}
-                >
-                  <Translate current={lang}>
+            <div className={cx('col-md-5', 'news')}>
+              <h2>
+                <Translate current={lang}>
                   {{
-                    en: 'More News »',
-                    sv: 'Mer Nyheter »'
+                    en: 'News',
+                    sv: 'Nyheter'
                   }}
-                  </Translate>
-                </Link>
-                </div>
+                </Translate>
+              </h2>
+              <ul>
+                {
+                  content &&
+                  content
+                    .filter(item => item.itemType === 'POST')
+                    .filter((_, i) => i < 5)
+                    .map(item => <li key={item.id}>
+                      <h3>
+                        <Translate current={lang}>
+                         {{
+                            en: item.titleEnglish,
+                            sv: item.titleSwedish
+                         }}
+                        </Translate>
+                      </h3>
+                      <span>
+                        {
+                          new Date(item.publishDate)
+                          .toLocaleDateString(
+                            lang === 'en' ? 'en-US' : 'sv-SE',
+                            {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            }
+                          )
+                        }
+                        &nbsp;&bull;&nbsp;
+                        { item.publishAsDisplay || item.authorDisplay }
+                      </span>
+                    </li>)
+                }
+              </ul>
+              <div className="text-center">
+              <Link
+                to={ lang === 'en' ? '/en/news' : '/nyheter' }
+                className={cx('more-btn')}
+              >
+                <Translate current={lang}>
+                {{
+                  en: 'More News »',
+                  sv: 'Mer Nyheter »'
+                }}
+                </Translate>
+              </Link>
               </div>
-              <div className={cx('col-md-4', 'news')}>
-                <h2>
-                  <Translate current={lang}>
-                    {{
-                      en: 'Event',
-                      sv: 'Event'
-                    }}
-                  </Translate>
-                </h2>
-                <ul>
-                  {
-                    content &&
-                    content
-                      .filter(item => item.itemType === 'EVENT')
-                      .filter((_, i) => i < 5)
-                      .map(item => <li key={item.id}>
-                        <h3>
-                          <Translate current={lang}>
-                           {{
-                              en: item.titleEnglish,
-                              sv: item.titleSwedish
-                           }}
-                          </Translate>
-                        </h3>
-                        <span>
-                          {
-                            new Date(item.publishDate)
-                            .toLocaleDateString(
-                              lang === 'en' ? 'en-US' : 'sv-SE',
-                              {
-                                day: 'numeric',
-                                month: 'short',
-                                year: 'numeric'
-                              }
-                            )
-                          }
-                        </span>
-                        &bull;
-                        <span>
-                          { item.publishAsDisplay || item.authorDisplay }
-                        </span>
-                      </li>)
-                  }
-                </ul>
-              </div>
-            </Fragment>
+            </div>
+          }
+        </Calypso>
+        <Calypso type='event'>
+          {({ content }) =>
+            <div className={cx('col-md-4', 'news')}>
+              <h2>
+                <Translate current={lang}>
+                  {{
+                    en: 'Event',
+                    sv: 'Event'
+                  }}
+                </Translate>
+              </h2>
+              <ul>
+                {
+                  content &&
+                  content
+                    .filter(item => item.itemType === 'EVENT')
+                    .filter((_, i) => i < 5)
+                    .map(item => <li key={item.id}>
+                      <h3>
+                        <Translate current={lang}>
+                         {{
+                            en: item.titleEnglish,
+                            sv: item.titleSwedish
+                         }}
+                        </Translate>
+                      </h3>
+                      <span>
+                        {
+                          new Date(item.publishDate)
+                          .toLocaleDateString(
+                            lang === 'en' ? 'en-US' : 'sv-SE',
+                            {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric'
+                            }
+                          )
+                        }
+                      </span>
+                      &bull;
+                      <span>
+                        { item.publishAsDisplay || item.authorDisplay }
+                      </span>
+                    </li>)
+                }
+              </ul>
+            </div>
           }
         </Calypso>
       </div>

@@ -9,10 +9,10 @@ import { DataLoader } from './DataLoader'
 const TAITAN_URL = process.env.TAITAN_URL || 'https://taitan.datasektionen.se'
 //const TAITAN_URL = process.env.TAITAN_URL || 'http://localhost:1234'
 
-const taitanFetcher = pathname => () =>
-  fetch(TAITAN_URL + pathname)
+const taitanFetcher = url =>
+  fetch(url)
     .then(res => {
-      const redirected = res.url !== TAITAN_URL + pathname // node-fetch doesnt have the res.redirected property
+      const redirected = res.url !== url // node-fetch doesnt have the res.redirected property
       if(redirected) {
         if(res.url.startsWith(TAITAN_URL)) {
           return { redirect: res.url.substr(TAITAN_URL.length) }
@@ -30,14 +30,14 @@ const taitanFetcher = pathname => () =>
       // Most likely we were redirected and the target did not allow cors-requests
       // Should not happen while SSR-ing, so is probably safe
       if(err.message === 'Failed to fetch'
-        && window.confirm(`Redirect to "${TAITAN_URL + pathname}"?`))
-        window.location.href = TAITAN_URL + pathname
+        && window.confirm(`Redirect to "${url}"?`))
+        window.location.href = url
     })
 
 export const Taitan = ({ pathname, children, ttl }) =>
   <DataLoader
-    cacheKey={'taitan' + pathname}
-    fetcher={taitanFetcher(pathname)}
+    cacheKey={TAITAN_URL + pathname}
+    fetcher={taitanFetcher}
     ttl={ttl || 60 * 60}
   >
     {({ data, loading }) => {
