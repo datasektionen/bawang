@@ -42,7 +42,7 @@ export const Default = ({ location, lang }) =>
           <div className="row">
             <div className="header-left col-md-2">
               <Link to="/">
-                &laquo;
+                &laquo;&nbsp;
                 <Translate current={lang}>
                   {{
                     en: 'Back',
