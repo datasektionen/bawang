@@ -20,7 +20,7 @@ const Frontpage = ({ location, lang }) =>
       <Title>
         { title }
       </Title>
-      <header>
+      <header className={styles.header}>
         <div className={styles.title}>
           <span className={cx('thin', 'left')}>
             <Translate current={lang}>
@@ -50,7 +50,7 @@ const Frontpage = ({ location, lang }) =>
           className={cx('col-md-3', 'intro')}
           dangerouslySetInnerHTML={{__html: body}}
         />
-        <Calypso type='list'>
+        <Calypso type='list' search='?itemType=POST'>
           {({ content }) =>
             <div className={cx('col-md-5', 'news')}>
               <h2>
@@ -65,7 +65,6 @@ const Frontpage = ({ location, lang }) =>
                 {
                   content &&
                   content
-                    .filter(item => item.itemType === 'POST')
                     .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
                       <h3>
@@ -113,7 +112,7 @@ const Frontpage = ({ location, lang }) =>
           }
         </Calypso>
         <Calypso type='event'>
-          {({ content }) =>
+          {content =>
             <div className={cx('col-md-4', 'news')}>
               <h2>
                 <Translate current={lang}>
@@ -125,9 +124,8 @@ const Frontpage = ({ location, lang }) =>
               </h2>
               <ul>
                 {
-                  content &&
-                  content
-                    .filter(item => item.itemType === 'EVENT')
+                  (content && content.length)
+                  ? content
                     .filter((_, i) => i < 5)
                     .map(item => <li key={item.id}>
                       <h3>
@@ -156,6 +154,14 @@ const Frontpage = ({ location, lang }) =>
                         { item.publishAsDisplay || item.authorDisplay }
                       </span>
                     </li>)
+                  : <h4 className={cx('empty')}>
+                      <Translate current={lang}>
+                       {{
+                          en: 'No upcoming events :(',
+                          sv: 'Inga kommande event :('
+                       }}
+                      </Translate>
+                    </h4>
                 }
               </ul>
             </div>

@@ -1,4 +1,4 @@
-header {
+.header {
   height: 400px;
   padding: 2em;
   text-align: center;
@@ -6,12 +6,12 @@ header {
   box-shadow: none;
 }
 
-header .title {
+.header .title {
   color: #eee;
   display: inline-block;
 }
 
-header .title .bold {
+.header .title .bold {
   font-size: 5em;
   font-weight: bolder;
   text-shadow: -2px -2px #fcda02, 4px 4px #e83d84;
@@ -19,25 +19,25 @@ header .title .bold {
   color: #fff;
 }
 
-header .title .bold img {
+.header .title .bold img {
   margin: 0 0.3em;
   height: 1.3em;
   vertical-align: text-top;
 }
 
-header .title .thin {
+.header .title .thin {
   color: #ffbbe0;
   font-size: initial;
   font-weight: lighter;
   display: block;
 }
 
-header .title .left {
+.header .title .left {
   text-align: left;
   margin-bottom: -10px;
 }
 
-header .title .right {
+.header .title .right {
   text-align: right;
   margin-top: -10px;
 }
@@ -77,6 +77,25 @@ header .title .right {
   box-shadow: 0 2px 2px rgba(0, 0, 0, .1);
   color: #828ca2;
 }
+
+.content.hero .more-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .1);
+}
+
+.content.hero h4.empty {
+  display: block;
+  text-align: center;
+  color: #828ca2;
+  font-size: 15px;
+  padding: 30px 0;
+ }
+
+ @media screen and (min-width: 768px) {
+  .content.hero h4.empty {
+    padding: 100px 0;
+  }
+ }
 
 .content .intro {
   display: flex;
