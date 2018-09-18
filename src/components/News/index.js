@@ -2,8 +2,12 @@ import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 
+import classNames from 'classnames/bind'
+import styles from './News.module.css'
+
 import Calypso from '../Calypso'
 
+const cx = classNames.bind(styles)
 const Translate = ({ current, children }) => children[current || 'sv']
 
 export const News = ({ location, lang }) =>
@@ -59,14 +63,37 @@ export const News = ({ location, lang }) =>
             </div>
             <div className="col-sm-8 col-md-9">
               <div className="row">
-                <div className="col-md-9">
+                <div className={cx('col-md-9', 'news')}>
                   {
                     content &&
-                    content.filter(item => item.itemType === 'POST')
-                      .filter((_, i) => i < 5)
-                      .map(item =>
-                        <div key={item.id}>
-                          <h1>
+                    content.map(item =>
+                      <div key={item.id} className={cx('notice', 'ultra_light')}>
+                        <div className={styles.metadata}>
+                          <div className="row">
+                            <div className="col-xs-6">
+                              <i className="fa fa-user-circle" />&nbsp;&nbsp;
+                              { item.publishAsDisplay || item.authorDisplay }
+                            </div>
+                            <div className="col-xs-6 text-right">
+                              <i className="far fa-clock" />&nbsp;&nbsp;
+                              {
+                                new Date(item.publishDate)
+                                  .toLocaleDateString(
+                                    lang === 'en' ? 'en-US' : 'sv-SE',
+                                    {
+                                      day: 'numeric',
+                                      month: 'long',
+                                      year: 'numeric',
+                                      hour: 'numeric',
+                                      minute: 'numeric'
+                                    }
+                                  )
+                              }
+                            </div>
+                          </div>
+                        </div>
+                        <div className={styles.content}>
+                          <h2>
                             <Link to={lang === 'en' ? '/en/news/' + item.id : '/nyheter/' + item.id }>
                               <Translate current={lang}>
                                 {{
@@ -75,29 +102,39 @@ export const News = ({ location, lang }) =>
                                 }}
                               </Translate>
                             </Link>
-                          </h1>
-                          <div>
-                            {
-                              new Date(item.publishDate)
-                                .toLocaleDateString(
-                                  lang === 'en' ? 'en-GB' : 'sv-SE',
-                                  {
-                                    day: 'numeric',
-                                    month: 'short',
-                                    year: 'numeric'
-                                  }
-                                )
-                            }
-                          </div>
-                          <div>
-                            { item.publishAsDisplay || item.authorDisplay }
-                          </div>
+                          </h2>
                           <div dangerouslySetInnerHTML={{
                             __html: lang === 'en' ? item.contentEnglish : item.contentSwedish
                           }}
                           />
                         </div>
-                      )
+                        {item.googleForm || item.facebookEvent ?
+                          <div className="row">
+                            {item.googleForm ? <div className={item.facebookEvent ? 'col-xs-6' : 'col-xs-12'}>
+                              <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-fw fa-google"/>&nbsp;&nbsp;
+                                <Translate current={lang}>
+                                  {{
+                                    en: 'Open in Google Docs',
+                                    sv: 'Öppna i Google Docs'
+                                  }}
+                                </Translate>
+                              </a>
+                            </div> : false}
+                            {item.facebookEvent ? <div className={item.googleForm ? 'col-xs-6' : 'col-xs-12'}>
+                              <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-fw fa-facebook-f"/>&nbsp;&nbsp;
+                                <Translate current={lang}>
+                                  {{
+                                    en: 'Facebook Event',
+                                    sv: 'Facebook-event'
+                                  }}
+                                </Translate>
+                              </a>
+                            </div> : false}
+                          </div> : false }
+                      </div>
+                    )
                   }
                 </div>
                 <div className="col-md-3" id="sidebar">
@@ -116,14 +153,16 @@ export const News = ({ location, lang }) =>
                           ? content
                             .filter((_, i) => i < 5)
                             .map(item => <p key={item.id}>
-                              <strong>
-                                <Translate current={lang}>
-                                  {{
-                                    en: item.titleEnglish,
-                                    sv: item.titleSwedish
-                                  }}
-                                </Translate>
-                              </strong>
+                              <Link to={lang === 'en' ? '/en/news/' + item.id : '/nyheter/' + item.id}>
+                                <strong>
+                                  <Translate current={lang}>
+                                    {{
+                                      en: item.titleEnglish,
+                                      sv: item.titleSwedish
+                                    }}
+                                  </Translate>
+                                </strong>
+                              </Link>
                               <br />
                               <span>
                                     {
@@ -132,7 +171,7 @@ export const News = ({ location, lang }) =>
                                           lang === 'en' ? 'en-US' : 'sv-SE',
                                           {
                                             day: 'numeric',
-                                            month: 'short',
+                                            month: 'long',
                                             year: 'numeric'
                                           }
                                         )

@@ -1,0 +1,42 @@
+.news h2:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.news h2 {
+    font-size: 27px !important;
+}
+
+.news .notice {
+    box-shadow: 0 1px 2px #eee;
+    margin-bottom: 30px;
+}
+
+.content {
+    padding: 15px;
+}
+
+.metadata {
+    background: rgba(0, 0, 0, .02);
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #999999;
+    padding: 5px 15px;
+}
+
+.gdocs, .fb {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    padding: 5px 15px;
+    text-align: center;
+}
+
+.gdocs {
+    background: #ae5751;
+}
+
+.fb {
+    background: #43629b;
+}
