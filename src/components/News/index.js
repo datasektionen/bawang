@@ -10,9 +10,11 @@ import Calypso from '../Calypso'
 const cx = classNames.bind(styles)
 const Translate = ({ current, children }) => children[current || 'sv']
 
-export const News = ({ location, lang }) =>
-  <Calypso search={location.search}>
-    {({ content, first, last, number, totalPages }) =>
+export const News = ({ location, lang }) => {
+  const itemType = new URLSearchParams(location.search).get('itemType')
+
+  return <Calypso search={location.search}>
+    {({content, first, last, number, totalPages}) =>
       <Fragment>
         <Title>
           <Translate>
@@ -46,7 +48,7 @@ export const News = ({ location, lang }) =>
                   </Translate>
                 </h2>
               </div>
-              <div className="header-right col-md-2" />
+              <div className="header-right col-md-2"/>
             </div>
           </div>
         </header>
@@ -55,7 +57,7 @@ export const News = ({ location, lang }) =>
             <div className="col-sm-4 col-md-3">
               <div id="secondary-nav">
                 <h3>
-                  <Link to={lang === 'en' ? '/en/news' : '/nyheter'}>
+                  <Link to={location.pathname}>
                     <Translate current={lang}>
                       {{
                         en: 'News/Events',
@@ -65,9 +67,9 @@ export const News = ({ location, lang }) =>
                   </Link>
                 </h3>
                 <ul>
-                  <li><a className="text-theme-color strong">Nyheter och event</a></li>
-                  <li><a className="">Endast nyheter</a></li>
-                  <li><a className="">Endast event</a></li>
+                  <li><Link to={location.pathname} className={!itemType && 'text-theme-color strong'}>Nyheter och event</Link></li>
+                  <li><Link to={'?itemType=POST'} className={itemType === 'POST' && 'text-theme-color strong'}>Endast nyheter</Link></li>
+                  <li><Link to={'?itemType=EVENT'} className={itemType === 'EVENT' && 'text-theme-color strong'}>Endast event</Link></li>
                 </ul>
               </div>
             </div>
@@ -81,11 +83,11 @@ export const News = ({ location, lang }) =>
                         <div className={styles.metadata}>
                           <div className="row">
                             <div className="col-xs-6">
-                              <i className="fa fa-user-circle" />&nbsp;&nbsp;
-                              { item.publishAsDisplay || item.authorDisplay }
+                              <i className="fa fa-user-circle"/>&nbsp;&nbsp;
+                              {item.publishAsDisplay || item.authorDisplay}
                             </div>
                             <div className="col-xs-6 text-right">
-                              <i className="far fa-clock" />&nbsp;&nbsp;
+                              <i className="far fa-clock"/>&nbsp;&nbsp;
                               {
                                 new Date(item.publishDate)
                                   .toLocaleDateString(
@@ -104,7 +106,7 @@ export const News = ({ location, lang }) =>
                         </div>
                         <div className={styles.content}>
                           <h2>
-                            <Link to={lang === 'en' ? '/en/news/' + item.id : '/nyheter/' + item.id }>
+                            <Link to={location.pathname + '/' + item.id}>
                               <Translate current={lang}>
                                 {{
                                   en: item.titleEnglish,
@@ -146,13 +148,13 @@ export const News = ({ location, lang }) =>
                       </div>
                     )
                   }
-                  <hr />
+                  <hr/>
                   <div className="text-center">
                     <nav aria-label="Page navigation">
                       <ul className="pagination">
                         {first
                           ? <li className="disabled"><span>&laquo;</span></li>
-                          : <li><Link to='?page=0'>&laquo;</Link></li>}
+                          : <li><Link to={location.pathname + itemType && '?itemType=' + itemType}>&laquo;</Link></li>}
                         {first
                           ? <li className="disabled"><span>&lsaquo;</span></li>
                           : <li><Link to={`?page=${number - 1}`}>&lsaquo;</Link></li>}
@@ -168,10 +170,10 @@ export const News = ({ location, lang }) =>
                         </li>
                         {last
                           ? <li className="disabled"><span>&rsaquo;</span></li>
-                          : <li><Link to={`?page=${number + 1}`}>&rsaquo;</Link></li>}
+                          : <li><Link to={`?page=${number + 1}${itemType && '&itemType=' + itemType}`}>&rsaquo;</Link></li>}
                         {last
                           ? <li className="disabled"><span>&raquo;</span></li>
-                          : <li><Link to={`?page=${totalPages - 1}`}>&raquo;</Link></li>}
+                          : <li><Link to={`?page=${totalPages - 1}${itemType && '&itemType=' + itemType}`}>&raquo;</Link></li>}
                       </ul>
                     </nav>
                   </div>
@@ -192,7 +194,7 @@ export const News = ({ location, lang }) =>
                           ? content
                             .filter((_, i) => i < 5)
                             .map(item => <p key={item.id}>
-                              <Link to={lang === 'en' ? '/en/news/' + item.id : '/nyheter/' + item.id}>
+                              <Link to={location.pathname + '/' + item.id}>
                                 <strong>
                                   <Translate current={lang}>
                                     {{
@@ -202,7 +204,7 @@ export const News = ({ location, lang }) =>
                                   </Translate>
                                 </strong>
                               </Link>
-                              <br />
+                              <br/>
                               <span>
                                     {
                                       new Date(item.eventStartTime)
@@ -233,6 +235,7 @@ export const News = ({ location, lang }) =>
         </div>
       </Fragment>
     }
-  </Calypso>
+  </Calypso>;
+}
 
 export default News
