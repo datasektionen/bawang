@@ -53,7 +53,17 @@ export const News = ({ location, lang }) =>
         <div id="content" key="content">
           <div className="row">
             <div className="col-sm-4 col-md-3">
-              <div id="secondary-nav"><h3><a href="/nyheter">Nyheter/Event</a></h3>
+              <div id="secondary-nav">
+                <h3>
+                  <Link to={lang === 'en' ? '/en/news' : '/nyheter'}>
+                    <Translate current={lang}>
+                      {{
+                        en: 'News/Events',
+                        sv: 'Nyheter/Event'
+                      }}
+                    </Translate>
+                  </Link>
+                </h3>
                 <ul>
                   <li><a className="text-theme-color strong">Nyheter och event</a></li>
                   <li><a className="">Endast nyheter</a></li>
