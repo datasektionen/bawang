@@ -12,7 +12,7 @@ const Translate = ({ current, children }) => children[current || 'sv']
 
 export const News = ({ location, lang }) =>
   <Calypso search={location.search}>
-    {({ content }) =>
+    {({ content, first, last, number, totalPages }) =>
       <Fragment>
         <Title>
           <Translate>
@@ -118,34 +118,63 @@ export const News = ({ location, lang }) =>
                           }}
                           />
                         </div>
-                        {item.googleForm || item.facebookEvent ?
-                          <div className="row">
-                            {item.googleForm ? <div className={item.facebookEvent ? cx('col-xs-6', styles['no-padding-right']) : 'col-xs-12'}>
-                              <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-fw fa-google"/>&nbsp;&nbsp;
-                                <Translate current={lang}>
-                                  {{
-                                    en: 'Open in Google Docs',
-                                    sv: 'Öppna i Google Docs'
-                                  }}
-                                </Translate>
-                              </a>
-                            </div> : false}
-                            {item.facebookEvent ? <div className={item.googleForm ? cx('col-xs-6', styles['no-padding-left']) : 'col-xs-12'}>
-                              <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-fw fa-facebook-f"/>&nbsp;&nbsp;
-                                <Translate current={lang}>
-                                  {{
-                                    en: 'Facebook Event',
-                                    sv: 'Facebook-event'
-                                  }}
-                                </Translate>
-                              </a>
-                            </div> : false}
-                          </div> : false }
+                        {(item.googleForm || item.facebookEvent) &&
+                        <div className="row">
+                          {item.googleForm && <div className={item.facebookEvent ? cx('col-xs-6', styles['no-padding-right']) : 'col-xs-12'}>
+                            <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
+                              <i className="fab fa-fw fa-google"/>&nbsp;&nbsp;
+                              <Translate current={lang}>
+                                {{
+                                  en: 'Open in Google Docs',
+                                  sv: 'Öppna i Google Docs'
+                                }}
+                              </Translate>
+                            </a>
+                          </div>}
+                          {item.facebookEvent && <div className={item.googleForm ? cx('col-xs-6', styles['no-padding-left']) : 'col-xs-12'}>
+                            <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
+                              <i className="fab fa-fw fa-facebook-f"/>&nbsp;&nbsp;
+                              <Translate current={lang}>
+                                {{
+                                  en: 'Facebook Event',
+                                  sv: 'Facebook-event'
+                                }}
+                              </Translate>
+                            </a>
+                          </div>}
+                        </div>}
                       </div>
                     )
                   }
+                  <hr />
+                  <div className="text-center">
+                    <nav aria-label="Page navigation">
+                      <ul className="pagination">
+                        {first
+                          ? <li className="disabled"><span>&laquo;</span></li>
+                          : <li><Link to='?page=0'>&laquo;</Link></li>}
+                        {first
+                          ? <li className="disabled"><span>&lsaquo;</span></li>
+                          : <li><Link to={`?page=${number - 1}`}>&lsaquo;</Link></li>}
+                        <li className="disabled">
+                          <span>
+                            <Translate current={lang}>
+                              {{
+                                en: `Page ${number + 1} of ${totalPages}`,
+                                sv: `Sida ${number + 1} av ${totalPages}`
+                              }}
+                            </Translate>
+                          </span>
+                        </li>
+                        {last
+                          ? <li className="disabled"><span>&rsaquo;</span></li>
+                          : <li><Link to={`?page=${number + 1}`}>&rsaquo;</Link></li>}
+                        {last
+                          ? <li className="disabled"><span>&raquo;</span></li>
+                          : <li><Link to={`?page=${totalPages - 1}`}>&raquo;</Link></li>}
+                      </ul>
+                    </nav>
+                  </div>
                 </div>
                 <div className="col-md-3" id="sidebar">
                   <div className="sidebar-card">
