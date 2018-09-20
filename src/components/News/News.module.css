@@ -40,3 +40,11 @@
 .fb {
     background: #43629b;
 }
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}

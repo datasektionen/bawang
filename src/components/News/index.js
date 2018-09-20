@@ -110,7 +110,7 @@ export const News = ({ location, lang }) =>
                         </div>
                         {item.googleForm || item.facebookEvent ?
                           <div className="row">
-                            {item.googleForm ? <div className={item.facebookEvent ? 'col-xs-6' : 'col-xs-12'}>
+                            {item.googleForm ? <div className={item.facebookEvent ? cx('col-xs-6', styles['no-padding-right']) : 'col-xs-12'}>
                               <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-fw fa-google"/>&nbsp;&nbsp;
                                 <Translate current={lang}>
@@ -121,7 +121,7 @@ export const News = ({ location, lang }) =>
                                 </Translate>
                               </a>
                             </div> : false}
-                            {item.facebookEvent ? <div className={item.googleForm ? 'col-xs-6' : 'col-xs-12'}>
+                            {item.facebookEvent ? <div className={item.googleForm ? cx('col-xs-6', styles['no-padding-left']) : 'col-xs-12'}>
                               <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
                                 <i className="fab fa-fw fa-facebook-f"/>&nbsp;&nbsp;
                                 <Translate current={lang}>
