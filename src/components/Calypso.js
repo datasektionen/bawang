@@ -3,7 +3,7 @@ import fetch from 'cross-fetch'
 
 import { DataLoader } from './DataLoader'
 
-const CALYPSO_URL = process.env.CALYPSO_URL || 'https://calypso.datasektionen.se/api/'
+const CALYPSO_URL = process.env.CALYPSO_URL || 'https://calypso.datasektionen.se/api'
 
 const calypsoFetcher = url =>
   fetch(url)

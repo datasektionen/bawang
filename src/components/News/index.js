@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
-
+import { pickBy, identity } from 'lodash'
 import classNames from 'classnames/bind'
 import styles from './News.module.css'
 
@@ -12,12 +12,16 @@ const Translate = ({ current, children }) => children[current || 'sv']
 
 export const News = ({ location, lang }) => {
   const itemType = new URLSearchParams(location.search).get('itemType')
+  const getSearch = page => {
+    const params = new URLSearchParams(pickBy({page, itemType}, identity)).toString()
+    return params ? '?' + params : ''
+  }
 
   return <Calypso search={location.search}>
     {({content, first, last, number, totalPages}) =>
       <Fragment>
         <Title>
-          <Translate>
+          <Translate current={lang}>
             {{
               en: 'News - Kongling Datasektionen',
               sv: 'Nyheter - Kongling Datasektionen'
@@ -57,19 +61,53 @@ export const News = ({ location, lang }) => {
             <div className="col-sm-4 col-md-3">
               <div id="secondary-nav">
                 <h3>
-                  <Link to={location.pathname}>
-                    <Translate current={lang}>
-                      {{
-                        en: 'News/Events',
-                        sv: 'Nyheter/Event'
-                      }}
-                    </Translate>
-                  </Link>
+                  <Translate current={lang}>
+                    {{
+                      en: 'Filters',
+                      sv: 'Filtrering'
+                    }}
+                  </Translate>
                 </h3>
                 <ul>
-                  <li><Link to={location.pathname} className={!itemType && 'text-theme-color strong'}>Nyheter och event</Link></li>
-                  <li><Link to={'?itemType=POST'} className={itemType === 'POST' && 'text-theme-color strong'}>Endast nyheter</Link></li>
-                  <li><Link to={'?itemType=EVENT'} className={itemType === 'EVENT' && 'text-theme-color strong'}>Endast event</Link></li>
+                  <li>
+                    <Link
+                      to={location.pathname}
+                      className={classNames({ 'text-theme-color strong': !itemType })}
+                    >
+                      <Translate current={lang}>
+                      {{
+                        sv: 'Nyheter och event',
+                        en: 'News and events'
+                      }}
+                      </Translate>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={`${location.pathname}?itemType=POST`}
+                      className={classNames({ 'text-theme-color strong': itemType === 'POST' })}
+                    >
+                      <Translate current={lang}>
+                      {{
+                        sv: 'Endast nyheter',
+                        en: 'Only news'
+                      }}
+                      </Translate>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={`${location.pathname}?itemType=EVENT`}
+                      className={classNames({ 'text-theme-color strong': itemType === 'EVENT' })}
+                    >
+                      <Translate current={lang}>
+                      {{
+                        sv: 'Endast event',
+                        en: 'Only events'
+                      }}
+                      </Translate>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -106,7 +144,7 @@ export const News = ({ location, lang }) => {
                         </div>
                         <div className={styles.content}>
                           <h2>
-                            <Link to={location.pathname + '/' + item.id}>
+                            <Link to={`${location.pathname}/${item.id}`}>
                               <Translate current={lang}>
                                 {{
                                   en: item.titleEnglish,
@@ -154,10 +192,10 @@ export const News = ({ location, lang }) => {
                       <ul className="pagination">
                         {first
                           ? <li className="disabled"><span>&laquo;</span></li>
-                          : <li><Link to={location.pathname + itemType && '?itemType=' + itemType}>&laquo;</Link></li>}
+                          : <li><Link to={location.pathname + getSearch(0)}>&laquo;</Link></li>}
                         {first
                           ? <li className="disabled"><span>&lsaquo;</span></li>
-                          : <li><Link to={`?page=${number - 1}`}>&lsaquo;</Link></li>}
+                          : <li><Link to={location.pathname + getSearch(number - 1)}>&lsaquo;</Link></li>}
                         <li className="disabled">
                           <span>
                             <Translate current={lang}>
@@ -170,10 +208,10 @@ export const News = ({ location, lang }) => {
                         </li>
                         {last
                           ? <li className="disabled"><span>&rsaquo;</span></li>
-                          : <li><Link to={`?page=${number + 1}${itemType && '&itemType=' + itemType}`}>&rsaquo;</Link></li>}
+                          : <li><Link to={location.pathname + getSearch(number + 1)}>&rsaquo;</Link></li>}
                         {last
                           ? <li className="disabled"><span>&raquo;</span></li>
-                          : <li><Link to={`?page=${totalPages - 1}${itemType && '&itemType=' + itemType}`}>&raquo;</Link></li>}
+                          : <li><Link to={location.pathname + getSearch(totalPages - 1)}>&raquo;</Link></li>}
                       </ul>
                     </nav>
                   </div>
