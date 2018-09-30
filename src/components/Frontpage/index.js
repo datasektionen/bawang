@@ -5,13 +5,12 @@ import classNames from 'classnames/bind'
 
 import Taitan from '../Taitan'
 import Calypso from '../Calypso'
+import { Translate, English, Swedish } from '../Translate'
 
 import styles from './Frontpage.module.css'
 import skold from './skold.svg'
 
 const cx = classNames.bind(styles)
-
-const Translate = ({ current, children }) => children[current || 'sv']
 
 const Frontpage = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
@@ -23,11 +22,9 @@ const Frontpage = ({ location, lang }) =>
       <header className={styles.header}>
         <div className={styles.title}>
           <span className={cx('thin', 'left')}>
-            <Translate current={lang}>
-              {{
-                en: 'Welcome to',
-                sv: 'Välkommen till'
-              }}
+            <Translate>
+              <English>Welcome to</English>
+              <Swedish>Välkommen till</Swedish>
             </Translate>
           </span>
           <span className={styles.bold}>
@@ -36,11 +33,9 @@ const Frontpage = ({ location, lang }) =>
           Datasektionen
           </span>
           <span className={cx('thin',  'right')}>
-            <Translate current={lang}>
-              {{
-                en: 'Chapter of THS • Since 1983',
-                sv: 'Vid THS • Sedan 1983'
-              }}
+            <Translate>
+                <English>Chapter of THS &bull; Since 1983</English>
+                <Swedish>Vid THS &bull; Sedan 1983</Swedish>
             </Translate>
           </span>
         </div>
@@ -54,11 +49,9 @@ const Frontpage = ({ location, lang }) =>
           {({ content }) =>
             <div className={cx('col-md-5', 'news')}>
               <h2>
-                <Translate current={lang}>
-                  {{
-                    en: 'News',
-                    sv: 'Nyheter'
-                  }}
+                 <Translate>
+                  <English>News</English>
+                  <Swedish>Nyheter</Swedish>
                 </Translate>
               </h2>
               <ul>
@@ -68,11 +61,9 @@ const Frontpage = ({ location, lang }) =>
                     .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
                       <h3>
-                        <Translate current={lang}>
-                         {{
-                            en: item.titleEnglish,
-                            sv: item.titleSwedish
-                         }}
+                        <Translate>
+                            <English>{item.titleEnglish}</English>
+                            <Swedish>{item.titleSwedish}</Swedish>
                         </Translate>
                       </h3>
                       <span>
@@ -100,11 +91,9 @@ const Frontpage = ({ location, lang }) =>
                 to={ lang === 'en' ? '/en/news' : '/nyheter' }
                 className={cx('more-btn')}
               >
-                <Translate current={lang}>
-                {{
-                  en: 'More News »',
-                  sv: 'Mer Nyheter »'
-                }}
+               <Translate>
+                <English>More News »</English>
+                <Swedish>Mer Nyheter »</Swedish>
                 </Translate>
               </Link>
               </div>
@@ -115,11 +104,9 @@ const Frontpage = ({ location, lang }) =>
           {content =>
             <div className={cx('col-md-4', 'news')}>
               <h2>
-                <Translate current={lang}>
-                  {{
-                    en: 'Event',
-                    sv: 'Event'
-                  }}
+                <Translate>
+                  <English>Event</English>
+                  <Swedish>Event</Swedish>
                 </Translate>
               </h2>
               <ul>
@@ -129,11 +116,9 @@ const Frontpage = ({ location, lang }) =>
                     .filter((_, i) => i < 5)
                     .map(item => <li key={item.id}>
                       <h3>
-                        <Translate current={lang}>
-                         {{
-                            en: item.titleEnglish,
-                            sv: item.titleSwedish
-                         }}
+                        <Translate>
+                          <English>{item.titleEnglish}</English>
+                          <Swedish>{item.titleSwedish}</Swedish>
                         </Translate>
                       </h3>
                       <span>
@@ -155,11 +140,9 @@ const Frontpage = ({ location, lang }) =>
                       </span>
                     </li>)
                   : <h4 className={cx('empty')}>
-                      <Translate current={lang}>
-                       {{
-                          en: 'No upcoming events :(',
-                          sv: 'Inga kommande event :('
-                       }}
+                      <Translate>
+                        <English>No upcoming events :(</English>
+                        <Swedish>Inga kommande event :(</Swedish>
                       </Translate>
                     </h4>
                 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 
 import Taitan from './Taitan'
@@ -7,11 +7,13 @@ import Frontpage from './Frontpage'
 import News from './News'
 import Default from './Default'
 
+import { LanguageContext } from './Translate'
+
 import './App.css'
 
 const createLinks = nav => nav.map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 
-const renderMethone = path => match =>
+const renderMethone = path =>
   <Taitan pathname={path}>
     {({ nav }) =>
       <Methone config={{
@@ -31,17 +33,30 @@ const renderMethone = path => match =>
 const App = () =>
   <div id="application" className="cerise">
     <Switch>
-      <Route path="/en/" render={renderMethone('/en')} />
-      <Route path="/" render={renderMethone('/')} />
-    </Switch>
-    <Switch>
-      <Route path="/en/" exact render={ match => <Frontpage lang="en" {...match} /> } />
-      <Route path="/en/news" exact render={ match => <News lang="en" {...match} /> } />
-      <Route path="/en/" render={ match => <Default lang="en" {...match} /> } />
-
-      <Route path="/" exact render={ match => <Frontpage {...match} /> } />
-      <Route path="/nyheter" render={ match => <News {...match} /> } />
-      <Route path="/" render={ match => <Default {...match} /> } />
+      <Route path="/en/" render={() =>
+        <Fragment>
+          {renderMethone('/en')}
+          <LanguageContext.Provider value='en'>
+            <Switch>
+              <Route path="/en/" exact render={ match => <Frontpage lang="en" {...match} /> } />
+              <Route path="/en/news" exact render={ match => <News lang="en" {...match} /> } />
+              <Route path="/en/" render={ match => <Default lang="en" {...match} /> } />
+            </Switch>
+          </LanguageContext.Provider>
+        </Fragment>
+      } />
+      <Route path="/" render={() =>
+        <Fragment>
+          {renderMethone('/')}
+          <LanguageContext.Provider value='sv'>
+            <Switch>
+              <Route path="/" exact render={ match => <Frontpage {...match} /> } />
+              <Route path="/nyheter" render={ match => <News {...match} /> } />
+              <Route path="/" render={ match => <Default {...match} /> } />
+            </Switch>
+          </LanguageContext.Provider>
+        </Fragment>
+        } />
     </Switch>
   </div>
 

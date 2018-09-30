@@ -6,9 +6,9 @@ import classNames from 'classnames/bind'
 import styles from './News.module.css'
 
 import Calypso from '../Calypso'
+import { Translate, English, Swedish } from '../Translate'
 
 const cx = classNames.bind(styles)
-const Translate = ({ current, children }) => children[current || 'sv']
 
 export const News = ({ location, lang }) => {
   const itemType = new URLSearchParams(location.search).get('itemType')
@@ -21,11 +21,9 @@ export const News = ({ location, lang }) => {
     {({content, first, last, number, totalPages}) =>
       <Fragment>
         <Title>
-          <Translate current={lang}>
-            {{
-              en: 'News - Kongling Datasektionen',
-              sv: 'Nyheter - Kongling Datasektionen'
-            }}
+          <Translate>
+            <English>News - Kongling Datasektionen</English>
+            <Swedish>Nyheter - Kongling Datasektionen</Swedish>
           </Translate>
         </Title>
         <header key="header">
@@ -33,22 +31,18 @@ export const News = ({ location, lang }) => {
             <div className="row">
               <div className="header-left col-md-2">
                 <Link to="/">
-                  &laquo;&nbsp;
-                  <Translate current={lang}>
-                    {{
-                      en: 'Back',
-                      sv: 'Tillbaka'
-                    }}
+                  {'« '}
+                  <Translate>
+                    <English>Back</English>
+                    <Swedish>Tillbaka</Swedish>
                   </Translate>
                 </Link>
               </div>
               <div className="col-md-8">
                 <h2>
-                  <Translate current={lang}>
-                    {{
-                      en: 'News',
-                      sv: 'Nyheter'
-                    }}
+                  <Translate>
+                    <English>News</English>
+                    <Swedish>Nyheter</Swedish>
                   </Translate>
                 </h2>
               </div>
@@ -61,11 +55,9 @@ export const News = ({ location, lang }) => {
             <div className="col-sm-4 col-md-3">
               <div id="secondary-nav">
                 <h3>
-                  <Translate current={lang}>
-                    {{
-                      en: 'Filters',
-                      sv: 'Filtrering'
-                    }}
+                  <Translate>
+                    <English>Filters</English>
+                    <Swedish>Filtrering</Swedish>
                   </Translate>
                 </h3>
                 <ul>
@@ -74,11 +66,9 @@ export const News = ({ location, lang }) => {
                       to={location.pathname}
                       className={classNames({ 'text-theme-color strong': !itemType })}
                     >
-                      <Translate current={lang}>
-                      {{
-                        sv: 'Nyheter och event',
-                        en: 'News and events'
-                      }}
+                      <Translate>
+                        <English>News and events</English>
+                        <Swedish>Nyheter och event</Swedish>
                       </Translate>
                     </Link>
                   </li>
@@ -87,11 +77,9 @@ export const News = ({ location, lang }) => {
                       to={`${location.pathname}?itemType=POST`}
                       className={classNames({ 'text-theme-color strong': itemType === 'POST' })}
                     >
-                      <Translate current={lang}>
-                      {{
-                        sv: 'Endast nyheter',
-                        en: 'Only news'
-                      }}
+                      <Translate>
+                        <English>Only news</English>
+                        <Swedish>Endast nyheter</Swedish>
                       </Translate>
                     </Link>
                   </li>
@@ -100,11 +88,9 @@ export const News = ({ location, lang }) => {
                       to={`${location.pathname}?itemType=EVENT`}
                       className={classNames({ 'text-theme-color strong': itemType === 'EVENT' })}
                     >
-                      <Translate current={lang}>
-                      {{
-                        sv: 'Endast event',
-                        en: 'Only events'
-                      }}
+                      <Translate>
+                        <English>Only events</English>
+                        <Swedish>Endast event</Swedish>
                       </Translate>
                     </Link>
                   </li>
@@ -121,11 +107,11 @@ export const News = ({ location, lang }) => {
                         <div className={styles.metadata}>
                           <div className="row">
                             <div className="col-xs-6">
-                              <i className="fa fa-user-circle"/>&nbsp;&nbsp;
+                              <i className="fa fa-user-circle"/>{'  '}
                               {item.publishAsDisplay || item.authorDisplay}
                             </div>
                             <div className="col-xs-6 text-right">
-                              <i className="far fa-clock"/>&nbsp;&nbsp;
+                              <i className="far fa-clock"/>{'  '}
                               {
                                 new Date(item.publishDate)
                                   .toLocaleDateString(
@@ -145,11 +131,9 @@ export const News = ({ location, lang }) => {
                         <div className={styles.content}>
                           <h2>
                             <Link to={`${location.pathname}/${item.id}`}>
-                              <Translate current={lang}>
-                                {{
-                                  en: item.titleEnglish,
-                                  sv: item.titleSwedish
-                                }}
+                              <Translate>
+                                <English>{item.titleEnglish}</English>
+                                <Swedish>{item.titleSwedish}</Swedish>
                               </Translate>
                             </Link>
                           </h2>
@@ -162,23 +146,19 @@ export const News = ({ location, lang }) => {
                         <div className="row">
                           {item.googleForm && <div className={item.facebookEvent ? cx('col-xs-6', styles['no-padding-right']) : 'col-xs-12'}>
                             <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-fw fa-google"/>&nbsp;&nbsp;
-                              <Translate current={lang}>
-                                {{
-                                  en: 'Open in Google Docs',
-                                  sv: 'Öppna i Google Docs'
-                                }}
+                              <i className="fab fa-fw fa-google"/>{'  '}
+                              <Translate>
+                                <English>Open in Google Docs</English>
+                                <Swedish>Öppna i Google Docs</Swedish>
                               </Translate>
                             </a>
                           </div>}
                           {item.facebookEvent && <div className={item.googleForm ? cx('col-xs-6', styles['no-padding-left']) : 'col-xs-12'}>
                             <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
-                              <i className="fab fa-fw fa-facebook-f"/>&nbsp;&nbsp;
-                              <Translate current={lang}>
-                                {{
-                                  en: 'Facebook Event',
-                                  sv: 'Facebook-event'
-                                }}
+                              <i className="fab fa-fw fa-facebook-f"/>{'  '}
+                              <Translate>
+                                <English>Facebook Event</English>
+                                <Swedish>Facebook-event</Swedish>
                               </Translate>
                             </a>
                           </div>}
@@ -198,11 +178,9 @@ export const News = ({ location, lang }) => {
                           : <li><Link to={location.pathname + getSearch(number - 1)}>&lsaquo;</Link></li>}
                         <li className="disabled">
                           <span>
-                            <Translate current={lang}>
-                              {{
-                                en: `Page ${number + 1} of ${totalPages}`,
-                                sv: `Sida ${number + 1} av ${totalPages}`
-                              }}
+                            <Translate>
+                              <English>Page {number + 1} of {totalPages}</English>
+                              <Swedish>Sida {number + 1} av {totalPages}</Swedish>
                             </Translate>
                           </span>
                         </li>
@@ -219,11 +197,9 @@ export const News = ({ location, lang }) => {
                 <div className="col-md-3" id="sidebar">
                   <div className="sidebar-card">
                     <h2>
-                      <Translate current={lang}>
-                        {{
-                          en: 'Upcoming events',
-                          sv: 'Kommande event'
-                        }}
+                      <Translate>
+                        <English>Upcoming events</English>
+                        <Swedish>Kommande event</Swedish>
                       </Translate>
                     </h2>
                     <Calypso type='event'>
@@ -234,11 +210,9 @@ export const News = ({ location, lang }) => {
                             .map(item => <p key={item.id}>
                               <Link to={location.pathname + '/' + item.id}>
                                 <strong>
-                                  <Translate current={lang}>
-                                    {{
-                                      en: item.titleEnglish,
-                                      sv: item.titleSwedish
-                                    }}
+                                  <Translate>
+                                    <English>{item.titleEnglish}</English>
+                                    <Swedish>{item.titleSwedish}</Swedish>
                                   </Translate>
                                 </strong>
                               </Link>
@@ -257,11 +231,10 @@ export const News = ({ location, lang }) => {
                                     }
                                     </span>
                             </p>)
-                          : <Translate current={lang}>
-                            {{
-                              en: 'No upcoming events :(',
-                              sv: 'Inga kommande event :('
-                            }}
+                          :
+                          <Translate>
+                            <English>No upcoming events :(</English>
+                            <Swedish>Inga kommande event :(</Swedish>
                           </Translate>
                       }
                     </Calypso>
@@ -273,7 +246,7 @@ export const News = ({ location, lang }) => {
         </div>
       </Fragment>
     }
-  </Calypso>;
+  </Calypso>
 }
 
 export default News

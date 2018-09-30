@@ -8,9 +8,7 @@ export const NotFound = (props) =>
   <header key="header">
     <div className="header-inner">
       <div className="row">
-        <div className="header-left col-md-2">
-          <a href="/">&laquo; Tillbaka</a>
-        </div>
+        <div className="header-left col-md-2"></div>
         <div className="col-md-8">
           <h2>{props.status}</h2>
         </div>
