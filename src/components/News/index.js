@@ -11,16 +11,14 @@ import NewsItem from './NewsItem'
 
 const cx = classNames.bind(styles)
 
-export const News = ({ location, lang }) => {
+export const News = ({ location, lang, match }) => {
   const itemType = new URLSearchParams(location.search).get('itemType')
   const getSearch = page => {
     const params = new URLSearchParams(pickBy({page, itemType}, identity)).toString()
     return params ? '?' + params : ''
   }
 
-  return <Calypso search={location.search}>
-    {({content, first, last, number, totalPages}) =>
-      <Fragment>
+  return <Fragment>
         <Title>
           <Translate>
             <English>News - Kongling Datasektionen</English>
@@ -100,38 +98,42 @@ export const News = ({ location, lang }) => {
             </div>
             <div className="col-sm-8 col-md-9">
               <div className="row">
-                <div className={cx('col-md-9', 'news')}>
-                  {
-                    content && content.map(item => <NewsItem item={item} location={location} lang={lang} />)
+                <Calypso search={location.search}>
+                  {({content, first, last, number, totalPages}) =>
+                    <div className={cx('col-md-9', 'news')}>
+                      {
+                        content && content.map(item => <NewsItem item={item} location={location} lang={lang} key={item.id} />)
+                      }
+                      <hr/>
+                      <div className="text-center">
+                        <nav aria-label="Page navigation">
+                          <ul className="pagination">
+                            {first
+                              ? <li className="disabled"><span>&laquo;</span></li>
+                              : <li><Link to={location.pathname + getSearch(0)}>&laquo;</Link></li>}
+                            {first
+                              ? <li className="disabled"><span>&lsaquo;</span></li>
+                              : <li><Link to={location.pathname + getSearch(number - 1)}>&lsaquo;</Link></li>}
+                            <li className="disabled">
+                              <span>
+                                <Translate>
+                                  <English>Page {number + 1} of {totalPages}</English>
+                                  <Swedish>Sida {number + 1} av {totalPages}</Swedish>
+                                </Translate>
+                              </span>
+                            </li>
+                            {last
+                              ? <li className="disabled"><span>&rsaquo;</span></li>
+                              : <li><Link to={location.pathname + getSearch(number + 1)}>&rsaquo;</Link></li>}
+                            {last
+                              ? <li className="disabled"><span>&raquo;</span></li>
+                              : <li><Link to={location.pathname + getSearch(totalPages - 1)}>&raquo;</Link></li>}
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
                   }
-                  <hr/>
-                  <div className="text-center">
-                    <nav aria-label="Page navigation">
-                      <ul className="pagination">
-                        {first
-                          ? <li className="disabled"><span>&laquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(0)}>&laquo;</Link></li>}
-                        {first
-                          ? <li className="disabled"><span>&lsaquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(number - 1)}>&lsaquo;</Link></li>}
-                        <li className="disabled">
-                          <span>
-                            <Translate>
-                              <English>Page {number + 1} of {totalPages}</English>
-                              <Swedish>Sida {number + 1} av {totalPages}</Swedish>
-                            </Translate>
-                          </span>
-                        </li>
-                        {last
-                          ? <li className="disabled"><span>&rsaquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(number + 1)}>&rsaquo;</Link></li>}
-                        {last
-                          ? <li className="disabled"><span>&raquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(totalPages - 1)}>&raquo;</Link></li>}
-                      </ul>
-                    </nav>
-                  </div>
-                </div>
+                </Calypso>
                 <div className="col-md-3" id="sidebar">
                   <div className="sidebar-card">
                     <h2>
@@ -183,8 +185,6 @@ export const News = ({ location, lang }) => {
           </div>
         </div>
       </Fragment>
-    }
-  </Calypso>
 }
 
 export default News

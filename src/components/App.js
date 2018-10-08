@@ -5,6 +5,7 @@ import Taitan from './Taitan'
 import Methone from 'methone'
 import Frontpage from './Frontpage'
 import News from './News'
+import SingleNews from './News/SingleNews'
 import Default from './Default'
 
 import { LanguageContext } from './Translate'
@@ -38,9 +39,10 @@ const App = () =>
           {renderMethone('/en')}
           <LanguageContext.Provider value='en'>
             <Switch>
-              <Route path="/en/" exact render={ match => <Frontpage lang="en" {...match} /> } />
-              <Route path="/en/news" exact render={ match => <News lang="en" {...match} /> } />
-              <Route path="/en/" render={ match => <Default lang="en" {...match} /> } />
+              <Route path="/en/" exact render={ args => <Frontpage lang="en" {...args} /> } />
+              <Route path="/en/news/:postId" exact render={ args => <SingleNews lang="en" {...args} /> } />
+              <Route path="/en/news" exact render={ args => <News lang="en" {...args} /> } />
+              <Route path="/en/" render={ args => <Default lang="en" {...args} /> } />
             </Switch>
           </LanguageContext.Provider>
         </Fragment>
@@ -50,9 +52,10 @@ const App = () =>
           {renderMethone('/')}
           <LanguageContext.Provider value='sv'>
             <Switch>
-              <Route path="/" exact render={ match => <Frontpage {...match} /> } />
-              <Route path="/nyheter" render={ match => <News {...match} /> } />
-              <Route path="/" render={ match => <Default {...match} /> } />
+              <Route path="/" exact render={ args => <Frontpage {...args} /> } />
+              <Route path="/nyheter/:postId" render={ args => <SingleNews {...args} /> } />
+              <Route path="/nyheter" render={ args => <News {...args} /> } />
+              <Route path="/" render={ args => <Default {...args} /> } />
             </Switch>
           </LanguageContext.Provider>
         </Fragment>

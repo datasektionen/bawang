@@ -2,8 +2,8 @@ import React, { Children, createContext } from 'react'
 
 export const LanguageContext = createContext()
 
-export const Swedish = ({ children }) => children
-export const English = ({ children }) => children
+export const Swedish = ({ children }) => children || 'Missing value :('
+export const English = ({ children }) => children || 'Missing value :('
 
 const languages = {
   sv: Swedish,
