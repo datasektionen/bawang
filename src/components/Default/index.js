@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 
 import Taitan from '../Taitan'
+import { Translate, English, Swedish } from '../Translate'
 
 const getNav = (nav, lang) => {
   const enNav = lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
@@ -28,8 +29,6 @@ const parseNav = (items, slug) =>
     )}
   </ul>
 
-const Translate = ({ current, children }) => children[current || 'sv']
-
 export const Default = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
   {({ title, body, sidebar, nav, anchors }) =>
@@ -42,12 +41,10 @@ export const Default = ({ location, lang }) =>
           <div className="row">
             <div className="header-left col-md-2">
               <Link to="/">
-                &laquo;
-                <Translate current={lang}>
-                  {{
-                    en: 'Back',
-                    sv: 'Tillbaka'
-                  }}
+                {'« '}
+                <Translate>
+                  <English>Back</English>
+                  <Swedish>Tillbaka</Swedish>
                 </Translate>
               </Link>
             </div>
@@ -84,11 +81,9 @@ export const Default = ({ location, lang }) =>
                 }
                 <div className="sidebar-card">
                   <h2>
-                    <Translate current={lang}>
-                      {{
-                        en: 'On this page',
-                        sv: 'På den här sidan'
-                      }}
+                    <Translate>
+                      <English>On this page</English>
+                      <Swedish>På den här sidan</Swedish>
                     </Translate>
                   </h2>
                   <ul>
