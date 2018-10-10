@@ -1,13 +1,12 @@
-const webpack = require('webpack');
 module.exports = {
-  modify: (config, { target, dev }, webpack) => {
-    if(target === 'node') {
-      const definePlugin = config.plugins.find(p => p.constructor.name === 'DefinePlugin')
-      if(definePlugin) {
-        delete definePlugin.definitions['process.env.PORT']
+  modify: (config, {target, dev}, webpack) => {
+    if(target === 'node' && !dev) {
+      const definitions = config.plugins.find(plugin => plugin.constructor.name === "DefinePlugin").definitions
+      delete definitions['process.env.PORT']
+      if(definitions["process.env.RAZZLE_PUBLIC_DIR"] === '/tmp/build/build/public') {
+        definitions["process.env.RAZZLE_PUBLIC_DIR"] = '"/app/build/public"'
       }
-    }
 
-    return config;
-  },
-};
+    }
+    return config
+  }

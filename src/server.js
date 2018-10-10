@@ -32,7 +32,11 @@ server
       </StaticRouter>
 
     // render the tree to trigger all promises
-    renderToStaticMarkup(vdom)
+    try {
+      renderToStaticMarkup(vdom)
+    } catch(error) {
+      console.error(error)
+    }
 
     // wait for them to finish
     const data = await Promise.all(promises)

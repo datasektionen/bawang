@@ -3,7 +3,7 @@
   "scripts": {
     "start:dev": "node bin/razzle.js start",
     "build": "node bin/razzle.js build",
-    "start": "NODE_ENV=production node -r esm build/server.js",
+    "start": "node -r esm build/server.js",
     "heroku-postbuild": "node bin/razzle.js build"
   },
   "dependencies": {
@@ -15,9 +15,13 @@
     "lodash": "^4.17.11",
     "methone": "^0.4.3",
     "razzle": "^2.4.0",
+    "razzle-heroku": "^2.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-head": "^3.0.1",
     "react-router-dom": "4.2.2"
+  },
+  "engines": {
+    "node": "^10"
   }
 }

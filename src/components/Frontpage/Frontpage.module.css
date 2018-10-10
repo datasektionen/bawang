@@ -89,13 +89,7 @@
   color: #828ca2;
   font-size: 15px;
   padding: 30px 0;
- }
-
- @media screen and (min-width: 768px) {
-  .content.hero h4.empty {
-    padding: 100px 0;
-  }
- }
+}
 
 .content .intro {
   display: flex;

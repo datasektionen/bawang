@@ -9,6 +9,8 @@ import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
 
+import URLSearchParams from 'url' // made global in node 10, needs import for the oldies
+
 const cx = classNames.bind(styles)
 
 export const News = ({ location, lang, match }) => {
