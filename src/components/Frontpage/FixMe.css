@@ -1,16 +1,3 @@
-body {
-  background: #fafafa;
-}
-#methone-container-replace::shadow #methone_header {
-  background: #e83d84 !important;
-}
-a,
-a:hover {
-  text-decoration: none !important;
-}
-.clear {
-  clear: both;
-}
 #hello_tomorrow {
   background: #ec5f99;
   line-height: 175%;
@@ -30,122 +17,6 @@ a:hover {
     padding: 10px;
     font-size: 14px;
   }
-}
-header#home {
-  background: #333 url("/static/gfx/bg.jpg") bottom center;
-  background-size: cover;
-  min-height: 500px;
-  text-align: center;
-}
-header#home #shield {
-  padding-top: 60px;
-  padding-bottom: 35px;
-}
-header#home #shield img {
-  margin: 0 auto;
-  max-width: 300px;
-}
-header#home #home_logo {
-  padding-bottom: 50px;
-}
-header#home #home_logo small {
-  color: #fff;
-  font-size: 16px;
-  font-weight: 100;
-}
-header#home #home_logo h1 {
-  margin: 0;
-  padding: 15px 0;
-  display: block;
-  font-weight: 900;
-  color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  font-size: 60px;
-}
-@media screen and (max-width: 400px) {
-  header#home #home_logo h1 {
-    font-size: 40px;
-  }
-}
-#home_intro,
-#home_news,
-#home_intro p,
-#home_news p,
-#home_intro h3,
-#home_news h3,
-#home_intro h4,
-#home_news h4 {
-  font-size: 17px;
-  line-height: 190%;
-}
-@media screen and (max-width: 400px) {
-  #home_intro,
-  #home_news,
-  #home_intro p,
-  #home_news p,
-  #home_intro h3,
-  #home_news h3,
-  #home_intro h4,
-  #home_news h4 {
-    font-size: 15px;
-  }
-}
-#home_intro h3,
-#home_news h3 {
-  font-weight: 900;
-}
-#home_intro p,
-#home_news p {
-  font-weight: 400;
-}
-#home_intro h3 {
-  color: #e83d84;
-  margin-top: 0;
-}
-#home_intro p {
-  color: #6e838f;
-}
-#home_news .news_item {
-  display: block;
-  margin-bottom: 10px;
-  overflow: hidden;
-  color: #6e838f !important;
-}
-#home_news .news_item h4 {
-  font-weight: 900;
-  margin: 0;
-  padding: 0;
-  display: block;
-  max-height: 30px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-#home_news .news_item .news_item_meta {
-  display: inline-block;
-  margin-right: 15px;
-  font-weight: 100;
-  font-size: 15px;
-}
-#home_news .news_item .news_item_meta i {
-  display: inline-block;
-  padding-right: 5px;
-}
-#home_news #sticky {
-  overflow: auto;
-}
-#home_news #sticky h4 {
-  padding: 0;
-  margin: 0 0 5px;
-  color: #6e838f;
-  font-weight: 900;
-}
-#home_news #sticky p {
-  font-size: 14px;
-  color: #6e838f;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 h2#sections_intro {
   text-transform: uppercase;
@@ -208,11 +79,7 @@ a.action {
   height: 300px;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
-@media screen and (max-width: 400px) {
-  #footer {
-    margin: 50px -25px -25px;
-  }
-}
+
 #footer #contact {
   text-align: center;
 }

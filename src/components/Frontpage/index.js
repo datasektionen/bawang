@@ -43,12 +43,12 @@ const Frontpage = ({ location, lang }) =>
       </header>
       <div className={cx('content', 'flex', 'hero')}>
         <div
-          className={cx('col-md-3', 'intro')}
+          className={cx('intro')}
           dangerouslySetInnerHTML={{__html: body}}
         />
         <Calypso type='list' search='?itemType=POST'>
           {({ content }) =>
-            <div className={cx('col-md-5', 'news')}>
+            <div className={cx('news')}>
               <h2>
                  <Translate>
                   <English>News</English>
@@ -103,7 +103,7 @@ const Frontpage = ({ location, lang }) =>
         </Calypso>
         <Calypso type='event'>
           {content =>
-            <div className={cx('col-md-4', 'news')}>
+            <div className={cx('news')}>
               <h2>
                 <Translate>
                   <English>Event</English>
@@ -166,7 +166,7 @@ const Frontpage = ({ location, lang }) =>
         </div>
       </div>
       <div id="footer" className="row">
-        <div className="col-sm-5 col-md-3" id="contact">
+        <div className="col-sm-6 col-md-3" id="contact">
             <p>&nbsp;</p>
             <p>
                 <strong>Adress</strong>

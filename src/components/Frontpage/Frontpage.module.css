@@ -17,12 +17,13 @@
   text-shadow: -2px -2px #fcda02, 4px 4px #e83d84;
   line-height: 1.3em;
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .header .title .bold img {
   margin: 0 0.3em;
   height: 1.3em;
-  vertical-align: text-top;
 }
 
 .header .title .thin {
@@ -64,7 +65,10 @@
   background-image: url('./kth.jpg'), linear-gradient(135deg, #fbeff3 0%,#fff6f0 100%);
   background-size: cover;
   background-position: center;
+  display:flex;
+  flex-direction: row;
 }
+
 
 .content.hero .more-btn {
   display: inline-block;
@@ -97,6 +101,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 20px;
+  max-width: 33%;
 }
 
 .content .intro h3 {
@@ -111,6 +116,10 @@
 
 .content .intro p {
   display: none;
+}
+
+.content .news {
+  max-width: 33%;
 }
 
 .content .news h2 {
@@ -156,4 +165,43 @@
   content: '';
   display: block;
   clear: both;
+}
+
+@media only screen and (max-width: 1250px) {
+  .header .title .bold {
+    font-size: 3.5em;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .header .title .bold {
+    flex-direction: column;
+  }
+
+  .content.hero {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content {
+    top: -105px;
+  }
+
+  .content .intro {
+    max-width: 75%;
+  }
+
+  .content .news {
+    max-width: 95%;
+  }
+}
+
+@media only screen and (max-width: 545px) {
+  .content {
+    top: -190px;
+  }
+
+  .header .title .bold {
+    font-size: 2em;
+  }
 }
