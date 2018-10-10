@@ -1,6 +1,8 @@
 module.exports = {
   modify: (config, {target, dev}, webpack) => {
     if(target === 'node' && !dev) {
+
+      // fix for dokku/heroku
       const definitions = config.plugins.find(plugin => plugin.constructor.name === "DefinePlugin").definitions
       delete definitions['process.env.PORT']
       if(definitions["process.env.RAZZLE_PUBLIC_DIR"] === '/tmp/build/build/public') {
@@ -10,3 +12,4 @@ module.exports = {
     }
     return config
   }
+}

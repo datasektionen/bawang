@@ -9,7 +9,9 @@ import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
 
-import URLSearchParams from 'url' // made global in node 10, needs import for the oldies
+if(global && !global.URLSearchParams) {
+  global.URLSearchParams = require('url').URLSearchParams
+}
 
 const cx = classNames.bind(styles)
 
