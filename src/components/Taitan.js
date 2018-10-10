@@ -6,16 +6,15 @@ import fetch from 'cross-fetch'
 import NotFound from './NotFound'
 import { DataLoader } from './DataLoader'
 
-const TAITAN_URL = process.env.TAITAN_URL || 'https://taitan.datasektionen.se'
-//const TAITAN_URL = process.env.TAITAN_URL || 'http://localhost:1234'
+const RAZZLE_TAITAN_URL = process.env.RAZZLE_TAITAN_URL || 'https://taitan.datasektionen.se'
 
 const taitanFetcher = url =>
   fetch(url)
     .then(res => {
       const redirected = res.url !== url // node-fetch doesnt have the res.redirected property
       if(redirected) {
-        if(res.url.startsWith(TAITAN_URL)) {
-          return { redirect: res.url.substr(TAITAN_URL.length) }
+        if(res.url.startsWith(RAZZLE_TAITAN_URL)) {
+          return { redirect: res.url.substr(RAZZLE_TAITAN_URL.length) }
         } else {
           return { redirect: res.url }
         }
@@ -36,7 +35,7 @@ const taitanFetcher = url =>
 
 export const Taitan = ({ pathname, children, ttl }) =>
   <DataLoader
-    cacheKey={TAITAN_URL + pathname}
+    cacheKey={RAZZLE_TAITAN_URL + pathname}
     fetcher={taitanFetcher}
     ttl={ttl || 60 * 60}
   >

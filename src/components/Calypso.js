@@ -3,7 +3,7 @@ import fetch from 'cross-fetch'
 
 import { DataLoader } from './DataLoader'
 
-const CALYPSO_URL = process.env.CALYPSO_URL || 'https://calypso.datasektionen.se/api'
+const RAZZLE_CALYPSO_URL = process.env.RAZZLE_CALYPSO_URL || 'https://calypso.datasektionen.se/api'
 
 const calypsoFetcher = url =>
   fetch(url)
@@ -14,7 +14,7 @@ const calypsoFetcher = url =>
 
 export const Calypso = ({ type, search, children, ttl }) =>
   <DataLoader
-    cacheKey={`${CALYPSO_URL}/${type || 'list'}${search || ''}`}
+    cacheKey={`${RAZZLE_CALYPSO_URL}/${type || 'list'}${search || ''}`}
     fetcher={calypsoFetcher}
     ttl={ ttl || 60 }
   >

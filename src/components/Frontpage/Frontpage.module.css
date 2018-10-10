@@ -1,6 +1,6 @@
 .header {
   height: 400px;
-  padding: 2em;
+  padding: 2em 0;
   text-align: center;
   text-transform: uppercase;
   box-shadow: none;
@@ -101,7 +101,7 @@
   align-items: center;
   justify-content: center;
   margin-right: 20px;
-  max-width: 33%;
+  width: 33%;
 }
 
 .content .intro h3 {
@@ -119,7 +119,7 @@
 }
 
 .content .news {
-  max-width: 33%;
+  width: 33%;
 }
 
 .content .news h2 {
@@ -169,7 +169,7 @@
 
 @media only screen and (max-width: 1250px) {
   .header .title .bold {
-    font-size: 3.5em;
+    font-size: 4em;
   }
 }
 
@@ -188,20 +188,27 @@
   }
 
   .content .intro {
-    max-width: 75%;
+    width: 75%;
   }
 
   .content .news {
-    max-width: 95%;
+    width: 95%;
   }
 }
 
 @media only screen and (max-width: 545px) {
   .content {
     top: -190px;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .header .title .bold {
+    font-size: 2.5em;
+    text-shadow: -1px -1px #fcda02, 2px 2px #e83d84;
+  }
+
+  .content .news h2 {
     font-size: 2em;
   }
 }
