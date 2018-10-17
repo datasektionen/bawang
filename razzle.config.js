@@ -1,3 +1,4 @@
+const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
   modify: (config, {target, dev}, webpack) => {
     if(target === 'node' && !dev) {
@@ -10,6 +11,12 @@ module.exports = {
       }
 
     }
+    config.devtool = 'sourcemap'
+
+    if(target === 'web' && !dev) {
+      config.optimization.minimizer = [new TerserPlugin()]
+    }
+
     return config
   }
 }
