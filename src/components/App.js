@@ -11,6 +11,7 @@ import Default from './Default'
 import { LanguageContext } from './Translate'
 
 import './App.css'
+import './FixMe.css'
 
 const createLinks = nav => nav.map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 

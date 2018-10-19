@@ -14,7 +14,7 @@
 .header .title .bold {
   font-size: 5em;
   font-weight: bolder;
-  text-shadow: -2px -2px #fcda02, 4px 4px #e83d84;
+  text-shadow: -3px -3px #fcda02, 4px 4px #e83d84;
   line-height: 1.3em;
   color: #fff;
   display: flex;
@@ -167,6 +167,10 @@
   clear: both;
 }
 
+.content-end {
+  margin-bottom: -50px;
+}
+
 @media only screen and (max-width: 1250px) {
   .header .title .bold {
     font-size: 4em;
@@ -196,19 +200,36 @@
   }
 }
 
-@media only screen and (max-width: 545px) {
+@media only screen and (max-width: 576px) {
   .content {
     top: -190px;
     padding-left: 0;
     padding-right: 0;
   }
 
+  .content-end {
+    margin-bottom: -150px;
+  }
+
+  .header {
+    height: 525px;
+  }
+
   .header .title .bold {
-    font-size: 2.5em;
+    font-size: 2.35em;
     text-shadow: -1px -1px #fcda02, 2px 2px #e83d84;
   }
 
   .content .news h2 {
     font-size: 2em;
   }
+
+  .header .title .thin {
+    display: none;
+  }
+
+  .header .title .bold img {
+    height: 5em;
+  }
+
 }

@@ -74,10 +74,11 @@ a.action {
 }
 #footer {
   background: #333333;
-  margin: -50px 0;
+  margin: 0 auto;
   padding-bottom: 0;
   height: 300px;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 1240px;
+  /* box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05); */
 }
 
 #footer #contact {
