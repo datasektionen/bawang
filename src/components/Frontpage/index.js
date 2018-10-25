@@ -49,24 +49,32 @@ const Frontpage = ({ location, lang }) =>
         <Calypso type='list' search='?itemType=POST'>
           {({ content }) =>
             <div className={cx('news')}>
-              <h2>
-                 <Translate>
-                  <English>News</English>
-                  <Swedish>Nyheter</Swedish>
-                </Translate>
-              </h2>
+              <Link
+                to={ lang === 'en' ? '/en/news?itemType=POST' : '/nyheter?itemType=POST' }
+              >
+                <h2>
+                  <Translate>
+                    <English>News</English>
+                    <Swedish>Nyheter</Swedish>
+                  </Translate>
+		            </h2>
+	            </Link>
               <ul>
                 {
                   content &&
                   content
                     .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
-                      <h3>
-                        <Translate>
+            		      <Link
+            			      to={ lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}` }
+            		      >
+                        <h3>
+                          <Translate>
                             <English>{item.titleEnglish}</English>
                             <Swedish>{item.titleSwedish}</Swedish>
-                        </Translate>
-                      </h3>
+                          </Translate>
+                        </h3>
+	                    </Link>
                       <span>
                         {
                           new Date(item.publishDate)
@@ -92,9 +100,9 @@ const Frontpage = ({ location, lang }) =>
                 to={ lang === 'en' ? '/en/news' : '/nyheter' }
                 className={cx('more-btn')}
               >
-               <Translate>
-                <English>More News »</English>
-                <Swedish>Mer Nyheter »</Swedish>
+                <Translate>
+                  <English>More News »</English>
+                  <Swedish>Mer Nyheter »</Swedish>
                 </Translate>
               </Link>
               </div>
@@ -104,24 +112,32 @@ const Frontpage = ({ location, lang }) =>
         <Calypso type='event'>
           {content =>
             <div className={cx('news')}>
-              <h2>
-                <Translate>
-                  <English>Event</English>
-                  <Swedish>Event</Swedish>
-                </Translate>
-              </h2>
+              <Link
+                to={ lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT' }
+              >
+                <h2>
+                  <Translate>
+                    <English>Event</English>
+                    <Swedish>Event</Swedish>
+                  </Translate>
+                </h2>
+	            </Link>
               <ul>
                 {
                   (content && content.length)
                   ? content
                     .filter((_, i) => i < 5)
                     .map(item => <li key={item.id}>
-                      <h3>
-                        <Translate>
-                          <English>{item.titleEnglish}</English>
-                          <Swedish>{item.titleSwedish}</Swedish>
-                        </Translate>
-                      </h3>
+            		      <Link
+            			      to={ lang === 'en' ? '/en/news' : '/nyheter?itemType=EVENT' }
+            		      >
+                        <h3>
+                          <Translate>
+                            <English>{item.titleEnglish}</English>
+                            <Swedish>{item.titleSwedish}</Swedish>
+                          </Translate>
+                        </h3>
+		                  </Link>
                       <span>
                         {
                           new Date(item.eventStartTime)
