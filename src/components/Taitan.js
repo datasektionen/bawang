@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom'
 
 import fetch from 'cross-fetch'
 
-import NotFound from './NotFound'
 import { DataLoader } from './DataLoader'
 
 const RAZZLE_TAITAN_URL = process.env.RAZZLE_TAITAN_URL || 'https://taitan.datasektionen.se'
@@ -21,17 +20,10 @@ const taitanFetcher = url =>
       } else if (res.ok) {
         return res.json()
       } else {
-        return { status: res.status }
+        throw new Error(`HTTP error ${res.status}`)
       }
     })
     .then(res => ({ status: 200, redirect: false, ...res }))
-    .catch(err => {
-      // Most likely we were redirected and the target did not allow cors-requests
-      // Should not happen while SSR-ing, so is probably safe
-      if(err.message === 'Failed to fetch'
-        && window.confirm(`Redirect to "${url}"?`))
-        window.location.href = url
-    })
 
 export const Taitan = ({ pathname, children, ttl }) =>
   <DataLoader
@@ -39,15 +31,11 @@ export const Taitan = ({ pathname, children, ttl }) =>
     fetcher={taitanFetcher}
     ttl={ttl || 60 * 60}
   >
-    {({ data, loading }) => {
-      if(!loading) {
-        if(data.redirect)
-          return <Redirect to={data.redirect} />
-        else if (data.status !== 200)
-          return <NotFound status={data.status} />
-      }
+    {({ data, loading, error }) => {
+      if (!loading && data && data.redirect)
+        return <Redirect to={data.redirect} />
 
-      return children(data)
+      return children(data, error)
     }}
   </DataLoader>
 

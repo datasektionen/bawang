@@ -32,10 +32,10 @@ export const DataLoader = withConsumer(class extends Component {
   isValid() {
     const cacheValue = cache[this.props.cacheKey]
 
-    if(!cacheValue)
+    if(!cacheValue || cacheValue.error)
       return false
 
-    return (cacheValue.time + (this.props.ttl || 60)) > (Date.now() / 1000)
+    return (cacheValue.time + (this.props.ttl || 60) * 1000) > Date.now()
   }
 
   loadData() {
@@ -83,6 +83,24 @@ export const DataLoader = withConsumer(class extends Component {
           return res
         }
       )
+      .catch(err => {
+        const res = {
+            data: {},
+            cacheKey,
+            loading: false,
+            error: err,
+            time: Date.now(),
+          }
+
+          cache[cacheKey] = res
+
+          waiting[cacheKey].forEach(resolve => resolve(res))
+          delete waiting[cacheKey]
+
+          this.forceUpdate()
+
+          return res
+      })
     )
   }
 

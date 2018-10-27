@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 
 import Taitan from '../Taitan'
+import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 
 const getNav = (nav, lang) => {
@@ -31,8 +32,9 @@ const parseNav = (items, slug) =>
 
 export const Default = ({ location, lang }) =>
 <Taitan pathname={location.pathname}>
-  {({ title, body, sidebar, nav, anchors }) =>
-    <Fragment>
+  {({ title, body, sidebar, nav, anchors }, error) =>
+    error ? <ErrorPage error={error} />
+    : <Fragment>
       <Title>
         { title + ' - Kongling Datasektionen'}
       </Title>
