@@ -13,18 +13,27 @@ const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
 const server = express()
 
-server.get('/fuzzyfile', (req, res) => res.redirect(TAITAN_URL + '/fuzzyfile'))
+const handleData = async promises => {
+  try {
+    const data = await Promise.all(promises)
+    const cacheObject = Object.assign(...data.map(d => ({[d.cacheKey]: d})))
+    return [cacheObject]
+  } catch(err) {
+    return [{}, err]
+  }
+}
 
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
+  .get('/fuzzyfile', (req, res) => res.redirect(TAITAN_URL + '/fuzzyfile'))
   .get('/*', async (req, res) => {
     const context = {}
     const promises = []
     const headTags = []
-    const vdom =
+    const vdom = (error) =>
       <StaticRouter context={context} location={req.url}>
-        <Provider value={promises}>
+        <Provider value={{promises, error}}>
           <HeadProvider headTags={headTags}>
             <App />
           </HeadProvider>
@@ -33,23 +42,21 @@ server
 
     // render the tree to trigger all promises
     try {
-      renderToStaticMarkup(vdom)
+      renderToStaticMarkup(vdom())
     } catch(error) {
       console.error(error)
     }
 
     // wait for them to finish
-    const data = await Promise.all(promises)
+    const [cacheObject, error] = await handleData(promises)
 
     // render the tree again with data
-    const markup = renderToString(vdom)
-    const cacheObject = Object.assign(...data.map(d => ({[d.cacheKey]: d})))
-    const cacheString = JSON.stringify(cacheObject)
+    const markup = renderToString(vdom(error))
 
     if (context.url) {
       res.redirect(context.url)
     } else {
-        res.status(200).send(
+        res.status((error && error.code) || 200).send(
 `<!doctype html>
   <html lang="${req.url.startsWith('/en') ? 'en' : 'sv'}">
   <head>
@@ -85,7 +92,7 @@ server
     ${renderToString(headTags)}
     <script>
       // We can't send this as a plain string because sometimes the contents include script tags :) :) :)
-      window.__cache__ = JSON.parse(decodeURIComponent("${encodeURIComponent(cacheString)}"))
+      window.__cache__ = JSON.parse(decodeURIComponent("${encodeURIComponent(JSON.stringify(cacheObject))}"))
     </script>
   </head>
   <body>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
+import { HTTPError } from '../HTTPError'
 
 import fetch from 'cross-fetch'
 
@@ -20,7 +21,7 @@ const taitanFetcher = url =>
       } else if (res.ok) {
         return res.json()
       } else {
-        throw new Error(`HTTP error ${res.status}`)
+        throw new HTTPError(res.status)
       }
     })
     .then(res => ({ status: 200, redirect: false, ...res }))

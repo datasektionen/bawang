@@ -3,17 +3,17 @@ import { Title } from 'react-head'
 
 import { Translate, English, Swedish } from '../Translate'
 
-export const ErrorPage = (props) =>
+export const ErrorPage = ({ error }) =>
 <Fragment>
   <Title>
-    { props.error.message + ' - Kongling Datasektionen' }
+    { error.code + ' - Kongling Datasektionen' }
   </Title>
   <header key="header">
     <div className="header-inner">
       <div className="row">
         <div className="header-left col-md-2"></div>
         <div className="col-md-8">
-          <h2>{props.error.message}</h2>
+          <h2>{error.code} {error.message}</h2>
         </div>
         <div className="header-right col-md-2"></div>
       </div>

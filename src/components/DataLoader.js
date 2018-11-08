@@ -8,8 +8,8 @@ export const Consumer = CacheContext.Consumer
 
 export function withConsumer(Child) {
   return props => <Consumer>
-    { cachePromises =>
-      <Child {...props} cachePromises={cachePromises} />
+    { ({promises, error}) =>
+      <Child {...props} promises={promises} error={error} />
     }
   </Consumer>
 }
@@ -39,13 +39,14 @@ export const DataLoader = withConsumer(class extends Component {
   }
 
   loadData() {
+    if(this.props.error) return
     const cacheKey = this.props.cacheKey
 
     if(this.isValid()) {
       if(cache[cacheKey].loading)
-        this.props.cachePromises.push(new Promise((resolve, reject) => waiting[cacheKey].push(resolve)))
+        this.props.promises.push(new Promise((resolve, reject) => waiting[cacheKey].push(resolve)))
       else
-        this.props.cachePromises.push(Promise.resolve(cache[cacheKey]))
+        this.props.promises.push(Promise.resolve(cache[cacheKey]))
 
       return
     }
@@ -62,7 +63,7 @@ export const DataLoader = withConsumer(class extends Component {
     if(!waiting[cacheKey])
       waiting[cacheKey] = []
 
-    this.props.cachePromises.push(
+    this.props.promises.push(
       this.props
         .fetcher(cacheKey)
         .then(data => {
@@ -84,27 +85,33 @@ export const DataLoader = withConsumer(class extends Component {
         }
       )
       .catch(err => {
-        const res = {
-            data: {},
-            cacheKey,
-            loading: false,
-            error: err,
-            time: Date.now(),
-          }
+          delete cache[cacheKey]
 
-          cache[cacheKey] = res
-
-          waiting[cacheKey].forEach(resolve => resolve(res))
+          waiting[cacheKey].forEach(
+            resolve => resolve({
+              data: {},
+              cacheKey,
+              loading: false,
+              error: err,
+              time: Date.now(),
+            }))
           delete waiting[cacheKey]
 
-          this.forceUpdate()
-
-          return res
+          throw err
       })
     )
   }
 
   render() {
+    if(this.props.error) {
+      return this.props.children({
+        data: {},
+        error: this.props.error,
+        cacheKey: this.props.cacheKey,
+        loading: false,
+        time: Date.now()
+      })
+    }
     return this.props.children(cache[this.props.cacheKey] || {
       data: {},
       cacheKey: this.props.cacheKey,
