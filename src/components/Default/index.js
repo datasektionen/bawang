@@ -54,7 +54,7 @@ export const Default = ({ location, lang }) =>
               <h2>{ title }</h2>
             </div>
             <div className="header-right col-md-2">
-              <a class="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
+              <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
                 <Translate>
                   <English>Edit</English>
                   <Swedish>Redigera</Swedish>
