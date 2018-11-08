@@ -49,7 +49,14 @@ export const News = ({ location, lang, match }) => {
                   </Translate>
                 </h2>
               </div>
-              <div className="header-right col-md-2"/>
+              <div className="header-right col-md-2">
+                <a className="primary-action" href="https://calypso.datasektionen.se/">
+                  <Translate>
+                    <English>Edit</English>
+                    <Swedish>Redigera</Swedish>
+                  </Translate>
+                </a>
+              </div>
             </div>
           </div>
         </header>
