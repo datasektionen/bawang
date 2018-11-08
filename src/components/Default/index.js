@@ -53,7 +53,14 @@ export const Default = ({ location, lang }) =>
             <div className="col-md-8">
               <h2>{ title }</h2>
             </div>
-            <div className="header-right col-md-2" />
+            <div className="header-right col-md-2">
+              <a class="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
+                <Translate>
+                  <English>Edit</English>
+                  <Swedish>Redigera</Swedish>
+                </Translate>
+              </a>
+            </div>
           </div>
         </div>
       </header>
