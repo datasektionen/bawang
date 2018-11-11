@@ -36,7 +36,7 @@ export const Default = ({ location, lang }) =>
     error ? <ErrorPage error={error} />
     : <Fragment>
       <Title>
-        { title + ' - Kongling Datasektionen'}
+        { title + ' - Konglig Datasektionen'}
       </Title>
       <header key="header">
         <div className="header-inner">
