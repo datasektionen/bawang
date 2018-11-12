@@ -60,6 +60,8 @@ export const DataLoader = withConsumer(class extends Component {
       time: Date.now()
     }
 
+    console.log('Object.keys(cache).length:', Object.keys(cache).length)
+
     if(!waiting[cacheKey])
       waiting[cacheKey] = []
 
