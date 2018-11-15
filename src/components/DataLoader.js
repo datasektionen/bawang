@@ -16,8 +16,6 @@ export function withConsumer(Child) {
 
 const cache = isBrowser ? window.__cache__ : {}
 
-const waiting = {}
-
 export const DataLoader = withConsumer(class extends Component {
   constructor(props) {
     super(props)
@@ -29,22 +27,14 @@ export const DataLoader = withConsumer(class extends Component {
       this.loadData()
   }
 
-  isValid() {
-    const cacheValue = cache[this.props.cacheKey]
-
-    if(!cacheValue || cacheValue.error)
-      return false
-
-    return (cacheValue.time + (this.props.ttl || 60) * 1000) > Date.now()
-  }
-
   loadData() {
     if(this.props.error) return
+
     const cacheKey = this.props.cacheKey
 
-    if(this.isValid()) {
+    if(cache[cacheKey]) {
       if(cache[cacheKey].loading)
-        this.props.promises.push(new Promise((resolve, reject) => waiting[cacheKey].push(resolve)))
+        this.props.promises.push(new Promise((resolve, reject) => cache[cacheKey].waiting.push(resolve)))
       else
         this.props.promises.push(Promise.resolve(cache[cacheKey]))
 
@@ -57,29 +47,28 @@ export const DataLoader = withConsumer(class extends Component {
       data: {},
       cacheKey,
       loading: true,
-      time: Date.now()
+      waiting: []
     }
 
     console.log('Object.keys(cache).length:', Object.keys(cache).length)
-
-    if(!waiting[cacheKey])
-      waiting[cacheKey] = []
 
     this.props.promises.push(
       this.props
         .fetcher(cacheKey)
         .then(data => {
+
           const res = {
             data,
             cacheKey,
             loading: false,
-            time: Date.now(),
           }
 
+          cache[cacheKey].waiting.forEach(resolve => resolve(res))
           cache[cacheKey] = res
 
-          waiting[cacheKey].forEach(resolve => resolve(res))
-          delete waiting[cacheKey]
+          setTimeout(() => {
+            delete cache[cacheKey]
+          }, (this.props.ttl || 60) * 1000)
 
           this.forceUpdate()
 
@@ -87,17 +76,14 @@ export const DataLoader = withConsumer(class extends Component {
         }
       )
       .catch(err => {
-          delete cache[cacheKey]
-
-          waiting[cacheKey].forEach(
+          cache[cacheKey].waiting.forEach(
             resolve => resolve({
               data: {},
               cacheKey,
               loading: false,
               error: err,
-              time: Date.now(),
             }))
-          delete waiting[cacheKey]
+          delete cache[cacheKey]
 
           throw err
       })
@@ -111,14 +97,13 @@ export const DataLoader = withConsumer(class extends Component {
         error: this.props.error,
         cacheKey: this.props.cacheKey,
         loading: false,
-        time: Date.now()
       })
     }
+
     return this.props.children(cache[this.props.cacheKey] || {
       data: {},
-      cacheKey: this.props.cacheKey,
+      cacheKey,
       loading: true,
-      time: Date.now()
     })
   }
 })

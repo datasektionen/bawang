@@ -16,7 +16,7 @@ export const Calypso = ({ type, search, children, ttl }) =>
   <DataLoader
     cacheKey={`${RAZZLE_CALYPSO_URL}/${type || 'list'}${search || ''}`}
     fetcher={calypsoFetcher}
-    ttl={ ttl || 60 }
+    ttl={ ttl || 30 }
   >
     {({ data, loading, time }) => children(data) }
   </DataLoader>
