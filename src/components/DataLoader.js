@@ -102,7 +102,6 @@ export const DataLoader = withConsumer(class extends Component {
 
     return this.props.children(cache[this.props.cacheKey] || {
       data: {},
-      cacheKey,
       loading: true,
     })
   }
