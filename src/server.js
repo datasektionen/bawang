@@ -23,6 +23,9 @@ const handleData = async promises => {
   }
 }
 
+console.log('RAZZLE_PUBLIC_DIR', process.env.RAZZLE_PUBLIC_DIR)
+console.log('RAZZLE_ASSETS_MANIFEST', process.env.RAZZLE_ASSETS_MANIFEST)
+
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))

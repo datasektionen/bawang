@@ -6,7 +6,8 @@ module.exports = {
       // fix for dokku/heroku
       const definitions = config.plugins.find(plugin => plugin.constructor.name === "DefinePlugin").definitions
       delete definitions['process.env.PORT']
-      if(definitions["process.env.RAZZLE_PUBLIC_DIR"] === '/tmp/build/build/public') {
+      console.log('what', definitions["process.env.RAZZLE_PUBLIC_DIR"], definitions["process.env.RAZZLE_PUBLIC_DIR"] === '"/tmp/build/build/public"')
+      if(definitions["process.env.RAZZLE_PUBLIC_DIR"] === '"/tmp/build/build/public"') {
         definitions["process.env.RAZZLE_PUBLIC_DIR"] = '"/app/build/public"'
       }
 
