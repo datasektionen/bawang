@@ -45,7 +45,7 @@ export const SingleItem = ({ item, location, lang, match }) =>
           </div>
         </header>
         <div id='content'>
-          <div key={item.id} className={cx('notice', 'ultra_light')}>
+          <div key={item.id} className={cx('notice', 'ultra_light', 'col-md-9')}>
             <div className={styles.metadata}>
               <div className="row">
                 <div className="col-xs-6">
@@ -71,14 +71,12 @@ export const SingleItem = ({ item, location, lang, match }) =>
               </div>
             </div>
             <div className={styles.content}>
-              <h2>
-                <Link to={`${location.pathname}/${item.id}`}>
-                  <Translate>
-                    <English>{item.titleEnglish}</English>
-                    <Swedish>{item.titleSwedish}</Swedish>
-                  </Translate>
-                </Link>
-              </h2>
+              <h1>
+                <Translate>
+                  <English>{item.titleEnglish}</English>
+                  <Swedish>{item.titleSwedish}</Swedish>
+                </Translate>
+              </h1>
               <div dangerouslySetInnerHTML={{
                 __html: lang === 'en' ? item.contentEnglish : item.contentSwedish
               }}
@@ -106,6 +104,68 @@ export const SingleItem = ({ item, location, lang, match }) =>
               </div>}
             </div>}
           </div>
+          {item.itemType === "EVENT" &&
+            <div className="col-md-3" id="sidebar">
+              <div className="sidebar-card">
+                <h2>
+                  <Translate>
+                    <English>Event Details</English>
+                    <Swedish>Eventinformation</Swedish>
+                  </Translate>
+                </h2>
+                <p>
+                  <b>
+                    <Translate>
+                      <English>Location</English>
+                      <Swedish>Plats</Swedish>
+                    </Translate>
+                  </b>
+                  <br />
+                  {item.eventLocation}
+                </p>
+                <p>
+                  <b>
+                    <Translate>
+                      <English>Start Time</English>
+                      <Swedish>Starttid</Swedish>
+                    </Translate>
+                  </b>
+                  <br />
+                  {new Date(item.eventStartTime)
+                      .toLocaleDateString(
+                        lang === 'en' ? 'en-US' : 'sv-SE',
+                        {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric'
+                        }
+                      )}
+                </p>
+                <p>
+                  <b>
+                    <Translate>
+                      <English>End Time</English>
+                      <Swedish>Sluttid</Swedish>
+                    </Translate>
+                  </b>
+                  <br />
+                  {new Date(item.eventEndTime)
+                      .toLocaleDateString(
+                        lang === 'en' ? 'en-US' : 'sv-SE',
+                        {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                          hour: 'numeric',
+                          minute: 'numeric'
+                        }
+                      )}
+                </p>
+              </div>
+            </div>
+          }
       </div>
     </Fragment>
   }

@@ -159,6 +159,7 @@
   font-weight: lighter;
   font-size: 13px;
   color: #959eb3;
+  white-space: nowrap;
 }
 
 .content:after {
