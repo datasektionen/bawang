@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router-dom'
 import express from 'express'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { HeadProvider } from 'react-head'
+import { ServerStyleSheet } from 'styled-components'
 
 import { Provider } from './components/DataLoader'
 
@@ -54,7 +55,8 @@ server
     const [cacheObject, error] = await handleData(promises)
 
     // render the tree again with data
-    const markup = renderToString(vdom(error))
+    const sheet = new ServerStyleSheet()
+    const markup = renderToString(sheet.collectStyles(vdom(error)))
 
     if (context.url) {
       res.redirect(context.url)
@@ -88,6 +90,7 @@ server
       ? `<link rel="stylesheet" href="${assets.client.css}">`
       : ''
     }
+    ${sheet.getStyleTags()}
     ${process.env.NODE_ENV === 'production'
       ? `<script src="${assets.client.js}" defer></script>`
       : `<script src="${assets.client.js}" defer crossorigin></script>`
