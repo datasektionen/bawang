@@ -6,7 +6,7 @@ import { Translate, English, Swedish } from '../Translate'
 export const ErrorPage = ({ error }) =>
 <Fragment>
   <Title>
-    { error.code + ' - Kongling Datasektionen' }
+    { error.code + ' - Konglig Datasektionen' }
   </Title>
   <header key="header">
     <div className="header-inner">
