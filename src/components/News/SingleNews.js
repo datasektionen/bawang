@@ -15,8 +15,8 @@ export const SingleItem = ({ item, location, lang, match }) =>
     <Fragment>
       <Title>
           <Translate>
-            <English>{ `${item.titleEnglish} - Kongling Datasektionen` }</English>
-            <Swedish>{ `${item.titleSwedish} - Kongling Datasektionen` }</Swedish>
+            <English>{ `${item.titleEnglish} - Konglig Datasektionen` }</English>
+            <Swedish>{ `${item.titleSwedish} - Konglig Datasektionen` }</Swedish>
           </Translate>
         </Title>
         <header key="header">
