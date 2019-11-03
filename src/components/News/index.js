@@ -25,8 +25,8 @@ export const News = ({ location, lang, match }) => {
   return <Fragment>
         <Title>
           <Translate>
-            <English>News - Kongling Datasektionen</English>
-            <Swedish>Nyheter - Kongling Datasektionen</Swedish>
+            <English>News - Konglig Datasektionen</English>
+            <Swedish>Nyheter - Konglig Datasektionen</Swedish>
           </Translate>
         </Title>
         <header key="header">
