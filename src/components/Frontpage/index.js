@@ -57,24 +57,24 @@ const Frontpage = ({ location, lang }) =>
                     <English>News</English>
                     <Swedish>Nyheter</Swedish>
                   </Translate>
-		            </h2>
-	            </Link>
+                </h2>
+              </Link>
               <ul>
                 {
                   content &&
                   content
                     .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
-            		      <Link
-            			      to={ lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}` }
-            		      >
+                      <Link
+                          to={ lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}` }
+                      >
                         <h3>
                           <Translate>
                             <English>{item.titleEnglish}</English>
                             <Swedish>{item.titleSwedish}</Swedish>
                           </Translate>
                         </h3>
-	                    </Link>
+                      </Link>
                       <span>
                         {
                           new Date(item.publishDate)
@@ -96,15 +96,15 @@ const Frontpage = ({ location, lang }) =>
                 }
               </ul>
               <div className="text-center">
-              <Link
-                to={ lang === 'en' ? '/en/news' : '/nyheter' }
-                className={cx('more-btn')}
-              >
-                <Translate>
-                  <English>More News »</English>
-                  <Swedish>Mer Nyheter »</Swedish>
-                </Translate>
-              </Link>
+                <Link
+                  to={ lang === 'en' ? '/en/news' : '/nyheter' }
+                  className={cx('more-btn')}
+                >
+                  <Translate>
+                    <English>More News »</English>
+                    <Swedish>Mer Nyheter »</Swedish>
+                  </Translate>
+                </Link>
               </div>
             </div>
           }
@@ -121,23 +121,23 @@ const Frontpage = ({ location, lang }) =>
                     <Swedish>Event</Swedish>
                   </Translate>
                 </h2>
-	            </Link>
+              </Link>
               <ul>
                 {
                   (content && content.length)
                   ? content
                     .filter((_, i) => i < 5)
                     .map(item => <li key={item.id}>
-            		      <Link
-            			      to={ lang === 'en' ? '/en/news' : '/nyheter?itemType=EVENT' }
-            		      >
+                      <Link
+                          to={ lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}` }
+                      >
                         <h3>
                           <Translate>
                             <English>{item.titleEnglish}</English>
                             <Swedish>{item.titleSwedish}</Swedish>
                           </Translate>
                         </h3>
-		                  </Link>
+                      </Link>
                       <span>
                         {
                           new Date(item.eventStartTime)
