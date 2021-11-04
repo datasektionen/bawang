@@ -197,8 +197,8 @@ export const News = ({ location, lang, match }) => {
                     </h2>
                     <a href="https://calypso.datasektionen.se/feeds/ical">
                       <Translate>
-                        <English>Link to ical-calendar</English>
-                        <Swedish>Länk till ical-kalender</Swedish>
+                        <English><a href="https://calypso.datasektionen.se/feeds/ical_en">Link to ical-calendar</a></English>
+                        <Swedish><a href="https://calypso.datasektionen.se/feeds/ical">Länk till ical-kalender</a></Swedish>
                       </Translate>
                     </a>
                   </div>
