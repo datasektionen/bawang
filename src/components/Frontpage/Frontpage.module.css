@@ -14,7 +14,7 @@
 .header .title .bold {
   font-size: 5em;
   font-weight: bolder;
-  text-shadow: -2px -2px #fcda02, 4px 4px #e83d84;
+  text-shadow: 4px 4px #EE2A7B;
   line-height: 1.3em;
   color: #fff;
   display: flex;
