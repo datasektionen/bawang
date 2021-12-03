@@ -126,7 +126,7 @@ const Frontpage = ({ location, lang }) =>
                 {
                   (content && content.length)
                   ? content
-                    .filter((_, i) => i < 5)
+                    .filter((_, i) => i < 4)
                     .map(item => <li key={item.id}>
                       <Link
                           to={ lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}` }
@@ -164,6 +164,20 @@ const Frontpage = ({ location, lang }) =>
                     </h4>
                 }
               </ul>
+              {
+                content.length > 4 &&
+                <div className="text-center">
+                  <Link
+                    to={ lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT' }
+                    className={cx('more-btn')}
+                  >
+                    <Translate>
+                      <English>More Events »</English>
+                      <Swedish>Mer Event »</Swedish>
+                    </Translate>
+                  </Link>
+                </div>
+              }
             </div>
           }
         </Calypso>
