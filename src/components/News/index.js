@@ -195,12 +195,10 @@ export const News = ({ location, lang, match }) => {
                         <Swedish>Exporterbar kalender</Swedish>
                       </Translate>
                     </h2>
-                    <a href="https://calypso.datasektionen.se/feeds/ical">
-                      <Translate>
-                        <English><a href="https://calypso.datasektionen.se/feeds/ical_en">Link to ical-calendar</a></English>
-                        <Swedish><a href="https://calypso.datasektionen.se/feeds/ical">Länk till ical-kalender</a></Swedish>
-                      </Translate>
-                    </a>
+                    <Translate>
+                      <English><a href="https://calypso.datasektionen.se/feeds/ical_en">Link to ical-calendar</a></English>
+                      <Swedish><a href="https://calypso.datasektionen.se/feeds/ical">Länk till ical-kalender</a></Swedish>
+                    </Translate>
                   </div>
                 </div>
               </div>
