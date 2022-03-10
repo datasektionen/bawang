@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Title } from 'react-head'
 import classNames from 'classnames/bind'
 import styles from './News.module.css'
+import DomPurify from "isomorphic-dompurify"
 
 import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
@@ -78,7 +79,7 @@ export const SingleItem = ({ item, location, lang, match }) =>
                 </Translate>
               </h1>
               <div dangerouslySetInnerHTML={{
-                __html: lang === 'en' ? item.contentEnglish : item.contentSwedish
+                __html: DomPurify.sanitize(lang === 'en' ? item.contentEnglish : item.contentSwedish)
               }}
               />
             </div>

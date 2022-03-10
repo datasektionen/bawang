@@ -44,6 +44,8 @@ const Frontpage = ({ location, lang }) =>
       <div className={cx('content', 'flex', 'hero')}>
         <div
           className={cx('intro')}
+          // ? We allow this since this data comes from
+          // ? a trusted site (bawang-content)
           dangerouslySetInnerHTML={{__html: body}}
         />
         <Calypso type='list' search='?itemType=POST'>
@@ -196,6 +198,10 @@ const Frontpage = ({ location, lang }) =>
               <div className="home_section_icon">
                 <i className="fa" />
               </div>
+              {
+                // ? We allow this since this data comes from
+                // ? a trusted site (bawang-content)
+              }
               <div dangerouslySetInnerHTML={{__html}} />
             </div>
           )}
