@@ -75,6 +75,8 @@ export const Default = ({ location, lang }) =>
             <div className="row">
               <div
                 className="col-md-9"
+                // ? We allow this since this data comes from
+                // ? a trusted site (bawang-content)
                 dangerouslySetInnerHTML={{__html: body}}
               />
               <div
@@ -83,6 +85,8 @@ export const Default = ({ location, lang }) =>
               >
                 { sidebar
                   ? <div
+                      // ? We allow this since this data comes from
+                      // ? a trusted site (bawang-content)
                       className="sidebar-card"
                       dangerouslySetInnerHTML={{__html: sidebar}}
                     />

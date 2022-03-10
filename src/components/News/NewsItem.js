@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './News.module.css'
+import DomPurify from "isomorphic-dompurify"
 
 import { Translate, English, Swedish } from '../Translate'
 const cx = classNames.bind(styles)
@@ -42,7 +43,7 @@ export const NewsItem = ({ item, location, lang }) =>
       </Link>
     </h2>
     <div dangerouslySetInnerHTML={{
-      __html: lang === 'en' ? item.contentEnglish : item.contentSwedish
+      __html: DomPurify.sanitize(lang === 'en' ? item.contentEnglish : item.contentSwedish)
     }}
     />
   </div>
