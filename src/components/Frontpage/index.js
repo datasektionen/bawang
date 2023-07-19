@@ -183,6 +183,14 @@ const Frontpage = ({ location, lang }) =>
         </Calypso>
       </div>
       <div className={cx('content')} >
+        <h2 id="sections_intro">Are you an international student?</h2>
+        <div className="text-center" id="home_sections">
+          Discover everything you need to know as an international student in the CS Chapter on the website for META internationals.
+          <a className="action" href="https://meta-internationals.mailchimpsites.com/">META Internationals website</a>
+          <a className="action" href="/en">Read this website in english</a>
+        </div>
+      </div>
+      <div className={cx('content')} >
         <h2 id="sections_intro">
           <Translate>
             <Swedish>Det här är&nbsp;</Swedish>
