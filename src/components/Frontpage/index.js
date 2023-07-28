@@ -169,7 +169,7 @@ const Frontpage = ({ location, lang }) =>
                   <div className="text-center">
                     <Link
                       to={lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT'}
-                      className='more-btn'
+                      className={cx('more-btn')}
                     >
                       <Translate>
                         <English>More Events »</English>
