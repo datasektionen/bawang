@@ -32,16 +32,15 @@ export const DataLoader = withConsumer(class extends Component {
 
     const cacheKey = this.props.cacheKey
 
-    if(cache[cacheKey]) {
-      if(cache[cacheKey].loading)
+    if (cache[cacheKey]) {
+      if (cache[cacheKey].loading) {
         this.props.promises.push(new Promise((resolve, reject) => cache[cacheKey].waiting.push(resolve)))
-      else
+      } else {
         this.props.promises.push(Promise.resolve(cache[cacheKey]))
+      }
 
       return
     }
-
-    console.log('fetching', cacheKey)
 
     cache[cacheKey] = {
       data: {},
@@ -49,8 +48,6 @@ export const DataLoader = withConsumer(class extends Component {
       loading: true,
       waiting: []
     }
-
-    console.log('Object.keys(cache).length:', Object.keys(cache).length)
 
     this.props.promises.push(
       this.props
@@ -68,7 +65,7 @@ export const DataLoader = withConsumer(class extends Component {
 
           setTimeout(() => {
             delete cache[cacheKey]
-          }, (this.props.ttl || 60) * 1000)
+          }, (typeof this.props.ttl === "number" ? this.props.ttl : 60) * 1000)
 
           this.forceUpdate()
 
