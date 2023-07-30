@@ -3,6 +3,16 @@ BAWANG
 
 Universal react application for the chapter website.
 
+Environment variables
+-------
+
+| Name               | Default                              | Description                                                                                         |
+|--------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------|
+| TAITAN_URL         | https://taitan.datasektionen.se      | URL to get contents from taitan on                                                                  |
+| RAZZLE_TAITAN_URL  | https://taitan.datasektionen.se      | URL to get contents from taitan on. **Set during build**. Should probably be the same as TAITAN_URL |
+| RAZZLE_CALYPSO_URL | https://calypso.datasektionen.se/api | URL to get news from calypso on. **Set during build**                                               |
+| PORT               | 3000                                 | Port to listen on                                                                                   |
+
 Running
 -------
 Bawang runs on Node v.10.x.x. It doesn't work on later versions (v.12.20.1)
