@@ -191,13 +191,18 @@ export const News = ({ location, lang, match }) => {
                     </Calypso>
                     <h2>
                       <Translate>
-                        <English>Exportable calendar</English>
-                        <Swedish>Exporterbar kalender</Swedish>
+                        <English>Export news</English>
+                        <Swedish>Exportera nyheter</Swedish>
                       </Translate>
                     </h2>
                     <Translate>
                       <English><a href="https://calypso.datasektionen.se/feeds/ical_en">Link to ical-calendar</a></English>
                       <Swedish><a href="https://calypso.datasektionen.se/feeds/ical">Länk till ical-kalender</a></Swedish>
+                    </Translate>
+                    <br/>
+                    <Translate>
+                      <English><a href="https://calypso.datasektionen.se/feeds/rss">Link to RSS</a></English>
+                      <Swedish><a href="https://calypso.datasektionen.se/feeds/rss">Länk till RSS</a></Swedish>
                     </Translate>
                   </div>
                 </div>
