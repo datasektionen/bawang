@@ -153,6 +153,13 @@
   color: #6a758f;
 }
 
+.content .news ul div {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #959eb3;
+}
+
 .content .news ul li span {
   margin: 0 10px;
   text-transform: uppercase;
