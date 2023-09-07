@@ -64,7 +64,8 @@ const Frontpage = ({ location, lang }) =>
                     content &&
                     content
                       .filter((_, i) => i < 4)
-                      .map(item => <li key={item.id}>
+                      .map(item => <li key={item.id}
+                      >
                         <Link
                           to={lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}`}
                         >
@@ -75,23 +76,25 @@ const Frontpage = ({ location, lang }) =>
                             </Translate>
                           </h3>
                         </Link>
-                        <span>
-                          {
-                            new Date(item.publishDate)
-                              .toLocaleDateString(
-                                lang === 'en' ? 'en-US' : 'sv-SE',
-                                {
-                                  day: 'numeric',
-                                  month: 'short',
-                                  year: 'numeric'
-                                }
-                              )
-                          }
-                        </span>
-                        &bull;
-                        <span>
-                          {item.publishAsDisplay || item.authorDisplay}
-                        </span>
+                        <div>
+                          <span>
+                            {
+                              new Date(item.publishDate)
+                                .toLocaleDateString(
+                                  lang === 'en' ? 'en-US' : 'sv-SE',
+                                  {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
+                                  }
+                                )
+                            }
+                          </span>
+                          &bull;
+                          <span>
+                            {item.publishAsDisplay || item.authorDisplay}
+                          </span>
+                        </div>
                       </li>)
                   }
                 </ul>
@@ -138,23 +141,25 @@ const Frontpage = ({ location, lang }) =>
                               </Translate>
                             </h3>
                           </Link>
-                          <span>
-                            {
-                              new Date(item.eventStartTime)
-                                .toLocaleDateString(
-                                  lang === 'en' ? 'en-US' : 'sv-SE',
-                                  {
-                                    day: 'numeric',
-                                    month: 'short',
-                                    year: 'numeric'
-                                  }
-                                )
-                            }
-                          </span>
-                          &bull;
-                          <span>
-                            {item.publishAsDisplay || item.authorDisplay}
-                          </span>
+                          <div>
+                            <span>
+                              {
+                                new Date(item.eventStartTime)
+                                  .toLocaleDateString(
+                                    lang === 'en' ? 'en-US' : 'sv-SE',
+                                    {
+                                      day: 'numeric',
+                                      month: 'short',
+                                      year: 'numeric'
+                                    }
+                                  )
+                              }
+                            </span>
+                            &bull;
+                            <span>
+                              {item.publishAsDisplay || item.authorDisplay}
+                            </span>
+                          </div>
                         </li>)
                       : <h4 className={cx('empty')}>
                         <Translate>
