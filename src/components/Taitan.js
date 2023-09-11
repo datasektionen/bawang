@@ -7,6 +7,7 @@ import fetch from 'cross-fetch'
 import { DataLoader } from './DataLoader'
 
 const RAZZLE_TAITAN_URL = process.env.RAZZLE_TAITAN_URL || 'https://taitan.datasektionen.se'
+const TAITAN_CACHE_TTL = process.env.TAITAN_CACHE_TTL ? parseInt(process.env.TAITAN_CACHE_TTL, 10) : 60 * 60
 
 const taitanFetcher = url =>
   fetch(url)
@@ -26,11 +27,11 @@ const taitanFetcher = url =>
     })
     .then(res => ({ status: 200, redirect: false, ...res }))
 
-export const Taitan = ({ pathname, children, ttl }) =>
+export const Taitan = ({ pathname, children }) =>
   <DataLoader
     cacheKey={RAZZLE_TAITAN_URL + pathname}
     fetcher={taitanFetcher}
-    ttl={ttl || 60 * 60}
+    ttl={TAITAN_CACHE_TTL}
   >
     {({ data, loading, error }) => {
       if (!loading && data && data.redirect)
