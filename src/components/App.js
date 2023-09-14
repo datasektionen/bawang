@@ -12,7 +12,13 @@ import { LanguageContext } from './Translate'
 
 import './App.css'
 
-const createLinks = nav => nav.map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
+const createLinks = nav => nav
+  .sort((a, b) => {
+    if (a.sort === undefined) return b.sort === undefined ? 0 : 1;
+    if (b.sort === undefined) return -1;
+    return a.sort - b.sort;
+  })
+  .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 
 const renderMethone = path =>
   <Taitan pathname={path}>
