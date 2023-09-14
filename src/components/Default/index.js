@@ -15,19 +15,25 @@ const getNav = (nav, lang) => {
 
 const parseNav = (items, slug) =>
   <ul key={slug}>
-    { items.map(item =>
-      <Fragment key={item.slug}>
-        <li>
-          <Link
-            className={item.active ? 'text-theme-color strong' : ''}
-            to={item.slug}
-          >
-            { item.title }
-          </Link>
-        </li>
-        {item.nav && parseNav(item.nav, item.slug + '/')}
-      </Fragment>
-    )}
+    {items
+      .sort((a,b) => {
+        if (a.sort === undefined) return b.sort === undefined ? 0 : 1;
+        if (b.sort === undefined) return -1;
+        return a.sort - b.sort;
+      })
+      .map(item =>
+        <Fragment key={item.slug}>
+          <li>
+            <Link
+              className={item.active ? 'text-theme-color strong' : ''}
+              to={item.slug}
+            >
+              { item.title }
+            </Link>
+          </li>
+          {item.nav && parseNav(item.nav, item.slug + '/')}
+        </Fragment>
+      )}
   </ul>
 
 export const Default = ({ location, lang }) =>
