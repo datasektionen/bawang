@@ -7,17 +7,14 @@ import Frontpage from './Frontpage'
 import News from './News'
 import SingleNews from './News/SingleNews'
 import Default from './Default'
+import { comparePages } from '../utility/compare'
 
 import { LanguageContext } from './Translate'
 
 import './App.css'
 
 const createLinks = nav => nav
-  .sort((a, b) => {
-    if (a.sort === undefined) return b.sort === undefined ? 0 : 1;
-    if (b.sort === undefined) return -1;
-    return a.sort - b.sort;
-  })
+  .sort(comparePages)
   .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 
 const renderMethone = path =>
