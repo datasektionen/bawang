@@ -7,7 +7,7 @@ export const comparePages = (a, b) => {
     if (a.title === undefined) return 1;
     if (b.title === undefined) return -1;
 
-    return a.title.localeCompare(b.title) // the comparison ignores case
+    return a.title.localeCompare(b.title, 'sv-SE') // the comparison ignores case
   }
 
   if (a.sort === undefined) return 1;
@@ -15,3 +15,4 @@ export const comparePages = (a, b) => {
 
   return a.sort - b.sort;
 }
+
