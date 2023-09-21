@@ -7,12 +7,15 @@ import Frontpage from './Frontpage'
 import News from './News'
 import SingleNews from './News/SingleNews'
 import Default from './Default'
+import { comparePages } from '../utility/compare'
 
 import { LanguageContext } from './Translate'
 
 import './App.css'
 
-const createLinks = nav => nav.map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
+const createLinks = nav => nav
+  .sort(comparePages)
+  .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 
 const renderMethone = path =>
   <Taitan pathname={path}>

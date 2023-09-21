@@ -5,6 +5,7 @@ import { Title } from 'react-head'
 import Taitan from '../Taitan'
 import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
+import { comparePages } from '../../utility/compare'
 
 const getNav = (nav, lang) => {
   const enNav = lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
@@ -15,19 +16,21 @@ const getNav = (nav, lang) => {
 
 const parseNav = (items, slug) =>
   <ul key={slug}>
-    { items.map(item =>
-      <Fragment key={item.slug}>
-        <li>
-          <Link
-            className={item.active ? 'text-theme-color strong' : ''}
-            to={item.slug}
-          >
-            { item.title }
-          </Link>
-        </li>
-        {item.nav && parseNav(item.nav, item.slug + '/')}
-      </Fragment>
-    )}
+    {items
+      .sort(comparePages)
+      .map(item =>
+        <Fragment key={item.slug}>
+          <li>
+            <Link
+              className={item.active ? 'text-theme-color strong' : ''}
+              to={item.slug}
+            >
+              { item.title }
+            </Link>
+          </li>
+          {item.nav && parseNav(item.nav, item.slug + '/')}
+        </Fragment>
+      )}
   </ul>
 
 export const Default = ({ location, lang }) =>
