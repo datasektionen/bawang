@@ -9,6 +9,7 @@ import { Translate, English, Swedish } from '../Translate'
 
 import styles from './Frontpage.module.css'
 import skold from './skold.svg'
+import EventCalendar from './eventCalendar.jsx';
 import './FixMe.css'
 
 const cx = classNames.bind(styles)
@@ -241,6 +242,23 @@ const Frontpage = ({ location, lang }) =>
               </div>
             )}
           </div>
+        </div>
+
+        {/* Calendar section*/}
+        <div className={cx('content')} >
+          {/* Title */}
+          <h2 id="sections_intro">
+            <Translate>
+              <Swedish>Evenemangs<span>Kalender</span></Swedish>
+              <English>Event <span>Calendar</span></English>
+            </Translate>
+          </h2>
+
+          {/* Calendar */}
+          <Calypso type='event'>
+          {/* Given content from Calypso, populate the section with events information */}
+          {content => <EventCalendar events={content} />}
+          </Calypso>
         </div>
 
         {/* Footer: contact section (address, number and META location in Google Maps) */}
