@@ -257,7 +257,7 @@ const Frontpage = ({ location, lang }) =>
           {/* Calendar */}
           <Calypso type='event'>
           {/* Given content from Calypso, populate the section with events information */}
-          {content => <EventCalendar events={content} />}
+          {content => <EventCalendar events={content} location={location} lang={lang} />}
           </Calypso>
         </div>
 

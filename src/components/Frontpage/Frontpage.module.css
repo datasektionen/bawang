@@ -169,11 +169,6 @@
   white-space: nowrap;
 }
 
-.content .calendar {
-  border: 1px solid;
-  border-color: #00000020
-}
-
 .content .calendar th {
   text-align: center;
   color: white;
@@ -329,6 +324,9 @@
   border: 1px solid;
   border-color: #00000010;
   border-radius: 6px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 .content .calendar .widget div:hover {

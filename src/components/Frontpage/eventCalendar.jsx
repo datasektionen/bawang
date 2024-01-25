@@ -2,11 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { add, sub } from 'date-fns';
 
 import classNames from 'classnames/bind';
-import { Translate, English, Swedish } from '../Translate';
 
+import { Translate, English, Swedish } from '../Translate';
+import NewsItem from '../News/NewsItem';
 import styles from './Frontpage.module.css';
 
 const cx = classNames.bind(styles);
+
+const SWEDISH_MONTHS = [
+  "Januari", "Februari", "Mars", "April", "Maj", "Juni",
+  "Juli", "Augusti", "September", "Oktober", "November", "December",
+];
+const SWEDISH_WEEK_DAYS = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
+
+const ENGLISH_MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+const ENGLISH_WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 function getMondayOfWeek(date) {
   const monday = sub(date, { days: date.getDay() - 1 })
@@ -166,13 +179,14 @@ function getWidgetsFromEvents(events) {
   return widgetWeekGroups;
 }
 
-export default function EventCalendar({ events }) {
+export default function EventCalendar({ events, location, lang }) {
   const today = new Date();
   const [weekState, setWeekState] = useState({
     week: 0,
     dates: getDatesOfWeek(today),
     widgetIndex: 0,
   });
+  const [selectedEventIndex, setSelectedEventIndex] = useState(-1);
 
   var widgetWeekGroups = getWidgetsFromEvents(events);
 
@@ -194,19 +208,6 @@ export default function EventCalendar({ events }) {
     });
   }, [events]);
 
-
-  const swedishMonths = [
-    "Januari", "Februari", "Mars", "April", "Maj", "Juni",
-    "Juli", "Augusti", "September", "Oktober", "November", "December",
-  ];
-  const swedishWeekDays = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
-
-  const englishMonths = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
-  ];
-  const englishWeekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
   const monthsOfDates = weekState.dates.map(date => date.getMonth());
   const yearHeader = [];
   const monthHeader = [];
@@ -215,8 +216,8 @@ export default function EventCalendar({ events }) {
   weekState.dates.forEach((date, i) => {
     const monthIndex = monthsOfDates[i];
     const monthClass = `month-${monthIndex}`;
-    const monthSV = swedishMonths[monthIndex];
-    const monthEN = englishMonths[monthIndex];
+    const monthSV = SWEDISH_MONTHS[monthIndex];
+    const monthEN = ENGLISH_MONTHS[monthIndex];
     if (i < 6 && monthIndex === weekState.dates[i+1].getMonth()) {
       currentColSpan++;
     } else {
@@ -238,8 +239,8 @@ export default function EventCalendar({ events }) {
     dateHeader.push(
       <th key={date.toUTCString()} className={cx(monthClass)}>
         <Translate>
-          <Swedish>{`${swedishWeekDays[i]} ${date.getDate()}`}</Swedish>
-          <English>{`${englishWeekDays[i]} ${date.getDate()}`}</English>
+          <Swedish>{`${SWEDISH_WEEK_DAYS[i]} ${date.getDate()}`}</Swedish>
+          <English>{`${ENGLISH_WEEK_DAYS[i]} ${date.getDate()}`}</English>
         </Translate>
       </th>
     );
@@ -283,7 +284,7 @@ export default function EventCalendar({ events }) {
   }
 
   return (
-    <div style={{position: "relative"}} className={cx("calendar")}>
+    <div style={{position: "relative"}} className={cx('calendar', 'flex')}>
       <table>
         <thead>
           <tr className={cx("yearHeader")}>
@@ -304,7 +305,13 @@ export default function EventCalendar({ events }) {
           )}
         </tbody>
       </table>
+      <div style={{width: "336px", height: "570px", overflow: "scroll"}}>
+      {
+        selectedEventIndex !== -1 && <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
+      }
+      </div>
       {(widgetWeekGroups
+      && widgetWeekGroups.length > 0
       && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
       && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
         <div 
@@ -315,6 +322,7 @@ export default function EventCalendar({ events }) {
             top: `${3 * 30}px`,
             left: "100px",
           }}
+          onClick={() => setSelectedEventIndex(ei)}
         >
           {eventWidget.blocks.map((block, bi) => {
             const H = 60;
