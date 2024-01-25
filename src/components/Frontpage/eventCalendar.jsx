@@ -284,8 +284,8 @@ export default function EventCalendar({ events, location, lang }) {
   }
 
   return (
-    <div style={{position: "relative"}} className={cx('calendar', 'flex')}>
-      <table>
+    <div style={{ position: "relative" }} className={cx('calendar', 'flex')}>
+      <table style={{ margin: "auto" }}>
         <thead>
           <tr className={cx("yearHeader")}>
             <td rowSpan='3'>
@@ -305,9 +305,17 @@ export default function EventCalendar({ events, location, lang }) {
           )}
         </tbody>
       </table>
-      <div style={{width: "336px", height: "570px", overflow: "scroll"}}>
+      <div style={{ width: "336px", height: "570px", overflow: "scroll", margin: "auto" }}>
       {
-        selectedEventIndex !== -1 && <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
+        selectedEventIndex !== -1
+        ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
+        : <div style={{ height: "100%", width: "100%", padding: "10%", display: "flex", alignItems: "center", backgroundColor: "#eeeeee" }}>
+            <p style={{ fontSize: "24px", textAlign: "center" }}>
+              <Translate>
+                <Swedish>Klicka på en händelse för att visa mer information</Swedish>
+                <English>Click on an event to display more information</English>
+              </Translate></p>
+          </div>
       }
       </div>
       {(widgetWeekGroups

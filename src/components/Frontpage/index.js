@@ -249,8 +249,8 @@ const Frontpage = ({ location, lang }) =>
           {/* Title */}
           <h2 id="sections_intro">
             <Translate>
-              <Swedish>Evenemangs<span>Kalender</span></Swedish>
-              <English>Event <span>Calendar</span></English>
+              <Swedish>Evenemangskalender</Swedish>
+              <English>Event Calendar</English>
             </Translate>
           </h2>
 
