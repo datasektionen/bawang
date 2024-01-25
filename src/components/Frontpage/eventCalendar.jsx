@@ -322,7 +322,7 @@ export default function EventCalendar({ events, location, lang }) {
             top: `${3 * 30}px`,
             left: "100px",
           }}
-          onClick={() => setSelectedEventIndex(ei)}
+          onClick={() => setSelectedEventIndex(eventWidget.eventIndex)}
         >
           {eventWidget.blocks.map((block, bi) => {
             const H = 60;
