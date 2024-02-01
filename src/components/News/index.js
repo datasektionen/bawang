@@ -8,6 +8,7 @@ import styles from './News.module.css'
 import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
+import EventCalendar from '../EventCalendar'
 
 if(global && !global.URLSearchParams) {
   global.URLSearchParams = require('url').URLSearchParams
@@ -60,7 +61,26 @@ export const News = ({ location, lang, match }) => {
             </div>
           </div>
         </header>
+        
+        {/* Calendar section*/}
+        <div className={cx("calendar-content")}>
+          {/* Title */}
+          <h2 id="sections_intro">
+            <Translate>
+              <Swedish>Evenemangskalender</Swedish>
+              <English>Event Calendar</English>
+            </Translate>
+          </h2>
+
+          {/* Calendar */}
+          <Calypso type='event'>
+          {/* Given content from Calypso, populate the section with events information */}
+          {content => <EventCalendar events={content} location={location} lang={lang} />}
+          </Calypso>
+        </div>
+
         <div id="content" key="content">
+          
           <div className="row">
             <div className="col-sm-4 col-md-3">
               <div id="secondary-nav">

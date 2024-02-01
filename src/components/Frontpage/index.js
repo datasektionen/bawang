@@ -9,7 +9,7 @@ import { Translate, English, Swedish } from '../Translate'
 
 import styles from './Frontpage.module.css'
 import skold from './skold.svg'
-import EventCalendar from './eventCalendar.jsx';
+import EventCalendar from '../EventCalendar/index.jsx';
 import './FixMe.css'
 
 const cx = classNames.bind(styles)
@@ -111,7 +111,7 @@ const Frontpage = ({ location, lang }) =>
               {/* "More News" button at the bottom of the news section */}
               <div className="text-center">
                 <Link
-                  to={lang === 'en' ? '/en/news' : '/nyheter'}
+                  to={lang === 'en' ? '/en/news?itemType=POST' : '/nyheter?itemType=POST'}
                   className={cx('more-btn')}
                 >
                   <Translate>

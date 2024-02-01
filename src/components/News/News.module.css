@@ -16,6 +16,16 @@
   padding: 15px;
 }
 
+.calendar-content {
+  background: #fff;
+  color: #666;
+  max-width: 1240px;
+  margin: 0px auto;
+  padding: 20px 50px;
+  min-height: 0;
+  z-index: 21;
+}
+
 .metadata {
   background: rgba(0, 0, 0, .02);
   font-size: 14px;

@@ -1,0 +1,198 @@
+.flex {
+  display: flex;
+}
+
+.calendar th {
+  text-align: center;
+  color: white;
+}
+.calendar td {
+  width: 90px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid;
+  border-color: #00000020
+}
+
+.calendar .yearHeader th {
+  height: 28px;
+  bottom: 0;
+  vertical-align: bottom;
+  font-size: small;
+}
+.calendar .yearHeader button {
+  height: 90px;
+  width: 44px;
+  font-size: x-large;
+}
+.calendar .monthHeader th {
+  height: 32px;
+  vertical-align: top;
+  font-size: larger;
+}
+.calendar .dateHeader th {
+  font-size: medium;
+  height: 30px;
+}
+
+.calendar th.month-0 {
+  background-color: #9656a2;
+}
+.calendar th.month-1 {
+  background-color: #ba4477;
+}
+.calendar th.month-2 {
+  background-color: #de324c;
+}
+.calendar th.month-3 {
+  background-color: #e95d55;
+}
+.calendar th.month-4 {
+  background-color: #f4895f;
+}
+.calendar th.month-5 {
+  background-color: #eaac4b;
+}
+.calendar th.month-6 {
+  background-color: #e0c937;
+}
+.calendar th.month-7 {
+  background-color: #bad064;
+}
+.calendar th.month-8 {
+  background-color: #95cf92
+}
+.calendar th.month-9 {
+  background-color: #65b4af;
+}
+.calendar th.month-10 {
+  background-color: #369acc;
+}
+.calendar th.month-11 {
+  background-color: #6678b7;
+}
+
+.calendar .darkTimeRow .hour {
+  background-color: #d0d0d0;
+}
+.calendar .lightTimeRow .hour {
+  background-color: #f0f0f0;
+}
+
+.calendar .darkTimeRow .month-0 {
+  background-color: #e6dbff;
+}
+.calendar .darkTimeRow .month-1 {
+  background-color: #f2d8ea;
+}
+.calendar .darkTimeRow .month-2 {
+  background-color: #ffd6d6;
+}
+.calendar .darkTimeRow .month-3 {
+  background-color: #ffe0d3;
+}
+.calendar .darkTimeRow .month-4 {
+  background-color: #ffead2;
+}
+.calendar .darkTimeRow .month-5 {
+  background-color: #fcf0bc;
+}
+.calendar .darkTimeRow .month-6 {
+  background-color: #faf6a6;
+}
+.calendar .darkTimeRow .month-7 {
+  background-color: #effac2;
+}
+.calendar .darkTimeRow .month-8 {
+  background-color: #e4ffdf;
+}
+.calendar .darkTimeRow .month-9 {
+  background-color: #d9f6ef;
+}
+.calendar .darkTimeRow .month-10 {
+  background-color: #ceeeff;
+}
+.calendar .darkTimeRow .month-11 {
+  background-color: #dae4ff;
+}
+
+.calendar .lightTimeRow .month-0 {
+  background-color: #f8f6ff;
+}
+.calendar .lightTimeRow .month-1 {
+  background-color: #fbf4f9;
+}
+.calendar .lightTimeRow .month-2 {
+  background-color: #fff4f4;
+}
+.calendar .lightTimeRow .month-3 {
+  background-color: #fff7f3;
+}
+.calendar .lightTimeRow .month-4 {
+  background-color: #fff9f3;
+}
+.calendar .lightTimeRow .month-5 {
+  background-color: #fefbee;
+}
+.calendar .lightTimeRow .month-6 {
+  background-color: #fdfce8;
+}
+.calendar .lightTimeRow .month-7 {
+  background-color: #fbfdef;
+}
+.calendar .lightTimeRow .month-8 {
+  background-color: #f8fff7;
+}
+.calendar .lightTimeRow .month-9 {
+  background-color: #f5fcfb;
+}
+.calendar .lightTimeRow .month-10 {
+  background-color: #f2faff;
+}
+.calendar .lightTimeRow .month-11 {
+  background-color: #f5f8ff;
+}
+
+.calendar .widget div {
+  border: 1px solid;
+  border-color: #00000010;
+  border-radius: 6px;
+  padding: 2px 6px;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.calendar .widget div:hover {
+  box-shadow: inset 0 0 0 10em #ffffff40;
+}
+
+.calendar .event-0 {
+  background-color: #bed074c0;
+}
+.calendar .event-1 {
+  background-color: #b251cac0;
+}
+.calendar .event-2 {
+  background-color: #fbc4ffc0;
+}
+.calendar .event-3 {
+  background-color: #6da9cec0;
+}
+.calendar .event-4 {
+  background-color: #ef8260c0;
+}
+.calendar .event-5 {
+  background-color: #dad370c0;
+}
+.calendar .event-6 {
+  background-color: #9bea83c0;
+}
+.calendar .event-7 {
+  background-color: #60b6e7c0;
+}
+.calendar .event-8 {
+  background-color: #ab847cc0;
+}
+.calendar .event-9 {
+  background-color: #bfcdf7c0;
+}

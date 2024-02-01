@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 import { Translate, English, Swedish } from '../Translate';
 import NewsItem from '../News/NewsItem';
-import styles from './Frontpage.module.css';
+import styles from './EventCalendar.module.css';
 
 const cx = classNames.bind(styles);
 
@@ -22,10 +22,17 @@ const ENGLISH_MONTHS = [
 const ENGLISH_WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 function getMondayOfWeek(date) {
-  const monday = sub(date, { days: date.getDay() - 1 })
+  const monday = sub(date, { days: (date.getDay() + 6) % 7 });
   return monday;
 }
 
+/**
+ * Given a Date object, return an array of the 7 Dates corresponding to the
+ * same week, starting from Monday.
+ * 
+ * @param {date} date 
+ * @returns {Date[]}
+ */
 function getDatesOfWeek(date) {
   const monday = getMondayOfWeek(date);
   const datesOfWeek = [monday];
@@ -35,11 +42,21 @@ function getDatesOfWeek(date) {
   return datesOfWeek;
 }
 
+/**
+ * Given an array of event objects, return an array widgetWeekGroups
+ * of WidgetWeekGroup objects.
+ * Widgets are groups of blocks associated to each event.
+ * Blocks are drawn on the calendar.
+ * 
+ * @param {Event[]} events
+ * @returns {WidgetWeekGroup[]}
+ */
 function getWidgetsFromEvents(events) {
   if (!(events && events.length > 0)) {
     return [];
   }
 
+  // Transform time strings into Date objects
   events.forEach(event => {
     event.eventStartTime = new Date(event.eventStartTime);
     event.eventEndTime = new Date(event.eventEndTime);
@@ -51,17 +68,39 @@ function getWidgetsFromEvents(events) {
   
   const firstEventDate = new Date(events[0].eventStartTime)
 
-  // Inner function
+  /**
+   * Inner function.
+   * Adds into a WidgetWeekGroup object a "week group": a group of Widget
+   * objects in a same week.
+   * 
+   * @returns {WidgetWeekGroup}
+   */
   const addWeekGroup = () => {
     widgetWeekGroups.push({ week: currentWeek, widgets: [] });
   }
-  // Inner function
+  
+  /**
+   * Inner function.
+   * Creates a Widget for an Event, and adds it into the corresponding
+   * WidgetWeekGroup based on the startTime date: useful for events
+   * spanning multiple weeks, as a different startTime date is passed
+   * for every spanned day.
+   * 
+   * @param {Event} event 
+   * @param {number} eventIndex 
+   * @param {Date} startTime
+   */
   const addWidget = (event, eventIndex, startTime) => {
     if (!startTime) return;
 
     const endTime = event.eventEndTime;
+    // Starting weekday number for the event.
+    // Will increment in a loop if the event spans multiple days.
     var currentDayOfTheWeek = (startTime.getDay() + 6) % 7; // 0: Monday, 1: Tuesday, ..., 6: Sunday
 
+    // Because the events are sorted by week and widgets are created by event
+    // order, getting the last WidgetWeekGroup will correspond to the event's
+    // current week.
     const weekWidgets = widgetWeekGroups[widgetWeekGroups.length - 1].widgets;
     weekWidgets.push({
       eventIndex: eventIndex,
@@ -74,15 +113,26 @@ function getWidgetsFromEvents(events) {
       }],
     });
     const blocks = weekWidgets[weekWidgets.length - 1].blocks;
+    // Some events have endTime === startTime. It's not that they span
+    // 0 time: rather, they're intended to span the entire day.
+    if (endTime.getTime() === startTime.getTime()) {
+      blocks[blocks.length - 1].startMinute = 0;
+      return;
+    }
 
+    // Iterate over the days between startTime and endTime
     var currentDayOfTheYear = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
     currentDayOfTheYear = add(currentDayOfTheYear, { days: 1 });
     while (currentDayOfTheYear < endTime) {
       currentDayOfTheWeek++;
+      // If the week is over, defer the event to the next week and end the loop
       if (currentDayOfTheWeek === 7) {
         multiWeekEvents.push([event, eventIndex]);
         break;
       }
+      // The middle blocks (not start or end) always start at 0 and end at 1440
+      // The end block will be set to the correct endMinute if necessary,
+      // outside this loop
       blocks.push({
         day: currentDayOfTheWeek,
         startMinute: 0,
@@ -96,6 +146,7 @@ function getWidgetsFromEvents(events) {
     );
   }
 
+  // Iterate through the events and generate the WidgetWeekGroups
   const firstMonday = getMondayOfWeek(firstEventDate);
   var currentMonday = firstMonday;
   var currentWeek = -1;
@@ -123,6 +174,7 @@ function getWidgetsFromEvents(events) {
     addWidget(event, eventIndex, startTime);
   });
 
+  // Manage collisions between overlapping blocks
   widgetWeekGroups.forEach(weekGroup => {
     const weekWidgets = weekGroup.widgets;
     const blockIndices = weekWidgets.map(_ => 0);
@@ -179,6 +231,13 @@ function getWidgetsFromEvents(events) {
   return widgetWeekGroups;
 }
 
+
+/**
+ * Event calendar in the calendar section.
+ * 
+ * @param {{events: Event[]; location: any; lang: any;}} props
+ * @returns {JSX.Element}
+ */
 export default function EventCalendar({ events, location, lang }) {
   const today = new Date();
   const [weekState, setWeekState] = useState({
@@ -305,7 +364,7 @@ export default function EventCalendar({ events, location, lang }) {
           )}
         </tbody>
       </table>
-      <div style={{ width: "336px", height: "570px", overflow: "scroll", margin: "auto" }}>
+      <div style={{ width: "416px", height: "570px", overflowX: "hidden", overflowY: "scroll" }}>
       {
         selectedEventIndex !== -1
         ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
@@ -328,7 +387,7 @@ export default function EventCalendar({ events, location, lang }) {
           style={{
             position: "absolute",
             top: `${3 * 30}px`,
-            left: "100px",
+            left: "90px",
           }}
           onClick={() => setSelectedEventIndex(eventWidget.eventIndex)}
         >
@@ -341,9 +400,9 @@ export default function EventCalendar({ events, location, lang }) {
             const blockStartMinute = Math.max(8*H, block.startMinute);
             const blockDuration = block.endMinute - blockStartMinute;
             const top = Math.floor((blockStartMinute - 8*H) / 2);
-            const height = Math.floor(blockDuration / 2);
-            const left = 100 * (block.day + block.collisions.index / block.collisions.numParts) + 2;
-            const width = 100 / block.collisions.numParts - 4;
+            const height = Math.max(30, Math.floor(blockDuration / 2)); // some events might be "too short"
+            const left = 90 * (block.day + block.collisions.index / block.collisions.numParts) + 2;
+            const width = 90 / block.collisions.numParts - 4;
             return (
               <div
                 key={`block-${ei}-${bi}`}
