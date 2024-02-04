@@ -377,7 +377,8 @@ export default function EventCalendar({ events, location, lang }) {
           </div>
       }
       </div>
-      {(widgetWeekGroups
+      {(weekState.widgetIndex >= 0
+      && widgetWeekGroups
       && widgetWeekGroups.length > 0
       && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
       && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
