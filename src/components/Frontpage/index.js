@@ -246,10 +246,10 @@ const Frontpage = ({ location, lang }) =>
 
         {/* Calendar section*/}
         <div className={cx('content')} >
-          {/* Title */}
+          {/* Title - &#8203; is zero-width space character, useful for line breaking */}
           <h2 id="sections_intro">
             <Translate>
-              <Swedish>Evenemangskalender</Swedish>
+              <Swedish>Evenemangs&#8203;kalender</Swedish>
               <English>Event Calendar</English>
             </Translate>
           </h2>

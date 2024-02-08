@@ -239,6 +239,27 @@ function getWidgetsFromEvents(events) {
  * @returns {JSX.Element}
  */
 export default function EventCalendar({ events, location, lang }) {
+  const [columnWidth, setColumnWidth] = useState(56);
+  var widthUpdateTimer = null;
+
+  function getColumnWidth() {
+    if (widthUpdateTimer === null) {
+      widthUpdateTimer = setTimeout(() => {
+        const W = (typeof window === "undefined") ? 480 : window.innerWidth;
+        const newColumnWidth = (W < 480) ? 48 : (W < 768) ? 56 : (W < 1024) ? 80 : (W < 1280) ? 72 : 90;
+        setColumnWidth(newColumnWidth);
+        clearInterval(widthUpdateTimer);
+        widthUpdateTimer = null;
+      }, 100);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", getColumnWidth);
+    getColumnWidth();
+    return () => window.removeEventListener("resize", getColumnWidth);
+  }, []);
+
   const today = new Date();
   const [weekState, setWeekState] = useState({
     week: 0,
@@ -248,6 +269,7 @@ export default function EventCalendar({ events, location, lang }) {
   const [selectedEventIndex, setSelectedEventIndex] = useState(-1);
 
   var widgetWeekGroups = getWidgetsFromEvents(events);
+  const monthsOfDates = weekState.dates.map(date => date.getMonth());
 
   useEffect(() => {
     widgetWeekGroups = getWidgetsFromEvents(events);
@@ -267,7 +289,38 @@ export default function EventCalendar({ events, location, lang }) {
     });
   }, [events]);
 
-  const monthsOfDates = weekState.dates.map(date => date.getMonth());
+  function getTimeRow(time) {
+    return [
+      <td key={`hourKey-${time}`} className={cx("hour")}>
+        {String(time).padStart(2, '0')}:00
+      </td>,
+      ...monthsOfDates.map((monthIndex, dayIndex) => (
+        <td key={`cellKey-${time}-${dayIndex}`} className={cx(`month-${monthIndex}`)} />
+      )),
+    ];
+  }
+
+  function goBack() {
+    const week = weekState.week;
+    const wi = weekState.widgetIndex;
+    setWeekState({
+      week: week - 1,
+      dates: weekState.dates.map(date => sub(date, { weeks: 1 })),
+      widgetIndex: (wi > 0 && widgetWeekGroups[wi - 1].week === week - 1) ? wi - 1 : wi,
+    });
+  }
+
+  function goForward() {
+    const week = weekState.week;
+    const wi = weekState.widgetIndex;
+    const end = widgetWeekGroups.length - 1;
+    setWeekState({
+      week: weekState.week + 1,
+      dates: weekState.dates.map(date => add(date, { weeks: 1 })),
+      widgetIndex: (wi < end && widgetWeekGroups[wi + 1].week === week + 1) ? wi + 1 : wi,
+    });
+  }
+
   const yearHeader = [];
   const monthHeader = [];
   const dateHeader = [];
@@ -305,49 +358,17 @@ export default function EventCalendar({ events, location, lang }) {
     );
   });
 
-  function getTimeRow(time) {
-    return [
-      <td key={`hourKey-${time}`} className={cx("hour")}>
-        {String(time).padStart(2, '0')}:00
-      </td>,
-      ...monthsOfDates.map((monthIndex, dayIndex) => (
-        <td key={`cellKey-${time}-${dayIndex}`} className={cx(`month-${monthIndex}`)} />
-      )),
-    ];
-  }
-
   const hours = [];
   for (var hour = 8; hour < 24; hour++) {
     hours.push(hour);
   }
 
-  function goBack() {
-    const week = weekState.week;
-    const wi = weekState.widgetIndex;
-    setWeekState({
-      week: week - 1,
-      dates: weekState.dates.map(date => sub(date, { weeks: 1 })),
-      widgetIndex: (wi > 0 && widgetWeekGroups[wi - 1].week === week - 1) ? wi - 1 : wi,
-    });
-  }
-
-  function goForward() {
-    const week = weekState.week;
-    const wi = weekState.widgetIndex;
-    const end = widgetWeekGroups.length - 1;
-    setWeekState({
-      week: weekState.week + 1,
-      dates: weekState.dates.map(date => add(date, { weeks: 1 })),
-      widgetIndex: (wi < end && widgetWeekGroups[wi + 1].week === week + 1) ? wi + 1 : wi,
-    });
-  }
-
   return (
-    <div style={{ position: "relative" }} className={cx('calendar', 'flex')}>
-      <table style={{ margin: "auto" }}>
+    <div className={cx('calendar')}>
+      <table>
         <thead>
           <tr className={cx("yearHeader")}>
-            <td rowSpan='3'>
+            <td rowSpan='3' className={cx("buttonZone")}>
               <button onClick={goBack}>{"<"}</button>
               <button onClick={goForward}>{">"}</button>
             </td>
@@ -364,7 +385,7 @@ export default function EventCalendar({ events, location, lang }) {
           )}
         </tbody>
       </table>
-      <div style={{ width: "416px", height: "570px", overflowX: "hidden", overflowY: "scroll" }}>
+      <div className={cx("eventDisplay")}>
       {
         selectedEventIndex !== -1
         ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
@@ -381,13 +402,13 @@ export default function EventCalendar({ events, location, lang }) {
       && widgetWeekGroups.length > 0
       && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
       && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
-        <div 
+        <di 
           key={`event-${ei}`}
           className={cx("widget")}
           style={{
             position: "absolute",
-            top: `${3 * 30}px`,
-            left: "90px",
+            top: "90px",
+            left: `${columnWidth}px`,
           }}
           onClick={() => setSelectedEventIndex(eventWidget.eventIndex)}
         >
@@ -401,8 +422,8 @@ export default function EventCalendar({ events, location, lang }) {
             const blockDuration = block.endMinute - blockStartMinute;
             const top = Math.floor((blockStartMinute - 8*H) / 2);
             const height = Math.max(30, Math.floor(blockDuration / 2)); // some events might be "too short"
-            const left = 90 * (block.day + block.collisions.index / block.collisions.numParts) + 2;
-            const width = 90 / block.collisions.numParts - 4;
+            const left = columnWidth * (block.day + block.collisions.index / block.collisions.numParts) + 2;
+            const width = columnWidth / block.collisions.numParts - 4;
             return (
               <div
                 key={`block-${ei}-${bi}`}
@@ -419,7 +440,7 @@ export default function EventCalendar({ events, location, lang }) {
               </div>
             );
           })}
-        </div>
+        </di>
         )))}
     </div>
   );
