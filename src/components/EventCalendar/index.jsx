@@ -29,8 +29,8 @@ function getMondayOfWeek(date) {
 /**
  * Given a Date object, return an array of the 7 Dates corresponding to the
  * same week, starting from Monday.
- * 
- * @param {date} date 
+ *
+ * @param {date} date
  * @returns {Date[]}
  */
 function getDatesOfWeek(date) {
@@ -47,7 +47,7 @@ function getDatesOfWeek(date) {
  * of WidgetWeekGroup objects.
  * Widgets are groups of blocks associated to each event.
  * Blocks are drawn on the calendar.
- * 
+ *
  * @param {Event[]} events
  * @returns {WidgetWeekGroup[]}
  */
@@ -65,29 +65,29 @@ function getWidgetsFromEvents(events) {
 
   const widgetWeekGroups = [];
   var multiWeekEvents = [];
-  
+
   const firstEventDate = new Date(events[0].eventStartTime)
 
   /**
    * Inner function.
    * Adds into a WidgetWeekGroup object a "week group": a group of Widget
    * objects in a same week.
-   * 
+   *
    * @returns {WidgetWeekGroup}
    */
   const addWeekGroup = () => {
     widgetWeekGroups.push({ week: currentWeek, widgets: [] });
   }
-  
+
   /**
    * Inner function.
    * Creates a Widget for an Event, and adds it into the corresponding
    * WidgetWeekGroup based on the startTime date: useful for events
    * spanning multiple weeks, as a different startTime date is passed
    * for every spanned day.
-   * 
-   * @param {Event} event 
-   * @param {number} eventIndex 
+   *
+   * @param {Event} event
+   * @param {number} eventIndex
    * @param {Date} startTime
    */
   const addWidget = (event, eventIndex, startTime) => {
@@ -234,7 +234,7 @@ function getWidgetsFromEvents(events) {
 
 /**
  * Event calendar in the calendar section.
- * 
+ *
  * @param {{events: Event[]; location: any; lang: any;}} props
  * @returns {JSX.Element}
  */
@@ -398,11 +398,12 @@ export default function EventCalendar({ events, location, lang }) {
           </div>
       }
       </div>
-      {(widgetWeekGroups
+      {(weekState.widgetIndex >= 0
+      && widgetWeekGroups
       && widgetWeekGroups.length > 0
       && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
       && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
-        <di 
+        <div
           key={`event-${ei}`}
           className={cx("widget")}
           style={{
