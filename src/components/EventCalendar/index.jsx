@@ -398,7 +398,7 @@ export default function EventCalendar({ events, location, lang }) {
           </div>
       }
       </div>
-      {(weekState.widgetIndex >= 0
+      {weekState.widgetIndex >= 0
       && widgetWeekGroups
       && widgetWeekGroups.length > 0
       && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
@@ -441,8 +441,8 @@ export default function EventCalendar({ events, location, lang }) {
               </div>
             );
           })}
-        </di>
-        )))}
+        </div>
+      ))}
     </div>
   );
 }
