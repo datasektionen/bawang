@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { add, sub } from 'date-fns';
 
 import classNames from 'classnames/bind';
 
@@ -21,8 +20,15 @@ const ENGLISH_MONTHS = [
 ];
 const ENGLISH_WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
+
+function addDays(date, days) {
+  const newDate = new Date(date);
+  newDate.setDate(date.getDate() + days);
+  return newDate;
+}
+
 function getMondayOfWeek(date) {
-  const monday = sub(date, { days: (date.getDay() + 6) % 7 });
+  const monday = addDays(date, -((date.getDay() + 6) % 7));
   return monday;
 }
 
@@ -37,7 +43,7 @@ function getDatesOfWeek(date) {
   const monday = getMondayOfWeek(date);
   const datesOfWeek = [monday];
   for (var i = 1; i < 7; i++) {
-    datesOfWeek.push(add(monday, { days: i }));
+    datesOfWeek.push(addDays(monday, i));
   }
   return datesOfWeek;
 }
@@ -122,7 +128,7 @@ function getWidgetsFromEvents(events) {
 
     // Iterate over the days between startTime and endTime
     var currentDayOfTheYear = new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate());
-    currentDayOfTheYear = add(currentDayOfTheYear, { days: 1 });
+    currentDayOfTheYear = addDays(currentDayOfTheYear, 1);
     while (currentDayOfTheYear < endTime) {
       currentDayOfTheWeek++;
       // If the week is over, defer the event to the next week and end the loop
@@ -139,7 +145,7 @@ function getWidgetsFromEvents(events) {
         endMinute: 1440,
         collisions: { numParts: 1, index: 0 },
       });
-      currentDayOfTheYear = add(currentDayOfTheYear, { days: 1 });
+      currentDayOfTheYear = addDays(currentDayOfTheYear, 1);
     }
     blocks[blocks.length - 1].endMinute = (
       endTime.getHours() * 60 + endTime.getMinutes()
@@ -159,7 +165,7 @@ function getWidgetsFromEvents(events) {
     while (eventWeek > currentWeek && multiWeekEvents.length > 0) {
       const thisWeekEvents = [...multiWeekEvents];
       multiWeekEvents = [];
-      currentMonday = add(currentMonday, {weeks: 1});
+      currentMonday = addDays(currentMonday, 7);
       currentWeek++;
       addWeekGroup();
       for (var weekEventData of thisWeekEvents) {
@@ -246,7 +252,7 @@ export default function EventCalendar({ events, location, lang }) {
     if (widthUpdateTimer === null) {
       widthUpdateTimer = setTimeout(() => {
         const W = (typeof window === "undefined") ? 480 : window.innerWidth;
-        const newColumnWidth = (W < 480) ? 48 : (W < 768) ? 56 : (W < 1024) ? 80 : (W < 1280) ? 72 : 90;
+        const newColumnWidth = (W < 480) ? 44 : (W < 768) ? 56 : (W < 1024) ? 80 : (W < 1280) ? 72 : 90;
         setColumnWidth(newColumnWidth);
         clearInterval(widthUpdateTimer);
         widthUpdateTimer = null;
@@ -305,7 +311,7 @@ export default function EventCalendar({ events, location, lang }) {
     const wi = weekState.widgetIndex;
     setWeekState({
       week: week - 1,
-      dates: weekState.dates.map(date => sub(date, { weeks: 1 })),
+      dates: weekState.dates.map(date => addDays(date, -7)),
       widgetIndex: (wi > 0 && widgetWeekGroups[wi - 1].week === week - 1) ? wi - 1 : wi,
     });
   }
@@ -316,7 +322,7 @@ export default function EventCalendar({ events, location, lang }) {
     const end = widgetWeekGroups.length - 1;
     setWeekState({
       week: weekState.week + 1,
-      dates: weekState.dates.map(date => add(date, { weeks: 1 })),
+      dates: weekState.dates.map(date => addDays(date, 7)),
       widgetIndex: (wi < end && widgetWeekGroups[wi + 1].week === week + 1) ? wi + 1 : wi,
     });
   }

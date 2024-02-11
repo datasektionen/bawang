@@ -1,7 +1,7 @@
 /* DEFAULT VALUES FOR MOBILE */
 
 .calendar {
-  width: 384px;
+  width: 352px;
   justify-items: center;
   position: relative;
   margin: auto;
@@ -22,7 +22,7 @@
   color: white;
 }
 .calendar td {
-  width: 48px;
+  width: 44px;
   height: 30px;
   font-size: small;
   text-align: center;
@@ -37,7 +37,7 @@
   font-size: small;
 }
 .calendar .yearHeader button {
-  width: 23px;
+  width: 21px;
   height: 90px;
   font-size: x-large;
   padding: 0;

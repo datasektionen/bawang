@@ -7,10 +7,8 @@
     "heroku-postbuild": "node bin/razzle.js build"
   },
   "dependencies": {
-    "@daypilot/daypilot-lite-react": "^3.19.0",
     "babel-preset-stage-0": "^6.24.1",
     "cross-fetch": "^2.2.6",
-    "date-fns": "^2.30.0",
     "esm": "^3.2.25",
     "express": "^4.18.2",
     "is-in-browser": "^1.1.3",
@@ -19,7 +17,6 @@
     "razzle": "^2.4.0",
     "razzle-heroku": "^2.1.0",
     "react": "^16.14.0",
-    "react-calendar": "^4.6.1",
     "react-dom": "^16.14.0",
     "react-head": "^3.0.1",
     "react-router-dom": "4.2.2",

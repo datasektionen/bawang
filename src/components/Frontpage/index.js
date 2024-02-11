@@ -249,7 +249,7 @@ const Frontpage = ({ location, lang }) =>
           {/* Title - &#8203; is zero-width space character, useful for line breaking */}
           <h2 id="sections_intro">
             <Translate>
-              <Swedish>Evenemangs&#8203;kalender</Swedish>
+              <Swedish>Evenemangs&shy;kalender</Swedish>
               <English>Event Calendar</English>
             </Translate>
           </h2>
