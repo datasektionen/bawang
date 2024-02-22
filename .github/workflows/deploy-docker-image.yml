@@ -29,9 +29,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          build-args:
-            - RAZZLE_TAITAN_URL=http://localhost:5000
-
+          build-args: RAZZLE_TAITAN_URL=http://localhost:5000
           push: true
           tags: ${{ env.latest }},${{ env.current }}
           cache-from: type=gha
