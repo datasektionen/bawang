@@ -19,6 +19,7 @@
 
 .calendar th {
   text-align: center;
+  line-height: 1.05;
   color: white;
 }
 .calendar td {
@@ -31,7 +32,7 @@
 }
 
 .calendar .yearHeader th {
-  height: 28px;
+  height: 22px;
   bottom: 0;
   vertical-align: bottom;
   font-size: small;
@@ -43,12 +44,12 @@
   padding: 0;
 }
 .calendar .monthHeader th {
-  height: 32px;
+  height: 24px;
   vertical-align: top;
   font-size: larger;
 }
 .calendar .dateHeader th {
-  height: 30px;
+  height: 44px;
   font-size: small;
 }
 

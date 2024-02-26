@@ -357,8 +357,8 @@ export default function EventCalendar({ events, location, lang }) {
     dateHeader.push(
       <th key={date.toUTCString()} className={cx(monthClass)}>
         <Translate>
-          <Swedish>{`${SWEDISH_WEEK_DAYS[i]} ${date.getDate()}`}</Swedish>
-          <English>{`${ENGLISH_WEEK_DAYS[i]} ${date.getDate()}`}</English>
+          <Swedish>{SWEDISH_WEEK_DAYS[i]}<br/>{date.getDate()}</Swedish>
+          <English>{ENGLISH_WEEK_DAYS[i]}<br/>{date.getDate()}</English>
         </Translate>
       </th>
     );
