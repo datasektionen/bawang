@@ -45,6 +45,16 @@ const getRightSidebarListItemStyle = (headerLevel) => {
   }
 }
 
+const getActiveMainTabTitle = (nav) => {
+  console.log(nav)
+  for (const item of nav) {
+    if (item.expanded) {
+      return item.title;
+    }
+  }
+  return null
+}
+
 const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors }, error) => {
 
   const PageHeader = () => (
@@ -74,21 +84,23 @@ const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors
         </div>
       </div>
     </header>
-  )
+  );
+  
+  const actualNav = !nav ? [] : nav;
 
   const LeftSidebar = () => (
     <div className="col-sm-4 col-md-3">
+      <h2> 
+        {getActiveMainTabTitle(actualNav)}
+      </h2>
       <div id="secondary-nav">
-        { !nav ? [] : parseNav(getNav(nav, lang)) }
+        { parseNav(getNav(actualNav)) }
       </div>
     </div>
-  )
+  );
   
   const RightSidebar = () => (
-    <div
-      className="col-md-3"
-      id="sidebar"
-    >
+    <div className="col-md-3" id="sidebar">
       { sidebar
         ? <div
             className="sidebar-card"
@@ -116,7 +128,7 @@ const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors
         </ul>
       </div>
     </div>
-  )
+  );
 
   return (
     error ? 
