@@ -57,40 +57,39 @@ const getActiveMainTabTitle = (nav) => {
   return null
 }
 
-const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors }, error) => {
-
-  const PageHeader = () => (
-    <header key="header">
-      <div className="header-inner">
-        <div className="row">
-          <div className="header-left col-md-2">
-            <Link to="/">
-              {'« '}
-              <Translate>
-                <English>Back</English>
-                <Swedish>Tillbaka</Swedish>
-              </Translate>
-            </Link>
-          </div>
-          <div className="col-md-8">
-            <h2>{ title }</h2>
-          </div>
-          <div className="header-right col-md-2">
-            <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
-              <Translate>
-                <English>Edit</English>
-                <Swedish>Redigera</Swedish>
-              </Translate>
-            </a>
-          </div>
+const PageHeader = ({title, location}) => (
+  <header key="header">
+    <div className="header-inner">
+      <div className="row">
+        <div className="header-left col-md-2">
+          <Link to="/">
+            {'« '}
+            <Translate>
+              <English>Back</English>
+              <Swedish>Tillbaka</Swedish>
+            </Translate>
+          </Link>
+        </div>
+        <div className="col-md-8">
+          <h2>{ title }</h2>
+        </div>
+        <div className="header-right col-md-2">
+          <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
+            <Translate>
+              <English>Edit</English>
+              <Swedish>Redigera</Swedish>
+            </Translate>
+          </a>
         </div>
       </div>
-    </header>
-  );
-  
+    </div>
+  </header>
+);
+
+const LeftSidebar = ({nav, lang}) => {
   // without this check, the page crashes due to the rendering the page before the taitan request is finished
   const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
-  const LeftSidebar = () => (
+  return (
     <div className="col-sm-4 col-md-3">
       <h2> 
         {getActiveMainTabTitle(languageNav)}
@@ -99,64 +98,68 @@ const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors
         { parseNav(getPageNav(languageNav)) }
       </div>
     </div>
-  );
-  
-  const RightSidebar = () => (
-    <div className="col-md-3" id="sidebar">
-      { sidebar
-        ? <div
-            className="sidebar-card"
-            dangerouslySetInnerHTML={{__html: sidebar}}
-          />
-        : false
-      }
-      <div className="sidebar-card">
-        <h2>
-          <Translate>
-            <English>On this page</English>
-            <Swedish>På den här sidan</Swedish>
-          </Translate>
-        </h2>
-        <ul>
-          {(anchors || []).map(anchor =>
-            <li key={anchor.id} style={{"list-style-type": "none"}}>
-              <a href={'#' + anchor.id}>
-                <div style={getRightSidebarListItemStyle(anchor.level)}>
-                  { anchor.value }
-                </div>
-              </a>
-            </li>
-          )}
-        </ul>
-      </div>
-    </div>
-  );
+  )
+}
 
-  return (
-    error ? 
-      <ErrorPage error={error} /> : 
-      <Fragment>
-        <Title>
-          { title + ' - Konglig Datasektionen'}
-        </Title>
-        <PageHeader />
-        <div id="content" key="content">
-          <div className="row">
-            <LeftSidebar />
-            <div className="col-sm-8 col-md-9">
-              <div className="row">
-                <div
-                  className="col-md-9"
-                  dangerouslySetInnerHTML={{__html: body}}
-                />
-                <RightSidebar />
+const RightSidebar = ({sidebar, anchors}) => (
+  <div className="col-md-3" id="sidebar">
+    { sidebar
+      ? <div
+          className="sidebar-card"
+          dangerouslySetInnerHTML={{__html: sidebar}}
+        />
+      : false
+    }
+    <div className="sidebar-card">
+      <h2>
+        <Translate>
+          <English>On this page</English>
+          <Swedish>På den här sidan</Swedish>
+        </Translate>
+      </h2>
+      <ul>
+        {(anchors || []).map(anchor =>
+          <li key={anchor.id} style={{"list-style-type": "none"}}>
+            <a href={'#' + anchor.id}>
+              <div style={getRightSidebarListItemStyle(anchor.level)}>
+                { anchor.value }
               </div>
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+);
+
+const taitanRenderer = (location, lang) =>
+  ({ title, body, sidebar, nav, anchors }, error) =>
+  (error ?
+    <ErrorPage error={error} /> :
+    <Fragment>
+      <Title>
+        { title + ' - Konglig Datasektionen'}
+      </Title>
+      <PageHeader title={title} location={location}/>
+
+      <div id="content" key="content">
+        <div className="row">
+          <LeftSidebar nav={nav} lang={lang}/>
+
+          <div className="col-sm-8 col-md-9">
+            <div className="row">
+              <div
+                className="col-md-9"
+                dangerouslySetInnerHTML={{__html: body}}
+              />
+              <RightSidebar sidebar={sidebar} anchors={anchors}/>
             </div>
+
           </div>
         </div>
-      </Fragment>
-  )  
-}
+      </div>
+    </Fragment>
+  )
 
 
 export const Default = ({ location, lang }) =>
