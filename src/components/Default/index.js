@@ -7,9 +7,12 @@ import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
 
-const getNav = (nav, lang) => {
-  const enNav = lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
-  const child = enNav.find(item => item.nav)
+const getNavForLanguage = (nav, lang) => {
+  return lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
+}
+
+const getPageNav = (nav) => {
+  const child = nav.find(item => item.nav)
   if(child && child.nav) return child.nav
   return []
 }
@@ -45,90 +48,123 @@ const getRightSidebarListItemStyle = (headerLevel) => {
   }
 }
 
-export const Default = ({ location, lang }) =>
-<Taitan pathname={location.pathname}>
-  {({ title, body, sidebar, nav, anchors }, error) =>
-    error ? <ErrorPage error={error} />
-    : <Fragment>
+const getActiveMainTabTitle = (nav) => {
+  for (const item of nav) {
+    if (item.expanded || item.active) {
+      return item.title;
+    }
+  }
+  return null
+}
+
+const PageHeader = ({title, location}) => (
+  <header key="header">
+    <div className="header-inner">
+      <div className="row">
+        <div className="header-left col-md-2">
+          <Link to="/">
+            {'« '}
+            <Translate>
+              <English>Back</English>
+              <Swedish>Tillbaka</Swedish>
+            </Translate>
+          </Link>
+        </div>
+        <div className="col-md-8">
+          <h2>{ title }</h2>
+        </div>
+        <div className="header-right col-md-2">
+          <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
+            <Translate>
+              <English>Edit</English>
+              <Swedish>Redigera</Swedish>
+            </Translate>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+);
+
+const LeftSidebar = ({nav, lang}) => {
+  // without this check, the page crashes due to the rendering the page before the taitan request is finished
+  const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
+  return (
+    <div className="col-sm-4 col-md-3">
+      <h2> 
+        {getActiveMainTabTitle(languageNav)}
+      </h2>
+      <div id="secondary-nav">
+        { parseNav(getPageNav(languageNav)) }
+      </div>
+    </div>
+  )
+}
+
+const RightSidebar = ({sidebar, anchors}) => (
+  <div className="col-md-3" id="sidebar">
+    { sidebar
+      ? <div
+          className="sidebar-card"
+          dangerouslySetInnerHTML={{__html: sidebar}}
+        />
+      : false
+    }
+    <div className="sidebar-card">
+      <h2>
+        <Translate>
+          <English>On this page</English>
+          <Swedish>På den här sidan</Swedish>
+        </Translate>
+      </h2>
+      <ul>
+        {(anchors || []).map(anchor =>
+          <li key={anchor.id} style={{"list-style-type": "none"}}>
+            <a href={'#' + anchor.id}>
+              <div style={getRightSidebarListItemStyle(anchor.level)}>
+                { anchor.value }
+              </div>
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+);
+
+const taitanRenderer = (location, lang) =>
+  ({ title, body, sidebar, nav, anchors }, error) =>
+  (error ?
+    <ErrorPage error={error} /> :
+    <Fragment>
       <Title>
         { title + ' - Konglig Datasektionen'}
       </Title>
-      <header key="header">
-        <div className="header-inner">
-          <div className="row">
-            <div className="header-left col-md-2">
-              <Link to="/">
-                {'« '}
-                <Translate>
-                  <English>Back</English>
-                  <Swedish>Tillbaka</Swedish>
-                </Translate>
-              </Link>
-            </div>
-            <div className="col-md-8">
-              <h2>{ title }</h2>
-            </div>
-            <div className="header-right col-md-2">
-              <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
-                <Translate>
-                  <English>Edit</English>
-                  <Swedish>Redigera</Swedish>
-                </Translate>
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
+      <PageHeader title={title} location={location}/>
+
       <div id="content" key="content">
         <div className="row">
-          <div className="col-sm-4 col-md-3">
-            <div id="secondary-nav">
-              { !nav ? [] : parseNav(getNav(nav, lang)) }
-            </div>
-          </div>
+          <LeftSidebar nav={nav} lang={lang}/>
+
           <div className="col-sm-8 col-md-9">
             <div className="row">
               <div
                 className="col-md-9"
                 dangerouslySetInnerHTML={{__html: body}}
               />
-              <div
-                className="col-md-3"
-                id="sidebar"
-              >
-                { sidebar
-                  ? <div
-                      className="sidebar-card"
-                      dangerouslySetInnerHTML={{__html: sidebar}}
-                    />
-                  : false
-                }
-                <div className="sidebar-card">
-                  <h2>
-                    <Translate>
-                      <English>On this page</English>
-                      <Swedish>På den här sidan</Swedish>
-                    </Translate>
-                  </h2>
-                  <ul>
-                    {(anchors || []).map(anchor =>
-                      <li key={anchor.id} style={{"list-style-type": "none"}}>
-                        <a href={'#' + anchor.id}>
-                          <div style={getRightSidebarListItemStyle(anchor.level)}>
-                            { anchor.value }
-                          </div>
-                        </a>
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              </div>
+              <RightSidebar sidebar={sidebar} anchors={anchors}/>
             </div>
+
           </div>
         </div>
       </div>
     </Fragment>
-  }
-</Taitan>
+  )
+
+
+export const Default = ({ location, lang }) =>
+  <Taitan pathname={location.pathname}>
+    { taitanRenderer(location, lang) }
+  </Taitan>
 
 export default Default
