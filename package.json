@@ -23,7 +23,7 @@
     "terser-webpack-plugin": "^4.2.3"
   },
   "engines": {
-    "node": "^10"
+    "node": ">=10"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.9.2"

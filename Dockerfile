@@ -1,6 +1,7 @@
-FROM node:10-alpine3.11 AS base
+FROM node:21-alpine3.18 AS base
 
 WORKDIR /app
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # I dont know why, but when doing npm install in this Dockerfile, methone just gets cloned but there
 # is no dist directory, which makes the build fail since there is nothing in methone to import.
