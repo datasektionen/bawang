@@ -7,9 +7,12 @@ import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
 
-const getNav = (nav, lang) => {
-  const enNav = lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
-  const child = enNav.find(item => item.nav)
+const getNavForLanguage = (nav, lang) => {
+  return lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
+}
+
+const getPageNav = (nav) => {
+  const child = nav.find(item => item.nav)
   if(child && child.nav) return child.nav
   return []
 }
@@ -46,9 +49,8 @@ const getRightSidebarListItemStyle = (headerLevel) => {
 }
 
 const getActiveMainTabTitle = (nav) => {
-  console.log(nav)
   for (const item of nav) {
-    if (item.expanded) {
+    if (item.expanded || item.active) {
       return item.title;
     }
   }
@@ -86,15 +88,15 @@ const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors
     </header>
   );
   
-  const actualNav = !nav ? [] : nav;
-
+  // without this check, the page crashes due to the rendering the page before the taitan request is finished
+  const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
   const LeftSidebar = () => (
     <div className="col-sm-4 col-md-3">
       <h2> 
-        {getActiveMainTabTitle(actualNav)}
+        {getActiveMainTabTitle(languageNav)}
       </h2>
       <div id="secondary-nav">
-        { parseNav(getNav(actualNav)) }
+        { parseNav(getPageNav(languageNav)) }
       </div>
     </div>
   );
