@@ -45,90 +45,109 @@ const getRightSidebarListItemStyle = (headerLevel) => {
   }
 }
 
-export const Default = ({ location, lang }) =>
-<Taitan pathname={location.pathname}>
-  {({ title, body, sidebar, nav, anchors }, error) =>
-    error ? <ErrorPage error={error} />
-    : <Fragment>
-      <Title>
-        { title + ' - Konglig Datasektionen'}
-      </Title>
-      <header key="header">
-        <div className="header-inner">
-          <div className="row">
-            <div className="header-left col-md-2">
-              <Link to="/">
-                {'« '}
-                <Translate>
-                  <English>Back</English>
-                  <Swedish>Tillbaka</Swedish>
-                </Translate>
-              </Link>
-            </div>
-            <div className="col-md-8">
-              <h2>{ title }</h2>
-            </div>
-            <div className="header-right col-md-2">
-              <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
-                <Translate>
-                  <English>Edit</English>
-                  <Swedish>Redigera</Swedish>
-                </Translate>
-              </a>
-            </div>
+const taitanRenderer = (location, lang) => ({ title, body, sidebar, nav, anchors }, error) => {
+
+  const PageHeader = () => (
+    <header key="header">
+      <div className="header-inner">
+        <div className="row">
+          <div className="header-left col-md-2">
+            <Link to="/">
+              {'« '}
+              <Translate>
+                <English>Back</English>
+                <Swedish>Tillbaka</Swedish>
+              </Translate>
+            </Link>
+          </div>
+          <div className="col-md-8">
+            <h2>{ title }</h2>
+          </div>
+          <div className="header-right col-md-2">
+            <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
+              <Translate>
+                <English>Edit</English>
+                <Swedish>Redigera</Swedish>
+              </Translate>
+            </a>
           </div>
         </div>
-      </header>
-      <div id="content" key="content">
-        <div className="row">
-          <div className="col-sm-4 col-md-3">
-            <div id="secondary-nav">
-              { !nav ? [] : parseNav(getNav(nav, lang)) }
-            </div>
-          </div>
-          <div className="col-sm-8 col-md-9">
-            <div className="row">
-              <div
-                className="col-md-9"
-                dangerouslySetInnerHTML={{__html: body}}
-              />
-              <div
-                className="col-md-3"
-                id="sidebar"
-              >
-                { sidebar
-                  ? <div
-                      className="sidebar-card"
-                      dangerouslySetInnerHTML={{__html: sidebar}}
-                    />
-                  : false
-                }
-                <div className="sidebar-card">
-                  <h2>
-                    <Translate>
-                      <English>On this page</English>
-                      <Swedish>På den här sidan</Swedish>
-                    </Translate>
-                  </h2>
-                  <ul>
-                    {(anchors || []).map(anchor =>
-                      <li key={anchor.id} style={{"list-style-type": "none"}}>
-                        <a href={'#' + anchor.id}>
-                          <div style={getRightSidebarListItemStyle(anchor.level)}>
-                            { anchor.value }
-                          </div>
-                        </a>
-                      </li>
-                    )}
-                  </ul>
+      </div>
+    </header>
+  )
+
+  const LeftSidebar = () => (
+    <div className="col-sm-4 col-md-3">
+      <div id="secondary-nav">
+        { !nav ? [] : parseNav(getNav(nav, lang)) }
+      </div>
+    </div>
+  )
+  
+  const RightSidebar = () => (
+    <div
+      className="col-md-3"
+      id="sidebar"
+    >
+      { sidebar
+        ? <div
+            className="sidebar-card"
+            dangerouslySetInnerHTML={{__html: sidebar}}
+          />
+        : false
+      }
+      <div className="sidebar-card">
+        <h2>
+          <Translate>
+            <English>On this page</English>
+            <Swedish>På den här sidan</Swedish>
+          </Translate>
+        </h2>
+        <ul>
+          {(anchors || []).map(anchor =>
+            <li key={anchor.id} style={{"list-style-type": "none"}}>
+              <a href={'#' + anchor.id}>
+                <div style={getRightSidebarListItemStyle(anchor.level)}>
+                  { anchor.value }
                 </div>
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  )
+
+  return (
+    error ? 
+      <ErrorPage error={error} /> : 
+      <Fragment>
+        <Title>
+          { title + ' - Konglig Datasektionen'}
+        </Title>
+        <PageHeader />
+        <div id="content" key="content">
+          <div className="row">
+            <LeftSidebar />
+            <div className="col-sm-8 col-md-9">
+              <div className="row">
+                <div
+                  className="col-md-9"
+                  dangerouslySetInnerHTML={{__html: body}}
+                />
+                <RightSidebar />
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Fragment>
-  }
-</Taitan>
+      </Fragment>
+  )  
+}
+
+
+export const Default = ({ location, lang }) =>
+  <Taitan pathname={location.pathname}>
+    { taitanRenderer(location, lang) }
+  </Taitan>
 
 export default Default
