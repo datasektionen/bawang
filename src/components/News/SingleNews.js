@@ -101,7 +101,6 @@ const EventInfoSidebar = ({item, lang}) => // item CAN'T be undefined here
     </div>
   </div>
 
-
 export const SingleItem = ({ item, location, lang, match }) =>
 <Calypso type='item' search={'/' + match.params.postId}>
   {(item) => // item CAN be undefined here
@@ -154,7 +153,7 @@ export const SingleItem = ({ item, location, lang, match }) =>
             </div>
             {(item.googleForm || item.facebookEvent) &&
               <div className="row">
-                {item.googleForm && 
+                {item.googleForm &&
                   <div className={item.facebookEvent ? cx('col-xs-6', styles['no-padding-right']) : 'col-xs-12'}>
                     <a className={styles.gdocs} href={item.googleForm} target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-fw fa-google"/>{'  '}
@@ -165,7 +164,7 @@ export const SingleItem = ({ item, location, lang, match }) =>
                     </a>
                   </div>
                 }
-                {item.facebookEvent && 
+                {item.facebookEvent &&
                   <div className={item.googleForm ? cx('col-xs-6', styles['no-padding-left']) : 'col-xs-12'}>
                     <a className={styles.fb} href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
                       <i className="fab fa-fw fa-facebook-f"/>{'  '}
@@ -180,7 +179,7 @@ export const SingleItem = ({ item, location, lang, match }) =>
             }
           </div>
           {item.itemType === "EVENT" &&
-            <EventInfoSidebar />
+            <EventInfoSidebar item={item} lang={lang} />
           }
         </div>
       }
