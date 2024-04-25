@@ -8,7 +8,7 @@ import styles from './News.module.css'
 import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
-import EventCalendar from '../EventCalendar'
+import EventCalendar, { getWeekTimeSpan } from '../EventCalendar'
 
 if(global && !global.URLSearchParams) {
   global.URLSearchParams = require('url').URLSearchParams
@@ -73,9 +73,16 @@ export const News = ({ location, lang, match }) => {
           </h2>
 
           {/* Calendar */}
-          <Calypso type='event'>
+          <Calypso type='event' defaultTimeSpan={getWeekTimeSpan(new Date())}>
           {/* Given content from Calypso, populate the section with events information */}
-          {content => <EventCalendar events={content} location={location} lang={lang} />}
+          {({content, loading, onUpdateTimeSpan}) =>
+            <EventCalendar
+              events={loading ? [] : content}
+              location={location}
+              lang={lang}
+              onUpdateTimeSpan={onUpdateTimeSpan}
+            />
+          }
           </Calypso>
         </div>
 
@@ -174,7 +181,7 @@ export const News = ({ location, lang, match }) => {
                       </Translate>
                     </h2>
                     <Calypso type='event'>
-                      {content =>
+                      {({content}) =>
                         (content && content.length)
                           ? content
                             .filter((_, i) => i < 5)
