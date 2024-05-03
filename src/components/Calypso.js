@@ -35,7 +35,7 @@ function getCalypsoUrl(type, search, timeSpan) {
     return `${RAZZLE_CALYPSO_URL}/${type || 'list'}${search || ''}`;
   }
   const [startDate, endDate] = timeSpan;
-  const url = new URL(`https://calypso.datasektionen.se/api/event/span`);
+  const url = new URL(`${RAZZLE_CALYPSO_URL}/event/span`);
   url.searchParams.set('startDate', iso(startDate));
   url.searchParams.set('endDate', iso(endDate));
   return url.href;
