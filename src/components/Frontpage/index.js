@@ -9,7 +9,7 @@ import { Translate, English, Swedish } from '../Translate'
 
 import styles from './Frontpage.module.css'
 import skold from './skold.svg'
-import EventCalendar from '../EventCalendar/index.jsx';
+import EventCalendar, { getWeekTimeSpan } from '../EventCalendar/index.jsx';
 import './FixMe.css'
 
 const cx = classNames.bind(styles)
@@ -127,7 +127,7 @@ const Frontpage = ({ location, lang }) =>
           {/* Events section */}
           <Calypso type='event'>
           {/* Given content from Calypso, populate the section with events information */}
-          {content => (
+          {({content}) => (
             <div className={cx('news')}>
               {/* Title */}
               <Link to={lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT'}>
@@ -255,9 +255,16 @@ const Frontpage = ({ location, lang }) =>
           </h2>
 
           {/* Calendar */}
-          <Calypso type='event'>
+          <Calypso type='event' defaultTimeSpan={getWeekTimeSpan(new Date())}>
           {/* Given content from Calypso, populate the section with events information */}
-          {content => <EventCalendar events={content} location={location} lang={lang} />}
+          {({content, loading, onUpdateTimeSpan}) =>
+            <EventCalendar
+              events={loading ? [] : content}
+              location={location}
+              lang={lang}
+              onUpdateTimeSpan={onUpdateTimeSpan}
+            />
+          }
           </Calypso>
         </div>
 

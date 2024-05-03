@@ -49,6 +49,19 @@ function getDatesOfWeek(date) {
 }
 
 /**
+ * Get the start and end dates for a week.
+ * 
+ * @param {Date} date A date inside the week.
+ */
+export function getWeekTimeSpan(date) {
+  const monday = getMondayOfWeek(date);
+  monday.setHours(0, 0, 0, 0);
+  const sunday = addDays(monday, 6);
+  sunday.setHours(23, 59, 59, 999);
+  return [monday, sunday];
+}
+
+/**
  * Given an array of event objects, return an array widgetWeekGroups
  * of WidgetWeekGroup objects.
  * Widgets are groups of blocks associated to each event.
@@ -241,10 +254,10 @@ function getWidgetsFromEvents(events) {
 /**
  * Event calendar in the calendar section.
  *
- * @param {{events: Event[]; location: any; lang: any;}} props
+ * @param {{events: Event[]; location: any; lang: any; onUpdateTimeSpan: ([Date, Date]) => void}} props
  * @returns {JSX.Element}
  */
-export default function EventCalendar({ events, location, lang }) {
+export default function EventCalendar({ events, location, lang, onUpdateTimeSpan }) {
   const [columnWidth, setColumnWidth] = useState(56);
   var widthUpdateTimer = null;
 
@@ -272,22 +285,32 @@ export default function EventCalendar({ events, location, lang }) {
     dates: getDatesOfWeek(today),
     widgetIndex: 0,
   });
+  const [hasCalculatedWeek, setHasCalculatedWeek] = useState(false);
   const [selectedEventIndex, setSelectedEventIndex] = useState(-1);
 
-  var widgetWeekGroups = getWidgetsFromEvents(events);
+  const [widgetWeekGroups, setWidgetWeekGroups] = useState(() => getWidgetsFromEvents(events));
   const monthsOfDates = weekState.dates.map(date => date.getMonth());
 
+  // When the calendar is first loaded, calculate the week to display.
   useEffect(() => {
-    widgetWeekGroups = getWidgetsFromEvents(events);
+    const newWidgetWeekGroups = getWidgetsFromEvents(events);
+    setWidgetWeekGroups(newWidgetWeekGroups);
+    
+    setSelectedEventIndex(-1);
+    if (events.length === 0) return;
+    // Do not re-calculate the week if the user manually changes the viewed week.
+    if (hasCalculatedWeek) return;
+
     const timedelta = getMondayOfWeek(today) - getMondayOfWeek(events[0].eventStartTime);
     const currentWeek = Math.round(timedelta / (1000 * 60 * 60 * 27 * 7));
     var widgetIndex = -1;
-    for (var i = 0; i < widgetWeekGroups.length; i++) {
-      if (widgetWeekGroups[i].week > currentWeek) {
+    for (var i = 0; i < newWidgetWeekGroups.length; i++) {
+      if (newWidgetWeekGroups[i].week > currentWeek) {
         break;
       }
       widgetIndex = i;
     }
+    setHasCalculatedWeek(true);
     setWeekState({
       week: currentWeek,
       dates: getDatesOfWeek(today),
@@ -306,25 +329,35 @@ export default function EventCalendar({ events, location, lang }) {
     ];
   }
 
+  function updateTimeSpan(date) {
+    if (!onUpdateTimeSpan) return;
+    const span = getWeekTimeSpan(date);
+    onUpdateTimeSpan(span);
+  }
+
   function goBack() {
     const week = weekState.week;
     const wi = weekState.widgetIndex;
+    const dates = weekState.dates.map(date => addDays(date, -7));
     setWeekState({
       week: week - 1,
-      dates: weekState.dates.map(date => addDays(date, -7)),
+      dates,
       widgetIndex: (wi > 0 && widgetWeekGroups[wi - 1].week === week - 1) ? wi - 1 : wi,
     });
+    updateTimeSpan(dates[0]);
   }
 
   function goForward() {
     const week = weekState.week;
     const wi = weekState.widgetIndex;
     const end = widgetWeekGroups.length - 1;
+    const dates = weekState.dates.map(date => addDays(date, 7));
     setWeekState({
       week: weekState.week + 1,
-      dates: weekState.dates.map(date => addDays(date, 7)),
+      dates,
       widgetIndex: (wi < end && widgetWeekGroups[wi + 1].week === week + 1) ? wi + 1 : wi,
     });
+    updateTimeSpan(dates[0]);
   }
 
   const yearHeader = [];
@@ -393,7 +426,7 @@ export default function EventCalendar({ events, location, lang }) {
       </table>
       <div className={cx("eventDisplay")}>
       {
-        selectedEventIndex !== -1
+        selectedEventIndex !== -1 && events[selectedEventIndex]
         ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
         : <div style={{ height: "100%", width: "100%", padding: "10%", display: "flex", alignItems: "center", backgroundColor: "#eeeeee" }}>
             <p style={{ fontSize: "24px", textAlign: "center" }}>
@@ -407,7 +440,6 @@ export default function EventCalendar({ events, location, lang }) {
       {weekState.widgetIndex >= 0
       && widgetWeekGroups
       && widgetWeekGroups.length > 0
-      && widgetWeekGroups[weekState.widgetIndex].week === weekState.week
       && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
         <div
           key={`event-${ei}`}
@@ -422,6 +454,9 @@ export default function EventCalendar({ events, location, lang }) {
           {eventWidget.blocks.map((block, bi) => {
             const H = 60;
             if (block.endMinute <= 8*H) {
+              return null;
+            }
+            if (!events[eventWidget.eventIndex]) {
               return null;
             }
 
