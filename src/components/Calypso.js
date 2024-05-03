@@ -41,7 +41,7 @@ function getCalypsoUrl(type, search, timeSpan) {
   return url.href;
 }
 
-export const Calypso = ({ type, search, children, ttl, defaultTimeSpan }) => {
+export const Calypso = ({ type, search, children, defaultTimeSpan }) => {
   const [timeSpan, setTimeSpan] = useState(defaultTimeSpan);
   const cacheKey = getCalypsoUrl(type, search, timeSpan);
 
