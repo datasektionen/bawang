@@ -1,3 +1,9 @@
+:root{
+  --hoverdark: rgb(92, 3, 92);
+  --hoverlight: #e83d84;
+  --actionhover: #e83d84
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +13,47 @@ body {
 h3, .cerise #content h3 {
   border: none;
 }
+
+/* THE HOVER STYLING by @hunxjunedo */
+
+.sc-htpNat a:hover{
+  color: var(--hoverdark) !important;
+  text-decoration: underline !important;
+  transition: 1s;
+}
+
+
+
+.row a:hover{
+  color: var(--hoverdark) !important;
+  text-decoration: underline !important;
+}
+
+
+#contact a:hover{
+  color: var(--hoverlight) !important;
+}
+.header-right a:hover{
+  background: transparent;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
+
+.src-components-Frontpage-__Frontpage-module___content a h3:hover{
+  color: var(--hoverlight) !important;
+  text-decoration: underline !important;
+  transition: 1s;
+}
+
+.action:hover{
+  border: 2px solid var(--actionhover);
+  color: var(--actionhover) !important;
+  background: transparent !important;
+  transition: 0.1s;
+}
+
+/* END */
 
 .pagination .disabled, .pagination .disabled a {
   color: #999 !important;
