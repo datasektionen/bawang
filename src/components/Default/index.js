@@ -37,14 +37,14 @@ const parseNav = (items, slug) =>
   </ul>
 
 const getRightSidebarListItemStyle = (headerLevel) => {
-  // smallest level is 1, but it since we don't display the list item dot, 
-  // it is nice to move the top level header a bit to the left to 
+  // smallest level is 1, but it since we don't display the list item dot,
+  // it is nice to move the top level header a bit to the left to
   // compensate (since that doesn't happen automatically)
   const indent = (headerLevel - 2)
   return {
-    "margin-left": indent + "rem",
-    "line-height": "120%",
-    "margin-bottom": "1rem"
+    marginLeft: indent + "rem",
+    lineHeight: "120%",
+    marginBottom: "1rem",
   }
 }
 
@@ -91,7 +91,7 @@ const LeftSidebar = ({nav, lang}) => {
   const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
   return (
     <div className="col-sm-4 col-md-3">
-      <h2> 
+      <h2>
         {getActiveMainTabTitle(languageNav)}
       </h2>
       <div id="secondary-nav">
@@ -119,7 +119,7 @@ const RightSidebar = ({sidebar, anchors}) => (
       </h2>
       <ul>
         {(anchors || []).map(anchor =>
-          <li key={anchor.id} style={{"list-style-type": "none"}}>
+          <li key={anchor.id} style={{listStyleType: "none"}}>
             <a href={'#' + anchor.id}>
               <div style={getRightSidebarListItemStyle(anchor.level)}>
                 { anchor.value }
