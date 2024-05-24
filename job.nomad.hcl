@@ -28,7 +28,7 @@ job "bawang" {
 
       template {
         data        = <<ENV
-TAITAN_URL=https://taitan.betasektionen.se
+TAITAN_URL=http://taitan.nomad.dsekt.internal
 PORT={{ env "NOMAD_PORT_http" }}
 ENV
         destination = "local/.env"

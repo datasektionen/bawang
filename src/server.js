@@ -7,8 +7,7 @@ import { HeadProvider } from 'react-head'
 import { ServerStyleSheet } from 'styled-components'
 
 import { Provider } from './components/DataLoader'
-
-const TAITAN_URL = process.env.TAITAN_URL || 'https://taitan.datasektionen.se'
+import { FRONTEND_TAITAN_URL } from './utility/env'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
@@ -30,7 +29,7 @@ console.log('RAZZLE_ASSETS_MANIFEST', process.env.RAZZLE_ASSETS_MANIFEST)
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .get('/fuzzyfile', (req, res) => res.redirect(TAITAN_URL + '/fuzzyfile'))
+  .get('/fuzzyfile', (req, res) => res.redirect(FRONTEND_TAITAN_URL + '/fuzzyfile'))
   .get('/*', async (req, res) => {
     const context = {}
     const promises = []
