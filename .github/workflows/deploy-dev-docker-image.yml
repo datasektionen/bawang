@@ -12,8 +12,8 @@ jobs:
       - name: Set environment variables
         run: |
           cat >> "$GITHUB_ENV" <<EOF
-          latest=ghcr.io/${{ github.repository }}:latest
-          current=ghcr.io/${{ github.repository }}:$(git rev-parse --short ${{ github.sha }})
+          latest=ghcr.io/${{ github.repository }}-dev:latest
+          current=ghcr.io/${{ github.repository }}-dev:$(git rev-parse --short ${{ github.sha }})
           EOF
 
       - name: Set up Docker Buildx
