@@ -12,8 +12,6 @@ switch (script) {
     const result = spawn.sync(
       'node',
       [
-        '-r',
-        'esm',
         require.resolve('razzle/scripts/' + script)
       ].concat(args),
       { stdio: 'inherit' }
@@ -35,7 +33,6 @@ switch (script) {
       process.exit(1);
     }
     process.exit(result.status);
-    break;
   }
   default:
     console.log('Unknown script "' + script + '".');
