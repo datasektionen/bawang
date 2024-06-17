@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babel-preset-stage-0": "^6.24.1",
+    "classnames": "^2.5.1",
     "cross-fetch": "^2.2.6",
     "express": "^4.18.2",
     "is-in-browser": "^1.1.3",
