@@ -72,6 +72,10 @@ a.action {
   text-align: center;
   margin: 20px auto 0;
 }
+a.action:hover, a.action:focus {
+  transform: scale(1.05);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .1);
+}
 .inline_link {
   color: #e83d84;
   text-decoration: underline !important;
