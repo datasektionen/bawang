@@ -82,7 +82,8 @@
   color: #828ca2;
 }
 
-.content.hero .more-btn:hover {
+.content.hero .more-btn:hover,
+.content.hero .more-btn:focus {
   transform: scale(1.05);
   box-shadow: 0 3px 3px rgba(0, 0, 0, .1);
 }
