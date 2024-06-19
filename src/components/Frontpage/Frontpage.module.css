@@ -130,6 +130,12 @@
   text-shadow: 1px 1px #fff;
   margin: 20px;
   text-transform: uppercase;
+  transition: color 0.1s ease-out;
+}
+
+.content .news h2:hover,
+.content .news h2:focus {
+    color: #ec5f99;
 }
 
 .content .news ul {
@@ -152,6 +158,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: #6a758f;
+  transition: color 0.1s ease-out;
+}
+
+.content .news ul li h3:hover,
+.content .news ul li h3:focus {
+  color: #959eb3;
 }
 
 .content .news ul div {
