@@ -15,7 +15,7 @@ import './FixMe.css'
 const cx = classNames.bind(styles)
 
 const Frontpage = ({ location, lang }) =>
-  <Taitan pathname={location.pathname}>
+  <Taitan pathname={location.pathname} lang={lang}>
     {({ title, body, sidebar }) =>
       /*
       A "Fragment" groups multiple components in a place where only one component is expected.

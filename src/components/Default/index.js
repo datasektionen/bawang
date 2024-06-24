@@ -7,10 +7,6 @@ import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
 
-const getNavForLanguage = (nav, lang) => {
-  return lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
-}
-
 const getPageNav = (nav) => {
   const child = nav.find(item => item.nav)
   if(child && child.nav) return child.nav
@@ -86,16 +82,16 @@ const PageHeader = ({title, location}) => (
   </header>
 );
 
-const LeftSidebar = ({nav, lang}) => {
-  // without this check, the page crashes due to the rendering the page before the taitan request is finished
-  const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
+const LeftSidebar = ({nav}) => {
+  // without this check, the page crashes due to rendering the page before the taitan request is finished
+  nav = nav || [];
   return (
     <div className="col-sm-4 col-md-3">
       <h2>
-        {getActiveMainTabTitle(languageNav)}
+        {getActiveMainTabTitle(nav)}
       </h2>
       <div id="secondary-nav">
-        { parseNav(getPageNav(languageNav)) }
+        { parseNav(getPageNav(nav)) }
       </div>
     </div>
   )
@@ -132,7 +128,7 @@ const RightSidebar = ({sidebar, anchors}) => (
   </div>
 );
 
-const taitanRenderer = (location, lang) =>
+const taitanRenderer = (location) =>
   ({ title, body, sidebar, nav, anchors }, error) =>
   (error ?
     <ErrorPage error={error} /> :
@@ -144,7 +140,7 @@ const taitanRenderer = (location, lang) =>
 
       <div id="content" key="content">
         <div className="row">
-          <LeftSidebar nav={nav} lang={lang}/>
+          <LeftSidebar nav={nav}/>
 
           <div className="col-sm-8 col-md-9">
             <div className="row">
@@ -163,8 +159,8 @@ const taitanRenderer = (location, lang) =>
 
 
 export const Default = ({ location, lang }) =>
-  <Taitan pathname={location.pathname}>
-    { taitanRenderer(location, lang) }
+  <Taitan pathname={location.pathname} lang={lang}>
+    { taitanRenderer(location) }
   </Taitan>
 
 export default Default

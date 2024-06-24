@@ -196,18 +196,18 @@ export const News = ({ location, lang, match }) => {
                               </Link>
                               <br/>
                               <span>
-                                    {
-                                      new Date(item.eventStartTime)
-                                        .toLocaleDateString(
-                                          lang === 'en' ? 'en-US' : 'sv-SE',
-                                          {
-                                            day: 'numeric',
-                                            month: 'long',
-                                            year: 'numeric'
-                                          }
-                                        )
-                                    }
-                                    </span>
+                                {
+                                  new Date(item.eventStartTime)
+                                    .toLocaleDateString(
+                                      lang === 'en' ? 'en-US' : 'sv-SE',
+                                      {
+                                        day: 'numeric',
+                                        month: 'long',
+                                        year: 'numeric'
+                                      }
+                                    )
+                                }
+                              </span>
                             </p>)
                           :
                           <Translate>

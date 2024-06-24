@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { HTTPError } from '../HTTPError'
 
 import fetch from 'cross-fetch'
@@ -36,18 +36,26 @@ function taitanFetcher(cacheKey) {
     .then(res => ({ status: 200, redirect: false, ...res }));
 };
 
-export const Taitan = ({ pathname, children }) =>
-  <DataLoader
-    cacheKey={FRONTEND_TAITAN_URL + pathname}
-    fetcher={taitanFetcher}
-    ttl={TAITAN_CACHE_TTL}
-  >
-    {({ data, loading, error }) => {
-      if (!loading && data && data.redirect)
-        return <Redirect to={data.redirect} />
+export const Taitan = ({ pathname, children, lang }) => {
+  console.log(pathname)
+  const cacheKey = lang ? 
+    FRONTEND_TAITAN_URL + pathname + "?lang=" + lang :
+    FRONTEND_TAITAN_URL + pathname;
 
-      return children(data, error)
-    }}
-  </DataLoader>
+  return (
+    <DataLoader
+      cacheKey={cacheKey}
+      fetcher={taitanFetcher}
+      ttl={TAITAN_CACHE_TTL}
+    >
+      {({ data, loading, error }) => {
+        if (!loading && data && data.redirect)
+          return <Navigate to={data.redirect} />
+
+        return children(data, error)
+      }}
+    </DataLoader>
+  )
+}
 
 export default Taitan
