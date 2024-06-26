@@ -13,7 +13,7 @@
     "express": "^4.18.2",
     "is-in-browser": "^1.1.3",
     "lodash": "^4.17.21",
-    "methone": "datasektionen/Methone",
+    "methone": "github:datasektionen/Methone",
     "razzle": "^2.4.0",
     "razzle-heroku": "^2.1.0",
     "react": "^16.14.0",
