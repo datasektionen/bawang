@@ -23,6 +23,7 @@
     "terser-webpack-plugin": "^4.2.3"
   },
   "eslintConfig": {
+    "parser": "babel-eslint",
     "settings": {
       "react": {
         "version": "detect"
@@ -33,6 +34,7 @@
     "node": ">=21"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "babel-plugin-styled-components": "^1.9.2"
   }
 }
