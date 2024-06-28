@@ -1,6 +1,6 @@
-import App from './components/App'
 import React from 'react'
-import { StaticRouter } from 'react-router-dom'
+import { App } from './components/App'
+import { StaticRouter } from 'react-router-dom/server'
 import express from 'express'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { HeadProvider } from 'react-head'

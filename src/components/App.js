@@ -22,16 +22,16 @@ const renderMethone = (lang) => {
   const info = {
     "en": "Svenska",
     "sv": "English"
-  }[lang]// ?? "Svenska";
+  }[lang] || "Svenska";
 
   const redir = {
     "en": path,
     "sv": path + "?lang=en"
-  }[lang]// ?? path;
+  }[lang] || path;
 
   const methoneRenderFunc = ({ nav }) => {
     const links = nav ? createLinks(nav) : [];
-    
+
     return (
       <Methone config={{
         sytem_name: 'bawang',
@@ -50,27 +50,28 @@ const renderMethone = (lang) => {
   )
 }
 
-const App = () => {
+export const App = () => {
   const [searchParams,] = useSearchParams()
   const lang = searchParams.get("lang")
 
   return (
     <div id="application" className="cerise">
-      <Route path render={() =>
-        <Fragment>
-          {renderMethone(lang)}
-          <LanguageContext.Provider value={lang}>
-            <Routes>
-              <Route path="/" exact render={args => <Frontpage lang={lang} {...args} />} />
-              <Route path="/nyheter/:postId" render={args => <SingleNews lang={lang}{...args} />} />
-              <Route path="/nyheter" render={args => <News lang={lang}{...args} />} />
-              <Route path="/" render={args => <Default lang={lang}{...args} />} />
-            </Routes>
-          </LanguageContext.Provider>
-        </Fragment>
-      } />
+      <Routes>
+
+        <Route path render={() =>
+          <Fragment>
+            {renderMethone(lang)}
+            <LanguageContext.Provider value={lang}>
+              <Routes>
+                <Route path="/" exact render={args => <Frontpage lang={lang} {...args} />} />
+                <Route path="/nyheter/:postId" render={args => <SingleNews lang={lang}{...args} />} />
+                <Route path="/nyheter" render={args => <News lang={lang}{...args} />} />
+                <Route path="/" render={args => <Default lang={lang}{...args} />} />
+              </Routes>
+            </LanguageContext.Provider>
+          </Fragment>
+        } />
+      </Routes>
     </div>
   )
 }
-
-export default App
