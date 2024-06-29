@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Title } from 'react-head'
 
 import Taitan from '../Taitan'
@@ -9,7 +9,7 @@ import { comparePages } from '../../utility/compare'
 
 const getPageNav = (nav) => {
   const child = nav.find(item => item.nav)
-  if(child && child.nav) return child.nav
+  if (child && child.nav) return child.nav
   return []
 }
 
@@ -24,7 +24,7 @@ const parseNav = (items, slug) =>
               className={item.active ? 'text-theme-color strong' : ''}
               to={item.slug}
             >
-              { item.title }
+              {item.title}
             </Link>
           </li>
           {item.nav && parseNav(item.nav, item.slug + '/')}
@@ -53,7 +53,7 @@ const getActiveMainTabTitle = (nav) => {
   return null
 }
 
-const PageHeader = ({title, location}) => (
+const PageHeader = ({ title, location }) => (
   <header key="header">
     <div className="header-inner">
       <div className="row">
@@ -67,7 +67,7 @@ const PageHeader = ({title, location}) => (
           </Link>
         </div>
         <div className="col-md-8">
-          <h2>{ title }</h2>
+          <h2>{title}</h2>
         </div>
         <div className="header-right col-md-2">
           <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
@@ -82,7 +82,7 @@ const PageHeader = ({title, location}) => (
   </header>
 );
 
-const LeftSidebar = ({nav}) => {
+const LeftSidebar = ({ nav }) => {
   // without this check, the page crashes due to rendering the page before the taitan request is finished
   nav = nav || [];
   return (
@@ -91,19 +91,19 @@ const LeftSidebar = ({nav}) => {
         {getActiveMainTabTitle(nav)}
       </h2>
       <div id="secondary-nav">
-        { parseNav(getPageNav(nav)) }
+        {parseNav(getPageNav(nav))}
       </div>
     </div>
   )
 }
 
-const RightSidebar = ({sidebar, anchors}) => (
+const RightSidebar = ({ sidebar, anchors }) => (
   <div className="col-md-3" id="sidebar">
-    { sidebar
+    {sidebar
       ? <div
-          className="sidebar-card"
-          dangerouslySetInnerHTML={{__html: sidebar}}
-        />
+        className="sidebar-card"
+        dangerouslySetInnerHTML={{ __html: sidebar }}
+      />
       : false
     }
     <div className="sidebar-card">
@@ -115,10 +115,10 @@ const RightSidebar = ({sidebar, anchors}) => (
       </h2>
       <ul>
         {(anchors || []).map(anchor =>
-          <li key={anchor.id} style={{listStyleType: "none"}}>
+          <li key={anchor.id} style={{ listStyleType: "none" }}>
             <a href={'#' + anchor.id}>
               <div style={getRightSidebarListItemStyle(anchor.level)}>
-                { anchor.value }
+                {anchor.value}
               </div>
             </a>
           </li>
@@ -134,21 +134,21 @@ const taitanRenderer = (location) =>
     <ErrorPage error={error} /> :
     <Fragment>
       <Title>
-        { title + ' - Konglig Datasektionen'}
+        {title + ' - Konglig Datasektionen'}
       </Title>
-      <PageHeader title={title} location={location}/>
+      <PageHeader title={title} location={location} />
 
       <div id="content" key="content">
         <div className="row">
-          <LeftSidebar nav={nav}/>
+          <LeftSidebar nav={nav} />
 
           <div className="col-sm-8 col-md-9">
             <div className="row">
               <div
                 className="col-md-9"
-                dangerouslySetInnerHTML={{__html: body}}
+                dangerouslySetInnerHTML={{ __html: body }}
               />
-              <RightSidebar sidebar={sidebar} anchors={anchors}/>
+              <RightSidebar sidebar={sidebar} anchors={anchors} />
             </div>
 
           </div>
@@ -158,9 +158,12 @@ const taitanRenderer = (location) =>
   )
 
 
-export const Default = ({ location, lang }) =>
-  <Taitan pathname={location.pathname} lang={lang}>
-    { taitanRenderer(location) }
-  </Taitan>
+export const Default = ({ path, lang }) => {
+  return (
+    <Taitan pathname={path} lang={lang}>
+      {taitanRenderer(location)}
+    </Taitan>
+  )
+}
 
 export default Default

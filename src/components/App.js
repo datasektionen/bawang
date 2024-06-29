@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Routes, Route, Link, useSearchParams } from 'react-router-dom'
+import { Routes, Route, Link, useSearchParams, useLocation } from 'react-router-dom'
 
 import Taitan from './Taitan'
 import Methone from 'methone'
@@ -17,8 +17,7 @@ const createLinks = nav => nav
   .sort(comparePages)
   .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
 
-const renderMethone = (lang) => {
-  const path = window.location.pathname;
+const renderMethone = (path, lang) => {
   const info = {
     "en": "Svenska",
     "sv": "English"
@@ -53,25 +52,19 @@ const renderMethone = (lang) => {
 export const App = () => {
   const [searchParams,] = useSearchParams()
   const lang = searchParams.get("lang")
+  const location = useLocation()
 
   return (
     <div id="application" className="cerise">
-      <Routes>
-
-        <Route exact path="/" render={() =>
-          <Fragment>
-            {renderMethone(lang)}
-            <LanguageContext.Provider value={lang}>
-              <Routes>
-                <Route path="/" exact render={args => <Frontpage lang={lang} {...args} />} />
-                <Route path="/nyheter/:postId" render={args => <SingleNews lang={lang}{...args} />} />
-                <Route path="/nyheter" render={args => <News lang={lang}{...args} />} />
-                <Route path="/" render={args => <Default lang={lang}{...args} />} />
-              </Routes>
-            </LanguageContext.Provider>
-          </Fragment>
-        } />
-      </Routes>
+      {renderMethone(location.pathname, lang)}
+      <LanguageContext.Provider value={lang}>
+        <Routes>
+          <Route path="/" exact element={<Frontpage lang={lang} />} />
+          <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
+          <Route path="/nyheter" element={<News lang={lang} />} />
+          <Route path="/" element={<Default path={location.pathname} lang={lang}/>} />
+        </Routes>
+      </LanguageContext.Provider>
     </div>
   )
 }
