@@ -58,7 +58,7 @@ export const App = () => {
     <div id="application" className="cerise">
       <Routes>
 
-        <Route path render={() =>
+        <Route exact path="/" render={() =>
           <Fragment>
             {renderMethone(lang)}
             <LanguageContext.Provider value={lang}>
