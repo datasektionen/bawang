@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { Routes, Route, Link, useSearchParams, useLocation } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 
 import Taitan from './Taitan'
 import Methone from 'methone'
@@ -12,7 +12,7 @@ import { comparePages } from '../utility/compare'
 import { LanguageContext } from './Translate'
 
 import './App.css'
-import { addLangToUrl } from '../utility/lang'
+import { addLangToUrl, useLang } from '../utility/lang'
 
 const createLinks = (nav, lang) => nav
   .sort(comparePages)
@@ -53,14 +53,13 @@ const renderMethone = (path, lang) => {
 }
 
 export const App = () => {
-  const [searchParams,] = useSearchParams()
-  const lang = searchParams.get("lang")
+  const lang = useLang()
   const location = useLocation()
 
   return (
     <div id="application" className="cerise">
       {renderMethone(location.pathname, lang)}
-      <LanguageContext.Provider value={lang}>
+      <LanguageContext.Provider value={lang || 'sv'}>
         <Routes>
           <Route path="/" exact element={<Frontpage lang={lang} />} />
           <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
