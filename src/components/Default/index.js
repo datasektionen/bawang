@@ -6,14 +6,15 @@ import Taitan from '../Taitan'
 import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
+import { addLangToUrl } from '../../utility/lang'
 
 const getPageNav = (nav) => {
-  const child = nav.find(item => item.nav)
-  if (child && child.nav) return child.nav
-  return []
-}
+  const child = nav.find(item => item.nav);
+  if (child && child.nav) return child.nav;
+  return [];
+};
 
-const parseNav = (items, slug) =>
+const parseNav = (items, lang, slug) => (
   <ul key={slug}>
     {items
       .sort(comparePages)
@@ -22,7 +23,7 @@ const parseNav = (items, slug) =>
           <li>
             <Link
               className={item.active ? 'text-theme-color strong' : ''}
-              to={item.slug}
+              to={addLangToUrl(item.slug, lang)}
             >
               {item.title}
             </Link>
@@ -31,18 +32,19 @@ const parseNav = (items, slug) =>
         </Fragment>
       )}
   </ul>
+);
 
 const getRightSidebarListItemStyle = (headerLevel) => {
   // smallest level is 1, but it since we don't display the list item dot,
   // it is nice to move the top level header a bit to the left to
   // compensate (since that doesn't happen automatically)
-  const indent = (headerLevel - 2)
+  const indent = (headerLevel - 2);
   return {
     marginLeft: indent + "rem",
     lineHeight: "120%",
     marginBottom: "1rem",
-  }
-}
+  };
+};
 
 const getActiveMainTabTitle = (nav) => {
   for (const item of nav) {
@@ -50,8 +52,8 @@ const getActiveMainTabTitle = (nav) => {
       return item.title;
     }
   }
-  return null
-}
+  return null;
+};
 
 const PageHeader = ({ title, location }) => (
   <header key="header">
@@ -82,7 +84,7 @@ const PageHeader = ({ title, location }) => (
   </header>
 );
 
-const LeftSidebar = ({ nav }) => {
+const LeftSidebar = ({ nav, lang }) => {
   // without this check, the page crashes due to rendering the page before the taitan request is finished
   nav = nav || [];
   return (
@@ -91,11 +93,11 @@ const LeftSidebar = ({ nav }) => {
         {getActiveMainTabTitle(nav)}
       </h2>
       <div id="secondary-nav">
-        {parseNav(getPageNav(nav))}
+        {parseNav(getPageNav(nav), lang)}
       </div>
     </div>
   )
-}
+};
 
 const RightSidebar = ({ sidebar, anchors }) => (
   <div className="col-md-3" id="sidebar">
@@ -128,7 +130,7 @@ const RightSidebar = ({ sidebar, anchors }) => (
   </div>
 );
 
-const taitanRenderer = (location) =>
+const taitanRenderer = (location, lang) =>
   ({ title, body, sidebar, nav, anchors }, error) =>
   (error ?
     <ErrorPage error={error} /> :
@@ -140,7 +142,7 @@ const taitanRenderer = (location) =>
 
       <div id="content" key="content">
         <div className="row">
-          <LeftSidebar nav={nav} />
+          <LeftSidebar nav={nav} lang={lang}/>
 
           <div className="col-sm-8 col-md-9">
             <div className="row">
@@ -155,16 +157,15 @@ const taitanRenderer = (location) =>
         </div>
       </div>
     </Fragment>
-  )
-
+  );
 
 export const Default = ({ lang }) => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <Taitan pathname={location.pathname} lang={lang}>
-      {taitanRenderer(location)}
+      {taitanRenderer(location, lang)}
     </Taitan>
   )
-}
+};
 
 export default Default

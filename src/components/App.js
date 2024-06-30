@@ -12,24 +12,27 @@ import { comparePages } from '../utility/compare'
 import { LanguageContext } from './Translate'
 
 import './App.css'
+import { addLangToUrl } from '../utility/lang'
 
-const createLinks = nav => nav
+const createLinks = (nav, lang) => nav
   .sort(comparePages)
-  .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
+  .map(({ slug, title }) =>
+    <Link key={slug} to={addLangToUrl(slug, lang)}>{title}</Link>
+  )
 
 const renderMethone = (path, lang) => {
   const info = {
     "en": "Svenska",
     "sv": "English"
-  }[lang] || "Svenska";
+  }[lang || 'sv'] || "Svenska";
 
   const redir = {
     "en": path,
     "sv": path + "?lang=en"
-  }[lang] || path;
+  }[lang || 'sv'] || path;
 
   const methoneRenderFunc = ({ nav }) => {
-    const links = nav ? createLinks(nav) : [];
+    const links = nav ? createLinks(nav, lang) : [];
 
     return (
       <Methone config={{
@@ -52,6 +55,7 @@ const renderMethone = (path, lang) => {
 export const App = () => {
   const [searchParams,] = useSearchParams()
   const lang = searchParams.get("lang")
+  const location = useLocation()
 
   return (
     <div id="application" className="cerise">
@@ -61,7 +65,7 @@ export const App = () => {
           <Route path="/" exact element={<Frontpage lang={lang} />} />
           <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
           <Route path="/nyheter" element={<News lang={lang} />} />
-          <Route path="/*" element={<Default lang={lang}/>} />
+          <Route path="/*" element={<Default lang={lang} />} />
         </Routes>
       </LanguageContext.Provider>
     </div>
