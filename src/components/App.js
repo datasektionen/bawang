@@ -52,7 +52,6 @@ const renderMethone = (path, lang) => {
 export const App = () => {
   const [searchParams,] = useSearchParams()
   const lang = searchParams.get("lang")
-  const location = useLocation()
 
   return (
     <div id="application" className="cerise">
@@ -62,7 +61,7 @@ export const App = () => {
           <Route path="/" exact element={<Frontpage lang={lang} />} />
           <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
           <Route path="/nyheter" element={<News lang={lang} />} />
-          <Route path="/" element={<Default path={location.pathname} lang={lang}/>} />
+          <Route path="/*" element={<Default lang={lang}/>} />
         </Routes>
       </LanguageContext.Provider>
     </div>

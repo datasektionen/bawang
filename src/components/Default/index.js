@@ -158,9 +158,10 @@ const taitanRenderer = (location) =>
   )
 
 
-export const Default = ({ path, lang }) => {
+export const Default = ({ lang }) => {
+  const location = useLocation()
   return (
-    <Taitan pathname={path} lang={lang}>
+    <Taitan pathname={location.pathname} lang={lang}>
       {taitanRenderer(location)}
     </Taitan>
   )
