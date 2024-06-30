@@ -63,7 +63,7 @@ export const App = () => {
         <Routes>
           <Route path="/" exact element={<Frontpage lang={lang} />} />
           <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
-          <Route path="/nyheter" element={<News lang={lang} />} />
+          <Route path="/nyheter" element={<News lang={lang} location={location}/>} />
           <Route path="/*" element={<Default lang={lang} />} />
         </Routes>
       </LanguageContext.Provider>

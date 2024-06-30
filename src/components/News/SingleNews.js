@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Title } from 'react-head'
 import classNames from 'classnames/bind'
 import styles from './News.module.css'
@@ -101,8 +101,8 @@ const EventInfoSidebar = ({item, lang}) => // item CAN'T be undefined here
     </div>
   </div>
 
-export const SingleItem = ({ item, location, lang, match }) =>
-<Calypso type='item' search={'/' + match.params.postId}>
+export const SingleItem = ({ item, location, lang, postId }) =>
+<Calypso type='item' search={'/' + postId}>
   {(item) => // item CAN be undefined here
     <Fragment>
       <Title>
@@ -187,4 +187,9 @@ export const SingleItem = ({ item, location, lang, match }) =>
   }
 </Calypso>
 
-export default SingleItem
+export const SingleNews = ({lang}) => {
+  const { postId } = useParams()
+  return <SingleItem lang={lang} postId={postId} />
+}
+
+export default SingleNews

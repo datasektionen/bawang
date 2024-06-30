@@ -11,6 +11,7 @@ import styles from './Frontpage.module.css'
 import skold from './skold.svg'
 import EventCalendar, { getWeekTimeSpan } from '../EventCalendar/index.jsx';
 import './FixMe.css'
+import { addLangToUrl } from '../../utility/lang.js'
 
 const cx = classNames.bind(styles)
 
@@ -64,7 +65,7 @@ const Frontpage = ({ lang }) => {
               {({ content }) => (
                 <div className={cx('news')}>
                   {/* Title */}
-                  <Link to={lang === 'en' ? '/en/news?itemType=POST' : '/nyheter?itemType=POST'}>
+                  <Link to={addLangToUrl('/nyheter?itemType=POST', lang)}>
                     <h2>
                       <Translate>
                         <English>News</English>
@@ -79,7 +80,7 @@ const Frontpage = ({ lang }) => {
                       /* Single news item*/
                       <li key={item.id}>
                         {/* News item title */}
-                        <Link to={lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}`}>
+                        <Link to={addLangToUrl(`/nyheter/${item.id}`, lang)}>
                           <h3>
                             <Translate>
                               <English>{item.titleEnglish}</English>
@@ -113,7 +114,7 @@ const Frontpage = ({ lang }) => {
                   {/* "More News" button at the bottom of the news section */}
                   <div className="text-center">
                     <Link
-                      to={lang === 'en' ? '/en/news?itemType=POST' : '/nyheter?itemType=POST'}
+                      to={addLangToUrl('/nyheter?itemType=POST', lang)}
                       className={cx('more-btn')}
                     >
                       <Translate>
@@ -132,7 +133,7 @@ const Frontpage = ({ lang }) => {
               {({ content }) => (
                 <div className={cx('news')}>
                   {/* Title */}
-                  <Link to={lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT'}>
+                  <Link to={addLangToUrl('/nyheter?itemType=EVENT', lang)}>
                     <h2>
                       {/* TODO: does this really need a "Translate" component? */}
                       <Translate>
@@ -151,7 +152,7 @@ const Frontpage = ({ lang }) => {
                         /* Single event item */
                         <li key={item.id}>
                           {/* Event title */}
-                          <Link to={lang === 'en' ? `/en/news/${item.id}` : `/nyheter/${item.id}`}>
+                          <Link to={addLangToUrl(`/nyheter/${item.id}`, lang)}>
                             <h3>
                               <Translate>
                                 <English>{item.titleEnglish}</English>
@@ -196,7 +197,7 @@ const Frontpage = ({ lang }) => {
                     /* If there's ENOUGH content, show "More events" button */
                     content.length > 4 &&
                     <div className="text-center">
-                      <Link to={lang === 'en' ? '/en/news?itemType=EVENT' : '/nyheter?itemType=EVENT'} className={cx('more-btn')}>
+                      <Link to={addLangToUrl('/nyheter?itemType=EVENT', lang)} className={cx('more-btn')}>
                         <Translate>
                           <English>More Events »</English>
                           <Swedish>Mer Event »</Swedish>
@@ -214,7 +215,8 @@ const Frontpage = ({ lang }) => {
             <h2 id="sections_intro">Are you an international student?</h2>
             <div className="text-center" id="home_sections">
               <p>
-                Read this website in <a href="/en" className="inline_link">English</a>, or go to the website for META internationals and discover everything you need to know as an international student in the CS Chapter.
+                Read this website in <a href={addLangToUrl("/", "en")} className="inline_link">English</a>, 
+                or go to the website for META internationals and discover everything you need to know as an international student in the CS Chapter.
               </p>
               <p>
                 <a className="action" href="https://meta-internationals.mailchimpsites.com/">META Internationals website</a>
@@ -305,7 +307,7 @@ const Frontpage = ({ lang }) => {
                   <p><strong>Organization number</strong></p>
                   <p>802412 - 7709</p>
 
-                  <p><a className="action" href="/kontakt">Contact</a></p>
+                  <p><a className="action" href="/kontakt?lang=en">Contact</a></p>
                 </English>
               </Translate>
             </div>

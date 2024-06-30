@@ -16,7 +16,7 @@ if (global && !global.URLSearchParams) {
 
 const cx = classNames.bind(styles)
 
-export const News = ({ location, lang, match }) => {
+export const News = ({ location, lang }) => {
   const [searchParams,] = useSearchParams()
   const itemType = searchParams.get("itemType")
   const getSearch = page => {
