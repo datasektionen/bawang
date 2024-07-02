@@ -21,15 +21,20 @@ const createLinks = (nav, lang) => nav
   )
 
 const renderMethone = (path, lang) => {
-  const info = {
-    "en": "Svenska",
-    "sv": "English"
-  }[lang || 'sv'] || "Svenska";
 
-  const redir = {
-    "en": path,
-    "sv": path + "?lang=en"
-  }[lang || 'sv'] || path;
+  // currently we only have support for 2 languages. If we want to add more, we'll have to 
+  // figure out a more complex language switching solution, and can't just piggyback of methone.
+  const loginTargetLang = lang === 'en' ? 'sv' : 'en';
+
+  const targetLangLabel = {
+    "sv": "Svenska",
+    "en": "English"
+  }[loginTargetLang];
+
+  const targetLangHref = {
+    "sv": path,
+    "en": path + "?lang=en"
+  }[loginTargetLang];
 
   const methoneRenderFunc = ({ nav }) => {
     const links = nav ? createLinks(nav, lang) : [];
@@ -38,8 +43,8 @@ const renderMethone = (path, lang) => {
       <Methone config={{
         sytem_name: 'bawang',
         color_scheme: 'cerise',
-        login_text: info,
-        login_href: redir,
+        login_text: targetLangLabel,
+        login_href: targetLangHref,
         links: links
       }} />
     )
@@ -63,7 +68,7 @@ export const App = () => {
         <Routes>
           <Route path="/" exact element={<Frontpage lang={lang} />} />
           <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
-          <Route path="/nyheter" element={<News lang={lang} location={location}/>} />
+          <Route path="/nyheter" element={<News lang={lang} location={location} />} />
           <Route path="/*" element={<Default lang={lang} />} />
         </Routes>
       </LanguageContext.Provider>
