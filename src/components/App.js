@@ -21,11 +21,10 @@ const createLinks = (nav, lang) => nav
   )
 
 const renderMethone = (path, lang) => {
-
   // currently we only have support for 2 languages. If we want to add more, we'll have to 
   // figure out a more complex language switching solution, and can't just piggyback of methone.
   const loginTargetLang = lang === 'en' ? 'sv' : 'en';
-
+  
   const targetLangLabel = {
     "sv": "Svenska",
     "en": "English"
