@@ -30,7 +30,10 @@ function taitanFetcher(cacheKey) {
       } else if (res.ok) {
         return res.json()
       } else {
-        throw new HTTPError(res.status)
+        return res.text().then((data) => Promise.reject({
+          code: res.status,
+          message: data
+        }))
       }
     })
     .then(res => ({ status: 200, redirect: false, ...res }));
