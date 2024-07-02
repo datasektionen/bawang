@@ -9,7 +9,7 @@ import { Translate, English, Swedish } from '../Translate'
 
 import styles from './Frontpage.module.css'
 import skold from './skold.svg'
-import EventCalendar, { getWeekTimeSpan } from '../EventCalendar/index.jsx';
+import EventCalendar, { getWeekTimeSpan } from '../EventCalendar';
 import './FixMe.css'
 import { addLangToUrl } from '../../utility/lang.js'
 

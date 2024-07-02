@@ -85,7 +85,7 @@ server
     <meta name="msapplication-TileColor" content="#e83d84">
     <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#e83d84">
-    <link rel="stylesheet" href="//aurora.datasektionen.se/">
+    <link rel="stylesheet" href="https://aurora.datasektionen.se/">
     ${assets.client.css
       ? `<link rel="stylesheet" href="${assets.client.css}">`
       : ''
