@@ -16,9 +16,9 @@ const server = express()
 const handleData = async promises => {
   try {
     const data = await Promise.all(promises)
-    const cacheObject = Object.assign(...data.map(d => ({[d.cacheKey]: d})))
+    const cacheObject = Object.assign(...data.map(d => ({ [d.cacheKey]: d })))
     return [cacheObject]
-  } catch(err) {
+  } catch (err) {
     return [{}, err]
   }
 }
@@ -36,7 +36,7 @@ server
     const headTags = []
     const vdom = (error) =>
       <StaticRouter context={context} location={req.url}>
-        <Provider value={{promises, error}}>
+        <Provider value={{ promises, error }}>
           <HeadProvider headTags={headTags}>
             <App />
           </HeadProvider>
@@ -46,7 +46,7 @@ server
     // render the tree to trigger all promises
     try {
       renderToStaticMarkup(vdom())
-    } catch(error) {
+    } catch (error) {
       console.error(error)
     }
 
@@ -60,9 +60,11 @@ server
     if (context.url) {
       res.redirect(context.url)
     } else {
-        res.status((error && error.code) || 200).send(
-`<!doctype html>
-  <html lang="${req.url.startsWith('/en') ? 'en' : 'sv'}">
+      const lang = req.query.lang === "en" ? "en" : "sv";
+
+      res.status((error && error.code) || 200).send(
+        `<!doctype html>
+  <html lang="${lang}">
   <head>
     <meta name="google-site-verification" content="tIS6TUU0SAJrplJvlVybZ4ATVZlOKAGswiLPLIBWUKs" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,14 +89,14 @@ server
     <meta name="theme-color" content="#e83d84">
     <link rel="stylesheet" href="https://aurora.datasektionen.se/">
     ${assets.client.css
-      ? `<link rel="stylesheet" href="${assets.client.css}">`
-      : ''
-    }
+          ? `<link rel="stylesheet" href="${assets.client.css}">`
+          : ''
+        }
     ${sheet.getStyleTags()}
     ${process.env.NODE_ENV === 'production'
-      ? `<script src="${assets.client.js}" defer></script>`
-      : `<script src="${assets.client.js}" defer crossorigin></script>`
-    }
+          ? `<script src="${assets.client.js}" defer></script>`
+          : `<script src="${assets.client.js}" defer crossorigin></script>`
+        }
     ${renderToString(headTags)}
     <script>
       // We can't send this as a plain string because sometimes the contents include script tags :) :) :)

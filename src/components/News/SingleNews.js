@@ -18,7 +18,7 @@ const HeaderBar = ({}) =>
         <div className="header-left col-md-2">
           <Translate>
             <English>
-              <Link to="/en/news">{'« '}Back</Link>
+              <Link to="/nyheter?lang=en">{'« '}Back</Link>
             </English>
             <Swedish>
               <Link to="/nyheter">{'« '}Tillbaka</Link>
