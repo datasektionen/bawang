@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import React from 'react'
+import { Routes, Route, Link, useLocation } from 'react-router-dom'
 
 import Taitan from './Taitan'
 import Methone from 'methone'
@@ -12,58 +12,65 @@ import { comparePages } from '../utility/compare'
 import { LanguageContext } from './Translate'
 
 import './App.css'
+import { addLangToUrl, useLang } from '../utility/lang'
 
-const createLinks = nav => nav
+const createLinks = (nav, lang) => nav
   .sort(comparePages)
-  .map(({ slug, title }) => <Link key={slug} to={slug}>{title}</Link>)
+  .map(({ slug, title }) =>
+    <Link key={slug} to={addLangToUrl(slug, lang)}>{title}</Link>
+  )
 
-const renderMethone = path =>
-  <Taitan pathname={path}>
-    {({ nav }) =>
+const renderMethone = (path, lang) => {
+  // currently we only have support for 2 languages. If we want to add more, we'll have to 
+  // figure out a more complex language switching solution, and can't just piggyback of methone.
+  const loginTargetLang = lang === 'en' ? 'sv' : 'en';
+  
+  const targetLangLabel = {
+    "sv": "Svenska",
+    "en": "English"
+  }[loginTargetLang];
+
+  const targetLangHref = {
+    "sv": path,
+    "en": path + "?lang=en"
+  }[loginTargetLang];
+
+  const methoneRenderFunc = ({ nav }) => {
+    const links = nav ? createLinks(nav, lang) : [];
+
+    return (
       <Methone config={{
         sytem_name: 'bawang',
         color_scheme: 'cerise',
-        login_text: path === '/en' ? 'Svenska' : 'English',
-        login_href: path === '/en' ? '/' : '/en',
-        links: !nav ? [] : createLinks(
-          path === '/en'
-          ? nav.find(n => n.slug === '/en').nav
-          : nav.filter(n => n.slug !== '/en')
-        )
+        login_text: targetLangLabel,
+        login_href: targetLangHref,
+        links: links
       }} />
-    }
-  </Taitan>
+    )
+  }
 
-const App = () =>
-  <div id="application" className="cerise">
-    <Switch>
-      <Route path="/en/" render={() =>
-        <Fragment>
-          {renderMethone('/en')}
-          <LanguageContext.Provider value='en'>
-            <Switch>
-              <Route path="/en/" exact render={ args => <Frontpage lang="en" {...args} /> } />
-              <Route path="/en/news/:postId" exact render={ args => <SingleNews lang="en" {...args} /> } />
-              <Route path="/en/news" exact render={ args => <News lang="en" {...args} /> } />
-              <Route path="/en/" render={ args => <Default lang="en" {...args} /> } />
-            </Switch>
-          </LanguageContext.Provider>
-        </Fragment>
-      } />
-      <Route path="/" render={() =>
-        <Fragment>
-          {renderMethone('/')}
-          <LanguageContext.Provider value='sv'>
-            <Switch>
-              <Route path="/" exact render={ args => <Frontpage {...args} /> } />
-              <Route path="/nyheter/:postId" render={ args => <SingleNews {...args} /> } />
-              <Route path="/nyheter" render={ args => <News {...args} /> } />
-              <Route path="/" render={ args => <Default {...args} /> } />
-            </Switch>
-          </LanguageContext.Provider>
-        </Fragment>
-        } />
-    </Switch>
-  </div>
+  return (
+    <Taitan pathname={"/"} lang={lang}>
+      {methoneRenderFunc}
+    </Taitan>
+  )
+}
 
-export default App
+export const App = () => {
+  const lang = useLang()
+  const location = useLocation()
+
+  return (
+    <div id="application" className="cerise">
+      {renderMethone(location.pathname, lang)}
+      <LanguageContext.Provider value={lang || 'sv'}>
+        <Routes>
+          <Route path="/" exact element={<Frontpage lang={lang} />} />
+          <Route path="/nyheter/:postId" element={<SingleNews lang={lang} />} />
+          <Route path="/nyheter" element={<News lang={lang} location={location} />} />
+          <Route path="/*" element={<Default lang={lang} />} />
+        </Routes>
+      </LanguageContext.Provider>
+    </div>
+  )
+}

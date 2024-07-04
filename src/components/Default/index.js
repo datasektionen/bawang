@@ -1,23 +1,20 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Title } from 'react-head'
 
 import Taitan from '../Taitan'
 import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
-
-const getNavForLanguage = (nav, lang) => {
-  return lang === 'en' ? nav.find(item => item.slug === '/en').nav : nav
-}
+import { addLangToUrl } from '../../utility/lang'
 
 const getPageNav = (nav) => {
-  const child = nav.find(item => item.nav)
-  if(child && child.nav) return child.nav
-  return []
-}
+  const child = nav.find(item => item.nav);
+  if (child && child.nav) return child.nav;
+  return [];
+};
 
-const parseNav = (items, slug) =>
+const parseNav = (items, lang, slug) => (
   <ul key={slug}>
     {items
       .sort(comparePages)
@@ -26,27 +23,28 @@ const parseNav = (items, slug) =>
           <li>
             <Link
               className={item.active ? 'text-theme-color strong' : ''}
-              to={item.slug}
+              to={addLangToUrl(item.slug, lang)}
             >
-              { item.title }
+              {item.title}
             </Link>
           </li>
           {item.nav && parseNav(item.nav, item.slug + '/')}
         </Fragment>
       )}
   </ul>
+);
 
 const getRightSidebarListItemStyle = (headerLevel) => {
   // smallest level is 1, but it since we don't display the list item dot,
   // it is nice to move the top level header a bit to the left to
   // compensate (since that doesn't happen automatically)
-  const indent = (headerLevel - 2)
+  const indent = (headerLevel - 2);
   return {
     marginLeft: indent + "rem",
     lineHeight: "120%",
     marginBottom: "1rem",
-  }
-}
+  };
+};
 
 const getActiveMainTabTitle = (nav) => {
   for (const item of nav) {
@@ -54,10 +52,10 @@ const getActiveMainTabTitle = (nav) => {
       return item.title;
     }
   }
-  return null
-}
+  return null;
+};
 
-const PageHeader = ({title, location}) => (
+const PageHeader = ({ title, location }) => (
   <header key="header">
     <div className="header-inner">
       <div className="row">
@@ -71,7 +69,7 @@ const PageHeader = ({title, location}) => (
           </Link>
         </div>
         <div className="col-md-8">
-          <h2>{ title }</h2>
+          <h2>{title}</h2>
         </div>
         <div className="header-right col-md-2">
           <a className="primary-action" href={"https://github.com/datasektionen/bawang-content/tree/master/" + location.pathname}>
@@ -86,28 +84,28 @@ const PageHeader = ({title, location}) => (
   </header>
 );
 
-const LeftSidebar = ({nav, lang}) => {
-  // without this check, the page crashes due to the rendering the page before the taitan request is finished
-  const languageNav = !nav ? [] : getNavForLanguage(nav, lang);
+const LeftSidebar = ({ nav, lang }) => {
+  // without this check, the page crashes due to rendering the page before the taitan request is finished
+  nav = nav || [];
   return (
     <div className="col-sm-4 col-md-3">
       <h2>
-        {getActiveMainTabTitle(languageNav)}
+        {getActiveMainTabTitle(nav)}
       </h2>
       <div id="secondary-nav">
-        { parseNav(getPageNav(languageNav)) }
+        {parseNav(getPageNav(nav), lang)}
       </div>
     </div>
   )
-}
+};
 
-const RightSidebar = ({sidebar, anchors}) => (
+const RightSidebar = ({ sidebar, anchors }) => (
   <div className="col-md-3" id="sidebar">
-    { sidebar
+    {sidebar
       ? <div
-          className="sidebar-card"
-          dangerouslySetInnerHTML={{__html: sidebar}}
-        />
+        className="sidebar-card"
+        dangerouslySetInnerHTML={{ __html: sidebar }}
+      />
       : false
     }
     <div className="sidebar-card">
@@ -119,10 +117,10 @@ const RightSidebar = ({sidebar, anchors}) => (
       </h2>
       <ul>
         {(anchors || []).map(anchor =>
-          <li key={anchor.id} style={{listStyleType: "none"}}>
+          <li key={anchor.id} style={{ listStyleType: "none" }}>
             <a href={'#' + anchor.id}>
               <div style={getRightSidebarListItemStyle(anchor.level)}>
-                { anchor.value }
+                {anchor.value}
               </div>
             </a>
           </li>
@@ -138,9 +136,9 @@ const taitanRenderer = (location, lang) =>
     <ErrorPage error={error} /> :
     <Fragment>
       <Title>
-        { title + ' - Konglig Datasektionen'}
+        {title + ' - Konglig Datasektionen'}
       </Title>
-      <PageHeader title={title} location={location}/>
+      <PageHeader title={title} location={location} />
 
       <div id="content" key="content">
         <div className="row">
@@ -150,21 +148,24 @@ const taitanRenderer = (location, lang) =>
             <div className="row">
               <div
                 className="col-md-9"
-                dangerouslySetInnerHTML={{__html: body}}
+                dangerouslySetInnerHTML={{ __html: body }}
               />
-              <RightSidebar sidebar={sidebar} anchors={anchors}/>
+              <RightSidebar sidebar={sidebar} anchors={anchors} />
             </div>
 
           </div>
         </div>
       </div>
     </Fragment>
+  );
+
+export const Default = ({ lang }) => {
+  const location = useLocation();
+  return (
+    <Taitan pathname={location.pathname} lang={lang}>
+      {taitanRenderer(location, lang)}
+    </Taitan>
   )
-
-
-export const Default = ({ location, lang }) =>
-  <Taitan pathname={location.pathname}>
-    { taitanRenderer(location, lang) }
-  </Taitan>
+};
 
 export default Default
