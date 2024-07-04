@@ -29,7 +29,7 @@ job "bawang" {
       template {
         data        = <<ENV
 TAITAN_URL=http://taitan.nomad.dsekt.internal
-PORT={{ env "NOMAD_PORT_http" }}
+SLUTA_FIPPLA_MED_MINA_ENV_VARIABLER_RAZZLE__PORT={{ env "NOMAD_PORT_http" }}
 ENV
         destination = "local/.env"
         env         = true

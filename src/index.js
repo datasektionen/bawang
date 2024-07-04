@@ -4,7 +4,7 @@ import http from 'http'
 const server = http.createServer(app)
 
 let currentApp = app
-const port = process.env.PORT || 3000
+const port = process.env.SLUTA_FIPPLA_MED_MINA_ENV_VARIABLER_RAZZLE__PORT || 3000
 server.listen(port, error => {
   if (error) {
     console.log(error)
