@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { Title } from 'react-head'
+import { Link } from 'react-router-dom'
 
 import { Translate, English, Swedish } from '../Translate'
 
@@ -11,9 +12,17 @@ export const ErrorPage = ({ error }) => (
     <header key="header">
       <div className="header-inner">
         <div className="row">
-          <div className="header-left col-md-2"></div>
+          <div className="header-left col-md-2">
+            <Link to="/">
+              {'« '}
+              <Translate>
+                <English>Back</English>
+                <Swedish>Tillbaka</Swedish>
+              </Translate>
+            </Link>
+          </div>
           <div className="col-md-8">
-            <h2>{error.code} {error.message}</h2>
+            <h2>{error.code} - {error.message}</h2>
           </div>
           <div className="header-right col-md-2"></div>
         </div>
