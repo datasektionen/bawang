@@ -298,6 +298,7 @@ export default function EventCalendar({ events, location, lang, onUpdateTimeSpan
     
     setSelectedEventIndex(-1);
     if (events.length === 0) return;
+    if (!Array.isArray(events)) return;
     // Do not re-calculate the week if the user manually changes the viewed week.
     if (hasCalculatedWeek) return;
 
