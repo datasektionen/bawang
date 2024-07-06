@@ -9,7 +9,7 @@ import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
 import EventCalendar, { getWeekTimeSpan } from '../EventCalendar'
-import { addLangToUrl } from '../../util/lang'
+import { addLangToUrl } from '../../utility/lang'
 
 if (global && !global.URLSearchParams) {
   global.URLSearchParams = require('url').URLSearchParams
