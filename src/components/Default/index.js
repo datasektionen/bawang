@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Title } from 'react-head'
 
@@ -131,39 +131,56 @@ const RightSidebar = ({ sidebar, anchors }) => (
 );
 
 const taitanRenderer = (location, lang) =>
-  ({ title, body, sidebar, nav, anchors }, error) =>
-  (error ?
-    <ErrorPage error={error} /> :
-    <Fragment>
-      <Title>
-        {title + ' - Konglig Datasektionen'}
-      </Title>
-      <PageHeader title={title} location={location} />
+  ({ title, body, sidebar, nav, anchors, error }) => {
 
-      <div id="content" key="content">
-        <div className="row">
-          <LeftSidebar nav={nav} lang={lang}/>
+    // This useEffect solution is a workaround to prevent hydration errors when loading the Error page.
+    // useEffect does not run when doing serverside rendering, so this prevents the error page from 
+    // rendering serverside. Rendering it serverside caused the page to crash when rendering clientside,
+    // since the client always tries to render the normal page first, and getting angry that it does not
+    // match what the server produced. (This is due to error being undefined first due to latecncy).
+    const [errorPage, setErrorPage] = useState(null);
+    useEffect(() => {
+      if (error) {
+        setErrorPage(error)
+      } else {
+        setErrorPage(null)
+      }
+    }, [location, error]);
 
-          <div className="col-sm-8 col-md-9">
-            <div className="row">
-              <div
-                className="col-md-9"
-                dangerouslySetInnerHTML={{ __html: body }}
-              />
-              <RightSidebar sidebar={sidebar} anchors={anchors} />
+    return (errorPage ?
+      <ErrorPage error={errorPage} /> :
+      <>
+        <Title>
+          {title + ' - Konglig Datasektionen'}
+        </Title>
+        <PageHeader title={title} location={location} />
+
+        <div id="content" key="content">
+          <div className="row">
+            <LeftSidebar nav={nav} lang={lang} />
+
+            <div className="col-sm-8 col-md-9">
+              <div className="row">
+                <div
+                  className="col-md-9"
+                  dangerouslySetInnerHTML={{ __html: body }}
+                />
+                <RightSidebar sidebar={sidebar} anchors={anchors} />
+              </div>
             </div>
-
           </div>
         </div>
-      </div>
-    </Fragment>
-  );
+      </>
+    );
+  }
 
 export const Default = ({ lang }) => {
   const location = useLocation();
+  const Page = taitanRenderer(location, lang);
+
   return (
     <Taitan pathname={location.pathname} lang={lang}>
-      {taitanRenderer(location, lang)}
+      {(props, err) => <Page {...props} error={err} />}
     </Taitan>
   )
 };
