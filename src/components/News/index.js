@@ -10,6 +10,7 @@ import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
 import EventCalendar, { getWeekTimeSpan } from '../EventCalendar'
 import { addLangToUrl } from '../../utility/lang'
+import { navigateBack } from '../../utility/nav'
 
 if (global && !global.URLSearchParams) {
   global.URLSearchParams = require('url').URLSearchParams
@@ -36,7 +37,7 @@ export const News = ({ location, lang }) => {
       <div className="header-inner">
         <div className="row">
           <div className="header-left col-md-2">
-            <Link to="/">
+            <Link onClick={navigateBack(false)}>
               {'« '}
               <Translate>
                 <English>Back</English>
