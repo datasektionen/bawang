@@ -7,6 +7,7 @@ import ErrorPage from '../ErrorPage'
 import { Translate, English, Swedish } from '../Translate'
 import { comparePages } from '../../utility/compare'
 import { addLangToUrl } from '../../utility/lang'
+import { navigateBack } from '../../utility/nav'
 
 const getPageNav = (nav) => {
   const child = nav.find(item => item.nav);
@@ -55,12 +56,13 @@ const getActiveMainTabTitle = (nav) => {
   return null;
 };
 
+
 const PageHeader = ({ title, location }) => (
   <header key="header">
     <div className="header-inner">
       <div className="row">
         <div className="header-left col-md-2">
-          <Link to="/">
+          <Link onClick={navigateBack(false)}>
             {'« '}
             <Translate>
               <English>Back</English>

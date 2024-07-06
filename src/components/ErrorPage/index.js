@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Title } from 'react-head'
 import { Link } from 'react-router-dom'
 
+import { navigateBack } from '../../utility/nav'
 import { Translate, English, Swedish } from '../Translate'
 
 export const ErrorPage = ({ error }) => (
@@ -13,7 +14,7 @@ export const ErrorPage = ({ error }) => (
       <div className="header-inner">
         <div className="row">
           <div className="header-left col-md-2">
-            <Link to="/">
+            <Link onClick={navigateBack(true)}>
               {'« '}
               <Translate>
                 <English>Back</English>
