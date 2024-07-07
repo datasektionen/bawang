@@ -9,6 +9,7 @@ import Calypso from '../Calypso'
 import { Translate, English, Swedish } from '../Translate'
 import NewsItem from './NewsItem'
 import EventCalendar, { getWeekTimeSpan } from '../EventCalendar'
+import { addLangToUrl } from '../../utility/lang'
 
 if (global && !global.URLSearchParams) {
   global.URLSearchParams = require('url').URLSearchParams
@@ -101,7 +102,7 @@ export const News = ({ location, lang }) => {
             <ul>
               <li>
                 <Link
-                  to={location.pathname}
+                  to={addLangToUrl(location.pathname, lang)}
                   className={classNames({ 'text-theme-color strong': !itemType })}
                 >
                   <Translate>
@@ -112,7 +113,7 @@ export const News = ({ location, lang }) => {
               </li>
               <li>
                 <Link
-                  to={`${location.pathname}?itemType=POST`}
+                  to={addLangToUrl(`${location.pathname}?itemType=POST`, lang)}
                   className={classNames({ 'text-theme-color strong': itemType === 'POST' })}
                 >
                   <Translate>
@@ -123,7 +124,7 @@ export const News = ({ location, lang }) => {
               </li>
               <li>
                 <Link
-                  to={`${location.pathname}?itemType=EVENT`}
+                  to={addLangToUrl(`${location.pathname}?itemType=EVENT`, lang)}
                   className={classNames({ 'text-theme-color strong': itemType === 'EVENT' })}
                 >
                   <Translate>
@@ -149,10 +150,10 @@ export const News = ({ location, lang }) => {
                       <ul className="pagination">
                         {first
                           ? <li className="disabled"><span>&laquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(0)}>&laquo;</Link></li>}
+                          : <li><Link to={addLangToUrl(location.pathname + getSearch(0), lang)}>&laquo;</Link></li>}
                         {first
                           ? <li className="disabled"><span>&lsaquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(number - 1)}>&lsaquo;</Link></li>}
+                          : <li><Link to={addLangToUrl(location.pathname + getSearch(number - 1), lang)}>&lsaquo;</Link></li>}
                         <li className="disabled">
                           <span>
                             <Translate>
@@ -163,10 +164,10 @@ export const News = ({ location, lang }) => {
                         </li>
                         {last
                           ? <li className="disabled"><span>&rsaquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(number + 1)}>&rsaquo;</Link></li>}
+                          : <li><Link to={addLangToUrl(location.pathname + getSearch(number + 1), lang)}>&rsaquo;</Link></li>}
                         {last
                           ? <li className="disabled"><span>&raquo;</span></li>
-                          : <li><Link to={location.pathname + getSearch(totalPages - 1)}>&raquo;</Link></li>}
+                          : <li><Link to={addLangToUrl(location.pathname + getSearch(totalPages - 1), lang)}>&raquo;</Link></li>}
                       </ul>
                     </nav>
                   </div>
@@ -187,7 +188,7 @@ export const News = ({ location, lang }) => {
                       ? content
                         .filter((_, i) => i < 5)
                         .map(item => <p key={item.id}>
-                          <Link to={location.pathname + '/' + item.id}>
+                          <Link to={addLangToUrl(location.pathname + '/' + item.id, lang)}>
                             <strong>
                               <Translate>
                                 <English>{item.titleEnglish}</English>
