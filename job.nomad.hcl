@@ -11,10 +11,9 @@ job "bawang" {
       port     = "http"
       provider = "nomad"
       tags = [
-        "traefik-external.enable=true",
-        "traefik-external.http.routers.bawang.rule=Host(`datasektionen.se`)||Host(`www.datasektionen.se`)",
-        "traefik-external.http.routers.bawang.entrypoints=websecure",
-        "traefik-external.http.routers.bawang.tls.certresolver=default",
+        "traefik.enable=true",
+        "traefik.http.routers.bawang.rule=Host(`datasektionen.se`)||Host(`www.datasektionen.se`)",
+        "traefik.http.routers.bawang.tls.certresolver=default",
       ]
     }
 
