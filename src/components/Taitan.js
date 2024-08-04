@@ -36,7 +36,7 @@ function taitanFetcher(cacheKey) {
 };
 
 export const Taitan = ({ pathname, children, lang }) => {
-  const cacheKey = lang ? 
+  const cacheKey = lang ?
     FRONTEND_TAITAN_URL + pathname + "?lang=" + lang :
     FRONTEND_TAITAN_URL + pathname;
 

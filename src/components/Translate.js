@@ -12,5 +12,5 @@ const languages = {
 
 export const Translate = ({ children }) =>
   <LanguageContext.Consumer>
-    { lang => Children.toArray(children).filter(c => c.type === languages[lang]).concat(children).slice(0, 1) }
+    {lang => Children.toArray(children).filter(c => c.type === languages[lang]).concat(children).slice(0, 1)}
   </LanguageContext.Consumer>
