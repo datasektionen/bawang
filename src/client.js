@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { hydrateRoot } from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { HeadProvider } from 'react-head'
 
