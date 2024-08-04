@@ -10,7 +10,8 @@ NOTE: when building with podman, you may need to specify `--ulimit nofile=65535:
 |--------------------------------------------------|--------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | TAITAN_URL                                       | https://taitan.datasektionen.se      | URL to taitan from the backend.                                                                           |
 | RAZZLE_TAITAN_URL                                | https://taitan.datasektionen.se      | URL to taitan from the frontend. **Set during both build and run**.                                       |
-| RAZZLE_CALYPSO_URL                               | https://calypso.datasektionen.se/api | URL to get news from calypso on. **Set during both build and run**.                                       |
+| CALYPSO_URL                                      | https://calypso.datasektionen.se/api | URL to calypso from the backend.                                                                          |
+| RAZZLE_CALYPSO_URL                               | https://calypso.datasektionen.se/api | URL to calypso from the frontend. **Set during both build and run**.                                      |
 | TAITAN_CACHE_TTL                                 | 3600                                 | Time to keep content from taitan cached in seconds. Tip: Set to 0 if using local taitan & bawang-content. |
 | CALYPSO_CACHE_TTL                                | 30                                   | Time to keep news from calypso cached in seconds. Tip: Set to 0 if using local calypso.                   |
 | SLUTA_FIPPLA_MED_MINA_ENV_VARIABLER_RAZZLE__PORT | 3000                                 | Port to listen on                                                                                         |
