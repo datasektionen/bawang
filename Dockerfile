@@ -23,7 +23,6 @@ COPY --from=methone-builder /app/dist ./node_modules/methone/dist
 COPY bin bin
 COPY public public
 COPY src src
-COPY razzle.config.js .
 
 ENV NODE_ENV=production
 ARG RAZZLE_TAITAN_URL

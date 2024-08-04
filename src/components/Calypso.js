@@ -5,7 +5,7 @@ import { CALYPSO_URL, FRONTEND_CALYPSO_URL } from '../utility/env';
 
 const CALYPSO_CACHE_TTL = process.env.CALYPSO_CACHE_TTL ? parseInt(process.env.CALYPSO_CACHE_TTL, 10) : 30;
 
-function calypsoFetcher(url) {
+function calypsoFetcher(cacheKey) {
   // We're using the frontend url as the cache key when running on the backend as well, even though
   // we're not fetching using it, since the cache created by the backend is sent to the frontend.
   const url = cacheKey.startsWith(FRONTEND_CALYPSO_URL)
