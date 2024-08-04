@@ -30,7 +30,7 @@ job "bawang" {
 TAITAN_URL=http://taitan.nomad.dsekt.internal
 RAZZLE_TAITAN_URL=https://taitan.datasektionen.se
 
-CALYPSO_URL=http://calypso.nomad.dsekt.internal
+CALYPSO_URL=http://calypso.nomad.dsekt.internal/api
 RAZZLE_CALYPSO_URL=https://calypso.datasektionen.se/api
 
 SLUTA_FIPPLA_MED_MINA_ENV_VARIABLER_RAZZLE__PORT={{ env "NOMAD_PORT_http" }}
