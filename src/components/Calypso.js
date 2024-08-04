@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import fetch from 'cross-fetch'
 
 import { DataLoader } from './DataLoader'
 

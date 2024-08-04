@@ -1,8 +1,5 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { HTTPError } from '../HTTPError'
-
-import fetch from 'cross-fetch'
 
 import { DataLoader } from './DataLoader'
 import { TAITAN_URL, FRONTEND_TAITAN_URL } from '../utility/env'
@@ -20,8 +17,7 @@ function taitanFetcher(cacheKey) {
     : cacheKey;
   return fetch(url)
     .then(res => {
-      const redirected = res.url !== url // node-fetch doesnt have the res.redirected property
-      if (redirected) {
+      if (res.redirected) {
         if (res.url.startsWith(TAITAN_URL)) {
           return { redirect: res.url.substring(TAITAN_URL.length) }
         } else {

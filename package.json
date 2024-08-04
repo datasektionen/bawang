@@ -3,8 +3,7 @@
   "scripts": {
     "start:dev": "node bin/razzle.js start",
     "build": "node bin/razzle.js build --noninteractive",
-    "start": "node build/server.js",
-    "heroku-postbuild": "node bin/razzle.js build"
+    "start": "node build/server.js"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -18,35 +17,22 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
     "@babel/plugin-proposal-do-expressions": "^7.0.0",
     "@babel/plugin-proposal-function-bind": "^7.0.0",
-    
+
     "classnames": "^2.5.1",
-    "cross-fetch": "^4.0.0",
     "express": "^4.18.2",
     "is-in-browser": "^2.0.0",
     "lodash": "^4.17.21",
     "methone": "github:datasektionen/Methone",
     "razzle": "^4.2.18",
-    "razzle-heroku": "^3.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-head": "^3.0.1",
-    "react-router-dom": "^6.0.1",
-    "terser-webpack-plugin": "^4.2.3"
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    }
+    "react-router-dom": "^6.0.1"
   },
   "engines": {
-    "node": ">=21"
+    "node": ">=20"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^2.1.4"
   }
 }
