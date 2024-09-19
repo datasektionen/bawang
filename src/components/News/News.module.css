@@ -24,6 +24,7 @@
   padding: 20px 50px;
   min-height: 0;
   z-index: 21;
+  overflow: scroll;
 }
 
 .metadata {
