@@ -22,14 +22,17 @@ const parseNav = (items, lang, slug) => (
       .map(item =>
         <Fragment key={item.slug}>
           <li>
-            <Link
-              className={item.active ? 'text-theme-color strong' : ''}
-              to={addLangToUrl(item.slug, lang)}
-            >
-              {item.title}
-            </Link>
+            {item.nav
+              ? <p>{item.title}</p>
+              : <Link 
+                className={item.active ? 'text-theme-color strong' : ''}
+                to={addLangToUrl(item.slug, lang)}
+              >
+                {item.title}
+              </Link>
+            }
           </li>
-          {item.nav && parseNav(item.nav, item.slug + '/')}
+          {item.nav && parseNav(item.nav, lang, item.slug + '/')}
         </Fragment>
       )}
   </ul>
