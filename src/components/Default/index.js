@@ -23,8 +23,8 @@ const parseNav = (items, lang, slug) => (
         <Fragment key={item.slug}>
           <li>
             {item.nav
-              ? <p>{item.title}</p>
-              : <Link 
+              ? <h3>{item.title}</h3>
+              : <Link
                 className={item.active ? 'text-theme-color strong' : ''}
                 to={addLangToUrl(item.slug, lang)}
               >
