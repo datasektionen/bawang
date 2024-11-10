@@ -16,20 +16,23 @@ const getPageNav = (nav) => {
 };
 
 const parseNav = (items, lang, slug) => (
-  <ul key={slug}>
+  <ul key={slug} style={{ marginBottom: "1em" }}>
     {items
       .sort(comparePages)
       .map(item =>
         <Fragment key={item.slug}>
           <li>
-            <Link
-              className={item.active ? 'text-theme-color strong' : ''}
-              to={addLangToUrl(item.slug, lang)}
-            >
-              {item.title}
-            </Link>
+            {item.nav
+              ? <h3>{item.title}</h3>
+              : <Link
+                className={item.active ? 'text-theme-color strong' : ''}
+                to={addLangToUrl(item.slug, lang)}
+              >
+                {item.title}
+              </Link>
+            }
           </li>
-          {item.nav && parseNav(item.nav, item.slug + '/')}
+          {item.nav && parseNav(item.nav, lang, item.slug + '/')}
         </Fragment>
       )}
   </ul>
@@ -136,7 +139,7 @@ const taitanRenderer = (location, lang) =>
   ({ title, body, sidebar, nav, anchors, error }) => {
 
     // This useEffect solution is a workaround to prevent hydration errors when loading the Error page.
-    // useEffect does not run when doing serverside rendering, so this prevents the error page from 
+    // useEffect does not run when doing serverside rendering, so this prevents the error page from
     // rendering serverside. Rendering it serverside caused the page to crash when rendering clientside,
     // since the client always tries to render the normal page first, and getting angry that it does not
     // match what the server produced. (This is due to error being undefined first due to latecncy).
