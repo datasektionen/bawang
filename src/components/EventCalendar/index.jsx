@@ -50,7 +50,7 @@ function getDatesOfWeek(date) {
 
 /**
  * Get the start and end dates for a week.
- * 
+ *
  * @param {Date} date A date inside the week.
  */
 export function getWeekTimeSpan(date) {
@@ -295,7 +295,7 @@ export default function EventCalendar({ events, location, lang, onUpdateTimeSpan
   useEffect(() => {
     const newWidgetWeekGroups = getWidgetsFromEvents(events);
     setWidgetWeekGroups(newWidgetWeekGroups);
-    
+
     setSelectedEventIndex(-1);
     if (events.length === 0) return;
     if (!Array.isArray(events)) return;
@@ -370,7 +370,7 @@ export default function EventCalendar({ events, location, lang, onUpdateTimeSpan
     const monthClass = `month-${monthIndex}`;
     const monthSV = SWEDISH_MONTHS[monthIndex];
     const monthEN = ENGLISH_MONTHS[monthIndex];
-    if (i < 6 && monthIndex === weekState.dates[i+1].getMonth()) {
+    if (i < 6 && monthIndex === weekState.dates[i + 1].getMonth()) {
       currentColSpan++;
     } else {
       yearHeader.push(
@@ -391,8 +391,8 @@ export default function EventCalendar({ events, location, lang, onUpdateTimeSpan
     dateHeader.push(
       <th key={date.toUTCString()} className={cx(monthClass)}>
         <Translate>
-          <Swedish>{SWEDISH_WEEK_DAYS[i]}<br/>{date.getDate()}</Swedish>
-          <English>{ENGLISH_WEEK_DAYS[i]}<br/>{date.getDate()}</English>
+          <Swedish>{SWEDISH_WEEK_DAYS[i]}<br />{date.getDate()}</Swedish>
+          <English>{ENGLISH_WEEK_DAYS[i]}<br />{date.getDate()}</English>
         </Translate>
       </th>
     );
@@ -426,65 +426,65 @@ export default function EventCalendar({ events, location, lang, onUpdateTimeSpan
         </tbody>
       </table>
       <div className={cx("eventDisplay")}>
-      {
-        selectedEventIndex !== -1 && events[selectedEventIndex]
-        ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang}/>
-        : <div style={{ height: "100%", width: "100%", padding: "10%", display: "flex", alignItems: "center", backgroundColor: "#eeeeee" }}>
-            <p style={{ fontSize: "24px", textAlign: "center" }}>
-              <Translate>
-                <Swedish>Klicka på en händelse för att visa mer information</Swedish>
-                <English>Click on an event to display more information</English>
-              </Translate></p>
-          </div>
-      }
+        {
+          selectedEventIndex !== -1 && events[selectedEventIndex]
+            ? <NewsItem item={events[selectedEventIndex]} location={location} lang={lang} />
+            : <div style={{ height: "100%", width: "100%", padding: "10%", display: "flex", alignItems: "center", backgroundColor: "#eeeeee" }}>
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                <Translate>
+                  <Swedish>Klicka på en händelse för att visa mer information</Swedish>
+                  <English>Click on an event to display more information</English>
+                </Translate></p>
+            </div>
+        }
       </div>
       {weekState.widgetIndex >= 0
-      && widgetWeekGroups
-      && widgetWeekGroups.length > 0
-      && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
-        <div
-          key={`event-${ei}`}
-          className={cx("widget")}
-          style={{
-            position: "absolute",
-            top: "90px",
-            left: `${columnWidth}px`,
-          }}
-          onClick={() => setSelectedEventIndex(eventWidget.eventIndex)}
-        >
-          {eventWidget.blocks.map((block, bi) => {
-            const H = 60;
-            if (block.endMinute <= 8*H) {
-              return null;
-            }
-            if (!events[eventWidget.eventIndex]) {
-              return null;
-            }
+        && widgetWeekGroups
+        && widgetWeekGroups.length > 0
+        && widgetWeekGroups[weekState.widgetIndex].widgets.map((eventWidget, ei) => (
+          <div
+            key={`event-${ei}`}
+            className={cx("widget")}
+            style={{
+              position: "absolute",
+              top: "90px",
+              left: `${columnWidth}px`,
+            }}
+            onClick={() => setSelectedEventIndex(eventWidget.eventIndex)}
+          >
+            {eventWidget.blocks.map((block, bi) => {
+              const H = 60;
+              if (block.endMinute <= 8 * H) {
+                return null;
+              }
+              if (!events[eventWidget.eventIndex]) {
+                return null;
+              }
 
-            const blockStartMinute = Math.max(8*H, block.startMinute);
-            const blockDuration = block.endMinute - blockStartMinute;
-            const top = Math.floor((blockStartMinute - 8*H) / 2);
-            const height = Math.max(30, Math.floor(blockDuration / 2)); // some events might be "too short"
-            const left = columnWidth * (block.day + block.collisions.index / block.collisions.numParts) + 2;
-            const width = columnWidth / block.collisions.numParts - 4;
-            return (
-              <div
-                key={`block-${ei}-${bi}`}
-                className={cx(`event-${eventWidget.colorID}`)}
-                style={{
-                  position: "absolute",
-                  top: `${top}px`,
-                  height: `${height}px`,
-                  left: `${left}px`,
-                  width: `${width}px`,
-                }}
-              >
-                {events[eventWidget.eventIndex].titleSwedish}
-              </div>
-            );
-          })}
-        </div>
-      ))}
+              const blockStartMinute = Math.max(8 * H, block.startMinute);
+              const blockDuration = block.endMinute - blockStartMinute;
+              const top = Math.floor((blockStartMinute - 8 * H) / 2);
+              const height = Math.max(30, Math.floor(blockDuration / 2)); // some events might be "too short"
+              const left = columnWidth * (block.day + block.collisions.index / block.collisions.numParts) + 2;
+              const width = columnWidth / block.collisions.numParts - 4;
+              return (
+                <div
+                  key={`block-${ei}-${bi}`}
+                  className={cx(`event-${eventWidget.colorID}`)}
+                  style={{
+                    position: "absolute",
+                    top: `${top}px`,
+                    height: `${height}px`,
+                    left: `${left}px`,
+                    width: `${width}px`,
+                  }}
+                >
+                  {events[eventWidget.eventIndex].titleSwedish}
+                </div>
+              );
+            })}
+          </div>
+        ))}
     </div>
   );
 }

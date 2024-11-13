@@ -70,7 +70,7 @@ export const News = ({ location, lang }) => {
       {/* Title */}
       <h2 id="sections_intro">
         <Translate>
-          <Swedish>Evenemangskalender</Swedish>
+          <Swedish>Eventkalender</Swedish>
           <English>Event Calendar</English>
         </Translate>
       </h2>

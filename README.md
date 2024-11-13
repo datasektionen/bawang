@@ -19,6 +19,6 @@ NOTE: when building with podman, you may need to specify `--ulimit nofile=65535:
 
 ## Running
 
-- `npm run start:dev` will start the whole universal server in development mode. HMR will be enabled on both server and client side!
+- `npm run dev` will start the whole universal server in development mode. HMR will be enabled on both server and client side!
 - `npm run build` will build a production ready server.
 - `npm start` will start the production server.
