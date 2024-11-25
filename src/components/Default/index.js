@@ -136,7 +136,7 @@ const RightSidebar = ({ sidebar, anchors }) => (
 );
 
 const taitanRenderer = (location, lang) =>
-  ({ title, body, sidebar, nav, anchors, error }) => {
+  ({ title, body, updated_at, sidebar, nav, anchors, error }) => {
 
     // This useEffect solution is a workaround to prevent hydration errors when loading the Error page.
     // useEffect does not run when doing serverside rendering, so this prevents the error page from
@@ -166,10 +166,21 @@ const taitanRenderer = (location, lang) =>
 
             <div className="col-sm-8 col-md-9">
               <div className="row">
-                <div
-                  className="col-md-9"
-                  dangerouslySetInnerHTML={{ __html: body }}
-                />
+                <div className="col-md-9">
+                  <div dangerouslySetInnerHTML={{ __html: body }} />
+                  <Translate>
+                    <Swedish>
+                      <div className="align-right">
+                        Senast uppdaterad {new Date(updated_at).toLocaleString("sv-SE", { year: "numeric", month: "long", day: "numeric" })}
+                      </div>
+                    </Swedish>
+                    <English>
+                      <div className="align-right">
+                        Last updated {new Date(updated_at).toLocaleString("en-GB", { year: "numeric", month: "long", day: "numeric" })}
+                      </div>
+                    </English>
+                  </Translate>
+                </div>
                 <RightSidebar sidebar={sidebar} anchors={anchors} />
               </div>
             </div>
