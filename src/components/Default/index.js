@@ -168,7 +168,7 @@ const taitanRenderer = (location, lang) =>
               <div className="row">
                 <div className="col-md-9">
                   <div dangerouslySetInnerHTML={{ __html: body }} />
-                  <Translate>
+                  {updated_at ? <Translate>
                     <Swedish>
                       <div className="align-right">
                         Senast uppdaterad {new Date(updated_at).toLocaleString("sv-SE", { year: "numeric", month: "long", day: "numeric" })}
@@ -179,7 +179,7 @@ const taitanRenderer = (location, lang) =>
                         Last updated {new Date(updated_at).toLocaleString("en-GB", { year: "numeric", month: "long", day: "numeric" })}
                       </div>
                     </English>
-                  </Translate>
+                  </Translate> : null}
                 </div>
                 <RightSidebar sidebar={sidebar} anchors={anchors} />
               </div>
