@@ -28,6 +28,7 @@ const parseNav = (items, lang, slug) => (
                 className={item.active ? 'text-theme-color strong' : ''}
                 to={addLangToUrl(item.slug, lang)}
               >
+                <img src={item.image} width="50" height="50" />
                 {item.title}
               </Link>
             }
