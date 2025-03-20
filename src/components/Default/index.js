@@ -28,8 +28,10 @@ const parseNav = (items, lang, slug) => (
                 className={item.active ? 'text-theme-color strong' : ''}
                 to={addLangToUrl(item.slug, lang)}
               >
-                <img src={item.image} width="50" height="50" />
-                {item.title}
+                {item.image
+                  ? <img src={item.image} className="pageIcon" />
+                  : <div className="pageIcon"></div>}
+                <span>{item.title}</span>
               </Link>
             }
           </li>
