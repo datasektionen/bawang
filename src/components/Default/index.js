@@ -30,7 +30,7 @@ const parseNav = (items, lang, slug) => (
               >
                 {item.image
                   ? <img src={item.image} className="page-icon" />
-                  : <div className="pageIcon"></div>}
+                  : <div className="page-icon"></div>}
                 <span>{item.title}</span>
               </Link>
             }
