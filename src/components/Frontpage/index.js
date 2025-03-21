@@ -314,7 +314,7 @@ const Frontpage = ({ lang }) => {
 
             {/* META Location in Google Maps */}
             <div className="col-sm-6 col-md-9" id="map">
-              <iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=18.068405985832218%2C59.34683431886712%2C18.074403405189518%2C59.34925196776935&amp;layer=mapnik&amp;marker=59.34804316483591%2C18.071404695510864" style={{ border: 0 }}></iframe>
+              <iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=18.069899976253513%2C59.347444217121804%2C18.072898685932163%2C59.348653041378064&amp;layer=mapnik&amp;marker=59.34804863462937%2C18.071399331092834" style={{ border: 0 }}></iframe>
             </div>
           </div>
         </Fragment>
