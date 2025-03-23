@@ -312,7 +312,6 @@ const Frontpage = ({ lang }) => {
               </Translate>
             </div>
 
-            {/* META Location in Google Maps */}
             <div className="col-sm-6 col-md-9" id="map">
               <iframe width="100%" height="100%" src="https://www.openstreetmap.org/export/embed.html?bbox=18.069899976253513%2C59.347444217121804%2C18.072898685932163%2C59.348653041378064&amp;layer=mapnik&amp;marker=59.34804863462937%2C18.071399331092834" style={{ border: 0 }}></iframe>
             </div>
