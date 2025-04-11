@@ -15,6 +15,14 @@ const getPageNav = (nav) => {
   return [];
 };
 
+const getLinkIcon = (item) => {
+  if (item.image)
+    return <img src={item.image} className="page-icon" />;
+  else if (item.slug.startsWith("/namnder"))
+    return <div className="page-icon"></div>;
+  return;
+};
+
 const parseNav = (items, lang, slug) => (
   <ul key={slug} style={{ marginBottom: "1em" }}>
     {items
@@ -28,9 +36,7 @@ const parseNav = (items, lang, slug) => (
                 className={item.active ? 'text-theme-color strong' : ''}
                 to={addLangToUrl(item.slug, lang)}
               >
-                {item.image
-                  ? <img src={item.image} className="page-icon" />
-                  : <div className="page-icon"></div>}
+                {getLinkIcon(item)}
                 <span>{item.title}</span>
               </Link>
             }
