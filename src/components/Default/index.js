@@ -18,13 +18,12 @@ const getPageNav = (nav) => {
 const getLinkIcon = (item) => {
   if (item.image)
     return <img src={item.image} className="page-icon" />;
-  else if (item.slug.startsWith("/namnder"))
-    return <div className="page-icon"></div>;
-  return;
+  return <div className="page-icon"></div>;
 };
 
-const parseNav = (items, lang, slug) => (
-  <ul key={slug} style={{ marginBottom: "1em" }}>
+const parseNav = (items, lang, slug) => {
+  const hasIcon = items.some(item => item.image);
+  return <ul key={slug} style={{ marginBottom: "1em" }}>
     {items
       .sort(comparePages)
       .map(item =>
@@ -36,7 +35,7 @@ const parseNav = (items, lang, slug) => (
                 className={item.active ? 'text-theme-color strong' : ''}
                 to={addLangToUrl(item.slug, lang)}
               >
-                {getLinkIcon(item)}
+                {hasIcon && getLinkIcon(item)}
                 <span>{item.title}</span>
               </Link>
             }
@@ -44,8 +43,8 @@ const parseNav = (items, lang, slug) => (
           {item.nav && parseNav(item.nav, lang, item.slug + '/')}
         </Fragment>
       )}
-  </ul>
-);
+  </ul>;
+};
 
 const getRightSidebarListItemStyle = (headerLevel) => {
   // smallest level is 1, but it since we don't display the list item dot,
