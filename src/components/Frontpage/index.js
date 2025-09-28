@@ -219,7 +219,7 @@ const Frontpage = ({ lang }) => {
                 or go to the website for META internationals and discover everything you need to know as an international student in the CS Chapter.
               </p>
               <p>
-                <a className="action" href="https://meta-internationals.mailchimpsites.com/">META Internationals website</a>
+                <a className="action" href="https://metastudent.se">META Internationals Website</a>
               </p>
             </div>
           </div>
