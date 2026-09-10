@@ -31,6 +31,7 @@ jobs:
         with:
           build-args: RAZZLE_TAITAN_URL=http://localhost:5000
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.latest }},${{ env.current }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
