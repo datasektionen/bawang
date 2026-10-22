@@ -1,4 +1,4 @@
-FROM node:22-alpine3.20 AS base
+FROM node:22.23.4-alpine3.24 AS base
 
 WORKDIR /app
 ENV NODE_OPTIONS=--openssl-legacy-provider
